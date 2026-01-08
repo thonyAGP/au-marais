@@ -74,11 +74,11 @@ au-marais/
 - [x] BookingBar avec thème dark luxury
 
 ### À faire
-- [ ] Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)
+- [x] ~~Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)~~ ✓
 - [x] ~~Ajouter vraie photo famille~~ ✓
-- [x] ~~Adapter pages secondaires (appartement, quartier, contact) au thème dark~~ ✓
+- [x] ~~Adapter pages secondaires (appartement, quartier, contact) au thème Soft Terracotta~~ ✓
 - [x] ~~Page Disponibilités avec calendrier direct~~ ✓
-- [ ] Déploiement Vercel
+- [x] ~~Déploiement Vercel~~ ✓ (www.au-marais.fr)
 
 ## Décisions
 
@@ -104,4 +104,5 @@ au-marais/
 - 2026-01-08 : Stats Bar, sections homepage adaptées au nouveau thème
 - 2026-01-08 : Pages secondaires (appartement, quartier, contact) adaptées au thème dark
 - 2026-01-08 : Nouvelle page /disponibilites avec calendrier de réservation directe
-- 2026-01-08 : Calendrier AvailabilityCalendar adapté au thème dark luxury
+- 2026-01-08 : Calendrier AvailabilityCalendar adapté au thème Soft Terracotta
+- 2026-01-08 : **Déploiement Vercel** - Site live sur www.au-marais.fr

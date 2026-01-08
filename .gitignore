@@ -45,3 +45,6 @@ nul
 coverage
 .nyc_output
 design-examples/
+
+.vercel
+.env*.local
