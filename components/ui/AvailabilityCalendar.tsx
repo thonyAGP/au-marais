@@ -244,12 +244,12 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
     return (
       <div className="flex-1 min-w-0">
-        <h4 className="text-center font-medium text-white text-sm mb-2 capitalize">
+        <h4 className="text-center font-medium text-text text-sm mb-2 capitalize">
           {format(month, 'MMMM yyyy', { locale: fr })}
         </h4>
         <div className="grid grid-cols-7 gap-0.5 mb-1">
           {WEEKDAYS_SHORT.map((day, i) => (
-            <div key={i} className="text-center text-[10px] font-medium text-white/40 py-1">
+            <div key={i} className="text-center text-[10px] font-medium text-text-muted py-1">
               {day}
             </div>
           ))}
@@ -268,17 +268,17 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                 className={`
                   relative aspect-square flex items-center justify-center text-xs rounded transition-all
                   ${!day.isCurrentMonth ? 'opacity-0 pointer-events-none' : ''}
-                  ${day.isPast || !day.available ? 'text-white/20 cursor-not-allowed' : 'hover:bg-gold/20 cursor-pointer'}
-                  ${day.available && !day.isPast ? 'text-white/80' : ''}
+                  ${day.isPast || !day.available ? 'text-text-muted/50 cursor-not-allowed' : 'hover:bg-gold/20 cursor-pointer'}
+                  ${day.available && !day.isPast ? 'text-text' : ''}
                   ${day.isToday ? 'ring-1 ring-gold ring-inset' : ''}
                   ${inRange && !isStart && !isEnd ? 'bg-gold/20' : ''}
-                  ${isStart || isEnd ? 'bg-gold text-dark font-medium' : ''}
+                  ${isStart || isEnd ? 'bg-gold text-white font-medium' : ''}
                 `}
               >
                 {day.dayOfMonth}
                 {!day.available && day.isCurrentMonth && !day.isPast && (
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="w-4 h-px bg-white/30 rotate-45" />
+                    <span className="w-4 h-px bg-text-muted/30 rotate-45" />
                   </span>
                 )}
               </button>
@@ -291,24 +291,24 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
   return (
     <div className={className}>
-      <div className="bg-dark-card border border-white/10 overflow-hidden max-w-2xl mx-auto">
+      <div className="bg-white border border-stone-200 overflow-hidden max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-stone-200">
           <button
             onClick={goToPreviousMonth}
             disabled={!canGoPrevious}
-            className="p-2 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="p-2 hover:bg-cream disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             aria-label="Mois précédent"
           >
-            <ChevronLeft className="h-4 w-4 text-white/60" />
+            <ChevronLeft className="h-4 w-4 text-text-light" />
           </button>
-          <span className="text-sm text-white/50">Sélectionnez vos dates</span>
+          <span className="text-sm text-text-muted">Sélectionnez vos dates</span>
           <button
             onClick={goToNextMonth}
-            className="p-2 hover:bg-white/5 transition-colors"
+            className="p-2 hover:bg-cream transition-colors"
             aria-label="Mois suivant"
           >
-            <ChevronRight className="h-4 w-4 text-white/60" />
+            <ChevronRight className="h-4 w-4 text-text-light" />
           </button>
         </div>
 
@@ -319,11 +319,11 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
               <div className="animate-spin rounded-full h-6 w-6 border-2 border-gold border-t-transparent" />
             </div>
           ) : error ? (
-            <div className="text-center py-12 text-white/50 text-sm">{error}</div>
+            <div className="text-center py-12 text-text-muted text-sm">{error}</div>
           ) : (
             <div className="flex gap-6">
               {renderMonth(currentMonth)}
-              <div className="w-px bg-white/10 hidden sm:block" />
+              <div className="w-px bg-stone-200 hidden sm:block" />
               <div className="hidden sm:block flex-1">
                 {renderMonth(nextMonth)}
               </div>
@@ -332,15 +332,15 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
         </div>
 
         {/* Legend */}
-        <div className="px-4 pb-3 flex items-center justify-center gap-6 text-[10px] text-white/40">
+        <div className="px-4 pb-3 flex items-center justify-center gap-6 text-[10px] text-text-muted">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 bg-gold" />
             <span>Sélectionné</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 bg-white/10 relative">
+            <span className="w-2.5 h-2.5 bg-stone-100 relative">
               <span className="absolute inset-0 flex items-center justify-center">
-                <span className="w-2 h-px bg-white/40 rotate-45" />
+                <span className="w-2 h-px bg-text-muted/40 rotate-45" />
               </span>
             </span>
             <span>Indisponible</span>
@@ -349,16 +349,16 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
         {/* Selection Summary */}
         {(selection.checkIn || totals) && (
-          <div className="border-t border-white/10 p-4 bg-dark">
+          <div className="border-t border-stone-200 p-4 bg-cream">
             <div className="flex items-start gap-3">
               <Calendar className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 {selection.checkIn && !selection.checkOut && (
-                  <p className="text-white/60 text-xs">
-                    Arrivée : <span className="font-medium text-white">
+                  <p className="text-text-light text-xs">
+                    Arrivée : <span className="font-medium text-text">
                       {format(new Date(selection.checkIn), 'd MMM yyyy', { locale: fr })}
                     </span>
-                    <span className="text-white/40 ml-2">→ Choisir départ</span>
+                    <span className="text-text-muted ml-2">→ Choisir départ</span>
                   </p>
                 )}
                 {totals && (() => {
@@ -382,19 +382,19 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                     <div className="space-y-3">
                       {/* Dates row */}
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="text-white/60">
+                        <span className="text-text-light">
                           {format(new Date(selection.checkIn!), 'd MMM', { locale: fr })}
                         </span>
-                        <span className="text-white/40">→</span>
-                        <span className="text-white/60">
+                        <span className="text-text-muted">→</span>
+                        <span className="text-text-light">
                           {format(new Date(selection.checkOut!), 'd MMM', { locale: fr })}
                         </span>
-                        <span className="text-white/30">·</span>
-                        <span className="text-white/60">{totals.nights} nuit{totals.nights > 1 ? 's' : ''}</span>
+                        <span className="text-text-muted">·</span>
+                        <span className="text-text-light">{totals.nights} nuit{totals.nights > 1 ? 's' : ''}</span>
                       </div>
 
                       {/* Price comparison */}
-                      <div className="flex items-center justify-between bg-dark-card border border-white/10 p-3">
+                      <div className="flex items-center justify-between bg-white border border-stone-200 p-3">
                         <div className="space-y-1">
                           {stayDiscount && (
                             <span className="inline-block text-[10px] px-2 py-0.5 bg-gold/20 text-gold font-medium">
@@ -407,15 +407,15 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                               href={airbnbUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-white/40 line-through hover:text-[#FF5A5F] transition-colors"
+                              className="text-xs text-text-muted line-through hover:text-[#FF5A5F] transition-colors"
                             >
                               {airbnbPrice}€ Airbnb
                             </a>
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="block text-xs text-green-400 font-medium">-{directSavings}€</span>
-                          <span className="text-[10px] text-green-500/70">({directSavingsPercent}% économisés)</span>
+                          <span className="block text-xs text-green-600 font-medium">-{directSavings}€</span>
+                          <span className="text-[10px] text-green-600/70">({directSavingsPercent}% économisés)</span>
                         </div>
                       </div>
                     </div>

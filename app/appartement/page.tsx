@@ -57,18 +57,18 @@ export default function AppartementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark">
+    <div className="min-h-screen bg-cream">
       {/* Hero */}
-      <section className="py-24 bg-dark-lighter">
+      <section className="py-24 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               Votre séjour
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl text-white mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl text-text mb-6">
               L&apos;appartement
             </h1>
-            <p className="text-white/50 max-w-2xl mx-auto text-lg">
+            <p className="text-text-muted max-w-2xl mx-auto text-lg">
               Un cocon chaleureux au coeur du Marais, mêlant charme historique et
               confort moderne.
             </p>
@@ -79,15 +79,15 @@ export default function AppartementPage() {
                   <Star key={i} className="h-5 w-5 text-gold fill-gold" />
                 ))}
               </div>
-              <span className="text-white font-medium text-lg">4.97</span>
-              <span className="text-white/40">· 89 avis sur Airbnb</span>
+              <span className="text-text font-medium text-lg">4.97</span>
+              <span className="text-text-muted">· 89 avis sur Airbnb</span>
             </div>
           </AnimateOnScroll>
         </Container>
       </section>
 
       {/* Gallery */}
-      <section className="py-16 bg-dark">
+      <section className="py-16 bg-cream">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {/* Main image - larger */}
@@ -105,7 +105,7 @@ export default function AppartementPage() {
                   priority
                   quality={85}
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                 <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/30 transition-colors duration-500" />
               </button>
             </AnimateOnScroll>
@@ -124,13 +124,13 @@ export default function AppartementPage() {
                     sizes="(max-width: 768px) 50vw, 25vw"
                     quality={80}
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                   <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/30 transition-colors duration-500" />
                 </button>
               </AnimateOnScroll>
             ))}
           </div>
-          <p className="text-center text-white/30 text-sm mt-6">
+          <p className="text-center text-text-muted text-sm mt-6">
             Cliquez sur une photo pour l&apos;agrandir
           </p>
         </Container>
@@ -147,7 +147,7 @@ export default function AppartementPage() {
       />
 
       {/* Details */}
-      <section className="py-20 bg-dark-card">
+      <section className="py-20 bg-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-16">
             {/* Description */}
@@ -155,10 +155,10 @@ export default function AppartementPage() {
               <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
                 Description
               </p>
-              <h2 className="font-serif text-3xl text-white mb-8">
+              <h2 className="font-serif text-3xl text-text mb-8">
                 Bienvenue chez vous
               </h2>
-              <div className="space-y-4 text-white/60 leading-relaxed">
+              <div className="space-y-4 text-text-light leading-relaxed">
                 <p>
                   Bienvenue dans notre appartement, un petit cocon entièrement
                   refait à neuf au coeur de Paris. Niché dans un immeuble du
@@ -184,44 +184,44 @@ export default function AppartementPage() {
               <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
                 Informations
               </p>
-              <h2 className="font-serif text-3xl text-white mb-8">
+              <h2 className="font-serif text-3xl text-text mb-8">
                 En bref
               </h2>
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-4 p-6 bg-dark border border-white/5 hover:border-gold/20 transition-colors">
+                <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
                   <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                     <Users className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">4 voyageurs</p>
-                    <p className="text-white/40 text-sm">Capacité max.</p>
+                    <p className="text-text font-medium">4 voyageurs</p>
+                    <p className="text-text-muted text-sm">Capacité max.</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-dark border border-white/5 hover:border-gold/20 transition-colors">
+                <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
                   <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                     <Bed className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">1 chambre</p>
-                    <p className="text-white/40 text-sm">+ canapé-lit</p>
+                    <p className="text-text font-medium">1 chambre</p>
+                    <p className="text-text-muted text-sm">+ canapé-lit</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-dark border border-white/5 hover:border-gold/20 transition-colors">
+                <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
                   <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                     <Bath className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">1 salle de bain</p>
-                    <p className="text-white/40 text-sm">Complète</p>
+                    <p className="text-text font-medium">1 salle de bain</p>
+                    <p className="text-text-muted text-sm">Complète</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-dark border border-white/5 hover:border-gold/20 transition-colors">
+                <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
                   <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                     <Building className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-white font-medium">2ème étage</p>
-                    <p className="text-white/40 text-sm">Sans ascenseur</p>
+                    <p className="text-text font-medium">2ème étage</p>
+                    <p className="text-text-muted text-sm">Sans ascenseur</p>
                   </div>
                 </div>
               </div>
@@ -231,28 +231,28 @@ export default function AppartementPage() {
       </section>
 
       {/* Amenities */}
-      <section className="py-20 bg-dark-lighter">
+      <section className="py-20 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               Confort
             </p>
-            <h2 className="font-serif text-4xl text-white">
+            <h2 className="font-serif text-4xl text-text">
               Équipements
             </h2>
           </AnimateOnScroll>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <AnimateOnScroll className="bg-dark-card border border-white/5 p-8 hover:border-gold/20 transition-all duration-500">
+            <AnimateOnScroll className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-md transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Utensils className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-white">Cuisine</h3>
+                <h3 className="font-serif text-xl text-text">Cuisine</h3>
               </div>
               <ul className="space-y-3">
                 {amenities.cuisine.map((item) => (
-                  <li key={item} className="text-white/50 text-sm flex items-center gap-3">
+                  <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
                   </li>
@@ -260,16 +260,16 @@ export default function AppartementPage() {
               </ul>
             </AnimateOnScroll>
 
-            <AnimateOnScroll delay={100} className="bg-dark-card border border-white/5 p-8 hover:border-gold/20 transition-all duration-500">
+            <AnimateOnScroll delay={100} className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-md transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Wifi className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-white">Confort</h3>
+                <h3 className="font-serif text-xl text-text">Confort</h3>
               </div>
               <ul className="space-y-3">
                 {amenities.confort.map((item) => (
-                  <li key={item} className="text-white/50 text-sm flex items-center gap-3">
+                  <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
                   </li>
@@ -277,16 +277,16 @@ export default function AppartementPage() {
               </ul>
             </AnimateOnScroll>
 
-            <AnimateOnScroll delay={200} className="bg-dark-card border border-white/5 p-8 hover:border-gold/20 transition-all duration-500">
+            <AnimateOnScroll delay={200} className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-md transition-all duration-500">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Tv className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-white">Multimédia</h3>
+                <h3 className="font-serif text-xl text-text">Multimédia</h3>
               </div>
               <ul className="space-y-3">
                 {amenities.multimedia.map((item) => (
-                  <li key={item} className="text-white/50 text-sm flex items-center gap-3">
+                  <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
                   </li>
@@ -298,11 +298,11 @@ export default function AppartementPage() {
       </section>
 
       {/* Note */}
-      <section className="py-16 bg-dark">
+      <section className="py-16 bg-cream">
         <Container size="md">
-          <AnimateOnScroll className="bg-dark-card border border-white/5 p-8">
-            <h3 className="font-serif text-xl text-white mb-6">À noter</h3>
-            <ul className="space-y-4 text-white/60">
+          <AnimateOnScroll className="bg-white border border-stone-200 p-8">
+            <h3 className="font-serif text-xl text-text mb-6">À noter</h3>
+            <ul className="space-y-4 text-text-light">
               <li className="flex items-start gap-4">
                 <Wind className="h-5 w-5 text-gold mt-0.5 flex-shrink-0" />
                 <span>
@@ -322,21 +322,21 @@ export default function AppartementPage() {
       </section>
 
       {/* Calendar CTA */}
-      <section className="py-20 bg-dark-card">
+      <section className="py-20 bg-white">
         <Container size="md">
           <AnimateOnScroll className="text-center">
             <div className="w-20 h-20 mx-auto border border-gold/30 flex items-center justify-center mb-8">
               <Calendar className="h-10 w-10 text-gold" />
             </div>
-            <h2 className="font-serif text-4xl text-white mb-4">
+            <h2 className="font-serif text-4xl text-text mb-4">
               Vérifier les disponibilités
             </h2>
-            <p className="text-white/50 mb-10 max-w-xl mx-auto">
+            <p className="text-text-muted mb-10 max-w-xl mx-auto">
               Consultez notre calendrier pour voir les dates disponibles et planifier votre séjour.
             </p>
             <Link
               href="/disponibilites"
-              className="inline-flex items-center justify-center px-10 py-5 bg-gold text-dark font-medium text-sm tracking-widest uppercase hover:bg-gold-light transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(212,175,55,0.25)]"
+              className="inline-flex items-center justify-center px-10 py-5 bg-gold text-white font-medium text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(196,116,90,0.25)]"
             >
               Voir le calendrier
             </Link>
@@ -345,10 +345,10 @@ export default function AppartementPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-dark-lighter relative overflow-hidden">
+      <section className="py-20 bg-cream-dark relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gold/5 rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gold/10 rounded-full" />
         </div>
 
         <Container className="relative z-10">
@@ -356,17 +356,17 @@ export default function AppartementPage() {
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               Réservation
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl text-text mb-6">
               Envie de réserver ?
             </h2>
-            <p className="text-white/50 mb-10 max-w-xl mx-auto">
+            <p className="text-text-muted mb-10 max-w-xl mx-auto">
               Contactez-nous directement ou réservez via Airbnb pour votre séjour
               au coeur du Marais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-10 py-5 bg-gold text-dark font-medium text-sm tracking-widest uppercase hover:bg-gold-light transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(212,175,55,0.25)]"
+                className="inline-flex items-center justify-center px-10 py-5 bg-gold text-white font-medium text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(196,116,90,0.25)]"
               >
                 Nous contacter
               </a>
@@ -374,7 +374,7 @@ export default function AppartementPage() {
                 href="https://www.airbnb.fr/rooms/618442543008929958"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-10 py-5 border border-white/20 text-white font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-all duration-300"
+                className="inline-flex items-center justify-center px-10 py-5 border border-text/20 text-text font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-all duration-300"
               >
                 Réserver sur Airbnb
               </a>

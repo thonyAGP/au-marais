@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 
 export default function DisponibilitesPage() {
   return (
-    <div className="min-h-screen bg-dark">
+    <div className="min-h-screen bg-cream">
       {/* Hero */}
-      <section className="py-24 bg-dark-lighter">
+      <section className="py-24 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               Réservation directe
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl text-white mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl text-text mb-6">
               Disponibilités
             </h1>
-            <p className="text-white/50 max-w-2xl mx-auto text-lg">
+            <p className="text-text-muted max-w-2xl mx-auto text-lg">
               Sélectionnez vos dates pour vérifier la disponibilité et obtenir
               un tarif direct sans les frais de plateforme.
             </p>
@@ -30,7 +30,7 @@ export default function DisponibilitesPage() {
       </section>
 
       {/* Calendar Section */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-cream">
         <Container>
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Calendar */}
@@ -41,16 +41,16 @@ export default function DisponibilitesPage() {
             {/* Info Sidebar */}
             <AnimateOnScroll delay={200} className="space-y-6">
               {/* Direct Booking Benefits */}
-              <div className="bg-dark-card border border-white/5 p-8">
+              <div className="bg-white border border-stone-200 p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                     <Star className="h-5 w-5 text-gold" />
                   </div>
-                  <h3 className="font-serif text-xl text-white">
+                  <h3 className="font-serif text-xl text-text">
                     Réservation directe
                   </h3>
                 </div>
-                <ul className="space-y-4 text-white/60 text-sm">
+                <ul className="space-y-4 text-text-light text-sm">
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
                     <span>Jusqu&apos;à <strong className="text-gold">20% moins cher</strong> qu&apos;Airbnb</span>
@@ -71,32 +71,32 @@ export default function DisponibilitesPage() {
               </div>
 
               {/* Discounts */}
-              <div className="bg-dark-card border border-white/5 p-8">
-                <h3 className="font-serif text-xl text-white mb-6">
+              <div className="bg-white border border-stone-200 p-8">
+                <h3 className="font-serif text-xl text-text mb-6">
                   Réductions séjour
                 </h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-dark border border-white/5">
-                    <span className="text-white/60">7+ nuits</span>
+                  <div className="flex justify-between items-center p-3 bg-cream border border-stone-200">
+                    <span className="text-text-light">7+ nuits</span>
                     <span className="text-gold font-medium">-10%</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-dark border border-white/5">
-                    <span className="text-white/60">14+ nuits</span>
+                  <div className="flex justify-between items-center p-3 bg-cream border border-stone-200">
+                    <span className="text-text-light">14+ nuits</span>
                     <span className="text-gold font-medium">-15%</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-dark border border-white/5">
-                    <span className="text-white/60">28+ nuits</span>
+                  <div className="flex justify-between items-center p-3 bg-cream border border-stone-200">
+                    <span className="text-text-light">28+ nuits</span>
                     <span className="text-gold font-medium">-20%</span>
                   </div>
                 </div>
               </div>
 
               {/* Contact */}
-              <div className="bg-dark-card border border-gold/20 p-8">
-                <h3 className="font-serif text-xl text-white mb-4">
+              <div className="bg-white border border-gold/30 p-8">
+                <h3 className="font-serif text-xl text-text mb-4">
                   Des questions ?
                 </h3>
-                <p className="text-white/50 text-sm mb-6">
+                <p className="text-text-muted text-sm mb-6">
                   N&apos;hésitez pas à nous contacter pour toute demande
                   particulière ou question sur l&apos;appartement.
                 </p>
@@ -112,7 +112,7 @@ export default function DisponibilitesPage() {
                   </a>
                   <Link
                     href="/contact"
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-white/20 hover:border-gold/50 text-white text-sm font-medium tracking-wide uppercase transition-colors w-full"
+                    className="flex items-center justify-center gap-2 px-6 py-3 border border-stone-300 hover:border-gold/50 text-text text-sm font-medium tracking-wide uppercase transition-colors w-full"
                   >
                     Formulaire de contact
                   </Link>
@@ -124,13 +124,13 @@ export default function DisponibilitesPage() {
       </section>
 
       {/* Apartment Quick Info */}
-      <section className="py-20 bg-dark-card">
+      <section className="py-20 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center mb-12">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               L&apos;appartement
             </p>
-            <h2 className="font-serif text-4xl text-white">
+            <h2 className="font-serif text-4xl text-text">
               En bref
             </h2>
           </AnimateOnScroll>
@@ -143,9 +143,9 @@ export default function DisponibilitesPage() {
               { label: 'Salle de bain', value: '1' },
             ].map((item, index) => (
               <AnimateOnScroll key={item.label} delay={index * 50}>
-                <div className="text-center p-6 bg-dark border border-white/5">
+                <div className="text-center p-6 bg-white border border-stone-200">
                   <p className="text-3xl font-serif text-gold mb-2">{item.value}</p>
-                  <p className="text-white/50 text-sm">{item.label}</p>
+                  <p className="text-text-muted text-sm">{item.label}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -164,25 +164,25 @@ export default function DisponibilitesPage() {
       </section>
 
       {/* Airbnb Alternative */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-cream">
         <Container size="md">
           <AnimateOnScroll className="text-center">
-            <div className="bg-dark-card border border-white/5 p-12">
-              <p className="text-white/40 text-sm mb-4">
+            <div className="bg-white border border-stone-200 p-12">
+              <p className="text-text-muted text-sm mb-4">
                 Vous préférez réserver via une plateforme ?
               </p>
               <a
                 href="https://www.airbnb.fr/rooms/618442543008929958"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-white hover:text-[#FF5A5F] transition-colors"
+                className="inline-flex items-center gap-3 text-text hover:text-[#FF5A5F] transition-colors"
               >
                 <svg className="h-6 w-6 text-[#FF5A5F]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 14.379c-.718 2.292-2.9 4.782-6.894 6.621-3.994-1.839-6.176-4.329-6.894-6.621-.598-1.91-.139-3.595 1.14-4.542 1.085-.805 2.523-.881 3.754-.281.693.339 1.286.843 1.737 1.477.196.276.372.569.527.878.155-.309.331-.602.527-.878.451-.634 1.044-1.138 1.737-1.477 1.231-.6 2.669-.524 3.754.281 1.279.947 1.738 2.632 1.14 4.542h-.528z"/>
                 </svg>
                 <span className="font-serif text-lg">Voir sur Airbnb</span>
               </a>
-              <p className="text-white/30 text-xs mt-4">
+              <p className="text-text-muted text-xs mt-4">
                 Note : les tarifs Airbnb incluent des frais de service
               </p>
             </div>
