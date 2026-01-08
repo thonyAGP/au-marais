@@ -1,0 +1,14 @@
+{
+  "discounts": {
+    "weekly": 10,
+    "biweekly": 15,
+    "monthly": 20
+  },
+  "airbnb": {
+    "serviceFee": 15,
+    "listingId": "618442543008929958"
+  },
+  "contact": {
+    "whatsapp": "33631598400"
+  }
+}

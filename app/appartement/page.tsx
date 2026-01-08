@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Container, Lightbox } from '@/components/ui';
+import { Container, Lightbox, AvailabilityCalendar } from '@/components/ui';
 import { Users, Bed, Bath, Building, Wifi, Utensils, Tv, Wind, Star } from 'lucide-react';
 
 const galleryImages = [
@@ -277,6 +277,19 @@ export default function AppartementPage() {
               </li>
             </ul>
           </div>
+        </Container>
+      </section>
+
+      {/* Calendar */}
+      <section className="py-16 bg-cream">
+        <Container size="md">
+          <h2 className="font-serif text-3xl text-stone-900 mb-8 text-center">
+            Disponibilités
+          </h2>
+          <AvailabilityCalendar />
+          <p className="text-center text-stone-500 text-sm mt-4">
+            Sélectionnez vos dates pour voir le prix total
+          </p>
         </Container>
       </section>
 
