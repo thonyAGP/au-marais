@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, MessageCircle, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, MessageCircle } from 'lucide-react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isToday, isBefore, startOfToday, addDays, differenceInDays, isSameDay, isWithinInterval } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import type { CalendarDay, DateRange } from '@/types/smoobu';
@@ -244,12 +244,12 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
     return (
       <div className="flex-1 min-w-0">
-        <h4 className="text-center font-medium text-stone-700 text-sm mb-2 capitalize">
+        <h4 className="text-center font-medium text-white text-sm mb-2 capitalize">
           {format(month, 'MMMM yyyy', { locale: fr })}
         </h4>
         <div className="grid grid-cols-7 gap-0.5 mb-1">
           {WEEKDAYS_SHORT.map((day, i) => (
-            <div key={i} className="text-center text-[10px] font-medium text-stone-400 py-1">
+            <div key={i} className="text-center text-[10px] font-medium text-white/40 py-1">
               {day}
             </div>
           ))}
@@ -268,17 +268,17 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                 className={`
                   relative aspect-square flex items-center justify-center text-xs rounded transition-all
                   ${!day.isCurrentMonth ? 'opacity-0 pointer-events-none' : ''}
-                  ${day.isPast || !day.available ? 'text-stone-300 cursor-not-allowed' : 'hover:bg-gold/20 cursor-pointer'}
-                  ${day.available && !day.isPast ? 'text-stone-700' : ''}
+                  ${day.isPast || !day.available ? 'text-white/20 cursor-not-allowed' : 'hover:bg-gold/20 cursor-pointer'}
+                  ${day.available && !day.isPast ? 'text-white/80' : ''}
                   ${day.isToday ? 'ring-1 ring-gold ring-inset' : ''}
                   ${inRange && !isStart && !isEnd ? 'bg-gold/20' : ''}
-                  ${isStart || isEnd ? 'bg-gold text-white font-medium' : ''}
+                  ${isStart || isEnd ? 'bg-gold text-dark font-medium' : ''}
                 `}
               >
                 {day.dayOfMonth}
                 {!day.available && day.isCurrentMonth && !day.isPast && (
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="w-4 h-px bg-stone-300 rotate-45" />
+                    <span className="w-4 h-px bg-white/30 rotate-45" />
                   </span>
                 )}
               </button>
@@ -291,39 +291,39 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
   return (
     <div className={className}>
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden max-w-2xl mx-auto">
+      <div className="bg-dark-card border border-white/10 overflow-hidden max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-3 py-2 border-b border-stone-100">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
           <button
             onClick={goToPreviousMonth}
             disabled={!canGoPrevious}
-            className="p-1.5 rounded-full hover:bg-stone-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="p-2 hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             aria-label="Mois précédent"
           >
-            <ChevronLeft className="h-4 w-4 text-stone-600" />
+            <ChevronLeft className="h-4 w-4 text-white/60" />
           </button>
-          <span className="text-sm text-stone-500">Sélectionnez vos dates</span>
+          <span className="text-sm text-white/50">Sélectionnez vos dates</span>
           <button
             onClick={goToNextMonth}
-            className="p-1.5 rounded-full hover:bg-stone-100 transition-colors"
+            className="p-2 hover:bg-white/5 transition-colors"
             aria-label="Mois suivant"
           >
-            <ChevronRight className="h-4 w-4 text-stone-600" />
+            <ChevronRight className="h-4 w-4 text-white/60" />
           </button>
         </div>
 
         {/* Calendar Grid - 2 months */}
-        <div className="p-3">
+        <div className="p-4">
           {loading && !Object.keys(rates).length ? (
             <div className="flex items-center justify-center py-12">
               <div className="animate-spin rounded-full h-6 w-6 border-2 border-gold border-t-transparent" />
             </div>
           ) : error ? (
-            <div className="text-center py-12 text-stone-500 text-sm">{error}</div>
+            <div className="text-center py-12 text-white/50 text-sm">{error}</div>
           ) : (
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               {renderMonth(currentMonth)}
-              <div className="w-px bg-stone-100 hidden sm:block" />
+              <div className="w-px bg-white/10 hidden sm:block" />
               <div className="hidden sm:block flex-1">
                 {renderMonth(nextMonth)}
               </div>
@@ -332,15 +332,15 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
         </div>
 
         {/* Legend */}
-        <div className="px-3 pb-2 flex items-center justify-center gap-4 text-[10px] text-stone-400">
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm bg-gold" />
+        <div className="px-4 pb-3 flex items-center justify-center gap-6 text-[10px] text-white/40">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 bg-gold" />
             <span>Sélectionné</span>
           </div>
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm bg-stone-200 relative">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 bg-white/10 relative">
               <span className="absolute inset-0 flex items-center justify-center">
-                <span className="w-1.5 h-px bg-stone-400 rotate-45" />
+                <span className="w-2 h-px bg-white/40 rotate-45" />
               </span>
             </span>
             <span>Indisponible</span>
@@ -349,16 +349,16 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
         {/* Selection Summary */}
         {(selection.checkIn || totals) && (
-          <div className="border-t border-stone-100 p-3 bg-stone-50">
+          <div className="border-t border-white/10 p-4 bg-dark">
             <div className="flex items-start gap-3">
               <Calendar className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 {selection.checkIn && !selection.checkOut && (
-                  <p className="text-stone-600 text-xs">
-                    Arrivée : <span className="font-medium text-stone-900">
+                  <p className="text-white/60 text-xs">
+                    Arrivée : <span className="font-medium text-white">
                       {format(new Date(selection.checkIn), 'd MMM yyyy', { locale: fr })}
                     </span>
-                    <span className="text-stone-400 ml-1">→ Choisir départ</span>
+                    <span className="text-white/40 ml-2">→ Choisir départ</span>
                   </p>
                 )}
                 {totals && (() => {
@@ -379,43 +379,43 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                   const airbnbUrl = `https://www.airbnb.fr/rooms/${settings.airbnb.listingId}?check_in=${selection.checkIn}&check_out=${selection.checkOut}&guests=2`;
 
                   return (
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       {/* Dates row */}
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="text-stone-600">
+                        <span className="text-white/60">
                           {format(new Date(selection.checkIn!), 'd MMM', { locale: fr })}
                         </span>
-                        <span className="text-stone-400">→</span>
-                        <span className="text-stone-600">
+                        <span className="text-white/40">→</span>
+                        <span className="text-white/60">
                           {format(new Date(selection.checkOut!), 'd MMM', { locale: fr })}
                         </span>
-                        <span className="text-stone-400">·</span>
-                        <span className="text-stone-600">{totals.nights} nuit{totals.nights > 1 ? 's' : ''}</span>
+                        <span className="text-white/30">·</span>
+                        <span className="text-white/60">{totals.nights} nuit{totals.nights > 1 ? 's' : ''}</span>
                       </div>
 
                       {/* Price comparison */}
-                      <div className="flex items-center justify-between bg-white rounded p-2 border border-stone-100">
-                        <div className="space-y-0.5">
+                      <div className="flex items-center justify-between bg-dark-card border border-white/10 p-3">
+                        <div className="space-y-1">
                           {stayDiscount && (
-                            <span className="inline-block text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded font-medium">
+                            <span className="inline-block text-[10px] px-2 py-0.5 bg-gold/20 text-gold font-medium">
                               -{stayDiscount.percent}% {stayDiscount.label.replace('Réduction ', '')}
                             </span>
                           )}
                           <div className="flex items-baseline gap-2">
-                            <span className="text-lg font-serif text-gold">{priceAfterDiscount}€</span>
+                            <span className="text-xl font-serif text-gold">{priceAfterDiscount}€</span>
                             <a
                               href={airbnbUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-stone-400 line-through hover:text-red-400 transition-colors"
+                              className="text-xs text-white/40 line-through hover:text-[#FF5A5F] transition-colors"
                             >
                               {airbnbPrice}€ Airbnb
                             </a>
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="block text-xs text-green-600 font-medium">-{directSavings}€</span>
-                          <span className="text-[10px] text-green-500">({directSavingsPercent}% économisés)</span>
+                          <span className="block text-xs text-green-400 font-medium">-{directSavings}€</span>
+                          <span className="text-[10px] text-green-500/70">({directSavingsPercent}% économisés)</span>
                         </div>
                       </div>
                     </div>
@@ -427,7 +427,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
             {totals && (
               <button
                 onClick={handleReserve}
-                className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gold text-white text-sm font-medium rounded-lg hover:bg-gold-dark transition-colors"
+                className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white text-sm font-medium tracking-wide uppercase transition-colors"
               >
                 <MessageCircle className="h-4 w-4" />
                 Réserver via WhatsApp

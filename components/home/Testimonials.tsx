@@ -3,7 +3,6 @@
 import { Container, AnimateOnScroll } from '@/components/ui';
 import { Star, Quote } from 'lucide-react';
 
-// Placeholder reviews - à remplacer par les vrais avis Airbnb
 const testimonials = [
   {
     name: 'Marie',
@@ -33,49 +32,49 @@ const testimonials = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-24 bg-stone-900 text-white relative overflow-hidden">
+    <section className="py-24 bg-cream-dark relative overflow-hidden">
       {/* Decorative quote */}
-      <Quote className="absolute top-12 left-12 h-32 w-32 text-white/5" />
-      <Quote className="absolute bottom-12 right-12 h-32 w-32 text-white/5 rotate-180" />
+      <Quote className="absolute top-12 left-12 h-32 w-32 text-gold/10" />
+      <Quote className="absolute bottom-12 right-12 h-32 w-32 text-gold/10 rotate-180" />
 
       <Container className="relative z-10">
         {/* Header */}
         <AnimateOnScroll className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-4">
+          <div className="inline-flex items-center gap-3 mb-6">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="h-5 w-5 text-gold fill-gold" />
               ))}
             </div>
-            <span className="text-2xl font-serif text-gold">4.97</span>
+            <span className="text-3xl font-serif text-gold">4.97</span>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl text-text mb-4">
             Ce que disent nos voyageurs
           </h2>
-          <p className="text-stone-400">
+          <p className="text-text-muted text-sm tracking-wider">
             89 avis sur Airbnb · Super note en propreté, communication et emplacement
           </p>
         </AnimateOnScroll>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
             <AnimateOnScroll key={index} delay={index * 100}>
-              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex items-center gap-1 mb-4">
+              <div className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-lg transition-all duration-500 group">
+                <div className="flex items-center gap-1 mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 text-gold fill-gold" />
                   ))}
                 </div>
-                <p className="text-stone-300 leading-relaxed mb-6 italic">
-                  "{testimonial.text}"
+                <p className="text-text-light leading-relaxed mb-8 font-light">
+                  &ldquo;{testimonial.text}&rdquo;
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-6 border-t border-stone-100">
                   <div>
-                    <p className="font-medium text-white">{testimonial.name}</p>
-                    <p className="text-stone-500 text-sm">{testimonial.date}</p>
+                    <p className="font-medium text-text">{testimonial.name}</p>
+                    <p className="text-text-muted text-sm">{testimonial.date}</p>
                   </div>
-                  <div className="text-stone-500 text-sm">
+                  <div className="text-gold/70 text-xs tracking-wider uppercase">
                     via Airbnb
                   </div>
                 </div>
@@ -90,7 +89,7 @@ export const Testimonials = () => {
             href="https://www.airbnb.fr/rooms/618442543008929958"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors"
+            className="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors text-sm tracking-wider"
           >
             Voir tous les avis sur Airbnb
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

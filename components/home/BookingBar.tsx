@@ -19,41 +19,41 @@ export const BookingBar = () => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-stone-200 shadow-lg transition-all duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-stone-200 shadow-lg transition-all duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 py-3">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Left: Price info */}
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-6">
             <div>
-              <p className="text-stone-500 text-sm">À partir de</p>
-              <p className="font-serif text-xl text-stone-900">
-                120€ <span className="text-sm font-sans text-stone-500">/ nuit</span>
+              <p className="text-text-muted text-xs tracking-wider uppercase">À partir de</p>
+              <p className="font-serif text-2xl text-text">
+                120€ <span className="text-sm font-sans text-text-muted">/ nuit</span>
               </p>
             </div>
             <div className="h-10 w-px bg-stone-200" />
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <Star className="h-4 w-4 text-gold fill-gold" />
-              <span className="font-medium text-stone-900">4.97</span>
-              <span className="text-stone-500 text-sm">(89 avis)</span>
+              <span className="font-medium text-text">4.97</span>
+              <span className="text-text-muted text-sm">(89 avis)</span>
             </div>
           </div>
 
           {/* Right: CTA */}
-          <div className="flex items-center gap-3 flex-1 sm:flex-none justify-end">
+          <div className="flex items-center gap-4 flex-1 sm:flex-none justify-end">
             <Link
               href="/appartement#disponibilites"
-              className="flex items-center gap-2 px-4 py-2.5 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-5 py-3 border border-stone-300 text-text hover:border-gold hover:text-gold transition-all text-sm font-medium tracking-wider"
             >
               <Calendar className="h-4 w-4" />
               <span className="hidden sm:inline">Voir disponibilités</span>
-              <span className="sm:hidden">Disponibilités</span>
+              <span className="sm:hidden">Dispo</span>
             </Link>
             <Link
               href="/contact"
-              className="px-6 py-2.5 bg-gold text-white rounded-lg hover:bg-gold-dark transition-colors font-medium text-sm"
+              className="px-8 py-3 bg-gold text-white hover:bg-gold-dark transition-all font-medium text-sm tracking-wider hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(201,169,98,0.3)]"
             >
               Réserver
             </Link>

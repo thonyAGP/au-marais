@@ -27,6 +27,7 @@ au-marais/
 │   ├── appartement/       # Page appartement
 │   ├── quartier/          # Page quartier
 │   ├── contact/           # Page contact
+│   ├── disponibilites/    # Page calendrier réservation
 │   └── api/availability/  # API Smoobu
 ├── components/
 │   ├── layout/            # Header, Footer
@@ -64,9 +65,19 @@ au-marais/
 - [x] Sticky booking bar (visible au scroll)
 - [x] Animations CSS (fade-in-up, transitions)
 - [x] Calendrier disponibilités accessible depuis booking bar
+- [x] **Nouveau thème "Dark Luxury"** (fond sombre #0A0A0A, accents dorés #D4AF37)
+- [x] **Hero cinématique** avec effet Ken Burns et animation lettre par lettre
+- [x] Typographie premium (Cormorant Garamond serif + Montserrat sans)
+- [x] Header transparent qui devient solide au scroll
+- [x] Stats Bar après le Hero (note Airbnb, avis, siècle, distance métro)
+- [x] Sections homepage avec thème sombre cohérent
+- [x] BookingBar avec thème dark luxury
 
 ### À faire
 - [ ] Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)
+- [x] ~~Ajouter vraie photo famille~~ ✓
+- [x] ~~Adapter pages secondaires (appartement, quartier, contact) au thème dark~~ ✓
+- [x] ~~Page Disponibilités avec calendrier direct~~ ✓
 - [ ] Déploiement Vercel
 
 ## Décisions
@@ -75,6 +86,8 @@ au-marais/
 |------|----------|----------|
 | 2026-01-05 | Tailwind CSS v4 | Nouvelle syntaxe avec @theme |
 | 2026-01-05 | Next.js 16 (latest) | App Router + Turbopack |
+| 2026-01-08 | Design Dark Luxury | Hero cinématique (Option A) + thème sombre avec or (Option C) |
+| 2026-01-08 | Polices Cormorant Garamond + Montserrat | Typographie premium pour le thème luxe |
 
 ## Changelog
 
@@ -85,3 +98,10 @@ au-marais/
 - 2026-01-08 : Ajout sections Hosts, Testimonials, LocalTips sur page d'accueil
 - 2026-01-08 : Sticky booking bar avec animations
 - 2026-01-08 : Animations CSS (fade-in-up avec delays)
+- 2026-01-08 : **Refonte design "Dark Luxury"** - fond sombre, accents dorés, typographie Cormorant Garamond
+- 2026-01-08 : Hero cinématique avec effet Ken Burns et animation lettre par lettre
+- 2026-01-08 : Header transparent avec transition au scroll
+- 2026-01-08 : Stats Bar, sections homepage adaptées au nouveau thème
+- 2026-01-08 : Pages secondaires (appartement, quartier, contact) adaptées au thème dark
+- 2026-01-08 : Nouvelle page /disponibilites avec calendrier de réservation directe
+- 2026-01-08 : Calendrier AvailabilityCalendar adapté au thème dark luxury

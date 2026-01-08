@@ -1,7 +1,7 @@
 'use client';
 
 import { Container, AnimateOnScroll } from '@/components/ui';
-import { MapPin, Utensils, Coffee, Wine, Croissant, ShoppingBag } from 'lucide-react';
+import { MapPin, Utensils, ShoppingBag } from 'lucide-react';
 
 const tips = [
   {
@@ -11,7 +11,7 @@ const tips = [
       {
         name: 'King of Falafel',
         address: '26 Rue des Rosiers',
-        description: 'Incontournable du quartier juif. Sandwich mixte à 10€, portions généreuses et explosion de saveurs.',
+        description: 'Incontournable du quartier juif. Sandwich mixte à 10€, portions généreuses.',
         tag: 'Street food',
         price: '€',
       },
@@ -25,7 +25,7 @@ const tips = [
       {
         name: 'Le Bourguignon du Marais',
         address: '52 Rue François Miron',
-        description: 'Spécialités de Bourgogne, dont l\'incontournable boeuf bourguignon. Formule midi à 20€.',
+        description: 'Spécialités de Bourgogne, dont l\'incontournable boeuf bourguignon.',
         tag: 'Traditionnel',
         price: '€€',
       },
@@ -45,7 +45,7 @@ const tips = [
       {
         name: 'Boulangerie (Meilleure baguette 2014)',
         address: 'À l\'angle, 50m à droite',
-        description: 'Élue meilleure baguette de Paris en 2014. Un must absolu pour le petit-déjeuner.',
+        description: 'Élue meilleure baguette de Paris en 2014. Un must absolu.',
         tag: 'À ne pas manquer',
         price: '€',
       },
@@ -59,14 +59,14 @@ const tips = [
       {
         name: 'Vinosfera',
         address: '11 Rue François Miron',
-        description: 'Caviste tenu par Igor, un vrai passionné. Le bâtiment à colombage vaut le détour.',
+        description: 'Caviste tenu par Igor, un vrai passionné.',
         tag: 'Caviste',
         price: '€€',
       },
       {
         name: 'Boucher Place Saint-Paul',
         address: '113 Rue Saint-Antoine',
-        description: 'Viande de qualité et rôtisserie. Parfait pour un poulet rôti dominical.',
+        description: 'Viande de qualité et rôtisserie. Parfait pour un poulet rôti.',
         tag: 'Boucher',
         price: '€€',
       },
@@ -78,22 +78,22 @@ const mustSee = [
   {
     name: 'Place des Vosges',
     distance: '600m',
-    description: 'La plus ancienne place de Paris (1605). Entrée par l\'Hôtel de Sully.',
+    description: 'La plus ancienne place de Paris (1605).',
   },
   {
     name: 'Musée Carnavalet',
     distance: '400m',
-    description: 'Histoire de Paris, des origines à nos jours. Entrée gratuite !',
+    description: 'Histoire de Paris. Entrée gratuite !',
   },
   {
     name: 'Bords de Seine',
     distance: '400m',
-    description: 'Promenade aménagée, loin de l\'agitation parisienne.',
+    description: 'Promenade aménagée, loin de l\'agitation.',
   },
   {
     name: 'BHV Marais',
     distance: '500m',
-    description: 'Le grand magasin lifestyle parisien depuis 160 ans.',
+    description: 'Le grand magasin lifestyle parisien.',
   },
 ];
 
@@ -103,13 +103,13 @@ export const LocalTips = () => {
       <Container>
         {/* Header */}
         <AnimateOnScroll className="text-center mb-16">
-          <p className="text-gold font-medium mb-2 tracking-wide uppercase text-sm">
+          <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
             Nos bonnes adresses
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-stone-900 mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl text-text mb-4">
             Le Marais comme un local
           </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
+          <p className="text-text-muted max-w-2xl mx-auto">
             Nos adresses testées et approuvées pour profiter du quartier comme de vrais Parisiens.
           </p>
         </AnimateOnScroll>
@@ -119,35 +119,37 @@ export const LocalTips = () => {
           {tips.map((section, sectionIndex) => (
             <AnimateOnScroll key={section.category} delay={sectionIndex * 150}>
               <div className="flex items-center gap-3 mb-8">
-                <div className="p-2 bg-gold/10 rounded-lg">
-                  <section.icon className="h-6 w-6 text-gold" />
+                <div className="w-12 h-12 border border-gold/40 flex items-center justify-center">
+                  <section.icon className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-2xl text-stone-900">{section.category}</h3>
+                <h3 className="font-serif text-2xl text-text">{section.category}</h3>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                {section.items.map((item, itemIndex) => (
+              <div className="grid md:grid-cols-2 gap-4">
+                {section.items.map((item) => (
                   <div
                     key={item.name}
-                    className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+                    className="bg-white border border-stone-200 p-6 hover:border-gold/50 hover:shadow-md transition-all duration-500 group"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h4 className="font-medium text-stone-900 text-lg group-hover:text-gold transition-colors">{item.name}</h4>
-                        <p className="text-stone-400 text-sm flex items-center gap-1">
+                        <h4 className="font-medium text-text text-lg group-hover:text-gold transition-colors">
+                          {item.name}
+                        </h4>
+                        <p className="text-text-muted text-sm flex items-center gap-1">
                           <MapPin className="h-3 w-3" />
                           {item.address}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs px-2 py-1 bg-gold/10 text-gold rounded-full">
+                        <span className="text-xs px-3 py-1 border border-gold/40 text-gold">
                           {item.tag}
                         </span>
-                        <span className="text-stone-400 text-sm font-medium">
+                        <span className="text-text-muted text-sm font-medium">
                           {item.price}
                         </span>
                       </div>
                     </div>
-                    <p className="text-stone-600 text-sm leading-relaxed">
+                    <p className="text-text-light text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -160,22 +162,24 @@ export const LocalTips = () => {
         {/* Must See */}
         <AnimateOnScroll className="mt-20" delay={300}>
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-2 bg-gold/10 rounded-lg">
-              <MapPin className="h-6 w-6 text-gold" />
+            <div className="w-12 h-12 border border-gold/40 flex items-center justify-center">
+              <MapPin className="h-5 w-5 text-gold" />
             </div>
-            <h3 className="font-serif text-2xl text-stone-900">À ne pas manquer</h3>
+            <h3 className="font-serif text-2xl text-text">À ne pas manquer</h3>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mustSee.map((place, index) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {mustSee.map((place) => (
               <div
                 key={place.name}
-                className="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-white border border-stone-200 p-6 text-center hover:border-gold/50 hover:shadow-md transition-all duration-500 group"
               >
-                <span className="inline-block px-3 py-1 bg-stone-100 text-stone-500 text-xs rounded-full mb-3 group-hover:bg-gold/10 group-hover:text-gold transition-colors">
+                <span className="inline-block px-3 py-1 border border-gold/40 text-gold text-xs mb-4">
                   {place.distance}
                 </span>
-                <h4 className="font-medium text-stone-900 mb-2 group-hover:text-gold transition-colors">{place.name}</h4>
-                <p className="text-stone-500 text-sm">{place.description}</p>
+                <h4 className="font-medium text-text mb-2 group-hover:text-gold transition-colors">
+                  {place.name}
+                </h4>
+                <p className="text-text-muted text-sm">{place.description}</p>
               </div>
             ))}
           </div>

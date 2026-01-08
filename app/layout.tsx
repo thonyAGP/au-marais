@@ -1,7 +1,22 @@
 import type { Metadata } from 'next';
+import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 import { BookingBar } from '@/components/home';
 import './globals.css';
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-family-serif',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-family-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://au-marais.fr'),
@@ -74,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${cormorant.variable} ${montserrat.variable}`}>
       <body className="font-sans">
         <Header />
         <main className="pt-20 pb-16 sm:pb-0">{children}</main>

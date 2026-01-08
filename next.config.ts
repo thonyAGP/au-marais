@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         hostname: 'a0.muscache.com',
       },
     ],
+    qualities: [75, 80, 85, 90],
   },
 };
 

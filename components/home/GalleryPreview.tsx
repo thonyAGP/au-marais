@@ -12,42 +12,66 @@ const previewImages = [
 
 export const GalleryPreview = () => {
   return (
-    <section className="py-24 bg-cream">
+    <section className="py-24 bg-cream-dark">
       <Container>
-        <AnimateOnScroll className="text-center mb-16">
-          <h2 className="font-serif text-4xl text-stone-900 mb-4">
-            Découvrez l&apos;appartement
-          </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
-            Un intérieur chaleureux qui a conservé tout son caractère d&apos;époque.
-          </p>
+        <AnimateOnScroll className="flex justify-between items-end mb-12">
+          <div>
+            <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
+              Galerie
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl text-text">
+              Découvrez l&apos;appartement
+            </h2>
+          </div>
+          <Link
+            href="/appartement"
+            className="hidden md:flex items-center gap-2 text-gold text-sm tracking-wider hover:gap-4 transition-all"
+          >
+            Voir toutes les photos <ArrowRight className="h-4 w-4" />
+          </Link>
         </AnimateOnScroll>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {previewImages.map((image, index) => (
-            <Link
-              key={index}
-              href="/appartement"
-              className="aspect-square relative rounded-lg overflow-hidden group"
-            >
+        {/* Gallery Grid - Asymmetric layout */}
+        <div className="grid grid-cols-4 grid-rows-2 gap-4 h-[500px]">
+          <AnimateOnScroll className="col-span-2 row-span-2 relative overflow-hidden group">
+            <Link href="/appartement">
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={previewImages[0].src}
+                alt={previewImages[0].alt}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="50vw"
               />
-              <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-text/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </Link>
+          </AnimateOnScroll>
+
+          {previewImages.slice(1).map((image, index) => (
+            <AnimateOnScroll
+              key={index}
+              delay={(index + 1) * 100}
+              className="relative overflow-hidden group"
+            >
+              <Link href="/appartement">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-text/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </Link>
+            </AnimateOnScroll>
           ))}
         </div>
 
-        <div className="text-center">
+        {/* Mobile CTA */}
+        <div className="text-center mt-8 md:hidden">
           <Link href="/appartement">
-            <Button variant="outline" className="group">
+            <Button className="bg-gold text-white hover:bg-gold-dark">
               Voir toutes les photos
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>

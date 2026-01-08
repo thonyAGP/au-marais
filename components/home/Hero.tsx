@@ -1,66 +1,87 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Button, Container } from '@/components/ui';
+import { Button } from '@/components/ui';
 
 export const Hero = () => {
+  const letters = ['A', 'u', '\u00A0', 'M', 'a', 'r', 'a', 'i', 's'];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center">
-      {/* Background Image */}
+    <section className="relative h-screen overflow-hidden flex items-center justify-center">
+      {/* Background Image with Ken Burns effect */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/apartment/01-salon.jpg"
-          alt="Salon de l'appartement Au Marais avec poutres apparentes"
-          fill
-          className="object-cover"
-          priority
-          quality={85}
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMQYTQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABsRAAICAwEAAAAAAAAAAAAAAAECABEDITFB/9oADAMBAAIRAxEAPwCz4V5FDc3VxaXNtHMYgPWXUlSp5I6PXVXv8gCj6FA2qN+0pR1Xo+aw6WxYCpLGxyWJOT/a0T//2Q=="
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/50 via-stone-900/40 to-stone-900/70" />
+        <div className="absolute inset-0 animate-ken-burns">
+          <Image
+            src="/images/apartment/01-salon.jpg"
+            alt="Salon de l'appartement Au Marais avec poutres apparentes"
+            fill
+            className="object-cover"
+            priority
+            quality={90}
+            sizes="100vw"
+          />
+        </div>
+
+        {/* Warm brown overlay for readability */}
+        <div className="absolute inset-0 hero-overlay" />
+
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 pattern-overlay-light opacity-50" />
       </div>
 
+      {/* Gold decorative line */}
+      <div className="absolute left-8 md:left-16 top-[30%] bottom-[30%] w-px gold-line-vertical hidden md:block" />
+
       {/* Content */}
-      <Container className="relative z-10 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight animate-fade-in-up">
-            Au Marais
-          </h1>
-          <p className="text-xl md:text-2xl text-stone-200 mb-4 font-light animate-fade-in-up delay-100 opacity-0">
-            Votre cocon parisien
-          </p>
-          <p className="text-lg text-stone-300 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200 opacity-0">
-            Appartement de charme au coeur du Marais, entièrement rénové dans un
-            immeuble du 17ème siècle. Poutres apparentes, murs en pierres, et la
-            ligne 1 à 200 mètres.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300 opacity-0">
-            <Link href="/appartement">
-              <Button size="lg" className="group">
-                Découvrir l&apos;appartement
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                variant="outline"
-                size="lg"
-                className="bg-white/10 border-white text-white hover:bg-white hover:text-stone-900"
-              >
-                Nous contacter
-              </Button>
-            </Link>
-          </div>
+      <div className="relative z-10 text-center text-white max-w-4xl px-6">
+        {/* Animated title letter by letter */}
+        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-normal tracking-wider mb-6 overflow-hidden">
+          {letters.map((letter, index) => (
+            <span
+              key={index}
+              className={`animate-letter-slide letter-delay-${index + 1}`}
+            >
+              {letter}
+            </span>
+          ))}
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-xl md:text-2xl font-light tracking-[0.3em] uppercase text-gold mb-8 animate-fade-in opacity-0 delay-800">
+          Votre cocon parisien
+        </p>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in opacity-0 delay-1000">
+          Appartement de charme dans un immeuble du 17ème siècle au cœur du Marais.
+          Poutres apparentes, murs en pierres, et la ligne 1 à 200 mètres.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in opacity-0 delay-1200">
+          <Link href="/appartement">
+            <Button
+              size="lg"
+              className="bg-gold text-white hover:bg-gold-dark px-10 py-4 text-sm tracking-widest uppercase font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,169,98,0.3)]"
+            >
+              Découvrir
+            </Button>
+          </Link>
+          <Link href="/contact">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white/50 text-white hover:bg-white hover:text-text px-10 py-4 text-sm tracking-widest uppercase font-medium"
+            >
+              Réserver
+            </Button>
+          </Link>
         </div>
-      </Container>
+      </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white/50 rounded-full" />
-        </div>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-in opacity-0 delay-1500">
+        <span className="text-white/70 text-xs tracking-[0.2em] uppercase">Explorer</span>
+        <div className="w-px h-16 gold-line-vertical animate-scroll-pulse" />
       </div>
     </section>
   );

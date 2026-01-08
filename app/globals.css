@@ -1,26 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-/* Custom Theme */
+/* Custom Theme - Soft Terracotta */
 @theme {
-  --color-cream: #FAF8F5;
+  /* Primary backgrounds */
+  --color-cream: #FDFBF8;
+  --color-cream-dark: #F8F4EF;
+  --color-white: #FFFFFF;
 
-  --color-stone-100: #F5F3EF;
-  --color-stone-200: #E8E4DD;
-  --color-stone-400: #A39E93;
-  --color-stone-600: #6B665C;
-  --color-stone-800: #3D3A35;
-  --color-stone-900: #1F1D1A;
+  /* Text colors */
+  --color-text: #3D2C2C;
+  --color-text-light: #5C4A4A;
+  --color-text-muted: #8A7A7A;
 
-  --color-gold: #C9A962;
-  --color-gold-dark: #A68B4B;
-  --color-gold-light: #D4B872;
+  /* Legacy dark colors (for hero overlay) */
+  --color-dark: #3D2C2C;
+  --color-dark-lighter: #4D3C3C;
+  --color-dark-card: #2D1C1C;
+
+  --color-stone-100: #F8F4EF;
+  --color-stone-200: #EDE6DD;
+  --color-stone-300: #DDD4C9;
+  --color-stone-400: #B5A99A;
+  --color-stone-600: #7A6A5A;
+  --color-stone-800: #4A3A30;
+  --color-stone-900: #2D1C1C;
+
+  /* Accent colors - Terracotta */
+  --color-gold: #C4745A;
+  --color-gold-dark: #A45A42;
+  --color-gold-light: #D4947A;
 
   --color-available: #4A7C59;
   --color-unavailable: #9B3D3D;
 
-  --font-family-serif: 'Playfair Display', Georgia, serif;
-  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-family-sans: 'Montserrat', system-ui, sans-serif;
 }
 
 @layer base {
@@ -29,18 +43,34 @@
   }
 
   body {
-    @apply bg-cream text-stone-900 antialiased;
+    @apply bg-cream text-text antialiased;
+    font-family: var(--font-family-sans);
   }
 
   ::selection {
     background-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
-    color: var(--color-stone-900);
+    color: var(--color-text);
   }
 }
 
 @layer components {
   .link-underline {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  /* Card style for light theme */
+  .card-cream {
+    background: var(--color-white);
+    border: 1px solid var(--color-stone-200);
+  }
+
+  /* Gold border accent */
+  .gold-border {
+    border: 1px solid color-mix(in srgb, var(--color-gold) 30%, transparent);
+  }
+
+  .gold-border:hover {
+    border-color: var(--color-gold);
   }
 }
 
@@ -50,11 +80,25 @@
   }
 }
 
-/* Animations */
+/* Ken Burns Animation */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(1.1) translateX(-2%);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+/* Fade In Up Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -71,7 +115,8 @@
   }
 }
 
-@keyframes slideUp {
+/* Letter slide up animation */
+@keyframes letterSlideUp {
   from {
     transform: translateY(100%);
     opacity: 0;
@@ -82,21 +127,79 @@
   }
 }
 
+/* Scroll line pulse */
+@keyframes scrollPulse {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.5;
+  }
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out forwards;
+.animate-letter-slide {
+  display: inline-block;
+  animation: letterSlideUp 1s ease-out forwards;
+  opacity: 0;
 }
 
-/* Stagger delays */
+.animate-scroll-pulse {
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* Stagger delays for letters */
+.letter-delay-1 { animation-delay: 0.1s; }
+.letter-delay-2 { animation-delay: 0.15s; }
+.letter-delay-3 { animation-delay: 0.2s; }
+.letter-delay-4 { animation-delay: 0.25s; }
+.letter-delay-5 { animation-delay: 0.3s; }
+.letter-delay-6 { animation-delay: 0.35s; }
+.letter-delay-7 { animation-delay: 0.4s; }
+.letter-delay-8 { animation-delay: 0.45s; }
+.letter-delay-9 { animation-delay: 0.5s; }
+
+/* Standard delays */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-1000 { animation-delay: 1000ms; }
+.delay-1200 { animation-delay: 1200ms; }
+.delay-1500 { animation-delay: 1500ms; }
+
+/* Subtle pattern overlay for light theme */
+.pattern-overlay-light {
+  background-image:
+    linear-gradient(45deg, transparent 45%, rgba(201,169,98,0.03) 45%, rgba(201,169,98,0.03) 55%, transparent 55%);
+  background-size: 60px 60px;
+}
+
+/* Gold gradient line */
+.gold-line-vertical {
+  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+}
+
+.gold-line-horizontal {
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+}
+
+/* Hero overlay for dark effect on image - Terracotta warmth */
+.hero-overlay {
+  background:
+    linear-gradient(135deg, rgba(61,44,44,0.8) 0%, rgba(61,44,44,0.3) 50%, rgba(61,44,44,0.6) 100%),
+    linear-gradient(to top, rgba(61,44,44,0.85) 0%, transparent 40%);
+}
