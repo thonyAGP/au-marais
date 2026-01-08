@@ -272,26 +272,62 @@ export default function AdminPage() {
                 <h2 className="font-serif text-xl text-stone-900">Configuration Airbnb</h2>
               </div>
               <p className="text-stone-500 text-sm mb-6">
-                Paramètres pour la comparaison de prix avec Airbnb.
+                Paramètres pour calculer le prix Airbnb équivalent (comparaison).
               </p>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-stone-700 mb-1">
-                    Frais de service Airbnb
+                    Majoration nuitée Airbnb
                   </label>
                   <div className="relative">
                     <input
                       type="number"
                       min="0"
                       max="100"
-                      value={settings.airbnb.serviceFee}
-                      onChange={(e) => updateSetting('airbnb', 'serviceFee', Number(e.target.value))}
+                      value={settings.airbnb.nightlyMarkup}
+                      onChange={(e) => updateSetting('airbnb', 'nightlyMarkup', Number(e.target.value))}
                       className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
                     />
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">%</span>
                   </div>
-                  <p className="text-stone-400 text-xs mt-1">Généralement entre 14% et 16%</p>
+                  <p className="text-stone-400 text-xs mt-1">Différence de prix par nuit vs direct</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-1">
+                    Frais de ménage Airbnb
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      value={settings.airbnb.cleaningFee}
+                      onChange={(e) => updateSetting('airbnb', 'cleaningFee', Number(e.target.value))}
+                      className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">€</span>
+                  </div>
+                  <p className="text-stone-400 text-xs mt-1">Frais fixes ajoutés sur Airbnb</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-1">
+                    Taxe de séjour / pers / nuit
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={settings.airbnb.touristTax}
+                      onChange={(e) => updateSetting('airbnb', 'touristTax', Number(e.target.value))}
+                      className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">€</span>
+                  </div>
+                  <p className="text-stone-400 text-xs mt-1">Appliquée pour 2 voyageurs par défaut</p>
                 </div>
 
                 <div>

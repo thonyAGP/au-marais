@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Container } from '@/components/ui';
+import { Container, AnimateOnScroll } from '@/components/ui';
 import { Heart, MapPin, Globe } from 'lucide-react';
 
 export const Hosts = () => {
@@ -10,7 +10,7 @@ export const Hosts = () => {
       <Container>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Photo */}
-          <div className="relative">
+          <AnimateOnScroll animation="slide-right" className="relative">
             <div className="aspect-[4/5] relative rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/hosts/family.jpg"
@@ -23,10 +23,10 @@ export const Hosts = () => {
             {/* Decorative elements */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gold/10 rounded-full -z-10" />
             <div className="absolute -top-6 -left-6 w-24 h-24 bg-stone-100 rounded-full -z-10" />
-          </div>
+          </AnimateOnScroll>
 
           {/* Content */}
-          <div>
+          <AnimateOnScroll animation="slide-left" delay={200}>
             <p className="text-gold font-medium mb-2 tracking-wide uppercase text-sm">
               Vos hôtes
             </p>
@@ -65,12 +65,12 @@ export const Hosts = () => {
                 <MapPin className="h-4 w-4 text-gold" />
                 Parisiens depuis 2013
               </span>
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600 hover:bg-gold/10 transition-colors">
                 <Globe className="h-4 w-4 text-gold" />
                 FR · ES · EN
               </span>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
       </Container>
     </section>

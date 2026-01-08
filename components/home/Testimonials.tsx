@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from '@/components/ui';
+import { Container, AnimateOnScroll } from '@/components/ui';
 import { Star, Quote } from 'lucide-react';
 
 // Placeholder reviews - à remplacer par les vrais avis Airbnb
@@ -40,7 +40,7 @@ export const Testimonials = () => {
 
       <Container className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <AnimateOnScroll className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
@@ -55,33 +55,32 @@ export const Testimonials = () => {
           <p className="text-stone-400">
             89 avis sur Airbnb · Super note en propreté, communication et emplacement
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10"
-            >
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 text-gold fill-gold" />
-                ))}
-              </div>
-              <p className="text-stone-300 leading-relaxed mb-6 italic">
-                "{testimonial.text}"
-              </p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-white">{testimonial.name}</p>
-                  <p className="text-stone-500 text-sm">{testimonial.date}</p>
+            <AnimateOnScroll key={index} delay={index * 100}>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-gold fill-gold" />
+                  ))}
                 </div>
-                <div className="text-stone-500 text-sm">
-                  via Airbnb
+                <p className="text-stone-300 leading-relaxed mb-6 italic">
+                  "{testimonial.text}"
+                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-white">{testimonial.name}</p>
+                    <p className="text-stone-500 text-sm">{testimonial.date}</p>
+                  </div>
+                  <div className="text-stone-500 text-sm">
+                    via Airbnb
+                  </div>
                 </div>
               </div>
-            </div>
+            </AnimateOnScroll>
           ))}
         </div>
 

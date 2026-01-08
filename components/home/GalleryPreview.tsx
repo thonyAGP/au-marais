@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Container, Button } from '@/components/ui';
+import { Container, Button, AnimateOnScroll } from '@/components/ui';
 
 const previewImages = [
   { src: '/images/apartment/01-salon.jpg', alt: 'Salon avec poutres apparentes' },
@@ -14,14 +14,14 @@ export const GalleryPreview = () => {
   return (
     <section className="py-24 bg-cream">
       <Container>
-        <div className="text-center mb-16">
+        <AnimateOnScroll className="text-center mb-16">
           <h2 className="font-serif text-4xl text-stone-900 mb-4">
             Découvrez l&apos;appartement
           </h2>
           <p className="text-stone-600 max-w-2xl mx-auto">
             Un intérieur chaleureux qui a conservé tout son caractère d&apos;époque.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">

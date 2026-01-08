@@ -20,11 +20,11 @@ export const Footer = () => {
           {/* Navigation */}
           <div>
             <h4 className="text-white font-medium mb-4">Navigation</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/"
-                  className="text-stone-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300 text-sm inline-block"
                 >
                   Accueil
                 </Link>
@@ -32,7 +32,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/appartement"
-                  className="text-stone-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300 text-sm inline-block"
                 >
                   Appartement
                 </Link>
@@ -40,7 +40,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/quartier"
-                  className="text-stone-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300 text-sm inline-block"
                 >
                   Le Quartier
                 </Link>
@@ -48,7 +48,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="text-stone-400 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300 text-sm inline-block"
                 >
                   Contact
                 </Link>
@@ -59,27 +59,33 @@ export const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="text-white font-medium mb-4">Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-sm">
-                <MapPin className="h-4 w-4 text-gold" />
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3 text-sm group">
+                <div className="p-2 bg-stone-800 rounded-lg group-hover:bg-gold/20 transition-colors">
+                  <MapPin className="h-4 w-4 text-gold" />
+                </div>
                 <span className="text-stone-400">
                   Rue François Miron, 75004 Paris
                 </span>
               </li>
-              <li className="flex items-center gap-3 text-sm">
-                <Phone className="h-4 w-4 text-gold" />
+              <li className="flex items-center gap-3 text-sm group">
+                <div className="p-2 bg-stone-800 rounded-lg group-hover:bg-gold/20 transition-colors">
+                  <Phone className="h-4 w-4 text-gold" />
+                </div>
                 <a
                   href="tel:+33631598400"
-                  className="text-stone-400 hover:text-white transition-colors duration-300"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300"
                 >
                   +33 6 31 59 84 00
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-sm">
-                <Mail className="h-4 w-4 text-gold" />
+              <li className="flex items-center gap-3 text-sm group">
+                <div className="p-2 bg-stone-800 rounded-lg group-hover:bg-gold/20 transition-colors">
+                  <Mail className="h-4 w-4 text-gold" />
+                </div>
                 <a
                   href="mailto:contact@au-marais.fr"
-                  className="text-stone-400 hover:text-white transition-colors duration-300"
+                  className="text-stone-400 hover:text-gold transition-colors duration-300"
                 >
                   contact@au-marais.fr
                 </a>

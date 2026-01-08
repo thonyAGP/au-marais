@@ -12,9 +12,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2',
+          'inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 active:scale-[0.98]',
           {
-            'bg-gold text-white hover:bg-gold-dark': variant === 'primary',
+            'bg-gold text-white hover:bg-gold-dark hover:shadow-lg hover:shadow-gold/25': variant === 'primary',
             'bg-stone-800 text-white hover:bg-stone-900': variant === 'secondary',
             'border-2 border-stone-800 text-stone-800 hover:bg-stone-800 hover:text-white':
               variant === 'outline',

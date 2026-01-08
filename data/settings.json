@@ -5,7 +5,9 @@
     "monthly": 20
   },
   "airbnb": {
-    "serviceFee": 15,
+    "nightlyMarkup": 19,
+    "cleaningFee": 48,
+    "touristTax": 2.88,
     "listingId": "618442543008929958"
   },
   "contact": {

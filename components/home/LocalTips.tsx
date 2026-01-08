@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from '@/components/ui';
+import { Container, AnimateOnScroll } from '@/components/ui';
 import { MapPin, Utensils, Coffee, Wine, Croissant, ShoppingBag } from 'lucide-react';
 
 const tips = [
@@ -102,7 +102,7 @@ export const LocalTips = () => {
     <section className="py-24 bg-cream">
       <Container>
         {/* Header */}
-        <div className="text-center mb-16">
+        <AnimateOnScroll className="text-center mb-16">
           <p className="text-gold font-medium mb-2 tracking-wide uppercase text-sm">
             Nos bonnes adresses
           </p>
@@ -112,25 +112,27 @@ export const LocalTips = () => {
           <p className="text-stone-600 max-w-2xl mx-auto">
             Nos adresses testées et approuvées pour profiter du quartier comme de vrais Parisiens.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Tips Grid */}
         <div className="space-y-16">
-          {tips.map((section) => (
-            <div key={section.category}>
+          {tips.map((section, sectionIndex) => (
+            <AnimateOnScroll key={section.category} delay={sectionIndex * 150}>
               <div className="flex items-center gap-3 mb-8">
-                <section.icon className="h-6 w-6 text-gold" />
+                <div className="p-2 bg-gold/10 rounded-lg">
+                  <section.icon className="h-6 w-6 text-gold" />
+                </div>
                 <h3 className="font-serif text-2xl text-stone-900">{section.category}</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
-                {section.items.map((item) => (
+                {section.items.map((item, itemIndex) => (
                   <div
                     key={item.name}
-                    className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h4 className="font-medium text-stone-900 text-lg">{item.name}</h4>
+                        <h4 className="font-medium text-stone-900 text-lg group-hover:text-gold transition-colors">{item.name}</h4>
                         <p className="text-stone-400 text-sm flex items-center gap-1">
                           <MapPin className="h-3 w-3" />
                           {item.address}
@@ -151,31 +153,33 @@ export const LocalTips = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </AnimateOnScroll>
           ))}
         </div>
 
         {/* Must See */}
-        <div className="mt-20">
+        <AnimateOnScroll className="mt-20" delay={300}>
           <div className="flex items-center gap-3 mb-8">
-            <MapPin className="h-6 w-6 text-gold" />
+            <div className="p-2 bg-gold/10 rounded-lg">
+              <MapPin className="h-6 w-6 text-gold" />
+            </div>
             <h3 className="font-serif text-2xl text-stone-900">À ne pas manquer</h3>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mustSee.map((place) => (
+            {mustSee.map((place, index) => (
               <div
                 key={place.name}
-                className="bg-white p-6 rounded-xl shadow-sm text-center"
+                className="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
-                <span className="inline-block px-3 py-1 bg-stone-100 text-stone-500 text-xs rounded-full mb-3">
+                <span className="inline-block px-3 py-1 bg-stone-100 text-stone-500 text-xs rounded-full mb-3 group-hover:bg-gold/10 group-hover:text-gold transition-colors">
                   {place.distance}
                 </span>
-                <h4 className="font-medium text-stone-900 mb-2">{place.name}</h4>
+                <h4 className="font-medium text-stone-900 mb-2 group-hover:text-gold transition-colors">{place.name}</h4>
                 <p className="text-stone-500 text-sm">{place.description}</p>
               </div>
             ))}
           </div>
-        </div>
+        </AnimateOnScroll>
       </Container>
     </section>
   );

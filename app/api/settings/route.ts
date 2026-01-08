@@ -13,7 +13,7 @@ const getSettings = async (): Promise<SiteSettings> => {
     // Retourner les valeurs par défaut si le fichier n'existe pas
     return {
       discounts: { weekly: 10, biweekly: 15, monthly: 20 },
-      airbnb: { serviceFee: 15, listingId: '618442543008929958' },
+      airbnb: { nightlyMarkup: 19, cleaningFee: 48, touristTax: 2.88, listingId: '618442543008929958' },
       contact: { whatsapp: '33631598400' },
     };
   }
@@ -47,7 +47,9 @@ export async function POST(request: NextRequest) {
       typeof newSettings.discounts?.weekly !== 'number' ||
       typeof newSettings.discounts?.biweekly !== 'number' ||
       typeof newSettings.discounts?.monthly !== 'number' ||
-      typeof newSettings.airbnb?.serviceFee !== 'number' ||
+      typeof newSettings.airbnb?.nightlyMarkup !== 'number' ||
+      typeof newSettings.airbnb?.cleaningFee !== 'number' ||
+      typeof newSettings.airbnb?.touristTax !== 'number' ||
       typeof newSettings.airbnb?.listingId !== 'string' ||
       typeof newSettings.contact?.whatsapp !== 'string'
     ) {

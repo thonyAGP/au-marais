@@ -7,3 +7,4 @@ export { Lightbox } from "./Lightbox";
 export { SmoobuCalendar } from "./SmoobuCalendar";
 export { SmoobuWidget } from "./SmoobuWidget";
 export { AvailabilityCalendar } from "./AvailabilityCalendar";
+export { AnimateOnScroll } from "./AnimateOnScroll";

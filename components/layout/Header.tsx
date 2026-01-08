@@ -33,7 +33,7 @@ export const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-stone-600 hover:text-stone-900 transition-colors duration-300 text-sm font-medium"
+                className="text-stone-600 hover:text-gold transition-colors duration-300 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.name}
               </Link>

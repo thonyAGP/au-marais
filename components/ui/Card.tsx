@@ -14,10 +14,10 @@ export const Card = ({
   return (
     <div
       className={cn(
-        'bg-white rounded-lg overflow-hidden',
+        'bg-white rounded-lg overflow-hidden transition-all duration-300',
         {
-          'border border-stone-200': variant === 'default',
-          'shadow-lg': variant === 'elevated',
+          'border border-stone-200 hover:border-stone-300 hover:shadow-md': variant === 'default',
+          'shadow-lg hover:shadow-xl hover:-translate-y-1': variant === 'elevated',
         },
         className
       )}
