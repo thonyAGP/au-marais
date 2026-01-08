@@ -281,7 +281,7 @@ export default function AppartementPage() {
       </section>
 
       {/* Calendar */}
-      <section className="py-16 bg-cream">
+      <section id="disponibilites" className="py-16 bg-cream scroll-mt-24">
         <Container size="md">
           <h2 className="font-serif text-3xl text-stone-900 mb-8 text-center">
             Disponibilités

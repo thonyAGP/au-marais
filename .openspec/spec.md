@@ -58,6 +58,12 @@ au-marais/
 - [x] Favicon SVG (initiales AM)
 - [x] Sitemap et robots.txt dynamiques
 - [x] Composant SmoobuCalendar prêt
+- [x] Section "Vos Hôtes" avec présentation famille
+- [x] Section témoignages Airbnb (4 avis)
+- [x] Section "Bonnes adresses" avec restaurants et commerces locaux
+- [x] Sticky booking bar (visible au scroll)
+- [x] Animations CSS (fade-in-up, transitions)
+- [x] Calendrier disponibilités accessible depuis booking bar
 
 ### À faire
 - [ ] Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)
@@ -76,3 +82,6 @@ au-marais/
 - 2026-01-05 : Intégration photos Airbnb, composants MetroLine (RATP), Map, Lightbox
 - 2026-01-05 : Formulaire contact via WhatsApp (ouverture directe avec message pré-rempli)
 - 2026-01-05 : SEO complet, favicon, sitemap, robots.txt, composant SmoobuCalendar
+- 2026-01-08 : Ajout sections Hosts, Testimonials, LocalTips sur page d'accueil
+- 2026-01-08 : Sticky booking bar avec animations
+- 2026-01-08 : Animations CSS (fade-in-up avec delays)

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Header, Footer } from '@/components/layout';
+import { BookingBar } from '@/components/home';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -76,8 +77,9 @@ export default function RootLayout({
     <html lang="fr">
       <body className="font-sans">
         <Header />
-        <main className="pt-20">{children}</main>
+        <main className="pt-20 pb-16 sm:pb-0">{children}</main>
         <Footer />
+        <BookingBar />
       </body>
     </html>
   );

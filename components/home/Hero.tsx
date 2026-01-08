@@ -25,18 +25,18 @@ export const Hero = () => {
       {/* Content */}
       <Container className="relative z-10 text-center">
         <div className="max-w-3xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight">
+          <h1 className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight animate-fade-in-up">
             Au Marais
           </h1>
-          <p className="text-xl md:text-2xl text-stone-200 mb-4 font-light">
+          <p className="text-xl md:text-2xl text-stone-200 mb-4 font-light animate-fade-in-up delay-100 opacity-0">
             Votre cocon parisien
           </p>
-          <p className="text-lg text-stone-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-stone-300 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200 opacity-0">
             Appartement de charme au coeur du Marais, entièrement rénové dans un
             immeuble du 17ème siècle. Poutres apparentes, murs en pierres, et la
             ligne 1 à 200 mètres.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300 opacity-0">
             <Link href="/appartement">
               <Button size="lg" className="group">
                 Découvrir l&apos;appartement

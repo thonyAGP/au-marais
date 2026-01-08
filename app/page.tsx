@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Hero, Features, GalleryPreview } from '@/components/home';
+import { Hero, Features, GalleryPreview, Hosts, Testimonials, LocalTips } from '@/components/home';
 
 export const metadata: Metadata = {
   title: 'Au Marais — Votre cocon parisien | Location courte durée Paris 4ème',
@@ -16,6 +16,9 @@ export default function HomePage() {
       <Hero />
       <Features />
       <GalleryPreview />
+      <Hosts />
+      <Testimonials />
+      <LocalTips />
 
       {/* CTA Section */}
       <section className="py-24 bg-stone-900 text-white">
