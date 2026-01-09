@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { Container, MetroStation, Map, AnimateOnScroll } from '@/components/ui';
-import { MapPin, Coffee, ShoppingBag, Camera, Utensils, Clock, Landmark, BookOpen, Crown } from 'lucide-react';
+import { MapPin, Coffee, ShoppingBag, Utensils, Clock, Landmark, BookOpen, Crown, ExternalLink } from 'lucide-react';
 
 const metroStations = [
   {
@@ -25,36 +26,68 @@ const metroStations = [
   },
 ];
 
-const pointsOfInterest = [
+const placesToVisit = [
   {
-    category: 'Monuments',
-    icon: Camera,
-    places: [
-      { name: 'Place des Vosges', distance: '5 min à pied' },
-      { name: 'Hôtel de Ville', distance: '8 min à pied' },
-      { name: 'Centre Pompidou', distance: '10 min à pied' },
-      { name: 'Notre-Dame', distance: '12 min à pied' },
-      { name: 'Île Saint-Louis', distance: '5 min à pied' },
-    ],
+    name: 'Place des Vosges',
+    description: 'La plus ancienne place de Paris, chef-d\'œuvre d\'architecture du XVIIe siècle.',
+    distance: '5 min',
+    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Place+des+Vosges+Paris',
   },
+  {
+    name: 'Centre Pompidou',
+    description: 'Musée d\'art moderne et contemporain à l\'architecture iconique.',
+    distance: '10 min',
+    image: 'https://images.unsplash.com/photo-1591289009723-aef0a1a8a211?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Centre+Pompidou+Paris',
+  },
+  {
+    name: 'Notre-Dame',
+    description: 'Cathédrale gothique emblématique, en cours de restauration.',
+    distance: '12 min',
+    image: 'https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Notre+Dame+Paris',
+  },
+  {
+    name: 'Île Saint-Louis',
+    description: 'Île paisible au charme intemporel, célèbre pour ses glaces Berthillon.',
+    distance: '5 min',
+    image: 'https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Ile+Saint+Louis+Paris',
+  },
+  {
+    name: 'Hôtel de Ville',
+    description: 'Mairie de Paris, bâtiment Renaissance avec sa place animée.',
+    distance: '8 min',
+    image: 'https://images.unsplash.com/photo-1600950207944-0d63e8edbc3f?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Hotel+de+Ville+Paris',
+  },
+  {
+    name: 'Rue des Rosiers',
+    description: 'Cœur du quartier juif historique, falafels et pâtisseries.',
+    distance: '4 min',
+    image: 'https://images.unsplash.com/photo-1551866442-64e75e911c23?w=800&q=80',
+    mapsUrl: 'https://maps.google.com/?q=Rue+des+Rosiers+Paris',
+  },
+];
+
+const pointsOfInterest = [
   {
     category: 'Shopping',
     icon: ShoppingBag,
     places: [
-      { name: 'BHV Marais', distance: '5 min à pied' },
-      { name: 'Rue des Francs-Bourgeois', distance: '3 min à pied' },
-      { name: 'Village Saint-Paul', distance: '2 min à pied' },
-      { name: 'Rue de Rivoli', distance: '5 min à pied' },
+      { name: 'BHV Marais', distance: '5 min', url: 'https://maps.google.com/?q=BHV+Marais+Paris' },
+      { name: 'Rue des Francs-Bourgeois', distance: '3 min', url: 'https://maps.google.com/?q=Rue+des+Francs+Bourgeois+Paris' },
+      { name: 'Village Saint-Paul', distance: '2 min', url: 'https://maps.google.com/?q=Village+Saint+Paul+Paris' },
     ],
   },
   {
-    category: 'Restaurants & Cafés',
+    category: 'Restaurants',
     icon: Coffee,
     places: [
-      { name: 'Carette Place des Vosges', distance: '5 min à pied' },
-      { name: 'L\'As du Fallafel', distance: '5 min à pied' },
-      { name: 'Chez Janou', distance: '6 min à pied' },
-      { name: 'Breizh Café', distance: '4 min à pied' },
+      { name: 'L\'As du Fallafel', distance: '5 min', url: 'https://maps.google.com/?q=L+As+du+Fallafel+Paris' },
+      { name: 'Chez Janou', distance: '6 min', url: 'https://maps.google.com/?q=Chez+Janou+Paris' },
+      { name: 'Breizh Café', distance: '4 min', url: 'https://maps.google.com/?q=Breizh+Cafe+Marais+Paris' },
     ],
   },
 ];
@@ -241,22 +274,80 @@ export default function QuartierPage() {
         </Container>
       </section>
 
-      {/* Points of Interest */}
+      {/* Lieux incontournables */}
       <section className="py-20 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Explorer
+              À découvrir
             </p>
             <h2 className="font-serif text-4xl text-text">
-              À proximité
+              Lieux incontournables
+            </h2>
+            <p className="text-text-muted mt-4 max-w-xl mx-auto">
+              Tous accessibles à pied depuis l&apos;appartement
+            </p>
+          </AnimateOnScroll>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {placesToVisit.map((place, index) => (
+              <AnimateOnScroll key={place.name} delay={index * 100}>
+                <a
+                  href={place.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block bg-white border border-stone-200 overflow-hidden hover:border-gold/50 hover:shadow-lg transition-all duration-500"
+                >
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={place.image}
+                      alt={place.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    {/* Distance badge */}
+                    <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-medium text-text">
+                      {place.distance} à pied
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-serif text-lg text-text group-hover:text-gold transition-colors">
+                        {place.name}
+                      </h3>
+                      <ExternalLink className="h-4 w-4 text-gold/50 group-hover:text-gold transition-colors" />
+                    </div>
+                    <p className="text-text-muted text-sm leading-relaxed">
+                      {place.description}
+                    </p>
+                  </div>
+                </a>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Points of Interest */}
+      <section className="py-20 bg-white">
+        <Container>
+          <AnimateOnScroll className="text-center mb-16">
+            <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
+              Pratique
+            </p>
+            <h2 className="font-serif text-4xl text-text">
+              Commerces à proximité
             </h2>
           </AnimateOnScroll>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {pointsOfInterest.map((category, index) => (
               <AnimateOnScroll key={category.category} delay={index * 100}>
-                <div className="bg-white border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500 h-full">
+                <div className="bg-cream border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500 h-full">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                       <category.icon className="h-5 w-5 text-gold" />
@@ -267,11 +358,19 @@ export default function QuartierPage() {
                   </div>
                   <ul className="space-y-4">
                     {category.places.map((place) => (
-                      <li key={place.name} className="flex justify-between items-center">
-                        <span className="text-text-light">{place.name}</span>
-                        <span className="text-gold/80 text-sm whitespace-nowrap ml-2">
-                          {place.distance}
-                        </span>
+                      <li key={place.name}>
+                        <a
+                          href={place.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex justify-between items-center group hover:text-gold transition-colors"
+                        >
+                          <span className="text-text-light group-hover:text-gold transition-colors">{place.name}</span>
+                          <span className="text-gold/80 text-sm whitespace-nowrap ml-2 flex items-center gap-1">
+                            {place.distance}
+                            <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </span>
+                        </a>
                       </li>
                     ))}
                   </ul>
