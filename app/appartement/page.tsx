@@ -83,12 +83,12 @@ export default function AppartementPage() {
       {/* Gallery */}
       <section className="py-16 bg-cream">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[200px] md:auto-rows-[250px]">
             {/* Main image - larger */}
             <AnimateOnScroll className="col-span-2 row-span-2">
               <button
                 onClick={() => openLightbox(0)}
-                className="relative aspect-square md:aspect-auto h-full w-full overflow-hidden cursor-zoom-in group"
+                className="relative h-full w-full overflow-hidden cursor-zoom-in group"
               >
                 <Image
                   src={galleryImages[0].src}
@@ -108,7 +108,7 @@ export default function AppartementPage() {
               <AnimateOnScroll key={index} delay={(index + 1) * 50}>
                 <button
                   onClick={() => openLightbox(index + 1)}
-                  className="relative aspect-square overflow-hidden cursor-zoom-in group"
+                  className="relative h-full w-full overflow-hidden cursor-zoom-in group"
                 >
                   <Image
                     src={image.src}
