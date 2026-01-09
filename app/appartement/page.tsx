@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Container, Lightbox, AnimateOnScroll } from '@/components/ui';
-import { Users, Bed, Bath, Building, Wifi, Utensils, Tv, Wind, Star, Calendar } from 'lucide-react';
+import { Container, Lightbox, AnimateOnScroll, SuperhostBadge } from '@/components/ui';
+import { Users, Bed, Bath, Building, Wifi, Utensils, Tv, Wind, Calendar } from 'lucide-react';
 
 const galleryImages = [
   { src: '/images/apartment/01-salon.jpg', alt: 'Salon avec poutres apparentes' },
@@ -72,15 +72,9 @@ export default function AppartementPage() {
               Un cocon chaleureux au coeur du Marais, mêlant charme historique et
               confort moderne.
             </p>
-            {/* Rating */}
-            <div className="flex items-center justify-center gap-3 mt-8">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-gold fill-gold" />
-                ))}
-              </div>
-              <span className="text-text font-medium text-lg">4.97</span>
-              <span className="text-text-muted">· 89 avis sur Airbnb</span>
+            {/* Superhost Badge */}
+            <div className="mt-10">
+              <SuperhostBadge variant="full" showExtras />
             </div>
           </AnimateOnScroll>
         </Container>

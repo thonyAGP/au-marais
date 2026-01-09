@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Hero, Features, GalleryPreview, Hosts, Testimonials, LocalTips } from '@/components/home';
-import { Container, AnimateOnScroll } from '@/components/ui';
+import { Container, AnimateOnScroll, SuperhostBadge } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: 'Au Marais — Votre cocon parisien | Location courte durée Paris 4ème',
@@ -20,15 +20,19 @@ export default function HomePage() {
       <section className="bg-white border-y border-stone-200">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4">
+            {/* Superhost Badge */}
+            <div className="py-6 flex items-center justify-center border-r border-stone-200 col-span-2 md:col-span-1">
+              <SuperhostBadge variant="compact" />
+            </div>
+            {/* Other stats */}
             {[
-              { value: '4.97', label: 'Note Airbnb' },
               { value: '89', label: 'Avis 5 étoiles' },
               { value: 'XVIIe', label: 'Siècle' },
               { value: '200m', label: 'Du métro' },
             ].map((stat, index) => (
               <div
                 key={stat.label}
-                className={`py-8 text-center ${index < 3 ? 'border-r border-stone-200' : ''}`}
+                className={`py-8 text-center ${index < 2 ? 'border-r border-stone-200' : ''}`}
               >
                 <div className="font-serif text-4xl text-gold mb-1">{stat.value}</div>
                 <div className="text-xs tracking-[0.2em] uppercase text-text-muted">{stat.label}</div>
