@@ -1,5 +1,5 @@
 import { Container, MetroStation, Map, AnimateOnScroll } from '@/components/ui';
-import { MapPin, Coffee, ShoppingBag, Camera, Utensils, Clock } from 'lucide-react';
+import { MapPin, Coffee, ShoppingBag, Camera, Utensils, Clock, Landmark, BookOpen, Crown } from 'lucide-react';
 
 const metroStations = [
   {
@@ -80,36 +80,102 @@ export default function QuartierPage() {
         </Container>
       </section>
 
-      {/* Description */}
+      {/* Histoire Section */}
       <section className="py-20 bg-white">
-        <Container size="md">
-          <AnimateOnScroll>
+        <Container>
+          <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
               Histoire
             </p>
-            <h2 className="font-serif text-3xl text-text mb-8">
-              Un quartier unique
+            <h2 className="font-serif text-4xl text-text">
+              Un quartier chargé d&apos;histoire
             </h2>
-            <div className="space-y-4 text-text-light leading-relaxed">
-              <p>
-                Le Marais est sans doute le quartier le plus authentique de Paris.
-                Épargné par les grands travaux haussmanniens du 19ème siècle, il a
-                conservé son architecture médiévale et ses hôtels particuliers du
-                17ème siècle.
-              </p>
-              <p>
-                Aujourd&apos;hui, c&apos;est un quartier vivant et cosmopolite, réputé pour
-                ses boutiques de créateurs, ses galeries d&apos;art, ses cafés branchés
-                et sa vie nocturne animée. C&apos;est aussi le coeur de la communauté
-                LGBTQ+ parisienne et du quartier juif historique.
-              </p>
-              <p>
-                Flânez dans les ruelles pavées, découvrez les cours cachées des
-                hôtels particuliers, arrêtez-vous sur la magnifique Place des
-                Vosges... Le Marais vous réserve des surprises à chaque coin de rue.
-              </p>
-            </div>
           </AnimateOnScroll>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* François Miron */}
+            <AnimateOnScroll className="bg-cream border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
+                  <Crown className="h-5 w-5 text-gold" />
+                </div>
+                <h3 className="font-serif text-xl text-text">François Miron</h3>
+              </div>
+              <p className="text-sm text-gold mb-4 font-medium">1560 — 1609</p>
+              <div className="space-y-3 text-text-light text-sm leading-relaxed">
+                <p>
+                  La rue qui abrite notre appartement porte le nom de <strong>François Miron</strong>,
+                  <em> prévôt des marchands de Paris</em> de 1604 à 1609 — l&apos;équivalent
+                  du maire de Paris sous l&apos;Ancien Régime.
+                </p>
+                <p>
+                  Surnommé <strong>« le père du peuple »</strong> par ses contemporains,
+                  il fut un proche du roi Henri IV et consacra sa fortune personnelle
+                  à l&apos;embellissement de Paris.
+                </p>
+                <p>
+                  On lui doit notamment la <strong>façade de l&apos;Hôtel de Ville</strong>,
+                  la première <strong>Samaritaine</strong> (pompe à eau près du Louvre)
+                  et la rénovation des aqueducs parisiens.
+                </p>
+              </div>
+            </AnimateOnScroll>
+
+            {/* La Rue */}
+            <AnimateOnScroll delay={100} className="bg-cream border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
+                  <Landmark className="h-5 w-5 text-gold" />
+                </div>
+                <h3 className="font-serif text-xl text-text">La Rue</h3>
+              </div>
+              <p className="text-sm text-gold mb-4 font-medium">Voie romaine du IIe siècle</p>
+              <div className="space-y-3 text-text-light text-sm leading-relaxed">
+                <p>
+                  La rue François Miron est l&apos;une des <strong>plus anciennes de Paris</strong>.
+                  Elle suit le tracé d&apos;une <strong>voie romaine du IIe siècle</strong> qui
+                  reliait Lutèce (Paris) à Melun et Sens.
+                </p>
+                <p>
+                  Renommée en 1865 par Louis-Philippe en hommage au prévôt, elle abrite
+                  des <strong>maisons médiévales à colombages</strong> (n°11 et 13), parmi
+                  les dernières de Paris, datant du XIVe siècle.
+                </p>
+                <p>
+                  L&apos;immeuble qui héberge notre appartement date du <strong>XVIIe siècle</strong>,
+                  avec ses poutres apparentes et ses murs en pierres caractéristiques.
+                </p>
+              </div>
+            </AnimateOnScroll>
+
+            {/* Le Marais */}
+            <AnimateOnScroll delay={200} className="bg-cream border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
+                  <BookOpen className="h-5 w-5 text-gold" />
+                </div>
+                <h3 className="font-serif text-xl text-text">Le Marais</h3>
+              </div>
+              <p className="text-sm text-gold mb-4 font-medium">Du marécage au quartier prisé</p>
+              <div className="space-y-3 text-text-light text-sm leading-relaxed">
+                <p>
+                  Son nom vient des <strong>marécages</strong> qui occupaient cette zone
+                  jusqu&apos;au XIIe siècle. Asséché par les moines, le quartier devient
+                  au XVIIe siècle le lieu de résidence de la <strong>noblesse parisienne</strong>.
+                </p>
+                <p>
+                  <strong>Épargné par les travaux haussmanniens</strong> du XIXe siècle,
+                  il conserve son architecture médiévale et ses hôtels particuliers,
+                  dont beaucoup sont devenus des musées.
+                </p>
+                <p>
+                  Aujourd&apos;hui, c&apos;est un quartier <strong>vivant et cosmopolite</strong> :
+                  communauté LGBTQ+, quartier juif historique, galeries d&apos;art,
+                  boutiques de créateurs et vie nocturne animée.
+                </p>
+              </div>
+            </AnimateOnScroll>
+          </div>
         </Container>
       </section>
 
