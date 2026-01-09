@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 import { BookingBar } from '@/components/home';
+import { ChatAssistant } from '@/components/ui';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -95,6 +96,7 @@ export default function RootLayout({
         <main className="pt-20 pb-16 sm:pb-0">{children}</main>
         <Footer />
         <BookingBar />
+        <ChatAssistant />
       </body>
     </html>
   );

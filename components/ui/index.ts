@@ -9,3 +9,4 @@ export { SmoobuWidget } from "./SmoobuWidget";
 export { AvailabilityCalendar } from "./AvailabilityCalendar";
 export { AnimateOnScroll } from "./AnimateOnScroll";
 export { SuperhostBadge } from "./SuperhostBadge";
+export { ChatAssistant } from "./ChatAssistant";
