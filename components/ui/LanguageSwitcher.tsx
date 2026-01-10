@@ -22,11 +22,10 @@ export const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm text-text-light hover:text-gold transition-colors"
+        className="flex items-center gap-1.5 px-2 py-2 text-text-light hover:text-gold transition-colors"
         aria-label="Change language"
       >
-        <span className="text-base">{localeFlags[currentLocale]}</span>
-        <span className="hidden sm:inline">{localeNames[currentLocale]}</span>
+        <span className="text-xl">{localeFlags[currentLocale]}</span>
         <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
