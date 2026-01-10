@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "title": "Au Marais — Your Parisian Hideaway",
+    "titleTemplate": "%s | Au Marais",
+    "description": "Charming apartment in the heart of Le Marais, fully renovated in a 17th-century building. Exposed beams, stone walls, Saint-Paul metro 200m away.",
+    "keywords": "Paris rental, Marais apartment, short term rental Paris, Airbnb Marais, charming apartment Paris, Paris vacation rental, Le Marais accommodation, Paris 4th arrondissement"
+  },
+  "nav": {
+    "home": "Home",
+    "apartment": "The Apartment",
+    "neighborhood": "The Neighborhood",
+    "availability": "Availability",
+    "contact": "Contact",
+    "book": "Book Now"
+  },
+  "hero": {
+    "subtitle": "Le Marais, Paris 4th",
+    "title": "Au Marais",
+    "description": "Charming apartment in the heart of Paris' most sought-after historic neighborhood",
+    "cta": "Discover",
+    "availability": "Check Availability"
+  },
+  "stats": {
+    "reviews": "5-star reviews",
+    "century": "Century",
+    "metro": "To metro"
+  },
+  "features": {
+    "sectionTitle": "The Apartment",
+    "title": "A Charming Haven in the Heart of Paris",
+    "description": "Our apartment combines old-world charm with modern comfort. Nestled in a 17th-century building, it offers an authentic Marais experience.",
+    "items": {
+      "beams": {
+        "title": "Exposed Beams",
+        "description": "Authentic period character"
+      },
+      "stone": {
+        "title": "Stone Walls",
+        "description": "Preserved Parisian architecture"
+      },
+      "metro": {
+        "title": "Saint-Paul Metro",
+        "description": "200m away, direct line 1"
+      },
+      "wifi": {
+        "title": "High-speed WiFi",
+        "description": "Fiber optic connection"
+      }
+    }
+  },
+  "gallery": {
+    "sectionTitle": "Gallery",
+    "title": "Discover Your Future Home Away from Home",
+    "viewAll": "View all photos"
+  },
+  "hosts": {
+    "sectionTitle": "Your Hosts",
+    "title": "Soraya, Anthony & Lénaïg",
+    "description": "We are delighted to welcome you to our apartment in the heart of Le Marais. Passionate about this neighborhood where we have lived for years, we will be happy to share our favorite addresses and tips for discovering authentic Paris.",
+    "superhost": "Superhosts",
+    "rating": "Average rating",
+    "reviews": "reviews",
+    "responseTime": "Response within 1 hour"
+  },
+  "testimonials": {
+    "sectionTitle": "Testimonials",
+    "title": "What Our Guests Say"
+  },
+  "localTips": {
+    "sectionTitle": "Local Tips",
+    "title": "Our Recommendations",
+    "categories": {
+      "restaurants": "Restaurants",
+      "cafes": "Cafés",
+      "shopping": "Shopping"
+    }
+  },
+  "cta": {
+    "sectionTitle": "Booking",
+    "title": "Ready to Discover Le Marais?",
+    "description": "Book your stay and experience Paris like a true Parisian, in the heart of one of the capital's most authentic neighborhoods.",
+    "bookDirect": "Request a Booking",
+    "viewAirbnb": "View on Airbnb"
+  },
+  "footer": {
+    "description": "Charming apartment in the heart of Le Marais, Paris 4th. Exposed beams, stone walls, Saint-Paul metro 200m away.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "legal": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "copyright": "© {year} Au Marais. All rights reserved."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a question? Don't hesitate to reach out.",
+    "whatsapp": "Contact us on WhatsApp",
+    "email": "By email",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "dates": "Desired dates",
+      "guests": "Number of guests",
+      "message": "Your message",
+      "submit": "Send"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What is the apartment's capacity?",
+          "answer": "The apartment can accommodate up to 4 guests: 1 double bed in the bedroom and 1 sofa bed in the living room."
+        },
+        {
+          "question": "Is there an elevator?",
+          "answer": "No, the apartment is on the 2nd floor without an elevator. The corridor is narrow, typical of 17th-century buildings."
+        },
+        {
+          "question": "What are the check-in and check-out times?",
+          "answer": "Check-in from 3 PM, check-out before 11 AM. Flexible arrangements can be discussed."
+        },
+        {
+          "question": "Is WiFi included?",
+          "answer": "Yes, free high-speed WiFi is included."
+        }
+      ]
+    }
+  },
+  "apartment": {
+    "title": "The Apartment",
+    "subtitle": "A Charming Haven in the Heart of Le Marais",
+    "description": "Nestled on the 2nd floor of a 17th-century building, our apartment offers an authentic experience of historic Paris.",
+    "features": {
+      "title": "Amenities",
+      "bedroom": "Bedroom with double bed",
+      "living": "Living room with sofa bed",
+      "kitchen": "Equipped kitchen",
+      "bathroom": "Full bathroom",
+      "wifi": "High-speed WiFi",
+      "heating": "Heating",
+      "tv": "Television",
+      "linens": "Bed linens and towels"
+    },
+    "details": {
+      "capacity": "4 guests",
+      "bedrooms": "1 bedroom",
+      "beds": "2 beds",
+      "bathrooms": "1 bathroom"
+    }
+  },
+  "neighborhood": {
+    "title": "The Neighborhood",
+    "subtitle": "Le Marais, Paris 4th",
+    "description": "One of Paris' best-preserved neighborhoods, combining history, culture, and art de vivre.",
+    "history": {
+      "title": "History",
+      "content": "Le Marais is one of the few Parisian neighborhoods to have preserved its pre-Haussmann architecture. Its 17th-century mansions, cobblestone streets, and historic squares make it a unique place."
+    },
+    "transport": {
+      "title": "Transportation",
+      "metro": "Metro",
+      "bus": "Bus"
+    },
+    "places": {
+      "title": "Places to Discover",
+      "walkingTime": "min walk"
+    }
+  },
+  "availability": {
+    "title": "Availability",
+    "subtitle": "Check our calendar and book directly",
+    "legend": {
+      "available": "Available",
+      "booked": "Booked",
+      "selected": "Selected"
+    },
+    "pricing": {
+      "title": "Rates",
+      "basePrice": "From",
+      "perNight": "/ night",
+      "discounts": {
+        "week": "-10% for 7+ nights",
+        "twoWeeks": "-15% for 14+ nights",
+        "month": "-20% for 28+ nights"
+      },
+      "directBooking": "Direct booking = up to 20% cheaper than Airbnb"
+    }
+  },
+  "bookingBar": {
+    "price": "From",
+    "perNight": "/ night",
+    "checkAvailability": "Availability",
+    "bookNow": "Book Now"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Container } from '@/components/ui';
+import { Container, LanguageSwitcher } from '@/components/ui';
 
 const navigation = [
   { name: 'Appartement', href: '/appartement' },
@@ -13,9 +14,17 @@ const navigation = [
   { name: 'Contact', href: '/contact' },
 ];
 
+// Helper to get locale-aware href
+const getLocalizedHref = (href: string, locale: string | string[] | undefined) => {
+  const loc = typeof locale === 'string' ? locale : 'fr';
+  return `/${loc}${href}`;
+};
+
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const params = useParams();
+  const locale = params?.locale;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +46,7 @@ export const Header = () => {
       <Container>
         <nav className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link href={getLocalizedHref('', locale)} className="flex items-center gap-3">
             <div className={cn(
               'w-10 h-10 border flex items-center justify-center transition-colors duration-500',
               isScrolled ? 'border-gold' : 'border-white/80'
@@ -56,11 +65,11 @@ export const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={getLocalizedHref(item.href, locale)}
                 className={cn(
                   'transition-colors duration-300 text-xs font-medium tracking-[0.15em] uppercase relative after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full',
                   isScrolled
@@ -71,6 +80,7 @@ export const Header = () => {
                 {item.name}
               </Link>
             ))}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
@@ -105,7 +115,7 @@ export const Header = () => {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={getLocalizedHref(item.href, locale)}
                 className={cn(
                   'transition-colors duration-300 text-sm font-medium tracking-wider uppercase py-2',
                   isScrolled
@@ -117,6 +127,9 @@ export const Header = () => {
                 {item.name}
               </Link>
             ))}
+            <div className="pt-2 border-t border-stone-200">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </Container>

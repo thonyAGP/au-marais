@@ -10,3 +10,5 @@ export { AvailabilityCalendar } from "./AvailabilityCalendar";
 export { AnimateOnScroll } from "./AnimateOnScroll";
 export { SuperhostBadge } from "./SuperhostBadge";
 export { ChatAssistant } from "./ChatAssistant";
+export { LocaleLink } from "./LocaleLink";
+export { LanguageSwitcher } from "./LanguageSwitcher";

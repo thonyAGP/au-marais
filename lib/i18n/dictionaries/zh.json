@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "title": "Au Marais — 您的巴黎避风港",
+    "titleTemplate": "%s | Au Marais",
+    "description": "位于玛黑区中心的迷人公寓，在17世纪建筑中全面翻新。外露横梁、石墙，距Saint-Paul地铁站200米。",
+    "keywords": "巴黎租房, 玛黑区公寓, 巴黎短租, Airbnb玛黎区, 巴黎特色公寓, 巴黎度假租房, 玛黑区住宿, 巴黎4区"
+  },
+  "nav": {
+    "home": "首页",
+    "apartment": "公寓",
+    "neighborhood": "街区",
+    "availability": "预订",
+    "contact": "联系",
+    "book": "立即预订"
+  },
+  "hero": {
+    "subtitle": "玛黑区，巴黎4区",
+    "title": "Au Marais",
+    "description": "位于巴黎最受欢迎历史街区中心的迷人公寓",
+    "cta": "探索",
+    "availability": "查看空房"
+  },
+  "stats": {
+    "reviews": "五星好评",
+    "century": "世纪",
+    "metro": "距地铁"
+  },
+  "features": {
+    "sectionTitle": "公寓介绍",
+    "title": "巴黎心脏地带的迷人居所",
+    "description": "我们的公寓将古老魅力与现代舒适完美结合。坐落于17世纪建筑中，为您提供正宗的玛黑区体验。",
+    "items": {
+      "beams": {
+        "title": "外露横梁",
+        "description": "正宗时代特色"
+      },
+      "stone": {
+        "title": "石墙",
+        "description": "保存完好的巴黎建筑"
+      },
+      "metro": {
+        "title": "Saint-Paul地铁站",
+        "description": "距离200米，1号线直达"
+      },
+      "wifi": {
+        "title": "高速WiFi",
+        "description": "光纤连接"
+      }
+    }
+  },
+  "gallery": {
+    "sectionTitle": "图片展示",
+    "title": "探索您的巴黎临时住所",
+    "viewAll": "查看所有照片"
+  },
+  "hosts": {
+    "sectionTitle": "房东介绍",
+    "title": "Soraya、Anthony 和 Lénaïg",
+    "description": "我们很高兴欢迎您来到位于玛黑区中心的公寓。作为在这个街区生活多年的当地人，我们很乐意与您分享我们最喜欢的地点和探索正宗巴黎的建议。",
+    "superhost": "超级房东",
+    "rating": "平均评分",
+    "reviews": "条评价",
+    "responseTime": "1小时内回复"
+  },
+  "testimonials": {
+    "sectionTitle": "住客评价",
+    "title": "看看住客们怎么说"
+  },
+  "localTips": {
+    "sectionTitle": "当地推荐",
+    "title": "我们的推荐",
+    "categories": {
+      "restaurants": "餐厅",
+      "cafes": "咖啡馆",
+      "shopping": "购物"
+    }
+  },
+  "cta": {
+    "sectionTitle": "预订",
+    "title": "准备好探索玛黑区了吗？",
+    "description": "预订您的住宿，像真正的巴黎人一样体验巴黎，在首都最正宗的街区之一。",
+    "bookDirect": "申请预订",
+    "viewAirbnb": "在Airbnb查看"
+  },
+  "footer": {
+    "description": "位于玛黑区中心的迷人公寓，巴黎4区。外露横梁、石墙，距Saint-Paul地铁站200米。",
+    "navigation": "导航",
+    "contact": "联系方式",
+    "legal": "法律声明",
+    "privacy": "隐私政策",
+    "copyright": "© {year} Au Marais. 保留所有权利。"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "有问题吗？请随时联系我们。",
+    "whatsapp": "通过WhatsApp联系我们",
+    "email": "通过邮件",
+    "form": {
+      "name": "您的姓名",
+      "email": "您的邮箱",
+      "dates": "希望入住日期",
+      "guests": "住客人数",
+      "message": "您的留言",
+      "submit": "发送"
+    },
+    "faq": {
+      "title": "常见问题",
+      "items": [
+        {
+          "question": "公寓可以容纳多少人？",
+          "answer": "公寓最多可容纳4位客人：卧室有1张双人床，客厅有1张沙发床。"
+        },
+        {
+          "question": "有电梯吗？",
+          "answer": "没有，公寓位于2楼，没有电梯。走廊较窄，这是17世纪建筑的典型特征。"
+        },
+        {
+          "question": "入住和退房时间是什么？",
+          "answer": "入住时间下午3点起，退房时间上午11点前。可以协商灵活安排。"
+        },
+        {
+          "question": "包含WiFi吗？",
+          "answer": "是的，包含免费高速WiFi。"
+        }
+      ]
+    }
+  },
+  "apartment": {
+    "title": "公寓",
+    "subtitle": "玛黑区中心的迷人居所",
+    "description": "位于17世纪建筑的2楼，我们的公寓为您提供正宗的巴黎历史体验。",
+    "features": {
+      "title": "设施",
+      "bedroom": "带双人床的卧室",
+      "living": "带沙发床的客厅",
+      "kitchen": "设备齐全的厨房",
+      "bathroom": "完整浴室",
+      "wifi": "高速WiFi",
+      "heating": "暖气",
+      "tv": "电视",
+      "linens": "床上用品和毛巾"
+    },
+    "details": {
+      "capacity": "4位客人",
+      "bedrooms": "1间卧室",
+      "beds": "2张床",
+      "bathrooms": "1间浴室"
+    }
+  },
+  "neighborhood": {
+    "title": "街区",
+    "subtitle": "玛黑区，巴黎4区",
+    "description": "巴黎保存最完好的街区之一，融合了历史、文化和生活艺术。",
+    "history": {
+      "title": "历史",
+      "content": "玛黑区是巴黎少数几个保留了奥斯曼改造前建筑的街区之一。17世纪的豪宅、鹅卵石街道和历史广场使其成为独一无二的地方。"
+    },
+    "transport": {
+      "title": "交通",
+      "metro": "地铁",
+      "bus": "公交"
+    },
+    "places": {
+      "title": "景点推荐",
+      "walkingTime": "分钟步行"
+    }
+  },
+  "availability": {
+    "title": "预订",
+    "subtitle": "查看我们的日历并直接预订",
+    "legend": {
+      "available": "可预订",
+      "booked": "已预订",
+      "selected": "已选择"
+    },
+    "pricing": {
+      "title": "价格",
+      "basePrice": "起价",
+      "perNight": "/晚",
+      "discounts": {
+        "week": "7晚以上 -10%",
+        "twoWeeks": "14晚以上 -15%",
+        "month": "28晚以上 -20%"
+      },
+      "directBooking": "直接预订 = 比Airbnb便宜高达20%"
+    }
+  },
+  "bookingBar": {
+    "price": "起价",
+    "perNight": "/晚",
+    "checkAvailability": "查看空房",
+    "bookNow": "立即预订"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "close": "关闭",
+    "previous": "上一个",
+    "next": "下一个"
+  }
+}

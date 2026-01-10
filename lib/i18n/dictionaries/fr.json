@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "title": "Au Marais — Votre cocon parisien",
+    "titleTemplate": "%s | Au Marais",
+    "description": "Appartement de charme au coeur du Marais, entièrement rénové dans un immeuble du 17ème siècle. Poutres apparentes, murs en pierres, métro Saint-Paul à 200m.",
+    "keywords": "location Paris, appartement Marais, location courte durée Paris, Airbnb Marais, appartement charme Paris, location vacances Paris 4, hébergement Marais"
+  },
+  "nav": {
+    "home": "Accueil",
+    "apartment": "L'appartement",
+    "neighborhood": "Le quartier",
+    "availability": "Disponibilités",
+    "contact": "Contact",
+    "book": "Réserver"
+  },
+  "hero": {
+    "subtitle": "Le Marais, Paris IVe",
+    "title": "Au Marais",
+    "description": "Appartement de charme au cœur du quartier historique le plus prisé de Paris",
+    "cta": "Découvrir",
+    "availability": "Voir les disponibilités"
+  },
+  "stats": {
+    "reviews": "Avis 5 étoiles",
+    "century": "Siècle",
+    "metro": "Du métro"
+  },
+  "features": {
+    "sectionTitle": "L'appartement",
+    "title": "Un écrin de charme au cœur de Paris",
+    "description": "Notre appartement allie le charme de l'ancien au confort moderne. Niché dans un immeuble du XVIIe siècle, il offre une expérience authentique du Marais.",
+    "items": {
+      "beams": {
+        "title": "Poutres apparentes",
+        "description": "Authenticité et caractère d'époque"
+      },
+      "stone": {
+        "title": "Murs en pierres",
+        "description": "Architecture parisienne préservée"
+      },
+      "metro": {
+        "title": "Métro Saint-Paul",
+        "description": "À 200m, ligne 1 directe"
+      },
+      "wifi": {
+        "title": "WiFi haut débit",
+        "description": "Connexion fibre optique"
+      }
+    }
+  },
+  "gallery": {
+    "sectionTitle": "Galerie",
+    "title": "Découvrez votre futur chez-vous",
+    "viewAll": "Voir toutes les photos"
+  },
+  "hosts": {
+    "sectionTitle": "Vos hôtes",
+    "title": "Soraya, Anthony & Lénaïg",
+    "description": "Nous sommes ravis de vous accueillir dans notre appartement au cœur du Marais. Passionnés par ce quartier où nous vivons depuis des années, nous serons heureux de partager avec vous nos bonnes adresses et conseils pour découvrir le Paris authentique.",
+    "superhost": "Superhosts",
+    "rating": "Note moyenne",
+    "reviews": "avis",
+    "responseTime": "Réponse en moins d'1h"
+  },
+  "testimonials": {
+    "sectionTitle": "Témoignages",
+    "title": "Ce que disent nos voyageurs"
+  },
+  "localTips": {
+    "sectionTitle": "Bonnes adresses",
+    "title": "Nos recommandations",
+    "categories": {
+      "restaurants": "Restaurants",
+      "cafes": "Cafés",
+      "shopping": "Shopping"
+    }
+  },
+  "cta": {
+    "sectionTitle": "Réservation",
+    "title": "Prêt à découvrir le Marais ?",
+    "description": "Réservez votre séjour et vivez Paris comme un vrai Parisien, au cœur de l'un des quartiers les plus authentiques de la capitale.",
+    "bookDirect": "Demander une réservation",
+    "viewAirbnb": "Voir sur Airbnb"
+  },
+  "footer": {
+    "description": "Appartement de charme au cœur du Marais, Paris 4ème. Poutres apparentes, murs en pierres, métro Saint-Paul à 200m.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "copyright": "© {year} Au Marais. Tous droits réservés."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Une question ? N'hésitez pas à nous contacter.",
+    "whatsapp": "Nous contacter sur WhatsApp",
+    "email": "Par email",
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "dates": "Dates souhaitées",
+      "guests": "Nombre de voyageurs",
+      "message": "Votre message",
+      "submit": "Envoyer"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "question": "Quelle est la capacité de l'appartement ?",
+          "answer": "L'appartement peut accueillir jusqu'à 4 personnes : 1 lit double dans la chambre et 1 canapé-lit dans le salon."
+        },
+        {
+          "question": "Y a-t-il un ascenseur ?",
+          "answer": "Non, l'appartement est situé au 2ème étage sans ascenseur. Le couloir est étroit, typique des immeubles du 17ème siècle."
+        },
+        {
+          "question": "Quels sont les horaires d'arrivée et de départ ?",
+          "answer": "Check-in à partir de 15h, check-out avant 11h. Des arrangements flexibles peuvent être discutés."
+        },
+        {
+          "question": "Le WiFi est-il inclus ?",
+          "answer": "Oui, WiFi haut débit gratuit inclus."
+        }
+      ]
+    }
+  },
+  "apartment": {
+    "title": "L'appartement",
+    "subtitle": "Un écrin de charme au cœur du Marais",
+    "description": "Niché au 2ème étage d'un immeuble du XVIIe siècle, notre appartement offre une expérience authentique du Paris historique.",
+    "features": {
+      "title": "Équipements",
+      "bedroom": "Chambre avec lit double",
+      "living": "Salon avec canapé-lit",
+      "kitchen": "Cuisine équipée",
+      "bathroom": "Salle de bain complète",
+      "wifi": "WiFi haut débit",
+      "heating": "Chauffage",
+      "tv": "Télévision",
+      "linens": "Linge de lit et serviettes"
+    },
+    "details": {
+      "capacity": "4 voyageurs",
+      "bedrooms": "1 chambre",
+      "beds": "2 lits",
+      "bathrooms": "1 salle de bain"
+    }
+  },
+  "neighborhood": {
+    "title": "Le quartier",
+    "subtitle": "Le Marais, Paris IVe",
+    "description": "L'un des quartiers les plus préservés de Paris, alliant histoire, culture et art de vivre.",
+    "history": {
+      "title": "Histoire",
+      "content": "Le Marais est l'un des rares quartiers parisiens à avoir conservé son architecture d'avant Haussmann. Ses hôtels particuliers du XVIIe siècle, ses ruelles pavées et ses places historiques en font un lieu unique."
+    },
+    "transport": {
+      "title": "Transports",
+      "metro": "Métro",
+      "bus": "Bus"
+    },
+    "places": {
+      "title": "À découvrir",
+      "walkingTime": "min à pied"
+    }
+  },
+  "availability": {
+    "title": "Disponibilités",
+    "subtitle": "Consultez notre calendrier et réservez directement",
+    "legend": {
+      "available": "Disponible",
+      "booked": "Réservé",
+      "selected": "Sélectionné"
+    },
+    "pricing": {
+      "title": "Tarifs",
+      "basePrice": "À partir de",
+      "perNight": "/ nuit",
+      "discounts": {
+        "week": "-10% pour 7+ nuits",
+        "twoWeeks": "-15% pour 14+ nuits",
+        "month": "-20% pour 28+ nuits"
+      },
+      "directBooking": "Réservation directe = jusqu'à 20% moins cher qu'Airbnb"
+    }
+  },
+  "bookingBar": {
+    "price": "À partir de",
+    "perNight": "/ nuit",
+    "checkAvailability": "Disponibilités",
+    "bookNow": "Réserver"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant"
+  }
+}

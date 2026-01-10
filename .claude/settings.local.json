@@ -9,7 +9,8 @@
       "Bash(pnpm add:*)",
       "WebSearch",
       "Bash(cd:*)",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "Bash(pnpm build:*)"
     ]
   }
 }

@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "title": "Au Marais — Ihr Pariser Rückzugsort",
+    "titleTemplate": "%s | Au Marais",
+    "description": "Charmante Wohnung im Herzen des Marais, vollständig renoviert in einem Gebäude aus dem 17. Jahrhundert. Sichtbare Balken, Steinwände, Metro Saint-Paul 200m entfernt.",
+    "keywords": "Paris Vermietung, Marais Wohnung, Kurzzeitmiete Paris, Airbnb Marais, charmante Wohnung Paris, Ferienwohnung Paris, Unterkunft Marais, Paris 4. Arrondissement"
+  },
+  "nav": {
+    "home": "Startseite",
+    "apartment": "Die Wohnung",
+    "neighborhood": "Das Viertel",
+    "availability": "Verfügbarkeit",
+    "contact": "Kontakt",
+    "book": "Buchen"
+  },
+  "hero": {
+    "subtitle": "Le Marais, Paris 4.",
+    "title": "Au Marais",
+    "description": "Charmante Wohnung im Herzen des begehrtesten historischen Viertels von Paris",
+    "cta": "Entdecken",
+    "availability": "Verfügbarkeit prüfen"
+  },
+  "stats": {
+    "reviews": "5-Sterne-Bewertungen",
+    "century": "Jahrhundert",
+    "metro": "Zur Metro"
+  },
+  "features": {
+    "sectionTitle": "Die Wohnung",
+    "title": "Ein charmanter Rückzugsort im Herzen von Paris",
+    "description": "Unsere Wohnung verbindet historischen Charme mit modernem Komfort. Eingebettet in einem Gebäude aus dem 17. Jahrhundert bietet sie ein authentisches Marais-Erlebnis.",
+    "items": {
+      "beams": {
+        "title": "Sichtbare Balken",
+        "description": "Authentischer Zeitcharakter"
+      },
+      "stone": {
+        "title": "Steinwände",
+        "description": "Erhaltene Pariser Architektur"
+      },
+      "metro": {
+        "title": "Metro Saint-Paul",
+        "description": "200m entfernt, direkte Linie 1"
+      },
+      "wifi": {
+        "title": "Highspeed-WLAN",
+        "description": "Glasfaserverbindung"
+      }
+    }
+  },
+  "gallery": {
+    "sectionTitle": "Galerie",
+    "title": "Entdecken Sie Ihr zukünftiges Zuhause auf Zeit",
+    "viewAll": "Alle Fotos ansehen"
+  },
+  "hosts": {
+    "sectionTitle": "Ihre Gastgeber",
+    "title": "Soraya, Anthony & Lénaïg",
+    "description": "Wir freuen uns, Sie in unserer Wohnung im Herzen des Marais willkommen zu heißen. Als Liebhaber dieses Viertels, in dem wir seit Jahren leben, teilen wir gerne unsere Lieblingsadressen und Tipps, um das authentische Paris zu entdecken.",
+    "superhost": "Superhosts",
+    "rating": "Durchschnittsbewertung",
+    "reviews": "Bewertungen",
+    "responseTime": "Antwort innerhalb 1 Stunde"
+  },
+  "testimonials": {
+    "sectionTitle": "Erfahrungsberichte",
+    "title": "Was unsere Gäste sagen"
+  },
+  "localTips": {
+    "sectionTitle": "Lokale Tipps",
+    "title": "Unsere Empfehlungen",
+    "categories": {
+      "restaurants": "Restaurants",
+      "cafes": "Cafés",
+      "shopping": "Einkaufen"
+    }
+  },
+  "cta": {
+    "sectionTitle": "Buchung",
+    "title": "Bereit, das Marais zu entdecken?",
+    "description": "Buchen Sie Ihren Aufenthalt und erleben Sie Paris wie ein echter Pariser, im Herzen eines der authentischsten Viertel der Hauptstadt.",
+    "bookDirect": "Buchung anfragen",
+    "viewAirbnb": "Auf Airbnb ansehen"
+  },
+  "footer": {
+    "description": "Charmante Wohnung im Herzen des Marais, Paris 4. Sichtbare Balken, Steinwände, Metro Saint-Paul 200m entfernt.",
+    "navigation": "Navigation",
+    "contact": "Kontakt",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "copyright": "© {year} Au Marais. Alle Rechte vorbehalten."
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Haben Sie eine Frage? Zögern Sie nicht, uns zu kontaktieren.",
+    "whatsapp": "Kontaktieren Sie uns auf WhatsApp",
+    "email": "Per E-Mail",
+    "form": {
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail",
+      "dates": "Gewünschte Daten",
+      "guests": "Anzahl der Gäste",
+      "message": "Ihre Nachricht",
+      "submit": "Senden"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "items": [
+        {
+          "question": "Wie viele Personen kann die Wohnung aufnehmen?",
+          "answer": "Die Wohnung kann bis zu 4 Gäste beherbergen: 1 Doppelbett im Schlafzimmer und 1 Schlafsofa im Wohnzimmer."
+        },
+        {
+          "question": "Gibt es einen Aufzug?",
+          "answer": "Nein, die Wohnung befindet sich im 2. Stock ohne Aufzug. Der Flur ist schmal, typisch für Gebäude aus dem 17. Jahrhundert."
+        },
+        {
+          "question": "Was sind die Check-in und Check-out Zeiten?",
+          "answer": "Check-in ab 15 Uhr, Check-out vor 11 Uhr. Flexible Vereinbarungen sind möglich."
+        },
+        {
+          "question": "Ist WLAN inbegriffen?",
+          "answer": "Ja, kostenloses Highspeed-WLAN ist inbegriffen."
+        }
+      ]
+    }
+  },
+  "apartment": {
+    "title": "Die Wohnung",
+    "subtitle": "Ein charmanter Rückzugsort im Herzen des Marais",
+    "description": "Im 2. Stock eines Gebäudes aus dem 17. Jahrhundert bietet unsere Wohnung ein authentisches Erlebnis des historischen Paris.",
+    "features": {
+      "title": "Ausstattung",
+      "bedroom": "Schlafzimmer mit Doppelbett",
+      "living": "Wohnzimmer mit Schlafsofa",
+      "kitchen": "Ausgestattete Küche",
+      "bathroom": "Vollbad",
+      "wifi": "Highspeed-WLAN",
+      "heating": "Heizung",
+      "tv": "Fernseher",
+      "linens": "Bettwäsche und Handtücher"
+    },
+    "details": {
+      "capacity": "4 Gäste",
+      "bedrooms": "1 Schlafzimmer",
+      "beds": "2 Betten",
+      "bathrooms": "1 Badezimmer"
+    }
+  },
+  "neighborhood": {
+    "title": "Das Viertel",
+    "subtitle": "Le Marais, Paris 4.",
+    "description": "Eines der am besten erhaltenen Viertel von Paris, das Geschichte, Kultur und Lebensart vereint.",
+    "history": {
+      "title": "Geschichte",
+      "content": "Das Marais ist eines der wenigen Pariser Viertel, das seine Architektur aus der Zeit vor Haussmann bewahrt hat. Seine Herrenhäuser aus dem 17. Jahrhundert, Kopfsteinpflasterstraßen und historischen Plätze machen es zu einem einzigartigen Ort."
+    },
+    "transport": {
+      "title": "Verkehrsanbindung",
+      "metro": "Metro",
+      "bus": "Bus"
+    },
+    "places": {
+      "title": "Sehenswürdigkeiten",
+      "walkingTime": "Min. zu Fuß"
+    }
+  },
+  "availability": {
+    "title": "Verfügbarkeit",
+    "subtitle": "Prüfen Sie unseren Kalender und buchen Sie direkt",
+    "legend": {
+      "available": "Verfügbar",
+      "booked": "Gebucht",
+      "selected": "Ausgewählt"
+    },
+    "pricing": {
+      "title": "Preise",
+      "basePrice": "Ab",
+      "perNight": "/ Nacht",
+      "discounts": {
+        "week": "-10% für 7+ Nächte",
+        "twoWeeks": "-15% für 14+ Nächte",
+        "month": "-20% für 28+ Nächte"
+      },
+      "directBooking": "Direktbuchung = bis zu 20% günstiger als Airbnb"
+    }
+  },
+  "bookingBar": {
+    "price": "Ab",
+    "perNight": "/ Nacht",
+    "checkAvailability": "Verfügbarkeit",
+    "bookNow": "Buchen"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "close": "Schließen",
+    "previous": "Zurück",
+    "next": "Weiter"
+  }
+}
