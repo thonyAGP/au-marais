@@ -3,7 +3,7 @@
 import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ChevronDown, Globe } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { locales, localeNames, localeFlags, type Locale } from '@/lib/i18n/config';
 
 export const LanguageSwitcher = () => {
@@ -25,9 +25,8 @@ export const LanguageSwitcher = () => {
         className="flex items-center gap-2 px-3 py-2 text-sm text-text-light hover:text-gold transition-colors"
         aria-label="Change language"
       >
-        <Globe className="h-4 w-4" />
+        <span className="text-base">{localeFlags[currentLocale]}</span>
         <span className="hidden sm:inline">{localeNames[currentLocale]}</span>
-        <span className="sm:hidden">{localeFlags[currentLocale]}</span>
         <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
