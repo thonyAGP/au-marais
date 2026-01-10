@@ -64,7 +64,51 @@
   },
   "testimonials": {
     "sectionTitle": "住客评价",
-    "title": "看看住客们怎么说"
+    "title": "看看住客们怎么说",
+    "viewAll": "在Airbnb查看所有评价",
+    "translatedBy": "由Airbnb翻译",
+    "items": [
+      {
+        "name": "Valentine",
+        "location": "弗里堡，瑞士",
+        "date": "2025年10月",
+        "text": "公寓位于玛黑区中心，位置绝佳，正是我们游览巴黎时想要的。公寓本身温馨、安静，设施齐全。装饰迷人复古，可以感受到房东为让住客享受愉快住宿而精心设计。Soraya、Anthony和Lénaïg回复非常迅速，非常灵活！",
+        "originalText": "L'appartement est parfaitement situé en plein cœur du Marais, ce qui était exactement ce que nous voulions lors de notre visite à Paris. L'appartement en lui-même est cosy, calme et équipé avec tout ce dont on peut avoir besoin. La décoration est charmeuse et vintage, et on peut sentir qu'il a été pensé avec soin pour permettre aux visiteurs de passer un agréable séjour. Soraya, Anthony et Lénaïg répondent très rapidement et font preuve de beaucoup de flexibilité !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Lisa",
+        "location": "阿尔伯克基，新墨西哥州",
+        "date": "2025年10月",
+        "text": "绝佳的位置，舒适、设施完善的空间，建筑充满历史感。房东非常热情，非常乐于满足我们的需求。步行即可到达美食餐厅和酒吧，附近还有很多购物选择。我们对选择这里作为巴黎的住所非常满意。",
+        "originalText": "Fantastic location and a comfortable, well-appointed space in a building with so much history. Our host was very responsive and very helpful in accommodating our needs. Walk to fantastic places to eat and drink and many shopping options nearby. We were very pleased with this choice as our home base in Paris.",
+        "originalLang": "en",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Marie-Claire",
+        "location": "里昂，法国",
+        "date": "2025年9月",
+        "text": "巴黎中心的真正瑰宝！公寓的外露横梁很有魅力。我们喜欢精心的装饰，尽管位于市中心却很安静。房东非常可爱，反应迅速。",
+        "originalText": "Une vraie pépite au cœur de Paris ! L'appartement a beaucoup de charme avec ses poutres apparentes. Nous avons adoré la décoration soignée et le calme du lieu malgré l'emplacement central. Les hôtes sont adorables et très réactifs.",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Thomas",
+        "location": "柏林，德国",
+        "date": "2025年8月",
+        "text": "步行探索巴黎的完美位置。地铁近在咫尺。公寓与照片完全一致，非常干净，设施齐全。强烈推荐！",
+        "originalText": "Perfekte Lage um Paris zu Fuß zu erkunden. Die Metro ist nur einen Katzensprung entfernt. Die Wohnung ist genau wie auf den Fotos, sehr sauber und gut ausgestattet. Sehr empfehlenswert!",
+        "originalLang": "de",
+        "rating": 5,
+        "translated": true
+      }
+    ]
   },
   "localTips": {
     "sectionTitle": "当地推荐",
@@ -73,7 +117,58 @@
       "restaurants": "餐厅",
       "cafes": "咖啡馆",
       "shopping": "购物"
-    }
+    },
+    "restaurants": [
+      {
+        "name": "Chez Janou",
+        "type": "普罗旺斯菜",
+        "description": "以80种茴香酒和温馨环境中的南方美食闻名。迷人的露台。"
+      },
+      {
+        "name": "L'As du Fallafel",
+        "type": "以色列菜",
+        "description": "公认巴黎最好的法拉费尔！排队是常事，但绝对值得。"
+      },
+      {
+        "name": "Breizh Café",
+        "type": "可丽饼店",
+        "description": "优质食材制作的手工布列塔尼可丽饼。苹果酒很棒。"
+      }
+    ],
+    "shops": [
+      {
+        "name": "Merci",
+        "type": "概念店",
+        "description": "必去的概念店：时尚、家居装饰、咖啡馆。收益捐给慈善机构。"
+      },
+      {
+        "name": "Village Saint-Paul",
+        "type": "古董",
+        "description": "隐藏的庭院里满是古董商和复古店。淘宝的完美去处。"
+      },
+      {
+        "name": "Fleux",
+        "type": "家居装饰",
+        "description": "同一条街上四家店，专注设计和独特物品。"
+      }
+    ],
+    "mustSee": [
+      {
+        "name": "孚日广场",
+        "type": "文化遗产",
+        "description": "巴黎最古老的广场。在拱廊下野餐或参观雨果故居。"
+      },
+      {
+        "name": "卡纳瓦雷博物馆",
+        "type": "博物馆",
+        "description": "在宏伟的私人府邸中了解巴黎历史。免费入场！"
+      },
+      {
+        "name": "玫瑰街",
+        "type": "历史街区",
+        "description": "犹太区的中心。不要错过糕点和法拉费尔。"
+      }
+    ]
   },
   "cta": {
     "sectionTitle": "预订",
@@ -320,6 +415,49 @@
         "month": "28晚以上 -20%"
       },
       "directBooking": "直接预订 = 比Airbnb便宜高达20%"
+    },
+    "hero": {
+      "sectionTitle": "直接预订",
+      "description": "选择您的日期，直接联系我们，获得个性化的住宿体验。"
+    },
+    "directBooking": {
+      "title": "直接预订",
+      "benefits": [
+        "比Airbnb<strong>便宜高达20%</strong>",
+        "通过WhatsApp快速回复",
+        "与房东直接联系",
+        "灵活的条款"
+      ]
+    },
+    "discounts": {
+      "title": "住宿折扣",
+      "items": [
+        { "nights": "7晚以上", "discount": "-10%" },
+        { "nights": "14晚以上", "discount": "-15%" },
+        { "nights": "28晚以上", "discount": "-20%" }
+      ]
+    },
+    "contact": {
+      "title": "有问题吗？",
+      "description": "如需更多信息或预订，请随时联系我们。",
+      "whatsapp": "WhatsApp",
+      "contactForm": "联系表单"
+    },
+    "apartment": {
+      "sectionTitle": "公寓",
+      "title": "概览",
+      "items": [
+        { "label": "住客", "value": "最多4人" },
+        { "label": "卧室", "value": "1间" },
+        { "label": "床位", "value": "2张" },
+        { "label": "浴室", "value": "1间" }
+      ],
+      "viewApartment": "了解公寓"
+    },
+    "airbnb": {
+      "preferPlatform": "更喜欢通过平台预订？",
+      "viewOnAirbnb": "在Airbnb查看",
+      "note": "注意：Airbnb价格包含服务费"
     }
   },
   "bookingBar": {

@@ -64,7 +64,51 @@
   },
   "testimonials": {
     "sectionTitle": "Erfahrungsberichte",
-    "title": "Was unsere Gäste sagen"
+    "title": "Was unsere Gäste sagen",
+    "viewAll": "Alle Bewertungen auf Airbnb ansehen",
+    "translatedBy": "Von Airbnb übersetzt",
+    "items": [
+      {
+        "name": "Valentine",
+        "location": "Freiburg, Schweiz",
+        "date": "Oktober 2025",
+        "text": "Die Wohnung ist perfekt gelegen und sehr leicht zu erreichen. Außerdem liegt sie in einem tollen Viertel. Wir hatten einen perfekten Aufenthalt mit sehr ruhigen und friedlichen Nächten. Wir empfehlen diese charmante Unterkunft, in der man sich sehr wohl fühlt! Die Bäckerei 3 Minuten zu Fuß entfernt ist auch ein großes Plus! Anthony ist auch sehr erreichbar und reaktionsschnell. Vielen Dank!",
+        "originalText": "L'appartement est parfaitement situé et très facile d'accès. De plus, il est situé dans un quartier génial. Nous avons passé un séjour parfait et des nuits très paisibles et calmes. Nous recommandons vivement ce logement plein de charmes où l'on s'y sent extrêmement bien! La boulangerie à 3 minutes à pieds est un grand plus également! Anthony est aussi très disponible et très réactif. Un grand merci!",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Lisa",
+        "location": "Albuquerque, New Mexico",
+        "date": "Oktober 2025",
+        "text": "Fantastische Lage und ein komfortabler, gut ausgestatteter Raum. Ein großartiger Ort als Ausgangspunkt für tägliche Erkundungen. Bäckerei und mehrere Restaurants ein bis zwei Blocks entfernt. Zwei Metrolinien in 10 Minuten zu Fuß erreichbar. Der Gastgeber war großartig, freundlich, reaktionsschnell und hilfsbereit. Ich würde wiederkommen.",
+        "originalText": "Fantastic location and a comfortable, well-appointed space. A great place to use as a base for daily explorations. Bakery and several restaurants within a block or two. Two metro lines within a 10 minute walk. Host was great, friendly, responsive, and helpful. I would return.",
+        "originalLang": "en",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Sophie",
+        "location": "Lyon, Frankreich",
+        "date": "September 2025",
+        "text": "Perfekter Aufenthalt für unseren Hochzeitstag. Die Wohnung ist geschmackvoll eingerichtet, sehr sauber, und die Restaurant-Empfehlungen waren ausgezeichnet. Danke!",
+        "originalText": "Séjour parfait pour notre anniversaire de mariage. L'appartement est décoré avec goût, très propre, et les recommandations de restaurants étaient excellentes. Merci !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Thomas",
+        "location": "Brüssel, Belgien",
+        "date": "August 2025",
+        "text": "Sehr guter Empfang, Wohnung entspricht der Beschreibung. Das Viertel ist lebendig und authentisch. Kleiner Nachteil: die Treppen zu steigen, aber das gehört zum Pariser Charme!",
+        "originalText": "Très bon accueil, appartement conforme à la description. Le quartier est vivant et authentique. Petit bémol : les escaliers à monter mais ça fait partie du charme parisien !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      }
+    ]
   },
   "localTips": {
     "sectionTitle": "Lokale Tipps",
@@ -73,7 +117,90 @@
       "restaurants": "Restaurants",
       "cafes": "Cafés",
       "shopping": "Einkaufen"
-    }
+    },
+    "restaurants": [
+      {
+        "name": "King of Falafel",
+        "address": "26 Rue des Rosiers",
+        "description": "Ein Muss im jüdischen Viertel. Gemischtes Sandwich für 10€, großzügige Portionen.",
+        "tag": "Street Food",
+        "price": "€"
+      },
+      {
+        "name": "Pamela Popo",
+        "address": "15 Rue François Miron",
+        "description": "Retro-schickes Ambiente, kreatives hausgemachtes Menü. Cocktailbar am Abend.",
+        "tag": "Retro-schick",
+        "price": "€€€"
+      },
+      {
+        "name": "Le Bourguignon du Marais",
+        "address": "52 Rue François Miron",
+        "description": "Burgunder Spezialitäten, einschließlich des unverzichtbaren Boeuf Bourguignon.",
+        "tag": "Traditionell",
+        "price": "€€"
+      },
+      {
+        "name": "Le Gribouille",
+        "address": "44 Rue de Rivoli",
+        "description": "Brasserie mit schattiger Terrasse. Happy Hour von 17 bis 22 Uhr.",
+        "tag": "Terrasse",
+        "price": "€€"
+      }
+    ],
+    "shops": [
+      {
+        "name": "Bäckerei (Bestes Baguette 2014)",
+        "address": "An der Ecke, 50m rechts",
+        "description": "Zum besten Baguette von Paris 2014 gewählt. Ein absolutes Muss.",
+        "tag": "Nicht verpassen",
+        "price": "€"
+      },
+      {
+        "name": "Les Délices de Manon",
+        "address": "Place Saint-Paul",
+        "description": "Ausgezeichnete Bäckerei-Konditorei für Abwechslung.",
+        "tag": "Bäckerei",
+        "price": "€"
+      },
+      {
+        "name": "Vinosfera",
+        "address": "11 Rue François Miron",
+        "description": "Weinhandlung geführt von Igor, einem wahren Enthusiasten.",
+        "tag": "Weinhandlung",
+        "price": "€€"
+      },
+      {
+        "name": "Metzger Place Saint-Paul",
+        "address": "113 Rue Saint-Antoine",
+        "description": "Qualitätsfleisch und Rotisserie. Perfekt für ein Brathähnchen.",
+        "tag": "Metzger",
+        "price": "€€"
+      }
+    ],
+    "mustSee": [
+      {
+        "name": "Place des Vosges",
+        "distance": "600m",
+        "description": "Der älteste Platz von Paris (1605)."
+      },
+      {
+        "name": "Musée Carnavalet",
+        "distance": "400m",
+        "description": "Geschichte von Paris. Freier Eintritt!"
+      },
+      {
+        "name": "Seine-Ufer",
+        "distance": "400m",
+        "description": "Angelegte Promenade, abseits des Trubels."
+      },
+      {
+        "name": "BHV Marais",
+        "distance": "500m",
+        "description": "Das Pariser Lifestyle-Kaufhaus."
+      }
+    ],
+    "mustSeeTitle": "★"
   },
   "cta": {
     "sectionTitle": "Buchung",
@@ -305,6 +432,10 @@
   "availability": {
     "title": "Verfügbarkeit",
     "subtitle": "Prüfen Sie unseren Kalender und buchen Sie direkt",
+    "hero": {
+      "sectionTitle": "Direktbuchung",
+      "description": "Wählen Sie Ihre Daten, um die Verfügbarkeit zu prüfen und einen Direktpreis ohne Plattformgebühren zu erhalten."
+    },
     "legend": {
       "available": "Verfügbar",
       "booked": "Gebucht",
@@ -320,6 +451,45 @@
         "month": "-20% für 28+ Nächte"
       },
       "directBooking": "Direktbuchung = bis zu 20% günstiger als Airbnb"
+    },
+    "directBooking": {
+      "title": "Direktbuchung",
+      "benefits": [
+        "Bis zu <strong>20% günstiger</strong> als Airbnb",
+        "Schnelle Antwort über WhatsApp",
+        "Direkter Kontakt mit den Eigentümern",
+        "Flexibilität bei den Bedingungen"
+      ]
+    },
+    "discounts": {
+      "title": "Aufenthaltsrabatte",
+      "items": [
+        { "nights": "7+ Nächte", "discount": "-10%" },
+        { "nights": "14+ Nächte", "discount": "-15%" },
+        { "nights": "28+ Nächte", "discount": "-20%" }
+      ]
+    },
+    "contact": {
+      "title": "Fragen?",
+      "description": "Zögern Sie nicht, uns bei besonderen Wünschen oder Fragen zur Wohnung zu kontaktieren.",
+      "whatsapp": "WhatsApp",
+      "contactForm": "Kontaktformular"
+    },
+    "apartment": {
+      "sectionTitle": "Die Wohnung",
+      "title": "Auf einen Blick",
+      "items": [
+        { "label": "Gäste", "value": "4 max" },
+        { "label": "Schlafzimmer", "value": "1" },
+        { "label": "Betten", "value": "2" },
+        { "label": "Badezimmer", "value": "1" }
+      ],
+      "viewApartment": "Die Wohnung entdecken"
+    },
+    "airbnb": {
+      "preferPlatform": "Bevorzugen Sie eine Buchung über eine Plattform?",
+      "viewOnAirbnb": "Auf Airbnb ansehen",
+      "note": "Hinweis: Airbnb-Preise beinhalten Servicegebühren"
     }
   },
   "bookingBar": {

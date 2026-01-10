@@ -64,7 +64,49 @@
   },
   "testimonials": {
     "sectionTitle": "Testimonials",
-    "title": "What Our Guests Say"
+    "title": "What Our Guests Say",
+    "viewAll": "View all reviews on Airbnb",
+    "translatedBy": "Translated by Airbnb",
+    "items": [
+      {
+        "name": "Valentine",
+        "location": "Fribourg, Switzerland",
+        "date": "October 2025",
+        "text": "The apartment is perfectly located and very easy to access. Plus, it's in an amazing neighborhood. We had a perfect stay with very peaceful and quiet nights. We highly recommend this charming accommodation where you feel extremely comfortable! The bakery 3 minutes away on foot is also a big plus! Anthony is also very available and responsive. A big thank you!",
+        "originalText": "L'appartement est parfaitement situé et très facile d'accès. De plus, il est situé dans un quartier génial. Nous avons passé un séjour parfait et des nuits très paisibles et calmes. Nous recommandons vivement ce logement plein de charmes où l'on s'y sent extrêmement bien! La boulangerie à 3 minutes à pieds est un grand plus également! Anthony est aussi très disponible et très réactif. Un grand merci!",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Lisa",
+        "location": "Albuquerque, New Mexico",
+        "date": "October 2025",
+        "text": "Fantastic location and a comfortable, well-appointed space. A great place to use as a base for daily explorations. Bakery and several restaurants within a block or two. Two metro lines within a 10 minute walk. Host was great, friendly, responsive, and helpful. I would return.",
+        "rating": 5,
+        "translated": false
+      },
+      {
+        "name": "Sophie",
+        "location": "Lyon, France",
+        "date": "September 2025",
+        "text": "Perfect stay for our wedding anniversary. The apartment is tastefully decorated, very clean, and the restaurant recommendations were excellent. Thank you!",
+        "originalText": "Séjour parfait pour notre anniversaire de mariage. L'appartement est décoré avec goût, très propre, et les recommandations de restaurants étaient excellentes. Merci !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Thomas",
+        "location": "Brussels, Belgium",
+        "date": "August 2025",
+        "text": "Great welcome, apartment matches the description. The neighborhood is lively and authentic. Small drawback: stairs to climb but that's part of the Parisian charm!",
+        "originalText": "Très bon accueil, appartement conforme à la description. Le quartier est vivant et authentique. Petit bémol : les escaliers à monter mais ça fait partie du charme parisien !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      }
+    ]
   },
   "localTips": {
     "sectionTitle": "Local Tips",
@@ -73,7 +115,90 @@
       "restaurants": "Restaurants",
       "cafes": "Cafés",
       "shopping": "Shopping"
-    }
+    },
+    "restaurants": [
+      {
+        "name": "King of Falafel",
+        "address": "26 Rue des Rosiers",
+        "description": "A must in the Jewish quarter. Mixed sandwich for €10, generous portions.",
+        "tag": "Street food",
+        "price": "€"
+      },
+      {
+        "name": "Pamela Popo",
+        "address": "15 Rue François Miron",
+        "description": "Retro-chic setting, creative homemade menu. Cocktail bar in the evening.",
+        "tag": "Retro-chic",
+        "price": "€€€"
+      },
+      {
+        "name": "Le Bourguignon du Marais",
+        "address": "52 Rue François Miron",
+        "description": "Burgundy specialties, including the unmissable beef bourguignon.",
+        "tag": "Traditional",
+        "price": "€€"
+      },
+      {
+        "name": "Le Gribouille",
+        "address": "44 Rue de Rivoli",
+        "description": "Brasserie with shaded terrace. Happy hour from 5pm to 10pm.",
+        "tag": "Terrace",
+        "price": "€€"
+      }
+    ],
+    "shops": [
+      {
+        "name": "Bakery (Best baguette 2014)",
+        "address": "On the corner, 50m to the right",
+        "description": "Voted best baguette in Paris in 2014. An absolute must.",
+        "tag": "Must try",
+        "price": "€"
+      },
+      {
+        "name": "Les Délices de Manon",
+        "address": "Place Saint-Paul",
+        "description": "Excellent bakery-pastry shop for variety.",
+        "tag": "Bakery",
+        "price": "€"
+      },
+      {
+        "name": "Vinosfera",
+        "address": "11 Rue François Miron",
+        "description": "Wine shop run by Igor, a true enthusiast.",
+        "tag": "Wine shop",
+        "price": "€€"
+      },
+      {
+        "name": "Butcher Place Saint-Paul",
+        "address": "113 Rue Saint-Antoine",
+        "description": "Quality meat and rotisserie. Perfect for a roast chicken.",
+        "tag": "Butcher",
+        "price": "€€"
+      }
+    ],
+    "mustSee": [
+      {
+        "name": "Place des Vosges",
+        "distance": "600m",
+        "description": "The oldest square in Paris (1605)."
+      },
+      {
+        "name": "Carnavalet Museum",
+        "distance": "400m",
+        "description": "History of Paris. Free entry!"
+      },
+      {
+        "name": "Seine Banks",
+        "distance": "400m",
+        "description": "Landscaped promenade, away from the hustle."
+      },
+      {
+        "name": "BHV Marais",
+        "distance": "500m",
+        "description": "The Parisian lifestyle department store."
+      }
+    ],
+    "mustSeeTitle": "★"
   },
   "cta": {
     "sectionTitle": "Booking",
@@ -305,6 +430,10 @@
   "availability": {
     "title": "Availability",
     "subtitle": "Check our calendar and book directly",
+    "hero": {
+      "sectionTitle": "Direct Booking",
+      "description": "Select your dates to check availability and get a direct rate without platform fees."
+    },
     "legend": {
       "available": "Available",
       "booked": "Booked",
@@ -320,6 +449,45 @@
         "month": "-20% for 28+ nights"
       },
       "directBooking": "Direct booking = up to 20% cheaper than Airbnb"
+    },
+    "directBooking": {
+      "title": "Direct Booking",
+      "benefits": [
+        "Up to <strong>20% cheaper</strong> than Airbnb",
+        "Quick response via WhatsApp",
+        "Direct contact with owners",
+        "Flexible conditions"
+      ]
+    },
+    "discounts": {
+      "title": "Stay Discounts",
+      "items": [
+        { "nights": "7+ nights", "discount": "-10%" },
+        { "nights": "14+ nights", "discount": "-15%" },
+        { "nights": "28+ nights", "discount": "-20%" }
+      ]
+    },
+    "contact": {
+      "title": "Questions?",
+      "description": "Don't hesitate to contact us for any special requests or questions about the apartment.",
+      "whatsapp": "WhatsApp",
+      "contactForm": "Contact form"
+    },
+    "apartment": {
+      "sectionTitle": "The Apartment",
+      "title": "At a Glance",
+      "items": [
+        { "label": "Guests", "value": "4 max" },
+        { "label": "Bedrooms", "value": "1" },
+        { "label": "Beds", "value": "2" },
+        { "label": "Bathroom", "value": "1" }
+      ],
+      "viewApartment": "Discover the apartment"
+    },
+    "airbnb": {
+      "preferPlatform": "Prefer booking through a platform?",
+      "viewOnAirbnb": "View on Airbnb",
+      "note": "Note: Airbnb rates include service fees"
     }
   },
   "bookingBar": {

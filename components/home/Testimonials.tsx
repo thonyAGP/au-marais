@@ -1,39 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import { Container, AnimateOnScroll } from '@/components/ui';
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, Globe } from 'lucide-react';
 
-const testimonials = [
-  {
-    name: 'Marie',
-    date: 'Décembre 2024',
-    text: 'Appartement magnifique, exactement comme sur les photos. L\'emplacement est parfait, à deux pas du métro et des meilleurs restaurants du Marais. Soraya et Anthony sont des hôtes très attentionnés.',
-    rating: 5,
-  },
-  {
-    name: 'John',
-    date: 'Novembre 2024',
-    text: 'A perfect little gem in the heart of Paris! The apartment has so much character with the exposed beams and stone walls. We felt like true Parisians. Will definitely come back!',
-    rating: 5,
-  },
-  {
-    name: 'Sophie',
-    date: 'Octobre 2024',
-    text: 'Séjour parfait pour notre anniversaire de mariage. L\'appartement est décoré avec goût, très propre, et les recommandations de restaurants étaient excellentes. Merci !',
-    rating: 5,
-  },
-  {
-    name: 'Thomas',
-    date: 'Septembre 2024',
-    text: 'Très bon accueil, appartement conforme à la description. Le quartier est vivant et authentique. Petit bémol : les escaliers à monter mais ça fait partie du charme parisien !',
-    rating: 5,
-  },
-];
+interface TestimonialItem {
+  name: string;
+  location: string;
+  date: string;
+  text: string;
+  originalText?: string;
+  originalLang?: string;
+  rating: number;
+  translated: boolean;
+}
 
 interface TestimonialsDict {
   sectionTitle: string;
   title: string;
   viewAll?: string;
+  translatedBy?: string;
+  items: TestimonialItem[];
 }
 
 interface StatsDict {
@@ -45,7 +32,66 @@ interface TestimonialsProps {
   stats: StatsDict;
 }
 
+const TestimonialCard = ({
+  testimonial,
+  translatedBy,
+  index
+}: {
+  testimonial: TestimonialItem;
+  translatedBy?: string;
+  index: number;
+}) => {
+  const [showOriginal, setShowOriginal] = useState(false);
+
+  const displayText = showOriginal && testimonial.originalText
+    ? testimonial.originalText
+    : testimonial.text;
+
+  return (
+    <AnimateOnScroll delay={index * 100}>
+      <div className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-lg transition-all duration-500 group h-full flex flex-col">
+        <div className="flex items-center gap-1 mb-6">
+          {[...Array(testimonial.rating)].map((_, i) => (
+            <Star key={i} className="h-4 w-4 text-gold fill-gold" />
+          ))}
+        </div>
+        <p className="text-text-light leading-relaxed mb-4 font-light flex-grow">
+          &ldquo;{displayText}&rdquo;
+        </p>
+
+        {/* Translation indicator */}
+        {testimonial.translated && testimonial.originalText && (
+          <button
+            onClick={() => setShowOriginal(!showOriginal)}
+            className="text-xs text-text-muted hover:text-gold transition-colors flex items-center gap-1.5 mb-6"
+          >
+            <Globe className="h-3 w-3" />
+            {showOriginal ? (
+              <span>Afficher la traduction</span>
+            ) : (
+              <span>{translatedBy} · Afficher l&apos;original</span>
+            )}
+          </button>
+        )}
+
+        <div className="flex items-center justify-between pt-6 border-t border-stone-100 mt-auto">
+          <div>
+            <p className="font-medium text-text">{testimonial.name}</p>
+            <p className="text-text-muted text-sm">{testimonial.location}</p>
+            <p className="text-text-muted text-xs mt-1">{testimonial.date}</p>
+          </div>
+          <div className="text-gold/70 text-xs tracking-wider uppercase">
+            via Airbnb
+          </div>
+        </div>
+      </div>
+    </AnimateOnScroll>
+  );
+};
+
 export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
+  const testimonials = dict.items || [];
+
   return (
     <section className="py-24 bg-cream-dark relative overflow-hidden">
       {/* Decorative quote */}
@@ -74,27 +120,12 @@ export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
-            <AnimateOnScroll key={index} delay={index * 100}>
-              <div className="bg-white border border-stone-200 p-8 hover:border-gold/50 hover:shadow-lg transition-all duration-500 group">
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-gold fill-gold" />
-                  ))}
-                </div>
-                <p className="text-text-light leading-relaxed mb-8 font-light">
-                  &ldquo;{testimonial.text}&rdquo;
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-stone-100">
-                  <div>
-                    <p className="font-medium text-text">{testimonial.name}</p>
-                    <p className="text-text-muted text-sm">{testimonial.date}</p>
-                  </div>
-                  <div className="text-gold/70 text-xs tracking-wider uppercase">
-                    via Airbnb
-                  </div>
-                </div>
-              </div>
-            </AnimateOnScroll>
+            <TestimonialCard
+              key={index}
+              testimonial={testimonial}
+              translatedBy={dict.translatedBy}
+              index={index}
+            />
           ))}
         </div>
 

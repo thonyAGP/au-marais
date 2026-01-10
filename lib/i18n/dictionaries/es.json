@@ -64,7 +64,51 @@
   },
   "testimonials": {
     "sectionTitle": "Testimonios",
-    "title": "Lo que dicen nuestros huéspedes"
+    "title": "Lo que dicen nuestros huéspedes",
+    "viewAll": "Ver todas las reseñas en Airbnb",
+    "translatedBy": "Traducido por Airbnb",
+    "items": [
+      {
+        "name": "Valentine",
+        "location": "Friburgo, Suiza",
+        "date": "Octubre 2025",
+        "text": "El apartamento está perfectamente ubicado y es muy fácil de acceder. Además, está en un barrio genial. Tuvimos una estancia perfecta con noches muy tranquilas y calmadas. ¡Recomendamos encarecidamente este alojamiento lleno de encanto donde te sientes muy a gusto! ¡La panadería a 3 minutos a pie también es un gran plus! Anthony también es muy disponible y muy reactivo. ¡Muchas gracias!",
+        "originalText": "L'appartement est parfaitement situé et très facile d'accès. De plus, il est situé dans un quartier génial. Nous avons passé un séjour parfait et des nuits très paisibles et calmes. Nous recommandons vivement ce logement plein de charmes où l'on s'y sent extrêmement bien! La boulangerie à 3 minutes à pieds est un grand plus également! Anthony est aussi très disponible et très réactif. Un grand merci!",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Lisa",
+        "location": "Albuquerque, Nuevo México",
+        "date": "Octubre 2025",
+        "text": "Ubicación fantástica y un espacio cómodo y bien equipado. Un lugar ideal como base para exploraciones diarias. Panadería y varios restaurantes a una o dos manzanas. Dos líneas de metro a menos de 10 minutos a pie. El anfitrión fue genial, amable, reactivo y servicial. Volvería.",
+        "originalText": "Fantastic location and a comfortable, well-appointed space. A great place to use as a base for daily explorations. Bakery and several restaurants within a block or two. Two metro lines within a 10 minute walk. Host was great, friendly, responsive, and helpful. I would return.",
+        "originalLang": "en",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Sophie",
+        "location": "Lyon, Francia",
+        "date": "Septiembre 2025",
+        "text": "Estancia perfecta para nuestro aniversario de boda. El apartamento está decorado con buen gusto, muy limpio, y las recomendaciones de restaurantes fueron excelentes. ¡Gracias!",
+        "originalText": "Séjour parfait pour notre anniversaire de mariage. L'appartement est décoré avec goût, très propre, et les recommandations de restaurants étaient excellentes. Merci !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Thomas",
+        "location": "Bruselas, Bélgica",
+        "date": "Agosto 2025",
+        "text": "Muy buena acogida, apartamento conforme a la descripción. El barrio es animado y auténtico. Pequeño inconveniente: las escaleras a subir, pero eso forma parte del encanto parisino.",
+        "originalText": "Très bon accueil, appartement conforme à la description. Le quartier est vivant et authentique. Petit bémol : les escaliers à monter mais ça fait partie du charme parisien !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      }
+    ]
   },
   "localTips": {
     "sectionTitle": "Direcciones recomendadas",
@@ -73,7 +117,90 @@
       "restaurants": "Restaurantes",
       "cafes": "Cafeterías",
       "shopping": "Compras"
-    }
+    },
+    "restaurants": [
+      {
+        "name": "King of Falafel",
+        "address": "26 Rue des Rosiers",
+        "description": "Imprescindible del barrio judío. Sándwich mixto a 10€, porciones generosas.",
+        "tag": "Street food",
+        "price": "€"
+      },
+      {
+        "name": "Pamela Popo",
+        "address": "15 Rue François Miron",
+        "description": "Ambiente retro-chic, menú creativo casero. Bar de cócteles por la noche.",
+        "tag": "Retro-chic",
+        "price": "€€€"
+      },
+      {
+        "name": "Le Bourguignon du Marais",
+        "address": "52 Rue François Miron",
+        "description": "Especialidades de Borgoña, incluyendo el imprescindible boeuf bourguignon.",
+        "tag": "Tradicional",
+        "price": "€€"
+      },
+      {
+        "name": "Le Gribouille",
+        "address": "44 Rue de Rivoli",
+        "description": "Brasserie con terraza sombreada. Happy hour de 17h a 22h.",
+        "tag": "Terraza",
+        "price": "€€"
+      }
+    ],
+    "shops": [
+      {
+        "name": "Panadería (Mejor baguette 2014)",
+        "address": "En la esquina, 50m a la derecha",
+        "description": "Elegida mejor baguette de París en 2014. Un must absoluto.",
+        "tag": "Imprescindible",
+        "price": "€"
+      },
+      {
+        "name": "Les Délices de Manon",
+        "address": "Place Saint-Paul",
+        "description": "Excelente panadería-pastelería para variar los placeres.",
+        "tag": "Panadería",
+        "price": "€"
+      },
+      {
+        "name": "Vinosfera",
+        "address": "11 Rue François Miron",
+        "description": "Vinoteca regentada por Igor, un verdadero apasionado.",
+        "tag": "Vinoteca",
+        "price": "€€"
+      },
+      {
+        "name": "Carnicería Place Saint-Paul",
+        "address": "113 Rue Saint-Antoine",
+        "description": "Carne de calidad y asador. Perfecto para un pollo asado.",
+        "tag": "Carnicería",
+        "price": "€€"
+      }
+    ],
+    "mustSee": [
+      {
+        "name": "Place des Vosges",
+        "distance": "600m",
+        "description": "La plaza más antigua de París (1605)."
+      },
+      {
+        "name": "Museo Carnavalet",
+        "distance": "400m",
+        "description": "Historia de París. ¡Entrada gratuita!"
+      },
+      {
+        "name": "Orillas del Sena",
+        "distance": "400m",
+        "description": "Paseo acondicionado, lejos del bullicio."
+      },
+      {
+        "name": "BHV Marais",
+        "distance": "500m",
+        "description": "Los grandes almacenes lifestyle parisinos."
+      }
+    ],
+    "mustSeeTitle": "★"
   },
   "cta": {
     "sectionTitle": "Reserva",
@@ -305,6 +432,10 @@
   "availability": {
     "title": "Disponibilidad",
     "subtitle": "Consulta nuestro calendario y reserva directamente",
+    "hero": {
+      "sectionTitle": "Reserva directa",
+      "description": "Selecciona tus fechas para verificar la disponibilidad y obtener una tarifa directa sin comisiones de plataforma."
+    },
     "legend": {
       "available": "Disponible",
       "booked": "Reservado",
@@ -320,6 +451,45 @@
         "month": "-20% para 28+ noches"
       },
       "directBooking": "Reserva directa = hasta 20% más barato que Airbnb"
+    },
+    "directBooking": {
+      "title": "Reserva directa",
+      "benefits": [
+        "Hasta <strong>20% más barato</strong> que Airbnb",
+        "Respuesta rápida vía WhatsApp",
+        "Contacto directo con los propietarios",
+        "Flexibilidad en las condiciones"
+      ]
+    },
+    "discounts": {
+      "title": "Descuentos estancia",
+      "items": [
+        { "nights": "7+ noches", "discount": "-10%" },
+        { "nights": "14+ noches", "discount": "-15%" },
+        { "nights": "28+ noches", "discount": "-20%" }
+      ]
+    },
+    "contact": {
+      "title": "¿Preguntas?",
+      "description": "No dudes en contactarnos para cualquier solicitud especial o pregunta sobre el apartamento.",
+      "whatsapp": "WhatsApp",
+      "contactForm": "Formulario de contacto"
+    },
+    "apartment": {
+      "sectionTitle": "El apartamento",
+      "title": "En resumen",
+      "items": [
+        { "label": "Huéspedes", "value": "4 máx" },
+        { "label": "Dormitorios", "value": "1" },
+        { "label": "Camas", "value": "2" },
+        { "label": "Baño", "value": "1" }
+      ],
+      "viewApartment": "Descubrir el apartamento"
+    },
+    "airbnb": {
+      "preferPlatform": "¿Prefieres reservar a través de una plataforma?",
+      "viewOnAirbnb": "Ver en Airbnb",
+      "note": "Nota: las tarifas de Airbnb incluyen comisiones de servicio"
     }
   },
   "bookingBar": {

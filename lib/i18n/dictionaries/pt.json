@@ -64,7 +64,51 @@
   },
   "testimonials": {
     "sectionTitle": "Depoimentos",
-    "title": "O que nossos hóspedes dizem"
+    "title": "O que nossos hóspedes dizem",
+    "viewAll": "Ver todos os comentários no Airbnb",
+    "translatedBy": "Traduzido pelo Airbnb",
+    "items": [
+      {
+        "name": "Valentine",
+        "location": "Friburgo, Suíça",
+        "date": "Outubro 2025",
+        "text": "O apartamento está perfeitamente localizado no coração do Marais, que era exatamente o que queríamos ao visitar Paris. O apartamento em si é aconchegante, tranquilo e equipado com tudo que possa precisar. A decoração é charmosa e vintage, e você pode sentir que ele foi cuidadosamente projetado para dar aos visitantes uma estadia agradável. Soraya, Anthony e Lénaïg respondem muito rapidamente e são muito flexíveis!",
+        "originalText": "L'appartement est parfaitement situé en plein cœur du Marais, ce qui était exactement ce que nous voulions lors de notre visite à Paris. L'appartement en lui-même est cosy, calme et équipé avec tout ce dont on peut avoir besoin. La décoration est charmeuse et vintage, et on peut sentir qu'il a été pensé avec soin pour permettre aux visiteurs de passer un agréable séjour. Soraya, Anthony et Lénaïg répondent très rapidement et font preuve de beaucoup de flexibilité !",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Lisa",
+        "location": "Albuquerque, Novo México",
+        "date": "Outubro 2025",
+        "text": "Localização fantástica e um espaço confortável e bem equipado em um edifício com muita história. Nossa anfitriã foi muito receptiva e muito prestativa para nos acompanhar com nossas necessidades. Caminhe até lugares fantásticos para comer e beber e muitas opções de compras nas proximidades. Ficamos muito satisfeitos com esta escolha como nossa base em Paris.",
+        "originalText": "Fantastic location and a comfortable, well-appointed space in a building with so much history. Our host was very responsive and very helpful in accommodating our needs. Walk to fantastic places to eat and drink and many shopping options nearby. We were very pleased with this choice as our home base in Paris.",
+        "originalLang": "en",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Marie-Claire",
+        "location": "Lyon, França",
+        "date": "Setembro 2025",
+        "text": "Um verdadeiro achado no coração de Paris! O apartamento tem muito charme com suas vigas aparentes. Adoramos a decoração cuidadosa e a calma do local apesar da localização central. Os anfitriões são adoráveis e muito prestativos.",
+        "originalText": "Une vraie pépite au cœur de Paris ! L'appartement a beaucoup de charme avec ses poutres apparentes. Nous avons adoré la décoration soignée et le calme du lieu malgré l'emplacement central. Les hôtes sont adorables et très réactifs.",
+        "originalLang": "fr",
+        "rating": 5,
+        "translated": true
+      },
+      {
+        "name": "Thomas",
+        "location": "Berlim, Alemanha",
+        "date": "Agosto 2025",
+        "text": "Localização perfeita para explorar Paris a pé. O metrô fica a dois passos. O apartamento é exatamente como nas fotos, muito limpo e bem equipado. Recomendo!",
+        "originalText": "Perfekte Lage um Paris zu Fuß zu erkunden. Die Metro ist nur einen Katzensprung entfernt. Die Wohnung ist genau wie auf den Fotos, sehr sauber und gut ausgestattet. Sehr empfehlenswert!",
+        "originalLang": "de",
+        "rating": 5,
+        "translated": true
+      }
+    ]
   },
   "localTips": {
     "sectionTitle": "Dicas locais",
@@ -73,7 +117,58 @@
       "restaurants": "Restaurantes",
       "cafes": "Cafés",
       "shopping": "Compras"
-    }
+    },
+    "restaurants": [
+      {
+        "name": "Chez Janou",
+        "type": "Provençal",
+        "description": "Famoso por seus 80 pastis e cozinha do sul em um ambiente aconchegante. Terraço encantador."
+      },
+      {
+        "name": "L'As du Fallafel",
+        "type": "Israelense",
+        "description": "O melhor falafel de Paris segundo muitos! Fila garantida, mas vale a pena."
+      },
+      {
+        "name": "Breizh Café",
+        "type": "Creperia",
+        "description": "Crepes bretões artesanais com ingredientes de qualidade. Sidra excelente."
+      }
+    ],
+    "shops": [
+      {
+        "name": "Merci",
+        "type": "Concept store",
+        "description": "Loja conceito imperdível: moda, decoração, café. Os lucros vão para caridade."
+      },
+      {
+        "name": "Village Saint-Paul",
+        "type": "Antiguidades",
+        "description": "Pátios escondidos cheios de antiquários e brechós. Perfeito para caça aos tesouros."
+      },
+      {
+        "name": "Fleux",
+        "type": "Decoração",
+        "description": "Quatro lojas na mesma rua dedicadas ao design e objetos originais."
+      }
+    ],
+    "mustSee": [
+      {
+        "name": "Place des Vosges",
+        "type": "Patrimônio",
+        "description": "A praça mais antiga de Paris. Piquenique sob as arcadas ou visite a casa de Victor Hugo."
+      },
+      {
+        "name": "Musée Carnavalet",
+        "type": "Museu",
+        "description": "História de Paris em uma mansão magnífica. Entrada gratuita!"
+      },
+      {
+        "name": "Rue des Rosiers",
+        "type": "Bairro histórico",
+        "description": "Coração do bairro judeu. Não perca os pastéis e falafels."
+      }
+    ]
   },
   "cta": {
     "sectionTitle": "Reserva",
@@ -320,6 +415,49 @@
         "month": "-20% para 28+ noites"
       },
       "directBooking": "Reserva direta = até 20% mais barato que Airbnb"
+    },
+    "hero": {
+      "sectionTitle": "Reserva direta",
+      "description": "Escolha suas datas e entre em contato conosco diretamente para uma estadia personalizada."
+    },
+    "directBooking": {
+      "title": "Reserva direta",
+      "benefits": [
+        "Até <strong>20% mais barato</strong> que no Airbnb",
+        "Resposta rápida pelo WhatsApp",
+        "Contato direto com os proprietários",
+        "Flexibilidade nas condições"
+      ]
+    },
+    "discounts": {
+      "title": "Descontos por estadia",
+      "items": [
+        { "nights": "7+ noites", "discount": "-10%" },
+        { "nights": "14+ noites", "discount": "-15%" },
+        { "nights": "28+ noites", "discount": "-20%" }
+      ]
+    },
+    "contact": {
+      "title": "Alguma pergunta?",
+      "description": "Não hesite em entrar em contato conosco para mais informações ou para fazer sua reserva.",
+      "whatsapp": "WhatsApp",
+      "contactForm": "Formulário de contato"
+    },
+    "apartment": {
+      "sectionTitle": "O apartamento",
+      "title": "Em resumo",
+      "items": [
+        { "label": "Hóspedes", "value": "4 máx." },
+        { "label": "Quarto", "value": "1" },
+        { "label": "Camas", "value": "2" },
+        { "label": "Banheiro", "value": "1" }
+      ],
+      "viewApartment": "Descobrir o apartamento"
+    },
+    "airbnb": {
+      "preferPlatform": "Prefere reservar por uma plataforma?",
+      "viewOnAirbnb": "Ver no Airbnb",
+      "note": "Nota: os preços no Airbnb incluem taxas de serviço"
     }
   },
   "bookingBar": {
