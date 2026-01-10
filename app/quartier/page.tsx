@@ -26,48 +26,51 @@ const metroStations = [
   },
 ];
 
+// Point de départ pour les itinéraires (Rue François Miron, sans adresse exacte)
+const DEPARTURE_POINT = 'Rue+François+Miron,+75004+Paris';
+
 const placesToVisit = [
   {
     name: 'Place des Vosges',
     description: 'La plus ancienne place de Paris, chef-d\'œuvre d\'architecture du XVIIe siècle.',
     distance: '5 min',
     image: 'https://images.pexels.com/photos/34393256/pexels-photo-34393256.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Place+des+Vosges+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Place+des+Vosges,+Paris`,
   },
   {
     name: 'Centre Pompidou',
     description: 'Musée d\'art moderne et contemporain à l\'architecture iconique.',
     distance: '10 min',
     image: 'https://images.pexels.com/photos/8031073/pexels-photo-8031073.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Centre+Pompidou+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Centre+Pompidou,+Paris`,
   },
   {
     name: 'Notre-Dame',
     description: 'Cathédrale gothique emblématique, en cours de restauration.',
     distance: '12 min',
     image: 'https://images.pexels.com/photos/34467409/pexels-photo-34467409.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Notre+Dame+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Cathédrale+Notre-Dame+de+Paris`,
   },
   {
     name: 'Île Saint-Louis',
     description: 'Île paisible au charme intemporel, célèbre pour ses glaces Berthillon.',
     distance: '5 min',
     image: 'https://images.pexels.com/photos/13641175/pexels-photo-13641175.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Ile+Saint+Louis+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Île+Saint-Louis,+Paris`,
   },
   {
     name: 'Hôtel de Ville',
     description: 'Mairie de Paris, bâtiment Renaissance avec sa place animée.',
     distance: '8 min',
     image: 'https://images.pexels.com/photos/5517331/pexels-photo-5517331.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Hotel+de+Ville+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Hôtel+de+Ville,+Paris`,
   },
   {
     name: 'Rue des Rosiers',
     description: 'Cœur du quartier juif historique, falafels et pâtisseries.',
     distance: '4 min',
     image: 'https://images.pexels.com/photos/1850591/pexels-photo-1850591.jpeg?w=800',
-    mapsUrl: 'https://maps.google.com/?q=Rue+des+Rosiers+Paris',
+    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Rue+des+Rosiers,+Paris`,
   },
 ];
 
@@ -76,18 +79,18 @@ const pointsOfInterest = [
     category: 'Shopping',
     icon: ShoppingBag,
     places: [
-      { name: 'BHV Marais', distance: '5 min', url: 'https://maps.google.com/?q=BHV+Marais+Paris' },
-      { name: 'Rue des Francs-Bourgeois', distance: '3 min', url: 'https://maps.google.com/?q=Rue+des+Francs+Bourgeois+Paris' },
-      { name: 'Village Saint-Paul', distance: '2 min', url: 'https://maps.google.com/?q=Village+Saint+Paul+Paris' },
+      { name: 'BHV Marais', distance: '5 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/BHV+Marais,+Paris` },
+      { name: 'Rue des Francs-Bourgeois', distance: '3 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Rue+des+Francs-Bourgeois,+Paris` },
+      { name: 'Village Saint-Paul', distance: '2 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Village+Saint-Paul,+Paris` },
     ],
   },
   {
     category: 'Restaurants',
     icon: Coffee,
     places: [
-      { name: 'L\'As du Fallafel', distance: '5 min', url: 'https://maps.google.com/?q=L+As+du+Fallafel+Paris' },
-      { name: 'Chez Janou', distance: '6 min', url: 'https://maps.google.com/?q=Chez+Janou+Paris' },
-      { name: 'Breizh Café', distance: '4 min', url: 'https://maps.google.com/?q=Breizh+Cafe+Marais+Paris' },
+      { name: 'L\'As du Fallafel', distance: '5 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/L'As+du+Fallafel,+Paris` },
+      { name: 'Chez Janou', distance: '6 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Chez+Janou,+Paris` },
+      { name: 'Breizh Café', distance: '4 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Breizh+Café,+Paris` },
     ],
   },
 ];
