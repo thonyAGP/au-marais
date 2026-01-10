@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(Start-Sleep -Seconds 3)",
+      "Bash(Get-Content \"C:\\\\Users\\\\Anthony\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Projects-Site-Au-marais\\\\tasks\\\\bc2edcb.output\" -Tail 15)",
+      "Bash(npm install:*)",
+      "Bash(pnpm add:*)",
+      "WebSearch",
+      "Bash(cd:*)",
+      "WebFetch(domain:unsplash.com)"
+    ]
+  }
+}
