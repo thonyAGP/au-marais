@@ -91,36 +91,65 @@
     "copyright": "© {year} Au Marais. 保留所有权利。"
   },
   "contact": {
-    "title": "联系我们",
-    "subtitle": "有问题吗？请随时联系我们。",
-    "whatsapp": "通过WhatsApp联系我们",
-    "email": "通过邮件",
+    "hero": {
+      "sectionTitle": "联系我们",
+      "title": "联系方式",
+      "description": "有问题吗？需要预订？请随时联系我们，我们会尽快回复您。"
+    },
+    "info": {
+      "sectionTitle": "联系方式",
+      "whatsapp": "WhatsApp",
+      "phone": "电话",
+      "email": "邮箱",
+      "address": "地址"
+    },
+    "links": {
+      "availability": "查看空房",
+      "airbnb": "在Airbnb预订"
+    },
     "form": {
-      "name": "您的姓名",
-      "email": "您的邮箱",
-      "dates": "希望入住日期",
+      "sectionTitle": "表单",
+      "title": "预订申请",
+      "name": "姓名",
+      "namePlaceholder": "您的姓名",
+      "email": "邮箱",
+      "emailPlaceholder": "your@email.com",
+      "phone": "电话",
+      "phonePlaceholder": "+86 XXX XXXX XXXX",
+      "arrival": "入住日期",
+      "departure": "退房日期",
       "guests": "住客人数",
-      "message": "您的留言",
-      "submit": "发送"
+      "guestsPlaceholder": "请选择",
+      "guestsOptions": {
+        "1": "1位客人",
+        "2": "2位客人",
+        "3": "3位客人",
+        "4": "4位客人"
+      },
+      "message": "留言",
+      "messagePlaceholder": "有任何问题或特殊要求？",
+      "submit": "通过WhatsApp发送",
+      "submitNote": "点击后将打开WhatsApp，您的消息已预填写"
     },
     "faq": {
+      "sectionTitle": "常见问题",
       "title": "常见问题",
       "items": [
         {
-          "question": "公寓可以容纳多少人？",
-          "answer": "公寓最多可容纳4位客人：卧室有1张双人床，客厅有1张沙发床。"
+          "question": "入住和退房时间是什么？",
+          "answer": "入住时间下午3点起，退房时间上午11点前。可根据情况协商调整。"
         },
         {
           "question": "有电梯吗？",
-          "answer": "没有，公寓位于2楼，没有电梯。走廊较窄，这是17世纪建筑的典型特征。"
-        },
-        {
-          "question": "入住和退房时间是什么？",
-          "answer": "入住时间下午3点起，退房时间上午11点前。可以协商灵活安排。"
+          "answer": "没有，公寓位于17世纪历史建筑的2楼，没有电梯。"
         },
         {
           "question": "包含WiFi吗？",
-          "answer": "是的，包含免费高速WiFi。"
+          "answer": "是的，高速WiFi已包含，整个公寓都可使用。"
+        },
+        {
+          "question": "可以取消预订吗？",
+          "answer": "取消政策取决于预订平台。请联系我们了解详情。"
         }
       ]
     }
@@ -186,21 +215,91 @@
     }
   },
   "neighborhood": {
-    "title": "街区",
-    "subtitle": "玛黑区，巴黎4区",
-    "description": "巴黎保存最完好的街区之一，融合了历史、文化和生活艺术。",
+    "sectionTitle": "街区",
+    "title": "玛黑区",
+    "subtitle": "巴黎最具标志性和活力的街区之一，历史与现代在这里和谐共存。",
     "history": {
-      "title": "历史",
-      "content": "玛黑区是巴黎少数几个保留了奥斯曼改造前建筑的街区之一。17世纪的豪宅、鹅卵石街道和历史广场使其成为独一无二的地方。"
+      "sectionTitle": "历史",
+      "title": "历史悠久的街区",
+      "francoisMiron": {
+        "title": "弗朗索瓦·米龙",
+        "period": "1560 — 1609",
+        "text1": "我们公寓所在的街道以弗朗索瓦·米龙命名，他于1604年至1609年担任巴黎商人总监——相当于旧制度下的巴黎市长。",
+        "text2": "他被同时代人称为'人民之父'，是亨利四世国王的亲密助手，将个人财富用于美化巴黎。",
+        "text3": "他的功绩包括市政厅外墙、第一座萨玛丽坦（卢浮宫附近的水泵）以及巴黎渡槽的翻新。"
+      },
+      "street": {
+        "title": "这条街",
+        "period": "公元2世纪的罗马大道",
+        "text1": "弗朗索瓦·米龙街是巴黎最古老的街道之一。它沿着公元2世纪连接卢泰西亚（巴黎）与默伦和桑斯的罗马大道而建。",
+        "text2": "1865年由路易·菲利普改名以纪念这位总监，这条街上有中世纪木筋房屋（11号和13号），是巴黎最后的此类建筑，可追溯到14世纪。",
+        "text3": "我们公寓所在的建筑建于17世纪，保留了典型的外露横梁和石墙。"
+      },
+      "marais": {
+        "title": "玛黑区",
+        "period": "从沼泽到热门街区",
+        "text1": "其名称来源于12世纪之前占据这一地区的沼泽地。由修道士排干后，这个街区在17世纪成为巴黎贵族的居住地。",
+        "text2": "幸免于19世纪奥斯曼改造，它保留了中世纪建筑和私人府邸，其中许多已成为博物馆。",
+        "text3": "如今，这里是一个充满活力的国际化街区：LGBTQ+社区、历史悠久的犹太区、艺术画廊、设计师精品店和热闹的夜生活。"
+      }
     },
-    "transport": {
-      "title": "交通",
-      "metro": "地铁",
-      "bus": "公交"
+    "location": {
+      "title": "我们的位置",
+      "address": "弗朗索瓦·米龙街",
+      "district": "75004 巴黎 — 第4区",
+      "description": "巴黎最古老的街道之一，两旁是中世纪房屋和历史府邸。",
+      "metroAccess": "地铁交通"
     },
     "places": {
-      "title": "景点推荐",
-      "walkingTime": "分钟步行"
+      "sectionTitle": "探索",
+      "title": "必游景点",
+      "subtitle": "从公寓步行即可到达",
+      "walkingTime": "步行",
+      "items": {
+        "placeDesVosges": {
+          "name": "孚日广场",
+          "description": "巴黎最古老的广场，17世纪建筑杰作。"
+        },
+        "centrePompidou": {
+          "name": "蓬皮杜中心",
+          "description": "标志性建筑的现代和当代艺术博物馆。"
+        },
+        "notreDame": {
+          "name": "巴黎圣母院",
+          "description": "标志性的哥特式大教堂，正在修复中。"
+        },
+        "ileSaintLouis": {
+          "name": "圣路易岛",
+          "description": "宁静的岛屿，以贝蒂永冰淇淋闻名。"
+        },
+        "hotelDeVille": {
+          "name": "巴黎市政厅",
+          "description": "文艺复兴风格建筑，广场热闹非凡。"
+        },
+        "rueDesRosiers": {
+          "name": "玫瑰街",
+          "description": "历史悠久的犹太区中心，法拉费尔和糕点。"
+        }
+      }
+    },
+    "shops": {
+      "sectionTitle": "实用信息",
+      "title": "附近商店",
+      "categories": {
+        "shopping": "购物",
+        "restaurants": "餐厅"
+      }
+    },
+    "recommendations": {
+      "title": "我们的推荐",
+      "text": "抵达时，我们会为您提供一份完整的街区最爱地址清单：餐厅、咖啡馆、酒吧、商店...",
+      "subtext": "来自真正巴黎人的建议，让您像当地人一样体验玛黑区。"
+    },
+    "cta": {
+      "sectionTitle": "预订",
+      "title": "准备好探索玛黑区了吗？",
+      "description": "预订您的住宿，像真正的巴黎人一样体验巴黎。",
+      "button": "联系我们"
     }
   },
   "availability": {

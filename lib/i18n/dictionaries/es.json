@@ -91,36 +91,65 @@
     "copyright": "© {year} Au Marais. Todos los derechos reservados."
   },
   "contact": {
-    "title": "Contáctanos",
-    "subtitle": "¿Tienes alguna pregunta? No dudes en contactarnos.",
-    "whatsapp": "Contáctanos por WhatsApp",
-    "email": "Por email",
+    "hero": {
+      "sectionTitle": "Contacto",
+      "title": "Contacto",
+      "description": "¿Tienes alguna pregunta? ¿Una solicitud de reserva? No dudes en contactarnos, te responderemos lo antes posible."
+    },
+    "info": {
+      "sectionTitle": "Datos de contacto",
+      "whatsapp": "WhatsApp",
+      "phone": "Teléfono",
+      "email": "Email",
+      "address": "Dirección"
+    },
+    "links": {
+      "availability": "Ver disponibilidad",
+      "airbnb": "Reservar en Airbnb"
+    },
     "form": {
-      "name": "Tu nombre",
-      "email": "Tu email",
-      "dates": "Fechas deseadas",
+      "sectionTitle": "Formulario",
+      "title": "Solicitud de reserva",
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+34 6XX XXX XXX",
+      "arrival": "Fecha de llegada",
+      "departure": "Fecha de salida",
       "guests": "Número de huéspedes",
-      "message": "Tu mensaje",
-      "submit": "Enviar"
+      "guestsPlaceholder": "Selecciona",
+      "guestsOptions": {
+        "1": "1 huésped",
+        "2": "2 huéspedes",
+        "3": "3 huéspedes",
+        "4": "4 huéspedes"
+      },
+      "message": "Mensaje",
+      "messagePlaceholder": "¿Preguntas o solicitudes especiales?",
+      "submit": "Enviar vía WhatsApp",
+      "submitNote": "Al hacer clic, se abrirá WhatsApp con tu mensaje pre-rellenado"
     },
     "faq": {
+      "sectionTitle": "FAQ",
       "title": "Preguntas frecuentes",
       "items": [
         {
-          "question": "¿Cuál es la capacidad del apartamento?",
-          "answer": "El apartamento puede alojar hasta 4 personas: 1 cama doble en el dormitorio y 1 sofá cama en el salón."
+          "question": "¿Cuáles son los horarios de llegada y salida?",
+          "answer": "Check-in a partir de las 15h, check-out antes de las 11h. Se pueden acordar horarios según disponibilidad."
         },
         {
           "question": "¿Hay ascensor?",
-          "answer": "No, el apartamento está en el 2º piso sin ascensor. El pasillo es estrecho, típico de los edificios del siglo XVII."
-        },
-        {
-          "question": "¿Cuáles son los horarios de llegada y salida?",
-          "answer": "Check-in a partir de las 15h, check-out antes de las 11h. Se pueden acordar horarios flexibles."
+          "answer": "No, el apartamento está en el 2º piso de un edificio histórico del siglo XVII, sin ascensor."
         },
         {
           "question": "¿Está incluido el WiFi?",
-          "answer": "Sí, WiFi de alta velocidad gratuito incluido."
+          "answer": "Sí, el WiFi de alta velocidad está incluido y accesible en todo el apartamento."
+        },
+        {
+          "question": "¿Puedo cancelar mi reserva?",
+          "answer": "Las condiciones de cancelación dependen de la plataforma de reserva. Contáctanos para más detalles."
         }
       ]
     }
@@ -186,21 +215,91 @@
     }
   },
   "neighborhood": {
-    "title": "El barrio",
-    "subtitle": "Le Marais, París 4º",
-    "description": "Uno de los barrios mejor conservados de París, que combina historia, cultura y art de vivre.",
+    "sectionTitle": "El barrio",
+    "title": "Le Marais",
+    "subtitle": "Uno de los barrios más emblemáticos y vibrantes de París, donde historia y modernidad conviven armoniosamente.",
     "history": {
-      "title": "Historia",
-      "content": "El Marais es uno de los pocos barrios parisinos que ha conservado su arquitectura anterior a Haussmann. Sus mansiones del siglo XVII, calles empedradas y plazas históricas lo convierten en un lugar único."
+      "sectionTitle": "Historia",
+      "title": "Un barrio cargado de historia",
+      "francoisMiron": {
+        "title": "François Miron",
+        "period": "1560 — 1609",
+        "text1": "La calle donde se encuentra nuestro apartamento lleva el nombre de François Miron, preboste de los comerciantes de París de 1604 a 1609 — el equivalente al alcalde de París bajo el Antiguo Régimen.",
+        "text2": "Apodado 'el padre del pueblo' por sus contemporáneos, fue un cercano del rey Enrique IV y dedicó su fortuna personal al embellecimiento de París.",
+        "text3": "Se le atribuye la fachada del Hôtel de Ville, la primera Samaritaine (bomba de agua cerca del Louvre) y la renovación de los acueductos parisinos."
+      },
+      "street": {
+        "title": "La Calle",
+        "period": "Vía romana del siglo II",
+        "text1": "La Rue François Miron es una de las calles más antiguas de París. Sigue el trazado de una vía romana del siglo II que conectaba Lutecia (París) con Melun y Sens.",
+        "text2": "Renombrada en 1865 por Luis Felipe en honor al preboste, alberga casas medievales con entramado de madera (nº 11 y 13), de las últimas en París, del siglo XIV.",
+        "text3": "El edificio que alberga nuestro apartamento data del siglo XVII, con sus características vigas a la vista y paredes de piedra."
+      },
+      "marais": {
+        "title": "Le Marais",
+        "period": "De pantano a barrio cotizado",
+        "text1": "Su nombre proviene de los pantanos que ocupaban esta zona hasta el siglo XII. Desecado por los monjes, el barrio se convirtió en el siglo XVII en la residencia de la nobleza parisina.",
+        "text2": "Salvado de las reformas haussmannianas del siglo XIX, conserva su arquitectura medieval y sus mansiones particulares, muchas de las cuales se han convertido en museos.",
+        "text3": "Hoy es un barrio vibrante y cosmopolita: comunidad LGBTQ+, barrio judío histórico, galerías de arte, boutiques de diseñadores y animada vida nocturna."
+      }
     },
-    "transport": {
-      "title": "Transporte",
-      "metro": "Metro",
-      "bus": "Autobús"
+    "location": {
+      "title": "Nuestra ubicación",
+      "address": "Rue François Miron",
+      "district": "75004 París — 4º arrondissement",
+      "description": "Una de las calles más antiguas de París, bordeada de casas medievales y mansiones históricas.",
+      "metroAccess": "Acceso metro"
     },
     "places": {
-      "title": "Lugares para descubrir",
-      "walkingTime": "min andando"
+      "sectionTitle": "Descubrir",
+      "title": "Lugares imprescindibles",
+      "subtitle": "Todos accesibles a pie desde el apartamento",
+      "walkingTime": "a pie",
+      "items": {
+        "placeDesVosges": {
+          "name": "Place des Vosges",
+          "description": "La plaza más antigua de París, obra maestra de la arquitectura del siglo XVII."
+        },
+        "centrePompidou": {
+          "name": "Centre Pompidou",
+          "description": "Museo de arte moderno y contemporáneo con arquitectura icónica."
+        },
+        "notreDame": {
+          "name": "Notre-Dame",
+          "description": "Catedral gótica emblemática, en proceso de restauración."
+        },
+        "ileSaintLouis": {
+          "name": "Île Saint-Louis",
+          "description": "Isla tranquila de encanto atemporal, famosa por sus helados Berthillon."
+        },
+        "hotelDeVille": {
+          "name": "Hôtel de Ville",
+          "description": "Ayuntamiento de París, edificio renacentista con su animada plaza."
+        },
+        "rueDesRosiers": {
+          "name": "Rue des Rosiers",
+          "description": "Corazón del barrio judío histórico, falafels y pastelerías."
+        }
+      }
+    },
+    "shops": {
+      "sectionTitle": "Práctico",
+      "title": "Comercios cercanos",
+      "categories": {
+        "shopping": "Compras",
+        "restaurants": "Restaurantes"
+      }
+    },
+    "recommendations": {
+      "title": "Nuestras recomendaciones",
+      "text": "A tu llegada, te proporcionaremos una lista completa de nuestras direcciones favoritas del barrio: restaurantes, cafeterías, bares, tiendas...",
+      "subtext": "Consejos de verdaderos parisinos para vivir el Marais como un local."
+    },
+    "cta": {
+      "sectionTitle": "Reserva",
+      "title": "¿Listo para descubrir el Marais?",
+      "description": "Reserva tu estancia y vive París como un auténtico parisino.",
+      "button": "Contáctanos"
     }
   },
   "availability": {

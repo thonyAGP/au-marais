@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container, MetroStation, Map, AnimateOnScroll } from '@/components/ui';
 import { MapPin, Coffee, ShoppingBag, Utensils, Clock, Landmark, BookOpen, Crown, ExternalLink } from 'lucide-react';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import type { Locale } from '@/lib/i18n/config';
 
 const metroStations = [
   {
@@ -29,73 +32,73 @@ const metroStations = [
 // Point de départ pour les itinéraires (coordonnées GPS, sans adresse exacte)
 const DEPARTURE_POINT = '48.855510,2.358149';
 
-const placesToVisit = [
+type PlaceKey = 'placeDesVosges' | 'centrePompidou' | 'notreDame' | 'ileSaintLouis' | 'hotelDeVille' | 'rueDesRosiers';
+
+const placesData: { key: PlaceKey; distance: string; image: string }[] = [
   {
-    name: 'Place des Vosges',
-    description: 'La plus ancienne place de Paris, chef-d\'œuvre d\'architecture du XVIIe siècle.',
+    key: 'placeDesVosges',
     distance: '5 min',
     image: 'https://images.pexels.com/photos/34393256/pexels-photo-34393256.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Place+des+Vosges,+Paris`,
   },
   {
-    name: 'Centre Pompidou',
-    description: 'Musée d\'art moderne et contemporain à l\'architecture iconique.',
+    key: 'centrePompidou',
     distance: '10 min',
     image: 'https://images.pexels.com/photos/8031073/pexels-photo-8031073.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Centre+Pompidou,+Paris`,
   },
   {
-    name: 'Notre-Dame',
-    description: 'Cathédrale gothique emblématique, en cours de restauration.',
+    key: 'notreDame',
     distance: '12 min',
     image: 'https://images.pexels.com/photos/34467409/pexels-photo-34467409.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Cathédrale+Notre-Dame+de+Paris`,
   },
   {
-    name: 'Île Saint-Louis',
-    description: 'Île paisible au charme intemporel, célèbre pour ses glaces Berthillon.',
+    key: 'ileSaintLouis',
     distance: '5 min',
     image: 'https://images.pexels.com/photos/13641175/pexels-photo-13641175.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Île+Saint-Louis,+Paris`,
   },
   {
-    name: 'Hôtel de Ville',
-    description: 'Mairie de Paris, bâtiment Renaissance avec sa place animée.',
+    key: 'hotelDeVille',
     distance: '8 min',
     image: 'https://images.pexels.com/photos/5517331/pexels-photo-5517331.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Hôtel+de+Ville,+Paris`,
   },
   {
-    name: 'Rue des Rosiers',
-    description: 'Cœur du quartier juif historique, falafels et pâtisseries.',
+    key: 'rueDesRosiers',
     distance: '4 min',
     image: 'https://images.pexels.com/photos/1850591/pexels-photo-1850591.jpeg?w=800',
-    mapsUrl: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Rue+des+Rosiers,+Paris`,
   },
 ];
 
-const pointsOfInterest = [
+const getMapsUrl = (placeName: string) =>
+  `https://www.google.com/maps/dir/${DEPARTURE_POINT}/${encodeURIComponent(placeName)},+Paris`;
+
+const pointsOfInterestData = [
   {
-    category: 'Shopping',
+    categoryKey: 'shopping' as const,
     icon: ShoppingBag,
     places: [
-      { name: 'BHV Marais', distance: '5 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/BHV+Marais,+Paris` },
-      { name: 'Rue des Francs-Bourgeois', distance: '3 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Rue+des+Francs-Bourgeois,+Paris` },
-      { name: 'Village Saint-Paul', distance: '2 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Village+Saint-Paul,+Paris` },
+      { name: 'BHV Marais', distance: '5 min' },
+      { name: 'Rue des Francs-Bourgeois', distance: '3 min' },
+      { name: 'Village Saint-Paul', distance: '2 min' },
     ],
   },
   {
-    category: 'Restaurants',
+    categoryKey: 'restaurants' as const,
     icon: Coffee,
     places: [
-      { name: 'L\'As du Fallafel', distance: '5 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/L'As+du+Fallafel,+Paris` },
-      { name: 'Chez Janou', distance: '6 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Chez+Janou,+Paris` },
-      { name: 'Breizh Café', distance: '4 min', url: `https://www.google.com/maps/dir/${DEPARTURE_POINT}/Breizh+Café,+Paris` },
+      { name: 'L\'As du Fallafel', distance: '5 min' },
+      { name: 'Chez Janou', distance: '6 min' },
+      { name: 'Breizh Café', distance: '4 min' },
     ],
   },
 ];
 
-export default function QuartierPage() {
+export default async function QuartierPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+
   return (
     <div className="min-h-screen bg-cream">
       {/* Hero */}
@@ -103,14 +106,13 @@ export default function QuartierPage() {
         <Container>
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Le quartier
+              {dict.neighborhood.sectionTitle}
             </p>
             <h1 className="font-serif text-5xl md:text-6xl text-text mb-6">
-              Le Marais
+              {dict.neighborhood.title}
             </h1>
             <p className="text-text-muted max-w-2xl mx-auto text-lg">
-              L&apos;un des quartiers les plus emblématiques et vivants de Paris,
-              où histoire et modernité se côtoient harmonieusement.
+              {dict.neighborhood.subtitle}
             </p>
           </AnimateOnScroll>
         </Container>
@@ -121,10 +123,10 @@ export default function QuartierPage() {
         <Container>
           <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Histoire
+              {dict.neighborhood.history.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl text-text">
-              Un quartier chargé d&apos;histoire
+              {dict.neighborhood.history.title}
             </h2>
           </AnimateOnScroll>
 
@@ -135,25 +137,13 @@ export default function QuartierPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Crown className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">François Miron</h3>
+                <h3 className="font-serif text-xl text-text">{dict.neighborhood.history.francoisMiron.title}</h3>
               </div>
-              <p className="text-sm text-gold mb-4 font-medium">1560 — 1609</p>
+              <p className="text-sm text-gold mb-4 font-medium">{dict.neighborhood.history.francoisMiron.period}</p>
               <div className="space-y-3 text-text-light text-sm leading-relaxed">
-                <p>
-                  La rue qui abrite notre appartement porte le nom de <strong>François Miron</strong>,
-                  <em> prévôt des marchands de Paris</em> de 1604 à 1609 — l&apos;équivalent
-                  du maire de Paris sous l&apos;Ancien Régime.
-                </p>
-                <p>
-                  Surnommé <strong>« le père du peuple »</strong> par ses contemporains,
-                  il fut un proche du roi Henri IV et consacra sa fortune personnelle
-                  à l&apos;embellissement de Paris.
-                </p>
-                <p>
-                  On lui doit notamment la <strong>façade de l&apos;Hôtel de Ville</strong>,
-                  la première <strong>Samaritaine</strong> (pompe à eau près du Louvre)
-                  et la rénovation des aqueducs parisiens.
-                </p>
+                <p>{dict.neighborhood.history.francoisMiron.text1}</p>
+                <p>{dict.neighborhood.history.francoisMiron.text2}</p>
+                <p>{dict.neighborhood.history.francoisMiron.text3}</p>
               </div>
             </AnimateOnScroll>
 
@@ -163,24 +153,13 @@ export default function QuartierPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Landmark className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">La Rue</h3>
+                <h3 className="font-serif text-xl text-text">{dict.neighborhood.history.street.title}</h3>
               </div>
-              <p className="text-sm text-gold mb-4 font-medium">Voie romaine du IIe siècle</p>
+              <p className="text-sm text-gold mb-4 font-medium">{dict.neighborhood.history.street.period}</p>
               <div className="space-y-3 text-text-light text-sm leading-relaxed">
-                <p>
-                  La rue François Miron est l&apos;une des <strong>plus anciennes de Paris</strong>.
-                  Elle suit le tracé d&apos;une <strong>voie romaine du IIe siècle</strong> qui
-                  reliait Lutèce (Paris) à Melun et Sens.
-                </p>
-                <p>
-                  Renommée en 1865 par Louis-Philippe en hommage au prévôt, elle abrite
-                  des <strong>maisons médiévales à colombages</strong> (n°11 et 13), parmi
-                  les dernières de Paris, datant du XIVe siècle.
-                </p>
-                <p>
-                  L&apos;immeuble qui héberge notre appartement date du <strong>XVIIe siècle</strong>,
-                  avec ses poutres apparentes et ses murs en pierres caractéristiques.
-                </p>
+                <p>{dict.neighborhood.history.street.text1}</p>
+                <p>{dict.neighborhood.history.street.text2}</p>
+                <p>{dict.neighborhood.history.street.text3}</p>
               </div>
             </AnimateOnScroll>
 
@@ -190,25 +169,13 @@ export default function QuartierPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <BookOpen className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">Le Marais</h3>
+                <h3 className="font-serif text-xl text-text">{dict.neighborhood.history.marais.title}</h3>
               </div>
-              <p className="text-sm text-gold mb-4 font-medium">Du marécage au quartier prisé</p>
+              <p className="text-sm text-gold mb-4 font-medium">{dict.neighborhood.history.marais.period}</p>
               <div className="space-y-3 text-text-light text-sm leading-relaxed">
-                <p>
-                  Son nom vient des <strong>marécages</strong> qui occupaient cette zone
-                  jusqu&apos;au XIIe siècle. Asséché par les moines, le quartier devient
-                  au XVIIe siècle le lieu de résidence de la <strong>noblesse parisienne</strong>.
-                </p>
-                <p>
-                  <strong>Épargné par les travaux haussmanniens</strong> du XIXe siècle,
-                  il conserve son architecture médiévale et ses hôtels particuliers,
-                  dont beaucoup sont devenus des musées.
-                </p>
-                <p>
-                  Aujourd&apos;hui, c&apos;est un quartier <strong>vivant et cosmopolite</strong> :
-                  communauté LGBTQ+, quartier juif historique, galeries d&apos;art,
-                  boutiques de créateurs et vie nocturne animée.
-                </p>
+                <p>{dict.neighborhood.history.marais.text1}</p>
+                <p>{dict.neighborhood.history.marais.text2}</p>
+                <p>{dict.neighborhood.history.marais.text3}</p>
               </div>
             </AnimateOnScroll>
           </div>
@@ -227,19 +194,18 @@ export default function QuartierPage() {
                     <MapPin className="h-5 w-5 text-gold" />
                   </div>
                   <h2 className="font-serif text-3xl text-text">
-                    Notre emplacement
+                    {dict.neighborhood.location.title}
                   </h2>
                 </div>
 
                 <div className="bg-white border border-stone-200 p-8 mb-8">
                   <p className="mb-4">
-                    <strong className="text-text text-xl font-serif">Rue François Miron</strong>
+                    <strong className="text-text text-xl font-serif">{dict.neighborhood.location.address}</strong>
                     <br />
-                    <span className="text-text-muted">75004 Paris — 4ème arrondissement</span>
+                    <span className="text-text-muted">{dict.neighborhood.location.district}</span>
                   </p>
                   <p className="text-text-muted text-sm">
-                    L&apos;une des plus anciennes rues de Paris, bordée de maisons
-                    médiévales et d&apos;hôtels particuliers historiques.
+                    {dict.neighborhood.location.description}
                   </p>
                 </div>
               </AnimateOnScroll>
@@ -251,7 +217,7 @@ export default function QuartierPage() {
                     <div className="w-10 h-10 border border-gold/30 flex items-center justify-center">
                       <Clock className="h-4 w-4 text-gold" />
                     </div>
-                    Accès métro
+                    {dict.neighborhood.location.metroAccess}
                   </h3>
                   <div className="space-y-5">
                     {metroStations.map((metro, index) => (
@@ -282,55 +248,58 @@ export default function QuartierPage() {
         <Container>
           <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              À découvrir
+              {dict.neighborhood.places.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl text-text">
-              Lieux incontournables
+              {dict.neighborhood.places.title}
             </h2>
             <p className="text-text-muted mt-4 max-w-xl mx-auto">
-              Tous accessibles à pied depuis l&apos;appartement
+              {dict.neighborhood.places.subtitle}
             </p>
           </AnimateOnScroll>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {placesToVisit.map((place, index) => (
-              <AnimateOnScroll key={place.name} delay={index * 100}>
-                <a
-                  href={place.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block bg-white border border-stone-200 overflow-hidden hover:border-gold/50 hover:shadow-lg transition-all duration-500"
-                >
-                  {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={place.image}
-                      alt={place.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    {/* Distance badge */}
-                    <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-medium text-text">
-                      {place.distance} à pied
+            {placesData.map((place, index) => {
+              const placeInfo = dict.neighborhood.places.items[place.key];
+              return (
+                <AnimateOnScroll key={place.key} delay={index * 100}>
+                  <a
+                    href={getMapsUrl(placeInfo.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block bg-white border border-stone-200 overflow-hidden hover:border-gold/50 hover:shadow-lg transition-all duration-500"
+                  >
+                    {/* Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={place.image}
+                        alt={placeInfo.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      {/* Distance badge */}
+                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-medium text-text">
+                        {place.distance} {dict.neighborhood.places.walkingTime}
+                      </div>
                     </div>
-                  </div>
-                  {/* Content */}
-                  <div className="p-5">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-serif text-lg text-text group-hover:text-gold transition-colors">
-                        {place.name}
-                      </h3>
-                      <ExternalLink className="h-4 w-4 text-gold/50 group-hover:text-gold transition-colors" />
+                    {/* Content */}
+                    <div className="p-5">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-serif text-lg text-text group-hover:text-gold transition-colors">
+                          {placeInfo.name}
+                        </h3>
+                        <ExternalLink className="h-4 w-4 text-gold/50 group-hover:text-gold transition-colors" />
+                      </div>
+                      <p className="text-text-muted text-sm leading-relaxed">
+                        {placeInfo.description}
+                      </p>
                     </div>
-                    <p className="text-text-muted text-sm leading-relaxed">
-                      {place.description}
-                    </p>
-                  </div>
-                </a>
-              </AnimateOnScroll>
-            ))}
+                  </a>
+                </AnimateOnScroll>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -340,30 +309,30 @@ export default function QuartierPage() {
         <Container>
           <AnimateOnScroll className="text-center mb-16">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Pratique
+              {dict.neighborhood.shops.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl text-text">
-              Commerces à proximité
+              {dict.neighborhood.shops.title}
             </h2>
           </AnimateOnScroll>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {pointsOfInterest.map((category, index) => (
-              <AnimateOnScroll key={category.category} delay={index * 100}>
+            {pointsOfInterestData.map((category, index) => (
+              <AnimateOnScroll key={category.categoryKey} delay={index * 100}>
                 <div className="bg-cream border border-stone-200 p-8 hover:border-gold/50 transition-all duration-500 h-full">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                       <category.icon className="h-5 w-5 text-gold" />
                     </div>
                     <h3 className="font-serif text-xl text-text">
-                      {category.category}
+                      {dict.neighborhood.shops.categories[category.categoryKey]}
                     </h3>
                   </div>
                   <ul className="space-y-4">
                     {category.places.map((place) => (
                       <li key={place.name}>
                         <a
-                          href={place.url}
+                          href={getMapsUrl(place.name)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex justify-between items-center group hover:text-gold transition-colors"
@@ -392,17 +361,15 @@ export default function QuartierPage() {
               <Utensils className="h-8 w-8 text-gold" />
             </div>
             <h2 className="font-serif text-3xl text-text mb-8">
-              Nos recommandations
+              {dict.neighborhood.recommendations.title}
             </h2>
 
             <div className="bg-white border border-stone-200 p-8">
               <p className="text-text-light mb-6">
-                À votre arrivée, nous vous fournirons une liste complète de nos
-                adresses préférées dans le quartier : restaurants, cafés, bars,
-                boutiques...
+                {dict.neighborhood.recommendations.text}
               </p>
               <p className="text-text-muted text-sm italic">
-                Des conseils de vrais Parisiens pour vivre le Marais comme un local.
+                {dict.neighborhood.recommendations.subtext}
               </p>
             </div>
           </AnimateOnScroll>
@@ -419,20 +386,20 @@ export default function QuartierPage() {
         <Container className="relative z-10">
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Réservation
+              {dict.neighborhood.cta.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl text-text mb-6">
-              Prêt à découvrir le Marais ?
+              {dict.neighborhood.cta.title}
             </h2>
             <p className="text-text-muted mb-10 max-w-xl mx-auto">
-              Réservez votre séjour et vivez Paris comme un vrai Parisien.
+              {dict.neighborhood.cta.description}
             </p>
-            <a
-              href="/contact"
+            <Link
+              href={`/${locale}/contact`}
               className="inline-flex items-center justify-center px-10 py-5 bg-gold text-white font-medium text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(196,116,90,0.25)]"
             >
-              Nous contacter
-            </a>
+              {dict.neighborhood.cta.button}
+            </Link>
           </AnimateOnScroll>
         </Container>
       </section>
