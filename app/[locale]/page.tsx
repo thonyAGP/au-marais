@@ -13,7 +13,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero />
+      <Hero dict={dict.hero} nav={dict.nav} common={dict.common} locale={locale} />
 
       {/* Stats Bar */}
       <section className="bg-white border-y border-stone-200">
@@ -41,11 +41,11 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <Features />
-      <GalleryPreview />
-      <Hosts />
-      <Testimonials />
-      <LocalTips />
+      <Features dict={dict.features} />
+      <GalleryPreview dict={dict.gallery} locale={locale} />
+      <Hosts dict={dict.hosts} />
+      <Testimonials dict={dict.testimonials} stats={dict.stats} />
+      <LocalTips dict={dict.localTips} />
 
       {/* CTA Section */}
       <section className="py-32 bg-cream-dark relative overflow-hidden">

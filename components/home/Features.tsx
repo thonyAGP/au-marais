@@ -1,43 +1,63 @@
-import { Sparkles, Train, MapPin, Home } from 'lucide-react';
+import { Sparkles, Train, MapPin, Wifi } from 'lucide-react';
 import { Container, AnimateOnScroll } from '@/components/ui';
 
-const features = [
-  {
-    icon: Sparkles,
-    title: 'Charme historique',
-    description: 'Poutres du 17ème siècle et murs en pierres authentiques',
-  },
-  {
-    icon: Train,
-    title: 'Métro à 200m',
-    description: 'Station Saint-Paul (ligne 1) pour explorer tout Paris',
-  },
-  {
-    icon: MapPin,
-    title: 'Le Marais',
-    description: 'Au cœur du quartier le plus authentique de Paris',
-  },
-  {
-    icon: Home,
-    title: 'Confort moderne',
-    description: 'Entièrement rénové avec équipements premium',
-  },
-];
+interface FeatureItem {
+  title: string;
+  description: string;
+}
 
-export const Features = () => {
+interface FeaturesDict {
+  sectionTitle: string;
+  title: string;
+  description: string;
+  items: {
+    beams: FeatureItem;
+    stone: FeatureItem;
+    metro: FeatureItem;
+    wifi: FeatureItem;
+  };
+}
+
+interface FeaturesProps {
+  dict: FeaturesDict;
+}
+
+export const Features = ({ dict }: FeaturesProps) => {
+  const features = [
+    {
+      icon: Sparkles,
+      title: dict.items.beams.title,
+      description: dict.items.beams.description,
+    },
+    {
+      icon: Train,
+      title: dict.items.metro.title,
+      description: dict.items.metro.description,
+    },
+    {
+      icon: MapPin,
+      title: dict.items.stone.title,
+      description: dict.items.stone.description,
+    },
+    {
+      icon: Wifi,
+      title: dict.items.wifi.title,
+      description: dict.items.wifi.description,
+    },
+  ];
+
   return (
     <section className="py-24 bg-cream">
       <Container>
         <AnimateOnScroll className="text-center mb-16">
           <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-            Prestations
+            {dict.sectionTitle}
           </p>
           <h2 className="font-serif text-4xl md:text-5xl text-text mb-6">
-            Un séjour inoubliable
+            {dict.title}
           </h2>
           <p className="text-text-light max-w-2xl mx-auto">
-            Un appartement unique alliant le charme de l&apos;ancien et le confort
-            moderne, idéalement situé pour découvrir Paris.
+            {dict.description}
           </p>
         </AnimateOnScroll>
 

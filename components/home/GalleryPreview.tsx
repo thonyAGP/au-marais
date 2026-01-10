@@ -10,31 +10,42 @@ const previewImages = [
   { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Salle de bain' },
 ];
 
-export const GalleryPreview = () => {
+interface GalleryDict {
+  sectionTitle: string;
+  title: string;
+  viewAll: string;
+}
+
+interface GalleryPreviewProps {
+  dict: GalleryDict;
+  locale: string;
+}
+
+export const GalleryPreview = ({ dict, locale }: GalleryPreviewProps) => {
   return (
     <section className="py-24 bg-cream-dark">
       <Container>
         <AnimateOnScroll className="flex justify-between items-end mb-12">
           <div>
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Galerie
+              {dict.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl text-text">
-              Découvrez l&apos;appartement
+              {dict.title}
             </h2>
           </div>
           <Link
-            href="/appartement"
+            href={`/${locale}/appartement`}
             className="hidden md:flex items-center gap-2 text-gold text-sm tracking-wider hover:gap-4 transition-all"
           >
-            Voir toutes les photos <ArrowRight className="h-4 w-4" />
+            {dict.viewAll} <ArrowRight className="h-4 w-4" />
           </Link>
         </AnimateOnScroll>
 
         {/* Gallery Grid - Asymmetric layout */}
         <div className="grid grid-cols-4 grid-rows-2 gap-4 h-[500px]">
           <AnimateOnScroll className="col-span-2 row-span-2 relative overflow-hidden group">
-            <Link href="/appartement">
+            <Link href={`/${locale}/appartement`}>
               <Image
                 src={previewImages[0].src}
                 alt={previewImages[0].alt}
@@ -52,7 +63,7 @@ export const GalleryPreview = () => {
               delay={(index + 1) * 100}
               className="relative overflow-hidden group"
             >
-              <Link href="/appartement">
+              <Link href={`/${locale}/appartement`}>
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -68,9 +79,9 @@ export const GalleryPreview = () => {
 
         {/* Mobile CTA */}
         <div className="text-center mt-8 md:hidden">
-          <Link href="/appartement">
+          <Link href={`/${locale}/appartement`}>
             <Button className="bg-gold text-white hover:bg-gold-dark">
-              Voir toutes les photos
+              {dict.viewAll}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>

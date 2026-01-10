@@ -2,7 +2,41 @@ import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Container } from '@/components/ui';
 
-export const Footer = () => {
+interface FooterDict {
+  description: string;
+  navigation: string;
+  contact: string;
+  legal: string;
+  privacy: string;
+  copyright: string;
+}
+
+interface NavDict {
+  home: string;
+  apartment: string;
+  neighborhood: string;
+  contact: string;
+}
+
+interface FooterProps {
+  dict: FooterDict;
+  nav: NavDict;
+  locale: string;
+}
+
+// Helper to get locale-aware href
+const getLocalizedHref = (href: string, locale: string) => {
+  return `/${locale}${href}`;
+};
+
+export const Footer = ({ dict, nav, locale }: FooterProps) => {
+  const navigation = [
+    { name: nav.home, href: '' },
+    { name: nav.apartment, href: '/appartement' },
+    { name: nav.neighborhood, href: '/quartier' },
+    { name: nav.contact, href: '/contact' },
+  ];
+
   return (
     <footer className="bg-[#3D2C2C] border-t border-gold/20">
       {/* Main Footer */}
@@ -19,26 +53,20 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-cream/60 text-sm leading-relaxed">
-              Appartement de charme au cœur du Marais, dans un immeuble du
-              17ème siècle. L&apos;art de vivre à la parisienne.
+              {dict.description}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <h4 className="text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
-              Navigation
+              {dict.navigation}
             </h4>
             <ul className="space-y-4">
-              {[
-                { name: 'Accueil', href: '/' },
-                { name: 'Appartement', href: '/appartement' },
-                { name: 'Le Quartier', href: '/quartier' },
-                { name: 'Contact', href: '/contact' },
-              ].map((item) => (
+              {navigation.map((item) => (
                 <li key={item.name}>
                   <Link
-                    href={item.href}
+                    href={getLocalizedHref(item.href, locale)}
                     className="text-cream/60 hover:text-gold transition-colors duration-300 text-sm"
                   >
                     {item.name}
@@ -51,7 +79,7 @@ export const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
-              Contact
+              {dict.contact}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-4 text-sm group">
@@ -94,21 +122,21 @@ export const Footer = () => {
         <Container className="py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-cream/40 text-xs tracking-wider">
-              © {new Date().getFullYear()} Au Marais. Tous droits réservés.
+              {dict.copyright.replace('{year}', new Date().getFullYear().toString())}
             </p>
             <div className="flex items-center gap-6">
               <Link
-                href="/mentions-legales"
+                href={getLocalizedHref('/mentions-legales', locale)}
                 className="text-cream/40 hover:text-gold text-xs transition-colors"
               >
-                Mentions légales
+                {dict.legal}
               </Link>
               <span className="text-cream/20">|</span>
               <Link
-                href="/confidentialite"
+                href={getLocalizedHref('/confidentialite', locale)}
                 className="text-cream/40 hover:text-gold text-xs transition-colors"
               >
-                Confidentialité
+                {dict.privacy}
               </Link>
             </div>
           </div>

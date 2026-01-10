@@ -2,9 +2,23 @@
 
 import Image from 'next/image';
 import { Container, AnimateOnScroll } from '@/components/ui';
-import { Heart, MapPin, Globe } from 'lucide-react';
+import { Star, MessageCircle } from 'lucide-react';
 
-export const Hosts = () => {
+interface HostsDict {
+  sectionTitle: string;
+  title: string;
+  description: string;
+  superhost: string;
+  rating: string;
+  reviews: string;
+  responseTime: string;
+}
+
+interface HostsProps {
+  dict: HostsDict;
+}
+
+export const Hosts = ({ dict }: HostsProps) => {
   return (
     <section className="py-24 bg-white">
       <Container>
@@ -30,46 +44,29 @@ export const Hosts = () => {
           {/* Content */}
           <AnimateOnScroll animation="slide-left" delay={200}>
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Vos hôtes
+              {dict.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl text-text mb-8">
-              Soraya & Anthony
+              {dict.title}
             </h2>
 
             <div className="space-y-4 text-text-light leading-relaxed">
-              <p>
-                Bonjour ! Nous sommes Soraya et Anthony, et voici notre fille Lénaïg.
-              </p>
-              <p>
-                Soraya est originaire de Madrid. Après avoir vécu au Maroc, elle s&apos;est
-                installée à Paris en 2013 où elle enseigne l&apos;espagnol dans une école bilingue.
-                Anthony, breton d&apos;origine, est venu à Paris pour le travail... et n&apos;est jamais reparti !
-                Il travaille dans l&apos;informatique.
-              </p>
-              <p>
-                Nous avons acheté cet appartement en 2020 et l&apos;avons entièrement rénové
-                à notre goût, en respectant l&apos;histoire du lieu et du quartier. L&apos;immeuble
-                date du 17ème siècle et le monument d&apos;en face a été construit en 1656.
-              </p>
-              <p className="text-text font-medium">
-                Nous adorons voyager et découvrir de nouvelles cultures. Si vous avez
-                des recommandations de destinations, nous sommes tout ouïe !
-              </p>
+              <p>{dict.description}</p>
             </div>
 
-            {/* Tags */}
+            {/* Stats */}
             <div className="flex flex-wrap gap-3 mt-10">
               <span className="inline-flex items-center gap-2 px-5 py-3 border border-stone-200 text-sm text-text-light hover:border-gold transition-colors">
-                <Heart className="h-4 w-4 text-gold" />
-                Passionnés de voyage
+                <Star className="h-4 w-4 text-gold fill-gold" />
+                {dict.superhost}
               </span>
               <span className="inline-flex items-center gap-2 px-5 py-3 border border-stone-200 text-sm text-text-light hover:border-gold transition-colors">
-                <MapPin className="h-4 w-4 text-gold" />
-                Parisiens depuis 2013
+                <Star className="h-4 w-4 text-gold fill-gold" />
+                {dict.rating}: 4.97 (89 {dict.reviews})
               </span>
               <span className="inline-flex items-center gap-2 px-5 py-3 border border-stone-200 text-sm text-text-light hover:border-gold transition-colors">
-                <Globe className="h-4 w-4 text-gold" />
-                FR · ES · EN
+                <MessageCircle className="h-4 w-4 text-gold" />
+                {dict.responseTime}
               </span>
             </div>
           </AnimateOnScroll>

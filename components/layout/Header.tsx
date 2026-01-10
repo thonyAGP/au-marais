@@ -7,12 +7,16 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Container, LanguageSwitcher } from '@/components/ui';
 
-const navigation = [
-  { name: 'Appartement', href: '/appartement' },
-  { name: 'Le Quartier', href: '/quartier' },
-  { name: 'Disponibilités', href: '/disponibilites' },
-  { name: 'Contact', href: '/contact' },
-];
+interface NavDict {
+  apartment: string;
+  neighborhood: string;
+  availability: string;
+  contact: string;
+}
+
+interface HeaderProps {
+  nav: NavDict;
+}
 
 // Helper to get locale-aware href
 const getLocalizedHref = (href: string, locale: string | string[] | undefined) => {
@@ -20,7 +24,13 @@ const getLocalizedHref = (href: string, locale: string | string[] | undefined) =
   return `/${loc}${href}`;
 };
 
-export const Header = () => {
+export const Header = ({ nav }: HeaderProps) => {
+  const navigation = [
+    { name: nav.apartment, href: '/appartement' },
+    { name: nav.neighborhood, href: '/quartier' },
+    { name: nav.availability, href: '/disponibilites' },
+    { name: nav.contact, href: '/contact' },
+  ];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const params = useParams();

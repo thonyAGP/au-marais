@@ -30,7 +30,22 @@ const testimonials = [
   },
 ];
 
-export const Testimonials = () => {
+interface TestimonialsDict {
+  sectionTitle: string;
+  title: string;
+  viewAll?: string;
+}
+
+interface StatsDict {
+  reviews: string;
+}
+
+interface TestimonialsProps {
+  dict: TestimonialsDict;
+  stats: StatsDict;
+}
+
+export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
   return (
     <section className="py-24 bg-cream-dark relative overflow-hidden">
       {/* Decorative quote */}
@@ -49,10 +64,10 @@ export const Testimonials = () => {
             <span className="text-3xl font-serif text-gold">4.97</span>
           </div>
           <h2 className="font-serif text-4xl md:text-5xl text-text mb-4">
-            Ce que disent nos voyageurs
+            {dict.title}
           </h2>
           <p className="text-text-muted text-sm tracking-wider">
-            89 avis sur Airbnb · Super note en propreté, communication et emplacement
+            89 {stats.reviews} · Airbnb
           </p>
         </AnimateOnScroll>
 
@@ -91,7 +106,7 @@ export const Testimonials = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors text-sm tracking-wider"
           >
-            Voir tous les avis sur Airbnb
+            {dict.viewAll || 'Airbnb'}
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>

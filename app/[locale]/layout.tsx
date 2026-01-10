@@ -108,6 +108,8 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const dict = await getDictionary(locale as Locale);
+
   return (
     <html lang={locale} className={`${cormorant.variable} ${montserrat.variable}`}>
       <head>
@@ -130,10 +132,10 @@ export default async function LocaleLayout({
         <link rel="alternate" hrefLang="x-default" href="https://au-marais.fr/fr" />
       </head>
       <body className="font-sans">
-        <Header />
+        <Header nav={dict.nav} />
         <main className="pt-20 pb-16 sm:pb-0">{children}</main>
-        <Footer />
-        <BookingBar />
+        <Footer dict={dict.footer} nav={dict.nav} locale={locale} />
+        <BookingBar dict={dict.bookingBar} stats={dict.stats} locale={locale} />
         <ChatAssistant />
       </body>
     </html>

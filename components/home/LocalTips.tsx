@@ -3,9 +3,23 @@
 import { Container, AnimateOnScroll } from '@/components/ui';
 import { MapPin, Utensils, ShoppingBag } from 'lucide-react';
 
-const tips = [
+interface LocalTipsDict {
+  sectionTitle: string;
+  title: string;
+  categories: {
+    restaurants: string;
+    cafes: string;
+    shopping: string;
+  };
+}
+
+interface LocalTipsProps {
+  dict: LocalTipsDict;
+}
+
+const getTips = (dict: LocalTipsDict) => [
   {
-    category: 'Nos restaurants préférés',
+    category: dict.categories.restaurants,
     icon: Utensils,
     items: [
       {
@@ -39,7 +53,7 @@ const tips = [
     ],
   },
   {
-    category: 'Pour vos courses',
+    category: dict.categories.shopping,
     icon: ShoppingBag,
     items: [
       {
@@ -97,21 +111,20 @@ const mustSee = [
   },
 ];
 
-export const LocalTips = () => {
+export const LocalTips = ({ dict }: LocalTipsProps) => {
+  const tips = getTips(dict);
+
   return (
     <section className="py-24 bg-cream">
       <Container>
         {/* Header */}
         <AnimateOnScroll className="text-center mb-16">
           <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-            Nos bonnes adresses
+            {dict.sectionTitle}
           </p>
           <h2 className="font-serif text-4xl md:text-5xl text-text mb-4">
-            Le Marais comme un local
+            {dict.title}
           </h2>
-          <p className="text-text-muted max-w-2xl mx-auto">
-            Nos adresses testées et approuvées pour profiter du quartier comme de vrais Parisiens.
-          </p>
         </AnimateOnScroll>
 
         {/* Tips Grid */}
@@ -159,13 +172,13 @@ export const LocalTips = () => {
           ))}
         </div>
 
-        {/* Must See */}
+        {/* Must See - Keep universal place names */}
         <AnimateOnScroll className="mt-20" delay={300}>
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 border border-gold/40 flex items-center justify-center">
               <MapPin className="h-5 w-5 text-gold" />
             </div>
-            <h3 className="font-serif text-2xl text-text">À ne pas manquer</h3>
+            <h3 className="font-serif text-2xl text-text">★</h3>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {mustSee.map((place) => (

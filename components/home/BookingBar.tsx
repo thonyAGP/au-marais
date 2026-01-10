@@ -4,7 +4,24 @@ import { useState, useEffect } from 'react';
 import { Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
 
-export const BookingBar = () => {
+interface BookingBarDict {
+  price: string;
+  perNight: string;
+  checkAvailability: string;
+  bookNow: string;
+}
+
+interface StatsDict {
+  reviews: string;
+}
+
+interface BookingBarProps {
+  dict: BookingBarDict;
+  stats: StatsDict;
+  locale: string;
+}
+
+export const BookingBar = ({ dict, stats, locale }: BookingBarProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -28,34 +45,34 @@ export const BookingBar = () => {
           {/* Left: Price info */}
           <div className="hidden sm:flex items-center gap-6">
             <div>
-              <p className="text-text-muted text-xs tracking-wider uppercase">À partir de</p>
+              <p className="text-text-muted text-xs tracking-wider uppercase">{dict.price}</p>
               <p className="font-serif text-2xl text-text">
-                120€ <span className="text-sm font-sans text-text-muted">/ nuit</span>
+                120€ <span className="text-sm font-sans text-text-muted">{dict.perNight}</span>
               </p>
             </div>
             <div className="h-10 w-px bg-stone-200" />
             <div className="flex items-center gap-2">
               <Star className="h-4 w-4 text-gold fill-gold" />
               <span className="font-medium text-text">4.97</span>
-              <span className="text-text-muted text-sm">(89 avis)</span>
+              <span className="text-text-muted text-sm">(89 {stats.reviews})</span>
             </div>
           </div>
 
           {/* Right: CTA */}
           <div className="flex items-center gap-4 flex-1 sm:flex-none justify-end">
             <Link
-              href="/appartement#disponibilites"
+              href={`/${locale}/appartement#disponibilites`}
               className="flex items-center gap-2 px-5 py-3 border border-stone-300 text-text hover:border-gold hover:text-gold transition-all text-sm font-medium tracking-wider"
             >
               <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">Voir disponibilités</span>
-              <span className="sm:hidden">Dispo</span>
+              <span className="hidden sm:inline">{dict.checkAvailability}</span>
+              <span className="sm:hidden">{dict.checkAvailability}</span>
             </Link>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="px-8 py-3 bg-gold text-white hover:bg-gold-dark transition-all font-medium text-sm tracking-wider hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(201,169,98,0.3)]"
             >
-              Réserver
+              {dict.bookNow}
             </Link>
           </div>
         </div>

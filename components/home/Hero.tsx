@@ -2,7 +2,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui';
 
-export const Hero = () => {
+interface HeroDict {
+  subtitle: string;
+  title: string;
+  description: string;
+  cta: string;
+  availability: string;
+}
+
+interface NavDict {
+  book: string;
+}
+
+interface CommonDict {
+  explore?: string;
+}
+
+interface HeroProps {
+  dict: HeroDict;
+  nav: NavDict;
+  common: CommonDict;
+  locale: string;
+}
+
+export const Hero = ({ dict, nav, common, locale }: HeroProps) => {
   const letters = ['A', 'u', '\u00A0', 'M', 'a', 'r', 'a', 'i', 's'];
 
   return (
@@ -47,32 +70,31 @@ export const Hero = () => {
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl font-light tracking-[0.3em] uppercase text-gold mb-8 animate-fade-in opacity-0 delay-800">
-          Votre cocon parisien
+          {dict.subtitle}
         </p>
 
         {/* Description */}
         <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in opacity-0 delay-1000">
-          Appartement de charme dans un immeuble du 17ème siècle au cœur du Marais.
-          Poutres apparentes, murs en pierres, et la ligne 1 à 200 mètres.
+          {dict.description}
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in opacity-0 delay-1200">
-          <Link href="/appartement">
+          <Link href={`/${locale}/appartement`}>
             <Button
               size="lg"
               className="bg-gold text-white hover:bg-gold-dark px-10 py-4 text-sm tracking-widest uppercase font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(201,169,98,0.3)]"
             >
-              Découvrir
+              {dict.cta}
             </Button>
           </Link>
-          <Link href="/contact">
+          <Link href={`/${locale}/contact`}>
             <Button
               variant="outline"
               size="lg"
               className="border-white/50 text-white hover:bg-white hover:text-text px-10 py-4 text-sm tracking-widest uppercase font-medium"
             >
-              Réserver
+              {nav.book}
             </Button>
           </Link>
         </div>
@@ -80,7 +102,7 @@ export const Hero = () => {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-in opacity-0 delay-1500">
-        <span className="text-white/70 text-xs tracking-[0.2em] uppercase">Explorer</span>
+        <span className="text-white/70 text-xs tracking-[0.2em] uppercase">{common.explore || 'Explore'}</span>
         <div className="w-px h-16 gold-line-vertical animate-scroll-pulse" />
       </div>
     </section>
