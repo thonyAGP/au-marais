@@ -1,185 +1,77 @@
-'use client';
-
-import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Container, Lightbox, AnimateOnScroll, SuperhostBadge } from '@/components/ui';
+import { Container, AnimateOnScroll, SuperhostBadge } from '@/components/ui';
+import { ApartmentGallery } from '@/components/apartment';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import type { Locale } from '@/lib/i18n/config';
 import { Users, Bed, Bath, Building, Wifi, Utensils, Tv, Wind, Calendar } from 'lucide-react';
 
-const galleryImages = [
-  { src: '/images/apartment/01-salon.jpg', alt: 'Salon avec poutres apparentes' },
-  { src: '/images/apartment/02-chambre.jpg', alt: 'Chambre cosy' },
-  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine équipée' },
-  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Salle de bain' },
-  { src: '/images/apartment/05-detail-1.jpg', alt: 'Détail de l\'appartement' },
-  { src: '/images/apartment/06-detail-2.jpg', alt: 'Vue de l\'appartement' },
-  { src: '/images/apartment/07-detail-3.jpg', alt: 'Ambiance de l\'appartement' },
-  { src: '/images/apartment/08-detail-4.jpg', alt: 'Charme parisien' },
-];
-
-const amenities = {
-  cuisine: [
-    'Plaques de cuisson',
-    'Réfrigérateur',
-    'Micro-ondes',
-    'Cafetière',
-    'Bouilloire',
-    'Ustensiles de cuisine',
-  ],
-  confort: [
-    'WiFi haut débit',
-    'Chauffage',
-    'Linge de lit',
-    'Serviettes',
-    'Fer à repasser',
-    'Sèche-cheveux',
-  ],
-  multimedia: ['Télévision'],
-};
-
-export default function AppartementPage() {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const openLightbox = (index: number) => {
-    setCurrentImageIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const closeLightbox = () => setLightboxOpen(false);
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-  };
+export default async function AppartementPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale);
+  const apt = dict.apartment;
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Hero */}
-      <section className="py-24 bg-cream-dark">
+      {/* Hero - More compact */}
+      <section className="pt-24 pb-8 bg-cream-dark">
         <Container>
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Votre séjour
+              {apt.sectionTitle}
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl text-text mb-6">
-              L&apos;appartement
+            <h1 className="font-serif text-4xl md:text-5xl text-text mb-4">
+              {apt.title}
             </h1>
-            <p className="text-text-muted max-w-2xl mx-auto text-lg">
-              Un cocon chaleureux au coeur du Marais, mêlant charme historique et
-              confort moderne.
+            <p className="text-text-muted max-w-2xl mx-auto">
+              {apt.subtitle}
             </p>
-            {/* Superhost Badge */}
-            <div className="mt-10">
-              <SuperhostBadge variant="full" showExtras />
+            {/* Compact Superhost inline */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <SuperhostBadge variant="minimal" />
+              <span className="text-text-muted">•</span>
+              <span className="text-sm text-text-muted">4.97★ · 89 {dict.hosts.reviews}</span>
             </div>
           </AnimateOnScroll>
         </Container>
       </section>
 
       {/* Gallery */}
-      <section className="py-16 bg-cream">
+      <section className="py-12 bg-cream">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[200px] md:auto-rows-[250px]">
-            {/* Main image - larger */}
-            <AnimateOnScroll className="col-span-2 row-span-2">
-              <button
-                onClick={() => openLightbox(0)}
-                className="relative h-full w-full overflow-hidden cursor-zoom-in group"
-              >
-                <Image
-                  src={galleryImages[0].src}
-                  alt={galleryImages[0].alt}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                  quality={85}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/30 transition-colors duration-500" />
-              </button>
-            </AnimateOnScroll>
-            {/* Other images */}
-            {galleryImages.slice(1).map((image, index) => (
-              <AnimateOnScroll key={index} delay={(index + 1) * 50}>
-                <button
-                  onClick={() => openLightbox(index + 1)}
-                  className="relative h-full w-full overflow-hidden cursor-zoom-in group"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    quality={80}
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                  <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/30 transition-colors duration-500" />
-                </button>
-              </AnimateOnScroll>
-            ))}
-          </div>
-          <p className="text-center text-text-muted text-sm mt-6">
-            Cliquez sur une photo pour l&apos;agrandir
-          </p>
+          <ApartmentGallery clickToEnlarge={apt.clickToEnlarge} />
         </Container>
       </section>
 
-      {/* Lightbox */}
-      <Lightbox
-        images={galleryImages}
-        currentIndex={currentImageIndex}
-        isOpen={lightboxOpen}
-        onClose={closeLightbox}
-        onNext={nextImage}
-        onPrev={prevImage}
-      />
-
       {/* Details */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-16">
             {/* Description */}
             <AnimateOnScroll>
               <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-                Description
+                {apt.description.sectionTitle}
               </p>
               <h2 className="font-serif text-3xl text-text mb-8">
-                Bienvenue chez vous
+                {apt.description.title}
               </h2>
               <div className="space-y-4 text-text-light leading-relaxed">
-                <p>
-                  Bienvenue dans notre appartement, un petit cocon entièrement
-                  refait à neuf au coeur de Paris. Niché dans un immeuble du
-                  17ème siècle, il a conservé tout son charme d&apos;époque : poutres
-                  en bois apparentes, murs en pierres, et cette atmosphère si
-                  particulière des vieux immeubles parisiens.
-                </p>
-                <p>
-                  Situé rue François Miron, l&apos;une des plus anciennes rues de
-                  Paris, vous serez au coeur du Marais avec sa vie de quartier
-                  unique. Boutiques, cafés, restaurants, galeries d&apos;art... tout
-                  est accessible à pied.
-                </p>
-                <p>
-                  La station de métro Saint-Paul (ligne 1) est à 200 mètres et
-                  dessert directement les Champs-Élysées, le Louvre, la Bastille.
-                </p>
+                <p>{apt.description.text1}</p>
+                <p>{apt.description.text2}</p>
+                <p>{apt.description.text3}</p>
               </div>
             </AnimateOnScroll>
 
             {/* Quick Info */}
             <AnimateOnScroll delay={200}>
               <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-                Informations
+                {apt.info.sectionTitle}
               </p>
               <h2 className="font-serif text-3xl text-text mb-8">
-                En bref
+                {apt.info.title}
               </h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
@@ -187,8 +79,8 @@ export default function AppartementPage() {
                     <Users className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">4 voyageurs</p>
-                    <p className="text-text-muted text-sm">Capacité max.</p>
+                    <p className="text-text font-medium">{apt.info.capacity}</p>
+                    <p className="text-text-muted text-sm">{apt.info.capacityLabel}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
@@ -196,8 +88,8 @@ export default function AppartementPage() {
                     <Bed className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">1 chambre</p>
-                    <p className="text-text-muted text-sm">+ canapé-lit</p>
+                    <p className="text-text font-medium">{apt.info.bedroom}</p>
+                    <p className="text-text-muted text-sm">{apt.info.bedroomLabel}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
@@ -205,8 +97,8 @@ export default function AppartementPage() {
                     <Bath className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">1 salle de bain</p>
-                    <p className="text-text-muted text-sm">Complète</p>
+                    <p className="text-text font-medium">{apt.info.bathroom}</p>
+                    <p className="text-text-muted text-sm">{apt.info.bathroomLabel}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-6 bg-cream border border-stone-200 hover:border-gold/50 transition-colors">
@@ -214,8 +106,8 @@ export default function AppartementPage() {
                     <Building className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">2ème étage</p>
-                    <p className="text-text-muted text-sm">Sans ascenseur</p>
+                    <p className="text-text font-medium">{apt.info.floor}</p>
+                    <p className="text-text-muted text-sm">{apt.info.floorLabel}</p>
                   </div>
                 </div>
               </div>
@@ -225,14 +117,14 @@ export default function AppartementPage() {
       </section>
 
       {/* Amenities */}
-      <section className="py-20 bg-cream-dark">
+      <section className="py-16 bg-cream-dark">
         <Container>
-          <AnimateOnScroll className="text-center mb-16">
+          <AnimateOnScroll className="text-center mb-12">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Confort
+              {apt.amenities.sectionTitle}
             </p>
             <h2 className="font-serif text-4xl text-text">
-              Équipements
+              {apt.amenities.title}
             </h2>
           </AnimateOnScroll>
 
@@ -242,10 +134,10 @@ export default function AppartementPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Utensils className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">Cuisine</h3>
+                <h3 className="font-serif text-xl text-text">{apt.amenities.kitchen.title}</h3>
               </div>
               <ul className="space-y-3">
-                {amenities.cuisine.map((item) => (
+                {apt.amenities.kitchen.items.map((item: string) => (
                   <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
@@ -259,10 +151,10 @@ export default function AppartementPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Wifi className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">Confort</h3>
+                <h3 className="font-serif text-xl text-text">{apt.amenities.comfort.title}</h3>
               </div>
               <ul className="space-y-3">
-                {amenities.confort.map((item) => (
+                {apt.amenities.comfort.items.map((item: string) => (
                   <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
@@ -276,10 +168,10 @@ export default function AppartementPage() {
                 <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
                   <Tv className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-serif text-xl text-text">Multimédia</h3>
+                <h3 className="font-serif text-xl text-text">{apt.amenities.multimedia.title}</h3>
               </div>
               <ul className="space-y-3">
-                {amenities.multimedia.map((item) => (
+                {apt.amenities.multimedia.items.map((item: string) => (
                   <li key={item} className="text-text-muted text-sm flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-gold rounded-full" />
                     {item}
@@ -292,23 +184,18 @@ export default function AppartementPage() {
       </section>
 
       {/* Note */}
-      <section className="py-16 bg-cream">
+      <section className="py-12 bg-cream">
         <Container size="md">
           <AnimateOnScroll className="bg-white border border-stone-200 p-8">
-            <h3 className="font-serif text-xl text-text mb-6">À noter</h3>
+            <h3 className="font-serif text-xl text-text mb-6">{apt.notes.title}</h3>
             <ul className="space-y-4 text-text-light">
               <li className="flex items-start gap-4">
                 <Wind className="h-5 w-5 text-gold mt-0.5 flex-shrink-0" />
-                <span>
-                  Le couloir principal est étroit, caractéristique des immeubles
-                  d&apos;époque du Marais.
-                </span>
+                <span>{apt.notes.items[0]}</span>
               </li>
               <li className="flex items-start gap-4">
                 <Building className="h-5 w-5 text-gold mt-0.5 flex-shrink-0" />
-                <span>
-                  L&apos;appartement est situé au 2ème étage sans ascenseur.
-                </span>
+                <span>{apt.notes.items[1]}</span>
               </li>
             </ul>
           </AnimateOnScroll>
@@ -316,30 +203,30 @@ export default function AppartementPage() {
       </section>
 
       {/* Calendar CTA */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <Container size="md">
           <AnimateOnScroll className="text-center">
-            <div className="w-20 h-20 mx-auto border border-gold/30 flex items-center justify-center mb-8">
-              <Calendar className="h-10 w-10 text-gold" />
+            <div className="w-16 h-16 mx-auto border border-gold/30 flex items-center justify-center mb-6">
+              <Calendar className="h-8 w-8 text-gold" />
             </div>
-            <h2 className="font-serif text-4xl text-text mb-4">
-              Vérifier les disponibilités
+            <h2 className="font-serif text-3xl text-text mb-4">
+              {apt.calendar.title}
             </h2>
-            <p className="text-text-muted mb-10 max-w-xl mx-auto">
-              Consultez notre calendrier pour voir les dates disponibles et planifier votre séjour.
+            <p className="text-text-muted mb-8 max-w-xl mx-auto">
+              {apt.calendar.description}
             </p>
             <Link
-              href="/disponibilites"
+              href={`/${locale}/disponibilites`}
               className="inline-flex items-center justify-center px-10 py-5 bg-gold text-white font-medium text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(196,116,90,0.25)]"
             >
-              Voir le calendrier
+              {apt.calendar.button}
             </Link>
           </AnimateOnScroll>
         </Container>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-cream-dark relative overflow-hidden">
+      <section className="py-16 bg-cream-dark relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gold/10 rounded-full" />
@@ -348,29 +235,28 @@ export default function AppartementPage() {
         <Container className="relative z-10">
           <AnimateOnScroll className="text-center">
             <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
-              Réservation
+              {apt.cta.sectionTitle}
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-text mb-6">
-              Envie de réserver ?
+            <h2 className="font-serif text-3xl md:text-4xl text-text mb-6">
+              {apt.cta.title}
             </h2>
             <p className="text-text-muted mb-10 max-w-xl mx-auto">
-              Contactez-nous directement ou réservez via Airbnb pour votre séjour
-              au coeur du Marais.
+              {apt.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
+              <Link
+                href={`/${locale}/contact`}
                 className="inline-flex items-center justify-center px-10 py-5 bg-gold text-white font-medium text-sm tracking-widest uppercase hover:bg-gold-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(196,116,90,0.25)]"
               >
-                Nous contacter
-              </a>
+                {apt.cta.contact}
+              </Link>
               <a
                 href="https://www.airbnb.fr/rooms/618442543008929958"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-10 py-5 border border-text/20 text-text font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-all duration-300"
               >
-                Réserver sur Airbnb
+                {apt.cta.airbnb}
               </a>
             </div>
           </AnimateOnScroll>

@@ -126,25 +126,63 @@
     }
   },
   "apartment": {
+    "sectionTitle": "您的住宿",
     "title": "公寓",
-    "subtitle": "玛黑区中心的迷人居所",
-    "description": "位于17世纪建筑的2楼，我们的公寓为您提供正宗的巴黎历史体验。",
-    "features": {
-      "title": "设施",
-      "bedroom": "带双人床的卧室",
-      "living": "带沙发床的客厅",
-      "kitchen": "设备齐全的厨房",
-      "bathroom": "完整浴室",
-      "wifi": "高速WiFi",
-      "heating": "暖气",
-      "tv": "电视",
-      "linens": "床上用品和毛巾"
+    "subtitle": "位于玛黑区中心的温馨居所，融合历史魅力与现代舒适。",
+    "clickToEnlarge": "点击照片放大查看",
+    "description": {
+      "sectionTitle": "描述",
+      "title": "欢迎回家",
+      "text1": "欢迎来到我们的公寓，这是位于巴黎中心的一个全新装修的温馨小屋。坐落于一栋17世纪的建筑中，它保留了所有的时代魅力：外露的木梁、石墙，以及老巴黎建筑特有的氛围。",
+      "text2": "公寓位于François Miron街，这是巴黎最古老的街道之一，您将身处玛黑区的中心，体验独特的街区生活。精品店、咖啡馆、餐厅、艺术画廊...一切都在步行范围内。",
+      "text3": "Saint-Paul地铁站（1号线）距离仅200米，可直达香榭丽舍大街、卢浮宫和巴士底。"
     },
-    "details": {
+    "info": {
+      "sectionTitle": "信息",
+      "title": "概览",
       "capacity": "4位客人",
-      "bedrooms": "1间卧室",
-      "beds": "2张床",
-      "bathrooms": "1间浴室"
+      "capacityLabel": "最大容量",
+      "bedroom": "1间卧室",
+      "bedroomLabel": "+ 沙发床",
+      "bathroom": "1间浴室",
+      "bathroomLabel": "完整设施",
+      "floor": "2楼",
+      "floorLabel": "无电梯"
+    },
+    "amenities": {
+      "sectionTitle": "舒适设施",
+      "title": "设施配置",
+      "kitchen": {
+        "title": "厨房",
+        "items": ["电磁炉", "冰箱", "微波炉", "咖啡机", "电热水壶", "厨房用具"]
+      },
+      "comfort": {
+        "title": "舒适设施",
+        "items": ["高速WiFi", "暖气", "床上用品", "毛巾", "熨斗", "吹风机"]
+      },
+      "multimedia": {
+        "title": "多媒体",
+        "items": ["电视"]
+      }
+    },
+    "notes": {
+      "title": "注意事项",
+      "items": [
+        "主走廊较窄，这是玛黑区老建筑的典型特征。",
+        "公寓位于2楼，没有电梯。"
+      ]
+    },
+    "calendar": {
+      "title": "查看空房",
+      "description": "查看我们的日历，了解可预订日期并规划您的住宿。",
+      "button": "查看日历"
+    },
+    "cta": {
+      "sectionTitle": "预订",
+      "title": "想要预订？",
+      "description": "直接联系我们或通过Airbnb预订，入住玛黑区中心的公寓。",
+      "contact": "联系我们",
+      "airbnb": "在Airbnb预订"
     }
   },
   "neighborhood": {

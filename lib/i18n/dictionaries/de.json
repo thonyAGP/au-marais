@@ -126,25 +126,63 @@
     }
   },
   "apartment": {
+    "sectionTitle": "Ihr Aufenthalt",
     "title": "Die Wohnung",
-    "subtitle": "Ein charmanter Rückzugsort im Herzen des Marais",
-    "description": "Im 2. Stock eines Gebäudes aus dem 17. Jahrhundert bietet unsere Wohnung ein authentisches Erlebnis des historischen Paris.",
-    "features": {
-      "title": "Ausstattung",
-      "bedroom": "Schlafzimmer mit Doppelbett",
-      "living": "Wohnzimmer mit Schlafsofa",
-      "kitchen": "Ausgestattete Küche",
-      "bathroom": "Vollbad",
-      "wifi": "Highspeed-WLAN",
-      "heating": "Heizung",
-      "tv": "Fernseher",
-      "linens": "Bettwäsche und Handtücher"
+    "subtitle": "Ein gemütlicher Rückzugsort im Herzen des Marais, der historischen Charme mit modernem Komfort verbindet.",
+    "clickToEnlarge": "Klicken Sie auf ein Foto zum Vergrößern",
+    "description": {
+      "sectionTitle": "Beschreibung",
+      "title": "Willkommen Zuhause",
+      "text1": "Willkommen in unserer Wohnung, einem kleinen, komplett renovierten Rückzugsort im Herzen von Paris. In einem Gebäude aus dem 17. Jahrhundert gelegen, hat sie ihren ganzen Charme bewahrt: sichtbare Holzbalken, Steinwände und diese besondere Atmosphäre alter Pariser Gebäude.",
+      "text2": "In der Rue François Miron gelegen, einer der ältesten Straßen von Paris, befinden Sie sich im Herzen des Marais mit seinem einzigartigen Viertel-Leben. Boutiquen, Cafés, Restaurants, Kunstgalerien... alles ist zu Fuß erreichbar.",
+      "text3": "Die Metro-Station Saint-Paul (Linie 1) ist 200 Meter entfernt und fährt direkt zu den Champs-Élysées, zum Louvre und zur Bastille."
     },
-    "details": {
+    "info": {
+      "sectionTitle": "Informationen",
+      "title": "Auf einen Blick",
       "capacity": "4 Gäste",
-      "bedrooms": "1 Schlafzimmer",
-      "beds": "2 Betten",
-      "bathrooms": "1 Badezimmer"
+      "capacityLabel": "Max. Kapazität",
+      "bedroom": "1 Schlafzimmer",
+      "bedroomLabel": "+ Schlafsofa",
+      "bathroom": "1 Badezimmer",
+      "bathroomLabel": "Komplett",
+      "floor": "2. Etage",
+      "floorLabel": "Ohne Aufzug"
+    },
+    "amenities": {
+      "sectionTitle": "Komfort",
+      "title": "Ausstattung",
+      "kitchen": {
+        "title": "Küche",
+        "items": ["Kochplatten", "Kühlschrank", "Mikrowelle", "Kaffeemaschine", "Wasserkocher", "Kochgeschirr"]
+      },
+      "comfort": {
+        "title": "Komfort",
+        "items": ["Highspeed-WLAN", "Heizung", "Bettwäsche", "Handtücher", "Bügeleisen", "Haartrockner"]
+      },
+      "multimedia": {
+        "title": "Multimedia",
+        "items": ["Fernseher"]
+      }
+    },
+    "notes": {
+      "title": "Gut zu wissen",
+      "items": [
+        "Der Hauptflur ist schmal, typisch für historische Gebäude im Marais.",
+        "Die Wohnung befindet sich im 2. Stock ohne Aufzug."
+      ]
+    },
+    "calendar": {
+      "title": "Verfügbarkeit prüfen",
+      "description": "Sehen Sie in unserem Kalender nach verfügbaren Daten und planen Sie Ihren Aufenthalt.",
+      "button": "Kalender ansehen"
+    },
+    "cta": {
+      "sectionTitle": "Buchung",
+      "title": "Möchten Sie buchen?",
+      "description": "Kontaktieren Sie uns direkt oder buchen Sie über Airbnb für Ihren Aufenthalt im Herzen des Marais.",
+      "contact": "Kontaktieren Sie uns",
+      "airbnb": "Auf Airbnb buchen"
     }
   },
   "neighborhood": {

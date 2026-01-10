@@ -126,25 +126,63 @@
     }
   },
   "apartment": {
+    "sectionTitle": "Sua estadia",
     "title": "O apartamento",
-    "subtitle": "Um refúgio encantador no coração do Marais",
-    "description": "Localizado no 2º andar de um prédio do século XVII, nosso apartamento oferece uma experiência autêntica da Paris histórica.",
-    "features": {
-      "title": "Comodidades",
-      "bedroom": "Quarto com cama de casal",
-      "living": "Sala com sofá-cama",
-      "kitchen": "Cozinha equipada",
-      "bathroom": "Banheiro completo",
-      "wifi": "WiFi de alta velocidade",
-      "heating": "Aquecimento",
-      "tv": "Televisão",
-      "linens": "Roupa de cama e toalhas"
+    "subtitle": "Um refúgio aconchegante no coração do Marais, combinando charme histórico e conforto moderno.",
+    "clickToEnlarge": "Clique em uma foto para ampliar",
+    "description": {
+      "sectionTitle": "Descrição",
+      "title": "Bem-vindo ao seu lar",
+      "text1": "Bem-vindo ao nosso apartamento, um pequeno refúgio completamente renovado no coração de Paris. Localizado em um prédio do século XVII, conservou todo o seu charme de época: vigas de madeira aparentes, paredes de pedra e aquela atmosfera tão especial dos antigos edifícios parisienses.",
+      "text2": "Situado na Rue François Miron, uma das ruas mais antigas de Paris, você estará no coração do Marais com sua vida de bairro única. Boutiques, cafés, restaurantes, galerias de arte... tudo está a uma curta caminhada.",
+      "text3": "A estação de metrô Saint-Paul (linha 1) fica a 200 metros e dá acesso direto aos Champs-Élysées, ao Louvre e à Bastille."
     },
-    "details": {
+    "info": {
+      "sectionTitle": "Informações",
+      "title": "Em resumo",
       "capacity": "4 hóspedes",
-      "bedrooms": "1 quarto",
-      "beds": "2 camas",
-      "bathrooms": "1 banheiro"
+      "capacityLabel": "Capacidade máx.",
+      "bedroom": "1 quarto",
+      "bedroomLabel": "+ sofá-cama",
+      "bathroom": "1 banheiro",
+      "bathroomLabel": "Completo",
+      "floor": "2º andar",
+      "floorLabel": "Sem elevador"
+    },
+    "amenities": {
+      "sectionTitle": "Comodidades",
+      "title": "Equipamentos",
+      "kitchen": {
+        "title": "Cozinha",
+        "items": ["Fogão", "Geladeira", "Micro-ondas", "Cafeteira", "Chaleira", "Utensílios de cozinha"]
+      },
+      "comfort": {
+        "title": "Conforto",
+        "items": ["WiFi de alta velocidade", "Aquecimento", "Roupa de cama", "Toalhas", "Ferro de passar", "Secador de cabelo"]
+      },
+      "multimedia": {
+        "title": "Multimídia",
+        "items": ["Televisão"]
+      }
+    },
+    "notes": {
+      "title": "Bom saber",
+      "items": [
+        "O corredor principal é estreito, característico dos prédios de época do Marais.",
+        "O apartamento está no 2º andar sem elevador."
+      ]
+    },
+    "calendar": {
+      "title": "Verificar disponibilidade",
+      "description": "Consulte nosso calendário para ver as datas disponíveis e planejar sua estadia.",
+      "button": "Ver calendário"
+    },
+    "cta": {
+      "sectionTitle": "Reserva",
+      "title": "Quer reservar?",
+      "description": "Entre em contato conosco diretamente ou reserve pelo Airbnb para sua estadia no coração do Marais.",
+      "contact": "Entre em contato",
+      "airbnb": "Reservar no Airbnb"
     }
   },
   "neighborhood": {

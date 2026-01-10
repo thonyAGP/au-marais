@@ -126,25 +126,63 @@
     }
   },
   "apartment": {
+    "sectionTitle": "Your Stay",
     "title": "The Apartment",
-    "subtitle": "A Charming Haven in the Heart of Le Marais",
-    "description": "Nestled on the 2nd floor of a 17th-century building, our apartment offers an authentic experience of historic Paris.",
-    "features": {
-      "title": "Amenities",
-      "bedroom": "Bedroom with double bed",
-      "living": "Living room with sofa bed",
-      "kitchen": "Equipped kitchen",
-      "bathroom": "Full bathroom",
-      "wifi": "High-speed WiFi",
-      "heating": "Heating",
-      "tv": "Television",
-      "linens": "Bed linens and towels"
+    "subtitle": "A warm cocoon in the heart of Le Marais, blending historic charm with modern comfort.",
+    "clickToEnlarge": "Click on a photo to enlarge",
+    "description": {
+      "sectionTitle": "Description",
+      "title": "Welcome Home",
+      "text1": "Welcome to our apartment, a cozy retreat completely renovated in the heart of Paris. Nestled in a 17th-century building, it has kept all its period charm: exposed wooden beams, stone walls, and that special atmosphere of old Parisian buildings.",
+      "text2": "Located on Rue François Miron, one of Paris' oldest streets, you'll be in the heart of Le Marais with its unique neighborhood life. Boutiques, cafés, restaurants, art galleries... everything is within walking distance.",
+      "text3": "Saint-Paul metro station (line 1) is 200 meters away and provides direct access to the Champs-Élysées, the Louvre, and Bastille."
     },
-    "details": {
+    "info": {
+      "sectionTitle": "Information",
+      "title": "At a Glance",
       "capacity": "4 guests",
-      "bedrooms": "1 bedroom",
-      "beds": "2 beds",
-      "bathrooms": "1 bathroom"
+      "capacityLabel": "Max capacity",
+      "bedroom": "1 bedroom",
+      "bedroomLabel": "+ sofa bed",
+      "bathroom": "1 bathroom",
+      "bathroomLabel": "Full",
+      "floor": "2nd floor",
+      "floorLabel": "No elevator"
+    },
+    "amenities": {
+      "sectionTitle": "Comfort",
+      "title": "Amenities",
+      "kitchen": {
+        "title": "Kitchen",
+        "items": ["Stovetop", "Refrigerator", "Microwave", "Coffee maker", "Kettle", "Cookware"]
+      },
+      "comfort": {
+        "title": "Comfort",
+        "items": ["High-speed WiFi", "Heating", "Bed linens", "Towels", "Iron", "Hair dryer"]
+      },
+      "multimedia": {
+        "title": "Multimedia",
+        "items": ["Television"]
+      }
+    },
+    "notes": {
+      "title": "Good to Know",
+      "items": [
+        "The main hallway is narrow, typical of period buildings in Le Marais.",
+        "The apartment is on the 2nd floor without an elevator."
+      ]
+    },
+    "calendar": {
+      "title": "Check Availability",
+      "description": "View our calendar to see available dates and plan your stay.",
+      "button": "View Calendar"
+    },
+    "cta": {
+      "sectionTitle": "Booking",
+      "title": "Ready to Book?",
+      "description": "Contact us directly or book via Airbnb for your stay in the heart of Le Marais.",
+      "contact": "Contact Us",
+      "airbnb": "Book on Airbnb"
     }
   },
   "neighborhood": {
