@@ -128,3 +128,7 @@ au-marais/
 - 2026-01-10 : Middleware de détection automatique de langue (Accept-Language header)
 - 2026-01-10 : Sélecteur de langue dans le header (desktop + mobile)
 - 2026-01-10 : Sitemap multilingue avec alternates
+- 2026-01-10 : **Traduction pages quartier et contact** - Toutes les 6 langues
+- 2026-01-10 : Composant ContactForm extrait en client component pour état formulaire
+- 2026-01-10 : Histoire du quartier (François Miron, la rue, Le Marais) traduite
+- 2026-01-10 : Lieux à visiter et commerces traduits avec descriptions
