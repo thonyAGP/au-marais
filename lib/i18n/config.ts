@@ -12,14 +12,19 @@ export const localeNames: Record<Locale, string> = {
   zh: '中文',
 };
 
-export const localeFlags: Record<Locale, string> = {
-  fr: '🇫🇷',
-  en: '🇬🇧',
-  es: '🇪🇸',
-  de: '🇩🇪',
-  pt: '🇧🇷',
-  zh: '🇨🇳',
+// Country codes for flag images (flagcdn.com)
+export const localeCountryCodes: Record<Locale, string> = {
+  fr: 'fr',
+  en: 'gb',
+  es: 'es',
+  de: 'de',
+  pt: 'br',
+  zh: 'cn',
 };
+
+// Get flag image URL
+export const getFlagUrl = (locale: Locale, size: number = 24) =>
+  `https://flagcdn.com/${size}x${Math.round(size * 0.75)}/${localeCountryCodes[locale]}.png`;
 
 // For hreflang tags
 export const localeHrefLang: Record<Locale, string> = {

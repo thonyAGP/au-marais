@@ -4,7 +4,7 @@ import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { locales, localeNames, localeFlags, type Locale } from '@/lib/i18n/config';
+import { locales, localeNames, getFlagUrl, type Locale } from '@/lib/i18n/config';
 
 export const LanguageSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ export const LanguageSwitcher = () => {
         className="flex items-center gap-1.5 px-2 py-2 text-text-light hover:text-gold transition-colors"
         aria-label="Change language"
       >
-        <span className="text-xl">{localeFlags[currentLocale]}</span>
+        <img src={getFlagUrl(currentLocale, 24)} alt="" className="w-6 h-[18px] object-cover rounded-sm" />
         <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -47,7 +47,7 @@ export const LanguageSwitcher = () => {
                   locale === currentLocale ? 'bg-cream text-gold' : 'text-text'
                 }`}
               >
-                <span>{localeFlags[locale]}</span>
+                <img src={getFlagUrl(locale, 24)} alt="" className="w-6 h-[18px] object-cover rounded-sm" />
                 <span>{localeNames[locale]}</span>
               </Link>
             ))}
