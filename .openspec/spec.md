@@ -22,20 +22,27 @@ Site web Next.js 15 pour promouvoir l'appartement "Au Marais", une location cour
 ```
 au-marais/
 ├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Layout principal
-│   ├── page.tsx           # Accueil
-│   ├── appartement/       # Page appartement
-│   ├── quartier/          # Page quartier
-│   ├── contact/           # Page contact
-│   ├── disponibilites/    # Page calendrier réservation
-│   └── api/availability/  # API Smoobu
+│   ├── [locale]/          # Routes internationalisées
+│   │   ├── layout.tsx     # Layout avec SEO, Schema.org, hreflang
+│   │   ├── page.tsx       # Accueil
+│   │   ├── appartement/   # Page appartement
+│   │   ├── quartier/      # Page quartier
+│   │   ├── contact/       # Page contact
+│   │   └── disponibilites/# Page calendrier
+│   └── api/               # API routes
 ├── components/
-│   ├── layout/            # Header, Footer
+│   ├── layout/            # Header, Footer (avec LanguageSwitcher)
 │   ├── home/              # Hero, Features, GalleryPreview
-│   └── ui/                # Button, Card, Container
+│   └── ui/                # Button, Card, Container, LanguageSwitcher
 ├── lib/
 │   ├── utils.ts           # Helper cn()
-│   └── smoobu.ts          # Client API Smoobu
+│   ├── smoobu.ts          # Client API Smoobu
+│   ├── schema.ts          # Schema.org structured data
+│   └── i18n/              # Internationalisation
+│       ├── config.ts      # Locales (fr, en, es, de, pt, zh)
+│       ├── dictionaries.ts
+│       └── dictionaries/  # Fichiers JSON par langue
+├── middleware.ts          # Détection automatique de langue
 └── types/                 # Types TypeScript
 ```
 
@@ -72,6 +79,13 @@ au-marais/
 - [x] Stats Bar après le Hero (note Airbnb, avis, siècle, distance métro)
 - [x] Sections homepage avec thème sombre cohérent
 - [x] BookingBar avec thème dark luxury
+- [x] **Internationalisation (i18n)** - Support 6 langues (FR, EN, ES, DE, PT, ZH)
+- [x] **Schema.org LodgingBusiness** - Données structurées pour SEO
+- [x] **Hreflang tags** - SEO international
+- [x] **Middleware de détection de langue** - Redirection automatique selon navigateur
+- [x] **Sélecteur de langue** - Dans le header desktop et mobile
+- [x] **Sitemap multilingue** - URLs par langue avec alternates
+- [x] **Dictionnaires de traduction** - Fichiers JSON complets pour chaque langue
 
 ### À faire
 - [x] ~~Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)~~ ✓
@@ -88,6 +102,8 @@ au-marais/
 | 2026-01-05 | Next.js 16 (latest) | App Router + Turbopack |
 | 2026-01-08 | Design Dark Luxury | Hero cinématique (Option A) + thème sombre avec or (Option C) |
 | 2026-01-08 | Polices Cormorant Garamond + Montserrat | Typographie premium pour le thème luxe |
+| 2026-01-10 | i18n 6 langues | FR, EN, ES, DE, PT, ZH avec middleware |
+| 2026-01-10 | Schema.org LodgingBusiness | SEO structured data pour rich results |
 
 ## Changelog
 
@@ -106,3 +122,9 @@ au-marais/
 - 2026-01-08 : Nouvelle page /disponibilites avec calendrier de réservation directe
 - 2026-01-08 : Calendrier AvailabilityCalendar adapté au thème Soft Terracotta
 - 2026-01-08 : **Déploiement Vercel** - Site live sur www.au-marais.fr
+- 2026-01-10 : **SEO & i18n** - Internationalisation 6 langues (FR, EN, ES, DE, PT, ZH)
+- 2026-01-10 : Schema.org structured data (LodgingBusiness) pour rich snippets Google
+- 2026-01-10 : Hreflang tags pour toutes les pages et langues
+- 2026-01-10 : Middleware de détection automatique de langue (Accept-Language header)
+- 2026-01-10 : Sélecteur de langue dans le header (desktop + mobile)
+- 2026-01-10 : Sitemap multilingue avec alternates
