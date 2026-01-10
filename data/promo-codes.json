@@ -1,0 +1,52 @@
+{
+  "codes": {
+    "RETOUR10": {
+      "discount": 10,
+      "type": "percent",
+      "description": "Clients Airbnb fideles",
+      "minNights": 2,
+      "maxUses": null,
+      "usedCount": 0,
+      "validFrom": "2026-01-01",
+      "validUntil": "2026-12-31",
+      "active": true
+    },
+    "PARRAIN15": {
+      "discount": 15,
+      "type": "percent",
+      "description": "Programme parrainage",
+      "minNights": 3,
+      "maxUses": null,
+      "usedCount": 0,
+      "validFrom": "2026-01-01",
+      "validUntil": "2026-12-31",
+      "active": true
+    },
+    "HIVER25": {
+      "discount": 20,
+      "type": "percent",
+      "description": "Promo saison creuse",
+      "minNights": 4,
+      "maxUses": 50,
+      "usedCount": 0,
+      "validFrom": "2026-01-01",
+      "validUntil": "2026-03-15",
+      "active": true
+    },
+    "BIENVENUE": {
+      "discount": 5,
+      "type": "percent",
+      "description": "Nouveau client",
+      "minNights": 2,
+      "maxUses": null,
+      "usedCount": 0,
+      "validFrom": "2026-01-01",
+      "validUntil": "2026-12-31",
+      "active": true
+    }
+  },
+  "settings": {
+    "allowStacking": false,
+    "caseInsensitive": true
+  }
+}

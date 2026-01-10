@@ -488,6 +488,50 @@
       "preferPlatform": "Prefer booking through a platform?",
       "viewOnAirbnb": "View on Airbnb",
       "note": "Note: Airbnb rates include service fees"
+    },
+    "calendar": {
+      "weekdays": ["M", "T", "W", "T", "F", "S", "S"],
+      "selectDates": "Select your dates",
+      "previousMonth": "Previous month",
+      "nextMonth": "Next month",
+      "selected": "Selected",
+      "unavailable": "Unavailable",
+      "arrival": "Check-in",
+      "departure": "Check-out",
+      "chooseCheckout": "Choose check-out",
+      "night": "night",
+      "nights": "nights",
+      "saved": "saved",
+      "reserveWhatsApp": "Book via WhatsApp",
+      "discounts": {
+        "weekly": "week",
+        "biweekly": "2 weeks",
+        "monthly": "monthly"
+      },
+      "errors": {
+        "loadingSettings": "Error loading settings",
+        "loading": "Error loading",
+        "unavailable": "Unable to load availability"
+      },
+      "promoCode": {
+        "placeholder": "Promo code",
+        "apply": "Apply",
+        "applied": "Applied",
+        "invalid": "Invalid code",
+        "expired": "This code has expired",
+        "minNights": "minimum nights required",
+        "discount": "discount"
+      },
+      "whatsappMessage": {
+        "greeting": "Hello,",
+        "intro": "I would like to book the Au Marais apartment:",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "nightsLabel": "night(s)",
+        "estimatedTotal": "Estimated total",
+        "promoCodeLabel": "Promo code",
+        "confirmation": "Please confirm availability."
+      }
     }
   },
   "bookingBar": {

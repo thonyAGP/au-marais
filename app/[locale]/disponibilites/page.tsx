@@ -49,7 +49,7 @@ export default async function DisponibilitesPage({ params }: PageProps) {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Calendar */}
             <AnimateOnScroll className="lg:col-span-2">
-              <AvailabilityCalendar />
+              <AvailabilityCalendar dict={avail.calendar} locale={locale} />
             </AnimateOnScroll>
 
             {/* Info Sidebar */}

@@ -1,0 +1,382 @@
+{
+  "apartment": {
+    "general": {
+      "name": "Au Marais",
+      "address": "33 Rue François Miron",
+      "postal_code": "75004",
+      "city": "Paris",
+      "district": "4ème arrondissement",
+      "neighborhood": "Le Marais",
+      "area_sqm": 39,
+      "building_year": "17ème siècle",
+      "renovation_year": 2021,
+      "floor": 2,
+      "has_elevator": false,
+      "description": "Appartement cocon entièrement rénové en 2021 au cœur de Paris. Immeuble du 17ème siècle avec poutres apparentes et murs en pierres. Le monument d'en face a été construit en 1656."
+    },
+    "capacity": {
+      "max_guests": 4,
+      "bedrooms": 1,
+      "beds": 2,
+      "bed_types": ["1 lit double dans la chambre", "1 canapé-lit dans le salon"],
+      "crib_available": true,
+      "bathrooms": 1
+    },
+    "sleeping": {
+      "main_bed_size": "Double",
+      "has_sofa_bed": true,
+      "sofa_bed_size": "Double",
+      "linens_provided": true,
+      "extra_blankets": true,
+      "mattress_quality": "Neuf (2021)"
+    },
+    "kitchen": {
+      "has_oven": true,
+      "has_microwave": true,
+      "has_dishwasher": true,
+      "dishwasher_brand": "Siemens",
+      "dishwasher_location": "Derrière la porte à droite de l'évier",
+      "cooktop_type": "Plaques",
+      "has_coffee_machine": true,
+      "coffee_machine_type": "Nespresso",
+      "has_kettle": true,
+      "has_toaster": true,
+      "has_food_processor": true,
+      "basic_supplies_provided": true,
+      "basic_supplies_list": ["sel", "poivre", "huile", "café", "thé"]
+    },
+    "comfort": {
+      "has_air_conditioning": true,
+      "has_heating": true,
+      "heating_system": "Airzone - 2 commandes distinctes (chambre et salon) permettant des températures différentes",
+      "has_hair_dryer": true,
+      "has_iron": true,
+      "has_washing_machine": true,
+      "washing_machine_location": "Derrière la porte gauche de la cuisine",
+      "has_dryer": true,
+      "dryer_note": "Mode séchage intégré à la machine à laver",
+      "towels_provided": true,
+      "toiletries_provided": true,
+      "toiletries_list": ["savon", "shampoing"],
+      "has_electric_curtains": true,
+      "electric_curtains_note": "Rideaux de la chambre radiocommandés (télécommande blanche sous le boîtier de chauffage)"
+    },
+    "multimedia": {
+      "has_tv": true,
+      "tv_features": ["Chaînes internationales", "Netflix", "Amazon Prime"],
+      "tv_note": "Utiliser le compte Airbnb pour Netflix. L'amplificateur doit être allumé (bouton On/Standby vert).",
+      "has_amplifier": true,
+      "wifi_network": "SFR-cfd0",
+      "wifi_password": "Q1NQK1T2NEVD",
+      "wifi_speed": "Fibre optique"
+    },
+    "useful_info": [
+      "Le double interrupteur de la chambre permet d'allumer la lumière générale et/ou la veilleuse de tête de lit",
+      "Il n'y a pas de voisins en face ni aux niveaux supérieurs de la chambre",
+      "La lumière des WC est automatique",
+      "Le couloir principal est étroit, caractéristique des immeubles d'époque du Marais"
+    ],
+    "special_features": {
+      "exposed_beams": true,
+      "stone_walls": true,
+      "historical_building": true,
+      "quiet_street": true,
+      "natural_light": "Bonnes fenêtres donnant sur la rue",
+      "no_neighbors_facing": true
+    }
+  },
+  "access": {
+    "entry_code": "47236",
+    "entry_instructions": "Tapez le code 47236 et poussez la porte. La lumière s'allume automatiquement.",
+    "key_box_location": "Sur le palier du 2ème étage",
+    "key_box_code": "Communiqué par message avant l'arrivée",
+    "directions_from_street": "Dans la rue François Miron, juste après le restaurant Thaïlandais (ou juste après un magasin de faïences si vous venez de l'autre côté). C'est le numéro 33.",
+    "directions_inside": "Avancez jusqu'à l'escalier, montez jusqu'au palier intermédiaire, prenez l'escalier à droite. Au 1er palier, montez encore un étage. L'appartement est la porte à gauche.",
+    "key_note": "Attention, porte blindée. Mettre la pointe de la clef vers le haut et l'enfoncer à fond avant de tourner."
+  },
+  "rules": {
+    "pets_allowed": false,
+    "pets_note": "Nous adorons les animaux mais ils ne sont pas acceptés dans le logement.",
+    "parties_allowed": false,
+    "smoking_allowed": false,
+    "smoking_note": "Interdit de fumer à l'intérieur de l'appartement et dans l'immeuble.",
+    "guests_policy": "Seuls les invités enregistrés sur Airbnb sont acceptés.",
+    "noise_policy": "Merci de respecter le voisinage en maintenant un niveau de bruit raisonnable.",
+    "check_in_time": "15:00",
+    "check_out_time": "10:00",
+    "late_check_in_possible": true,
+    "late_check_in_note": "Possible grâce au système de boîte à clefs autonome. Nous contacter pour organiser.",
+    "illegal_substances": "Aucune substance illégale n'est admise dans le logement."
+  },
+  "checkout_checklist": [
+    "Quitter le logement avant 10h00",
+    "Enlever les draps, housses de couette et taies d'oreiller et les mettre dans le panier de la salle de bain",
+    "Rassembler les serviettes utilisées dans le panier",
+    "Mettre la vaisselle sale dans le lave-vaisselle et le mettre en route",
+    "Vérifier de ne rien oublier sous les lits et canapés",
+    "Éteindre toutes les lumières et le chauffage/climatisation",
+    "Sortir la poubelle et la déposer dans le local au rez-de-chaussée",
+    "Laisser la clef dans le coffre sur le palier"
+  ],
+  "garbage": {
+    "kitchen_bin_location": "Sous l'évier",
+    "building_garbage_room": "Au rez-de-chaussée, ce sont les 2 premières portes avant de monter l'escalier (à gauche dans le couloir)",
+    "recycling_note": "Merci de recycler dans les poubelles appropriées"
+  },
+  "pricing": {
+    "base_price_low_season": 120,
+    "base_price_high_season": 150,
+    "currency": "EUR",
+    "cleaning_fee": 50,
+    "minimum_stay_nights": 2,
+    "payment_methods": ["carte bancaire", "virement", "PayPal"],
+    "direct_booking_discount": "Jusqu'à 20% moins cher qu'Airbnb (pas de frais de plateforme)",
+    "discounts": {
+      "weekly_7_nights": 10,
+      "biweekly_14_nights": 15,
+      "monthly_28_nights": 20
+    }
+  },
+  "hosts": {
+    "names": ["Soraya", "Anthony"],
+    "phone_numbers": ["+33 6 31 59 84 00", "+33 6 29 67 28 09"],
+    "email": "au-marais@hotmail.com",
+    "whatsapp": "+33 6 31 59 84 00",
+    "response_time": "Moins d'1 heure",
+    "languages_spoken": ["français", "anglais", "espagnol"],
+    "superhost": true,
+    "rating": 4.97,
+    "reviews_count": 89,
+    "exchanges_completed": 47,
+    "about_soraya": "Originaire de Madrid, après avoir vécu au Maroc, installée à Paris depuis 2013. Professeur d'espagnol dans une école bilingue.",
+    "about_anthony": "Breton, venu à Paris pour le travail et n'est jamais reparti. Travaille dans l'informatique.",
+    "passion": "Nous aimons beaucoup voyager et découvrir de nouvelles cultures, paysages et plats typiques."
+  },
+  "emergency_contacts": {
+    "medical_emergency": "112",
+    "fire_department": "18",
+    "ambulance_samu": "15",
+    "police": "17",
+    "pharmacy": {
+      "name": "Pharmacie du Marais",
+      "address": "119 Rue Saint Antoine (sur la place Saint Paul)",
+      "postal_code": "75004"
+    },
+    "hospital": {
+      "name": "Hôpital Saint Antoine",
+      "address": "34 rue Crozatier",
+      "postal_code": "75012",
+      "phone": "01 49 28 27 08"
+    }
+  },
+  "transport": {
+    "nearest_metro": {
+      "name": "Saint-Paul",
+      "line": "1",
+      "distance_meters": 100,
+      "walk_minutes": 2,
+      "directions": "En sortant du métro, prendre la rue à droite du magasin Hema."
+    },
+    "bus_lines": {
+      "nearby": ["69", "76", "96"],
+      "bit_further": ["67", "72"],
+      "night_buses": ["N11", "N16"]
+    },
+    "from_airports": {
+      "from_cdg": "RER B jusqu'à Châtelet les Halles, puis ligne 1 direction Château de Vincennes pour 2 stations (Saint-Paul)",
+      "from_orly": "Orlybus jusqu'au terminus Denfert-Rochereau, puis ligne B ou 4 en direction du Nord jusqu'à Châtelet les Halles, puis ligne 1 direction Château de Vincennes"
+    },
+    "from_train_stations": {
+      "from_montparnasse": "Bus n°96 (côté gauche de l'esplanade en sortant), 25 minutes jusqu'au pied de l'appartement"
+    },
+    "parking": {
+      "street_parking": ["Rue du Figuier", "Rue François Miron (bornes électriques)"],
+      "secured_parking": "Parking Baudoyer, Rue de Rivoli"
+    }
+  },
+  "location": {
+    "landmarks_nearby": [
+      {"name": "Place des Vosges", "distance": "600m", "walk_minutes": 8, "description": "La plus ancienne place de Paris (1605). Accès par l'hôtel de Sully, 62 Rue Saint Antoine."},
+      {"name": "Notre-Dame", "distance": "800m", "walk_minutes": 10, "description": "Cathédrale gothique emblématique, en restauration."},
+      {"name": "Centre Pompidou", "distance": "700m", "walk_minutes": 9, "description": "Musée d'art moderne et contemporain."},
+      {"name": "Hôtel de Ville", "distance": "400m", "walk_minutes": 5, "description": "Mairie de Paris, bâtiment Renaissance."},
+      {"name": "Île Saint-Louis", "distance": "500m", "walk_minutes": 6, "description": "Île paisible célèbre pour les glaces Berthillon."},
+      {"name": "Musée Carnavalet", "distance": "400m", "walk_minutes": 5, "description": "Histoire de Paris des origines à nos jours. Entrée gratuite ! 4000m² et 140 salles."},
+      {"name": "BHV Marais", "distance": "500m", "walk_minutes": 6, "description": "Grand magasin lifestyle parisien depuis 160 ans."},
+      {"name": "Bords de Seine", "distance": "400m", "walk_minutes": 5, "description": "Promenade aménagée, loin de l'agitation parisienne."}
+    ],
+    "parks_forests": [
+      {"name": "Bois de Boulogne", "access": "Ligne 1 direction Ouest, arrêt Porte Maillot", "travel_time": "25 minutes"},
+      {"name": "Bois de Vincennes", "access": "Ligne 1 direction Est, arrêt Château de Vincennes", "travel_time": "25 minutes"}
+    ]
+  },
+  "nearby_shops": {
+    "supermarkets": [
+      {"name": "Franprix Place Saint-Paul", "distance": "100m", "note": "Le plus proche, assez cher, ferme à 23h"},
+      {"name": "Supermarché (plus loin sur la place)", "distance": "150m", "note": "Moins cher, ferme à 22h, poissonnier le samedi matin"},
+      {"name": "Carrefour City", "distance": "300m", "note": "Direction Hôtel de Ville, 3 niveaux, ferme à 22h"}
+    ],
+    "bakeries": [
+      {"name": "Boulangerie (Meilleure baguette 2014)", "distance": "50m", "note": "À l'angle, en sortant de l'immeuble à droite. Élue meilleure baguette de Paris en 2014."},
+      {"name": "Les Délices de Manon", "location": "Place Saint-Paul", "note": "Excellente boulangerie-pâtisserie"}
+    ],
+    "butcher": {"name": "Boucher", "address": "113 Rue Saint Antoine (Place Saint-Paul)", "note": "Viande de qualité avec rôtisserie. Parfait pour un poulet rôti."},
+    "wine_shop": {"name": "Vinosfera", "address": "11 Rue François Miron", "note": "Caviste tenu par Igor, un vrai passionné de vin. Le bâtiment est à colombages."},
+    "tobacco_press": {"name": "Tabac", "address": "17 Rue François Miron", "note": "Vend aussi de la presse et des jeux à gratter."},
+    "post_office": {"address": "27 Rue des Francs Bourgeois, 75004 Paris"}
+  },
+  "restaurants": [
+    {
+      "name": "Pamela Popo",
+      "address": "15 Rue François Miron 75004",
+      "type": "Rétro-chic",
+      "description": "Cadre rétro-chic, menu créatif et entièrement fait maison. Bar à cocktails le soir jusqu'à 2h.",
+      "price_range": "20-30€ le plat",
+      "phone": "+33 1 42 74 14 65",
+      "website": "www.pamelapopo.fr"
+    },
+    {
+      "name": "King of Falafel (L'As du Fallafel)",
+      "address": "26 Rue des Rosiers 75004",
+      "type": "Street food israélienne",
+      "description": "Incontournable du quartier juif. Sandwichs et assiettes généreux, explosion de saveurs. Sandwich mixte recommandé à 10€.",
+      "price_range": "€",
+      "phone": "+33 1 84 14 30 31",
+      "website": "www.kingfalafelpalace.com"
+    },
+    {
+      "name": "Le Bourguignon du Marais",
+      "address": "52 Rue François Miron 75004",
+      "type": "Traditionnel français",
+      "description": "Spécialités de Bourgogne dont l'incontournable boeuf bourguignon. Carte de vins 100% bourguignonne. Formules à 20€ le midi en semaine.",
+      "price_range": "€€",
+      "website": "http://aubourguignondumarais.fr/"
+    },
+    {
+      "name": "Le Gribouille",
+      "address": "44 Rue de Rivoli 75004",
+      "type": "Brasserie",
+      "description": "Brasserie avec terrasse ombragée sur une place. Menu entrée-plat ou plat-dessert à 16,50€. Produits frais. Happy hour de 17h à 22h.",
+      "price_range": "€€",
+      "phone": "+33 1 42 78 58 29",
+      "website": "www.legribouilleparis.fr"
+    }
+  ],
+  "appliances_instructions": {
+    "dishwasher": {
+      "location": "Derrière la porte à droite de l'évier",
+      "brand": "Siemens",
+      "instructions": [
+        "Appuyer sur le bouton On/Off",
+        "La durée du cycle s'affiche en bleu",
+        "Sélectionner le programme sur la partie gauche",
+        "Options (demi-charge, etc.) sur la partie droite",
+        "Mettre la capsule (bocal sur le plan de travail) dans le compartiment de la porte",
+        "Valider avec le bouton Start et fermer la porte",
+        "Le temps restant s'affiche au sol"
+      ]
+    },
+    "washing_machine": {
+      "location": "Derrière la porte gauche de la cuisine",
+      "instructions": [
+        "Appuyer sur le bouton Marche/Arrêt environ 2 secondes",
+        "Tourner le bouton sur le cycle désiré",
+        "Temps, température, niveau d'essorage et poids max s'affichent en bleu",
+        "Mode séchage disponible en appuyant sur Séchage",
+        "Doses de lessive dans le bocal sur le plan de travail",
+        "Valider avec le bouton Start"
+      ]
+    },
+    "tv": {
+      "instructions": [
+        "S'assurer que l'amplificateur est allumé (bouton On/Standby vert)",
+        "Si l'amplificateur est éteint, appuyer sur le bouton de mise en marche (illuminé en rouge)",
+        "Vérifier que la source est TV/DBS (sinon tourner la molette de gauche)",
+        "Appuyer sur le bouton de mise en marche du décodeur TV",
+        "Appuyer sur OK pour accéder aux chaînes",
+        "Menu accessible via la touche Home",
+        "Netflix disponible via le bouton Netflix (utiliser le compte Airbnb)",
+        "Amazon Prime également disponible"
+      ],
+      "volume_tip": "Si le volume ne monte pas avec la télécommande TV, tourner la molette de gauche sur l'amplificateur jusqu'à 'tv' puis augmenter avec la molette de droite à -10db"
+    },
+    "heating_ac": {
+      "system": "Airzone",
+      "locations": ["Chambre (sur la gauche en entrant)", "Salon (à côté du canapé)"],
+      "instructions": [
+        "Appuyer sur la partie basse du boîtier au niveau de 'Airzone'",
+        "Appuyer sur le bouton de mise en marche en bas à droite",
+        "L'affichage montre 2 températures : en petit la température actuelle, en gros la température désirée",
+        "Régler la température avec la partie droite du boîtier"
+      ],
+      "note": "Vous pouvez régler salon et chambre à des températures différentes"
+    },
+    "electric_curtains": {
+      "location": "Chambre",
+      "control": "Télécommande blanche située sous le boîtier de contrôle du chauffage",
+      "note": "Pour plus d'intimité et d'obscurité"
+    }
+  },
+  "faq": [
+    {
+      "question": "Y a-t-il un ascenseur ?",
+      "answer": "Non, l'appartement est au 2ème étage d'un immeuble historique du 17ème siècle sans ascenseur."
+    },
+    {
+      "question": "Les animaux sont-ils acceptés ?",
+      "answer": "Non, nous adorons les animaux mais ils ne sont pas acceptés dans le logement."
+    },
+    {
+      "question": "Peut-on fumer ?",
+      "answer": "Non, il est interdit de fumer à l'intérieur de l'appartement et dans l'immeuble."
+    },
+    {
+      "question": "Y a-t-il le WiFi ?",
+      "answer": "Oui, WiFi fibre optique. Réseau : SFR-cfd0, Mot de passe : Q1NQK1T2NEVD"
+    },
+    {
+      "question": "Y a-t-il Netflix ?",
+      "answer": "Oui, Netflix et Amazon Prime sont disponibles sur la TV. Utilisez le compte Airbnb."
+    },
+    {
+      "question": "Où se garer ?",
+      "answer": "Stationnement possible Rue du Figuier ou Rue François Miron (bornes électriques disponibles). Parking sécurisé : Parking Baudoyer, Rue de Rivoli."
+    },
+    {
+      "question": "Comment arriver depuis l'aéroport CDG ?",
+      "answer": "RER B jusqu'à Châtelet les Halles, puis ligne 1 direction Château de Vincennes pour 2 stations jusqu'à Saint-Paul."
+    },
+    {
+      "question": "Comment arriver depuis Orly ?",
+      "answer": "Orlybus jusqu'à Denfert-Rochereau, puis ligne B ou 4 jusqu'à Châtelet, puis ligne 1 direction Château de Vincennes."
+    },
+    {
+      "question": "Y a-t-il la climatisation ?",
+      "answer": "Oui, système Airzone avec contrôle séparé pour la chambre et le salon."
+    },
+    {
+      "question": "Où jeter les poubelles ?",
+      "answer": "Poubelle cuisine sous l'évier. Local poubelles de l'immeuble au rez-de-chaussée, les 2 premières portes avant de monter l'escalier (à gauche)."
+    },
+    {
+      "question": "Y a-t-il un lave-linge ?",
+      "answer": "Oui, derrière la porte gauche de la cuisine. Il dispose aussi d'un mode séchage."
+    },
+    {
+      "question": "Y a-t-il un lave-vaisselle ?",
+      "answer": "Oui, Siemens, derrière la porte à droite de l'évier."
+    },
+    {
+      "question": "Où est la pharmacie la plus proche ?",
+      "answer": "Pharmacie du Marais, 119 Rue Saint Antoine (sur la place Saint Paul)."
+    },
+    {
+      "question": "Où trouver une bonne baguette ?",
+      "answer": "À 50m, à l'angle en sortant de l'immeuble à droite. Élue meilleure baguette de Paris en 2014 !"
+    },
+    {
+      "question": "Comment contacter les hôtes ?",
+      "answer": "Par WhatsApp ou téléphone au +33 6 31 59 84 00, ou par email à au-marais@hotmail.com. Réponse en moins d'1 heure."
+    }
+  ]
+}

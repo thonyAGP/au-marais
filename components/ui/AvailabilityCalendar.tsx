@@ -1,15 +1,72 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, MessageCircle } from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { ChevronLeft, ChevronRight, Calendar, MessageCircle, Tag, Check, X } from 'lucide-react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isToday, isBefore, startOfToday, addDays, differenceInDays, isSameDay, isWithinInterval } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS, es, de, pt, zhCN } from 'date-fns/locale';
 import type { CalendarDay, DateRange } from '@/types/smoobu';
 import type { SiteSettings } from '@/types/settings';
+import type { Locale } from '@/lib/i18n/config';
+
+interface CalendarDict {
+  weekdays: string[];
+  selectDates: string;
+  previousMonth: string;
+  nextMonth: string;
+  selected: string;
+  unavailable: string;
+  arrival: string;
+  departure: string;
+  chooseCheckout: string;
+  night: string;
+  nights: string;
+  saved: string;
+  reserveWhatsApp: string;
+  discounts: {
+    weekly: string;
+    biweekly: string;
+    monthly: string;
+  };
+  promoCode: {
+    placeholder: string;
+    apply: string;
+    applied: string;
+    invalid: string;
+    expired: string;
+    minNights: string;
+    discount: string;
+  };
+  errors: {
+    loadingSettings: string;
+    loading: string;
+    unavailable: string;
+  };
+  whatsappMessage: {
+    greeting: string;
+    intro: string;
+    checkIn: string;
+    checkOut: string;
+    nightsLabel: string;
+    estimatedTotal: string;
+    promoCodeLabel: string;
+    confirmation: string;
+  };
+}
 
 interface AvailabilityCalendarProps {
   className?: string;
+  dict: CalendarDict;
+  locale: Locale;
 }
+
+const dateFnsLocales: Record<Locale, typeof fr> = {
+  fr,
+  en: enUS,
+  es,
+  de,
+  pt,
+  zh: zhCN,
+};
 
 interface RatesData {
   [date: string]: {
@@ -19,7 +76,15 @@ interface RatesData {
   };
 }
 
-const WEEKDAYS_SHORT = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+interface PromoCodeState {
+  code: string;
+  validated: boolean;
+  validating: boolean;
+  discount: number;
+  type: 'percent' | 'fixed';
+  description: string;
+  error: string | null;
+}
 
 const DEFAULT_SETTINGS: SiteSettings = {
   discounts: { weekly: 10, biweekly: 15, monthly: 20 },
@@ -27,22 +92,22 @@ const DEFAULT_SETTINGS: SiteSettings = {
   contact: { whatsapp: '33631598400' },
 };
 
-const getStayDiscounts = (settings: SiteSettings) => {
+const getStayDiscounts = (settings: SiteSettings, discountLabels: CalendarDict['discounts']) => {
   const discounts = [];
   if (settings.discounts.monthly > 0) {
-    discounts.push({ minNights: 28, percent: settings.discounts.monthly, label: 'Réduction mensuelle' });
+    discounts.push({ minNights: 28, percent: settings.discounts.monthly, label: discountLabels.monthly });
   }
   if (settings.discounts.biweekly > 0) {
-    discounts.push({ minNights: 14, percent: settings.discounts.biweekly, label: 'Réduction 2 semaines' });
+    discounts.push({ minNights: 14, percent: settings.discounts.biweekly, label: discountLabels.biweekly });
   }
   if (settings.discounts.weekly > 0) {
-    discounts.push({ minNights: 7, percent: settings.discounts.weekly, label: 'Réduction semaine' });
+    discounts.push({ minNights: 7, percent: settings.discounts.weekly, label: discountLabels.weekly });
   }
   return discounts;
 };
 
-const getStayDiscount = (nights: number, settings: SiteSettings) => {
-  const discounts = getStayDiscounts(settings);
+const getStayDiscount = (nights: number, settings: SiteSettings, discountLabels: CalendarDict['discounts']) => {
+  const discounts = getStayDiscounts(settings, discountLabels);
   for (const discount of discounts) {
     if (nights >= discount.minNights) {
       return discount;
@@ -51,13 +116,24 @@ const getStayDiscount = (nights: number, settings: SiteSettings) => {
   return null;
 };
 
-export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) => {
+export const AvailabilityCalendar = ({ className, dict, locale }: AvailabilityCalendarProps) => {
+  const dateLocale = useMemo(() => dateFnsLocales[locale] || fr, [locale]);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [rates, setRates] = useState<RatesData>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selection, setSelection] = useState<DateRange>({ checkIn: null, checkOut: null });
   const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+  const [promoCode, setPromoCode] = useState<PromoCodeState>({
+    code: '',
+    validated: false,
+    validating: false,
+    discount: 0,
+    type: 'percent',
+    description: '',
+    error: null,
+  });
+  const [promoInput, setPromoInput] = useState('');
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -68,11 +144,11 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
           setSettings(data);
         }
       } catch {
-        console.error('Erreur lors du chargement des paramètres');
+        console.error(dict.errors.loadingSettings);
       }
     };
     fetchSettings();
-  }, []);
+  }, [dict.errors.loadingSettings]);
 
   const fetchRates = useCallback(async (month: Date) => {
     setLoading(true);
@@ -83,7 +159,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
 
     try {
       const response = await fetch(`/api/availability?start=${start}&end=${end}`);
-      if (!response.ok) throw new Error('Erreur lors du chargement');
+      if (!response.ok) throw new Error(dict.errors.loading);
       const data = await response.json();
 
       const apartmentId = Object.keys(data.data || {})[0];
@@ -91,15 +167,77 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
         setRates(prev => ({ ...prev, ...data.data[apartmentId] }));
       }
     } catch {
-      setError('Impossible de charger les disponibilités');
+      setError(dict.errors.unavailable);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [dict.errors.loading, dict.errors.unavailable]);
 
   useEffect(() => {
     fetchRates(currentMonth);
   }, [currentMonth, fetchRates]);
+
+  const validatePromoCode = async () => {
+    if (!promoInput.trim()) return;
+
+    const totals = calculateTotal();
+    const nights = totals?.nights || 0;
+
+    setPromoCode(prev => ({ ...prev, validating: true, error: null }));
+
+    try {
+      const response = await fetch('/api/promo-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: promoInput.trim(),
+          nights,
+          totalPrice: totals?.total || 0,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.valid) {
+        setPromoCode({
+          code: result.code,
+          validated: true,
+          validating: false,
+          discount: result.discount,
+          type: result.type,
+          description: result.description,
+          error: null,
+        });
+      } else {
+        setPromoCode(prev => ({
+          ...prev,
+          validated: false,
+          validating: false,
+          error: result.error || dict.promoCode.invalid,
+        }));
+      }
+    } catch {
+      setPromoCode(prev => ({
+        ...prev,
+        validated: false,
+        validating: false,
+        error: dict.promoCode.invalid,
+      }));
+    }
+  };
+
+  const clearPromoCode = () => {
+    setPromoCode({
+      code: '',
+      validated: false,
+      validating: false,
+      discount: 0,
+      type: 'percent',
+      description: '',
+      error: null,
+    });
+    setPromoInput('');
+  };
 
   const goToPreviousMonth = () => {
     const prevMonth = subMonths(currentMonth, 1);
@@ -219,20 +357,35 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
   const handleReserve = () => {
     if (!selection.checkIn || !selection.checkOut) return;
 
-    const checkInFormatted = format(new Date(selection.checkIn), 'd MMMM yyyy', { locale: fr });
-    const checkOutFormatted = format(new Date(selection.checkOut), 'd MMMM yyyy', { locale: fr });
+    const checkInFormatted = format(new Date(selection.checkIn), 'd MMMM yyyy', { locale: dateLocale });
+    const checkOutFormatted = format(new Date(selection.checkOut), 'd MMMM yyyy', { locale: dateLocale });
     const totals = calculateTotal();
+    const msg = dict.whatsappMessage;
 
-    const message = encodeURIComponent(
-      `Bonjour,\n\nJe souhaite réserver l'appartement Au Marais :\n` +
-      `- Arrivée : ${checkInFormatted}\n` +
-      `- Départ : ${checkOutFormatted}\n` +
-      `- ${totals?.nights} nuit(s)\n` +
-      `- Total estimé : ${totals?.total}€\n\n` +
-      `Merci de me confirmer la disponibilité.`
-    );
+    // Calculate final price with promo code if applied
+    let finalTotal = totals?.total || 0;
+    if (promoCode.validated && totals) {
+      if (promoCode.type === 'percent') {
+        finalTotal = Math.round(totals.total * (1 - promoCode.discount / 100));
+      } else {
+        finalTotal = Math.max(0, totals.total - promoCode.discount);
+      }
+    }
 
-    window.open(`https://wa.me/${settings.contact.whatsapp}?text=${message}`, '_blank');
+    let message = `${msg.greeting}\n\n${msg.intro}\n` +
+      `- ${msg.checkIn} : ${checkInFormatted}\n` +
+      `- ${msg.checkOut} : ${checkOutFormatted}\n` +
+      `- ${totals?.nights} ${msg.nightsLabel}\n` +
+      `- ${msg.estimatedTotal} : ${finalTotal}€`;
+
+    // Add promo code line if validated
+    if (promoCode.validated) {
+      message += `\n- ${msg.promoCodeLabel} : ${promoCode.code} (-${promoCode.discount}${promoCode.type === 'percent' ? '%' : '€'})`;
+    }
+
+    message += `\n\n${msg.confirmation}`;
+
+    window.open(`https://wa.me/${settings.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const totals = calculateTotal();
@@ -245,10 +398,10 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
     return (
       <div className="flex-1 min-w-0">
         <h4 className="text-center font-medium text-text text-sm mb-2 capitalize">
-          {format(month, 'MMMM yyyy', { locale: fr })}
+          {format(month, 'MMMM yyyy', { locale: dateLocale })}
         </h4>
         <div className="grid grid-cols-7 gap-0.5 mb-1">
-          {WEEKDAYS_SHORT.map((day, i) => (
+          {dict.weekdays.map((day, i) => (
             <div key={i} className="text-center text-[10px] font-medium text-text-muted py-1">
               {day}
             </div>
@@ -298,15 +451,15 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
             onClick={goToPreviousMonth}
             disabled={!canGoPrevious}
             className="p-2 hover:bg-cream disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            aria-label="Mois précédent"
+            aria-label={dict.previousMonth}
           >
             <ChevronLeft className="h-4 w-4 text-text-light" />
           </button>
-          <span className="text-sm text-text-muted">Sélectionnez vos dates</span>
+          <span className="text-sm text-text-muted">{dict.selectDates}</span>
           <button
             onClick={goToNextMonth}
             className="p-2 hover:bg-cream transition-colors"
-            aria-label="Mois suivant"
+            aria-label={dict.nextMonth}
           >
             <ChevronRight className="h-4 w-4 text-text-light" />
           </button>
@@ -335,7 +488,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
         <div className="px-4 pb-3 flex items-center justify-center gap-6 text-[10px] text-text-muted">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 bg-gold" />
-            <span>Sélectionné</span>
+            <span>{dict.selected}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 bg-stone-100 relative">
@@ -343,7 +496,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                 <span className="w-2 h-px bg-text-muted/40 rotate-45" />
               </span>
             </span>
-            <span>Indisponible</span>
+            <span>{dict.unavailable}</span>
           </div>
         </div>
 
@@ -355,17 +508,28 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
               <div className="flex-1 min-w-0">
                 {selection.checkIn && !selection.checkOut && (
                   <p className="text-text-light text-xs">
-                    Arrivée : <span className="font-medium text-text">
-                      {format(new Date(selection.checkIn), 'd MMM yyyy', { locale: fr })}
+                    {dict.arrival} : <span className="font-medium text-text">
+                      {format(new Date(selection.checkIn), 'd MMM yyyy', { locale: dateLocale })}
                     </span>
-                    <span className="text-text-muted ml-2">→ Choisir départ</span>
+                    <span className="text-text-muted ml-2">→ {dict.chooseCheckout}</span>
                   </p>
                 )}
                 {totals && (() => {
                   const basePrice = totals.total;
-                  const stayDiscount = getStayDiscount(totals.nights, settings);
-                  const discountAmount = stayDiscount ? Math.round(basePrice * stayDiscount.percent / 100) : 0;
-                  const priceAfterDiscount = basePrice - discountAmount;
+                  const stayDiscount = getStayDiscount(totals.nights, settings, dict.discounts);
+                  const stayDiscountAmount = stayDiscount ? Math.round(basePrice * stayDiscount.percent / 100) : 0;
+                  const priceAfterStayDiscount = basePrice - stayDiscountAmount;
+
+                  // Apply promo code discount if validated
+                  let promoDiscountAmount = 0;
+                  if (promoCode.validated) {
+                    if (promoCode.type === 'percent') {
+                      promoDiscountAmount = Math.round(priceAfterStayDiscount * promoCode.discount / 100);
+                    } else {
+                      promoDiscountAmount = promoCode.discount;
+                    }
+                  }
+                  const finalPrice = priceAfterStayDiscount - promoDiscountAmount;
 
                   // Calcul prix Airbnb: nuitées majorées + frais ménage + taxe séjour (2 voyageurs par défaut)
                   const nightlyMarkupPercent = settings.airbnb.nightlyMarkup / 100;
@@ -373,7 +537,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                   const airbnbCleaningFee = settings.airbnb.cleaningFee;
                   const airbnbTouristTax = Math.round(settings.airbnb.touristTax * 2 * totals.nights); // 2 voyageurs
                   const airbnbPrice = airbnbNightlyTotal + airbnbCleaningFee + airbnbTouristTax;
-                  const directSavings = airbnbPrice - priceAfterDiscount;
+                  const directSavings = airbnbPrice - finalPrice;
                   const directSavingsPercent = Math.round((directSavings / airbnbPrice) * 100);
 
                   const airbnbUrl = `https://www.airbnb.fr/rooms/${settings.airbnb.listingId}?check_in=${selection.checkIn}&check_out=${selection.checkOut}&guests=2`;
@@ -383,26 +547,33 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                       {/* Dates row */}
                       <div className="flex items-center gap-2 text-xs">
                         <span className="text-text-light">
-                          {format(new Date(selection.checkIn!), 'd MMM', { locale: fr })}
+                          {format(new Date(selection.checkIn!), 'd MMM', { locale: dateLocale })}
                         </span>
                         <span className="text-text-muted">→</span>
                         <span className="text-text-light">
-                          {format(new Date(selection.checkOut!), 'd MMM', { locale: fr })}
+                          {format(new Date(selection.checkOut!), 'd MMM', { locale: dateLocale })}
                         </span>
                         <span className="text-text-muted">·</span>
-                        <span className="text-text-light">{totals.nights} nuit{totals.nights > 1 ? 's' : ''}</span>
+                        <span className="text-text-light">{totals.nights} {totals.nights > 1 ? dict.nights : dict.night}</span>
                       </div>
 
                       {/* Price comparison */}
                       <div className="flex items-center justify-between bg-white border border-stone-200 p-3">
                         <div className="space-y-1">
-                          {stayDiscount && (
-                            <span className="inline-block text-[10px] px-2 py-0.5 bg-gold/20 text-gold font-medium">
-                              -{stayDiscount.percent}% {stayDiscount.label.replace('Réduction ', '')}
-                            </span>
-                          )}
+                          <div className="flex flex-wrap gap-1">
+                            {stayDiscount && (
+                              <span className="inline-block text-[10px] px-2 py-0.5 bg-gold/20 text-gold font-medium">
+                                -{stayDiscount.percent}% {stayDiscount.label}
+                              </span>
+                            )}
+                            {promoCode.validated && (
+                              <span className="inline-block text-[10px] px-2 py-0.5 bg-green-100 text-green-700 font-medium">
+                                {promoCode.code} -{promoCode.discount}{promoCode.type === 'percent' ? '%' : '€'}
+                              </span>
+                            )}
+                          </div>
                           <div className="flex items-baseline gap-2">
-                            <span className="text-xl font-serif text-gold">{priceAfterDiscount}€</span>
+                            <span className="text-xl font-serif text-gold">{finalPrice}€</span>
                             <a
                               href={airbnbUrl}
                               target="_blank"
@@ -415,8 +586,52 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                         </div>
                         <div className="text-right">
                           <span className="block text-xs text-green-600 font-medium">-{directSavings}€</span>
-                          <span className="text-[10px] text-green-600/70">({directSavingsPercent}% économisés)</span>
+                          <span className="text-[10px] text-green-600/70">({directSavingsPercent}% {dict.saved})</span>
                         </div>
+                      </div>
+
+                      {/* Promo code input */}
+                      <div className="bg-white border border-stone-200 p-3">
+                        <div className="flex items-center gap-2">
+                          <Tag className="h-4 w-4 text-text-muted flex-shrink-0" />
+                          {promoCode.validated ? (
+                            <div className="flex-1 flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <Check className="h-4 w-4 text-green-600" />
+                                <span className="text-sm text-green-700 font-medium">{promoCode.code}</span>
+                                <span className="text-xs text-green-600">({dict.promoCode.applied})</span>
+                              </div>
+                              <button
+                                onClick={clearPromoCode}
+                                className="p-1 text-text-muted hover:text-text transition-colors"
+                                aria-label="Remove promo code"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              <input
+                                type="text"
+                                value={promoInput}
+                                onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                                placeholder={dict.promoCode.placeholder}
+                                className="flex-1 text-sm border-0 bg-transparent focus:outline-none focus:ring-0 placeholder:text-text-muted/50"
+                                onKeyDown={(e) => e.key === 'Enter' && validatePromoCode()}
+                              />
+                              <button
+                                onClick={validatePromoCode}
+                                disabled={promoCode.validating || !promoInput.trim()}
+                                className="px-3 py-1.5 text-xs font-medium border border-gold text-gold hover:bg-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {promoCode.validating ? '...' : dict.promoCode.apply}
+                              </button>
+                            </>
+                          )}
+                        </div>
+                        {promoCode.error && (
+                          <p className="mt-2 text-xs text-red-600">{promoCode.error}</p>
+                        )}
                       </div>
                     </div>
                   );
@@ -430,7 +645,7 @@ export const AvailabilityCalendar = ({ className }: AvailabilityCalendarProps) =
                 className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white text-sm font-medium tracking-wide uppercase transition-colors"
               >
                 <MessageCircle className="h-4 w-4" />
-                Réserver via WhatsApp
+                {dict.reserveWhatsApp}
               </button>
             )}
           </div>

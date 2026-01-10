@@ -458,6 +458,50 @@
       "preferPlatform": "更喜欢通过平台预订？",
       "viewOnAirbnb": "在Airbnb查看",
       "note": "注意：Airbnb价格包含服务费"
+    },
+    "calendar": {
+      "weekdays": ["一", "二", "三", "四", "五", "六", "日"],
+      "selectDates": "选择日期",
+      "previousMonth": "上个月",
+      "nextMonth": "下个月",
+      "selected": "已选择",
+      "unavailable": "不可用",
+      "arrival": "入住",
+      "departure": "退房",
+      "chooseCheckout": "选择退房日期",
+      "night": "晚",
+      "nights": "晚",
+      "saved": "节省",
+      "reserveWhatsApp": "通过WhatsApp预订",
+      "discounts": {
+        "weekly": "周",
+        "biweekly": "两周",
+        "monthly": "月"
+      },
+      "errors": {
+        "loadingSettings": "加载设置时出错",
+        "loading": "加载时出错",
+        "unavailable": "无法加载可用性"
+      },
+      "promoCode": {
+        "placeholder": "优惠码",
+        "apply": "应用",
+        "applied": "已应用",
+        "invalid": "无效代码",
+        "expired": "此代码已过期",
+        "minNights": "需要最少住宿晚数",
+        "discount": "折扣"
+      },
+      "whatsappMessage": {
+        "greeting": "您好，",
+        "intro": "我想预订Au Marais公寓：",
+        "checkIn": "入住",
+        "checkOut": "退房",
+        "nightsLabel": "晚",
+        "estimatedTotal": "预计总价",
+        "promoCodeLabel": "优惠码",
+        "confirmation": "请确认可用性。"
+      }
     }
   },
   "bookingBar": {
