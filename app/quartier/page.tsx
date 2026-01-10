@@ -26,8 +26,8 @@ const metroStations = [
   },
 ];
 
-// Point de départ pour les itinéraires (Rue François Miron, sans adresse exacte)
-const DEPARTURE_POINT = 'Rue+François+Miron,+75004+Paris';
+// Point de départ pour les itinéraires (coordonnées GPS, sans adresse exacte)
+const DEPARTURE_POINT = '48.855510,2.358149';
 
 const placesToVisit = [
   {
