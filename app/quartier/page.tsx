@@ -270,7 +270,7 @@ export default function QuartierPage() {
             </div>
 
             {/* Map */}
-            <AnimateOnScroll delay={300}>
+            <AnimateOnScroll delay={300} className="self-end">
               <Map />
             </AnimateOnScroll>
           </div>

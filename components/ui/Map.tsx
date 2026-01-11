@@ -149,7 +149,7 @@ export const MapboxMap = ({ className }: MapboxMapProps) => {
   const [viewState, setViewState] = useState({
     longitude: APARTMENT_COORDS.lng,
     latitude: APARTMENT_COORDS.lat,
-    zoom: 15,
+    zoom: 14,
   });
 
   const handleMarkerClick = useCallback((monument: Monument) => {
