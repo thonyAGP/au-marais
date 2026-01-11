@@ -14,8 +14,8 @@ interface Monument {
   walkTime?: string;
 }
 
-// Coordonnées exactes du 33 rue François Miron, Paris 75004
-const APARTMENT_COORDS = { lat: 48.85515, lng: 2.35827 };
+// Coordonnées exactes du 33 rue François Miron, Paris 75004 (via OpenStreetMap Nominatim)
+const APARTMENT_COORDS = { lat: 48.8555544, lng: 2.3581927 };
 
 const monuments: Monument[] = [
   // L'appartement - 33 rue François Miron
@@ -25,7 +25,7 @@ const monuments: Monument[] = [
     type: 'home',
     lat: APARTMENT_COORDS.lat,
     lng: APARTMENT_COORDS.lng,
-    description: '33 rue François Miron',
+    description: 'Votre location',
   },
   // Monuments
   {
@@ -149,7 +149,7 @@ export const MapboxMap = ({ className }: MapboxMapProps) => {
   const [viewState, setViewState] = useState({
     longitude: APARTMENT_COORDS.lng,
     latitude: APARTMENT_COORDS.lat,
-    zoom: 16,
+    zoom: 15,
   });
 
   const handleMarkerClick = useCallback((monument: Monument) => {

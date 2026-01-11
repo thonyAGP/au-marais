@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartes Postales Au Marais - V8 Final</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #1a1a1a;
+      padding: 40px;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .style-section {
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #333;
+    }
+
+    .style-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .style-number {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #D4AF37, #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .style-info h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 22px; }
+    .style-info p { color: #888; font-size: 12px; margin-top: 3px; }
+
+    .variation-tag {
+      background: rgba(255,255,255,0.1);
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 11px;
+      color: #aaa;
+      margin-left: auto;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card-wrapper { text-align: center; }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      width: 150mm;
+      height: 100mm;
+      min-width: 150mm;
+      max-width: 150mm;
+      min-height: 100mm;
+      max-height: 100mm;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-recto {
+      background: #0a0a0a;
+      width: 150mm;
+      height: 100mm;
+    }
+
+    .card-recto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.02);
+    }
+
+    /* VERSO - Layout centré pleine largeur */
+    .card-verso {
+      background: #F5E6D3;
+      padding: 12px 14px;
+      position: relative;
+      width: 150mm;
+      height: 100mm;
+      min-width: 150mm;
+      max-width: 150mm;
+      min-height: 100mm;
+      max-height: 100mm;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header avec titre et timbre */
+    .verso-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .title-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #5C4033;
+      margin-bottom: 2px;
+    }
+
+    .title-section .subtitle {
+      font-size: 8px;
+      color: #8B7355;
+      letter-spacing: 1px;
+    }
+
+    /* TIMBRE avec image Tour Eiffel - AGRANDI */
+    .stamp {
+      width: 70px;
+      height: 90px;
+      padding: 4px;
+      transform: rotate(3deg);
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+      background: white;
+      position: relative;
+    }
+
+    .stamp::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      background:
+        radial-gradient(circle, transparent 2px, white 2px, white 3px, transparent 3px);
+      background-size: 6px 6px;
+      z-index: -1;
+    }
+
+    .stamp-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3px;
+      background: white;
+    }
+
+    .stamp-content img {
+      width: 48px;
+      height: auto;
+      max-height: 68px;
+      object-fit: contain;
+    }
+
+    .stamp-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8px;
+      letter-spacing: 1px;
+      color: #333;
+      margin-top: 3px;
+    }
+
+    /* Zone de message - pleine largeur */
+    .message-zone {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .thank-you {
+      font-family: 'Dancing Script', cursive;
+      font-size: 15px;
+      color: #5C4033;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .thank-you .signature {
+      font-size: 13px;
+      color: #8B7355;
+      margin-top: 4px;
+    }
+
+    /* PROMO BOX - Centrée */
+    .promo-section {
+      margin: 8px 0;
+    }
+
+    .promo-box {
+      background: #5C4033;
+      color: #F5E6D3;
+      padding: 8px 20px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .promo-box .code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 4px;
+    }
+
+    /* Lettres multicolores */
+    .promo-box .code span:nth-child(1) { color: #E63946; }
+    .promo-box .code span:nth-child(2) { color: #F4A261; }
+    .promo-box .code span:nth-child(3) { color: #E9C46A; }
+    .promo-box .code span:nth-child(4) { color: #2A9D8F; }
+    .promo-box .code span:nth-child(5) { color: #264653; }
+    .promo-box .code span:nth-child(6) { color: #E63946; }
+    .promo-box .code span:nth-child(7) { color: #E76F51; }
+    .promo-box .code span:nth-child(8) { color: #F4A261; }
+
+    .promo-box .discount {
+      font-size: 9px;
+      margin-top: 2px;
+      opacity: 0.9;
+    }
+
+    /* Paris avec cœurs */
+    .paris-deco {
+      font-family: 'Pacifico', cursive;
+      font-size: 11px;
+      color: #C9A86C;
+      margin-top: 6px;
+    }
+
+    .paris-deco .heart {
+      color: #E63946;
+    }
+
+    /* Footer avec QR codes */
+    .verso-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: auto;
+    }
+
+    .qr-item {
+      text-align: center;
+    }
+
+    .qr-item img {
+      width: 44px;
+      height: 44px;
+      padding: 2px;
+      background: #FFF8F0;
+      border: 2px solid #8B7355;
+    }
+
+    .qr-label {
+      font-size: 6px;
+      color: #8B7355;
+      margin-top: 2px;
+    }
+
+    .credit {
+      font-size: 5px;
+      color: #A99275;
+      text-align: center;
+    }
+
+    /* ========== VARIATIONS ========== */
+
+    /* V1 - Fond crème classique */
+    .v1 .card-verso { background: #F5E6D3; }
+    .v1 .promo-box { background: #5C4033; }
+
+    /* V2 - Fond blanc pur */
+    .v2 .card-verso { background: #FFFFFF; }
+    .v2 .promo-box { background: #2C3E50; }
+
+    /* V3 - Fond lin naturel + TIMBRE AGRANDI avec PARIS en haut à gauche */
+    .v3 .card-verso { background: #FAF0E6; }
+    .v3 .promo-box { background: #8B7355; }
+
+    .v3 .stamp {
+      width: 85px;
+      height: 105px;
+    }
+
+    .v3 .stamp-content {
+      position: relative;
+      justify-content: flex-end;
+      padding: 0;
+    }
+
+    .v3 .stamp-content img {
+      width: 70px;
+      max-height: 95px;
+      object-fit: contain;
+    }
+
+    .v3 .stamp-text {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      margin: 0;
+      font-size: 8px;
+      background: rgba(255,255,255,0.8);
+      padding: 1px 3px;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+      h1, .intro, .style-header, .card-label, .variation-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Cartes Postales Au Marais - V8 Final</h1>
+  <p class="intro">Avec ta Tour Eiffel Bleu-Blanc-Rouge</p>
+
+  <!-- V1 - Classique crème -->
+  <div class="style-section v1">
+    <div class="style-header">
+      <div class="style-number">1</div>
+      <div class="style-info">
+        <h2>Classique Crème</h2>
+        <p>Ta Tour Eiffel + fond crème chaleureux</p>
+      </div>
+      <div class="variation-tag">Crème + Brun</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="verso-header">
+            <div class="title-section">
+              <h2>Au Marais</h2>
+              <p class="subtitle">Appartement de charme · Paris 4ème</p>
+            </div>
+            <div class="stamp">
+              <div class="stamp-content">
+                <img src="images/Tour_eiffel.jpg" alt="Tour Eiffel">
+                <div class="stamp-text">PARIS</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-zone">
+            <div class="thank-you">
+              Merci d'avoir choisi notre appartement !<br>
+              Nous espérons que vous avez passé un excellent séjour.<br>
+              <span class="signature">— Anthony, Soraya & Lénaïg ♥</span>
+            </div>
+
+            <div class="promo-section">
+              <div class="promo-box">
+                <div class="code">
+                  <span>R</span><span>E</span><span>T</span><span>O</span><span>U</span><span>R</span><span>1</span><span>0</span>
+                </div>
+                <div class="discount">-10% sur votre prochain séjour / on your next stay</div>
+              </div>
+            </div>
+
+            <div class="paris-deco">
+              <span class="heart">♥</span> Paris avec amour <span class="heart">♥</span>
+            </div>
+          </div>
+
+          <div class="verso-footer">
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+              <div class="qr-label">Réserver / Book</div>
+            </div>
+            <div class="credit">Photo: Jawad @leflegme</div>
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+              <div class="qr-label">L'artiste / Artist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 - Blanc pur -->
+  <div class="style-section v2">
+    <div class="style-header">
+      <div class="style-number">2</div>
+      <div class="style-info">
+        <h2>Blanc Pur</h2>
+        <p>Fond blanc épuré, promo box bleu marine</p>
+      </div>
+      <div class="variation-tag">Blanc + Bleu</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="verso-header">
+            <div class="title-section">
+              <h2>Au Marais</h2>
+              <p class="subtitle">Appartement de charme · Paris 4ème</p>
+            </div>
+            <div class="stamp">
+              <div class="stamp-content">
+                <img src="images/Tour_eiffel.jpg" alt="Tour Eiffel">
+                <div class="stamp-text">PARIS</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-zone">
+            <div class="thank-you">
+              Un grand merci pour votre confiance !<br>
+              Revenez vite nous voir dans le Marais.<br>
+              <span class="signature">— Anthony, Soraya & Lénaïg ♥</span>
+            </div>
+
+            <div class="promo-section">
+              <div class="promo-box">
+                <div class="code">
+                  <span>R</span><span>E</span><span>T</span><span>O</span><span>U</span><span>R</span><span>1</span><span>0</span>
+                </div>
+                <div class="discount">-10% sur votre prochain séjour / on your next stay</div>
+              </div>
+            </div>
+
+            <div class="paris-deco">
+              <span class="heart">♥</span> Paris, ville lumière <span class="heart">♥</span>
+            </div>
+          </div>
+
+          <div class="verso-footer">
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+              <div class="qr-label">Réserver / Book</div>
+            </div>
+            <div class="credit">Photo: Jawad @leflegme</div>
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+              <div class="qr-label">L'artiste / Artist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V3 - Lin naturel -->
+  <div class="style-section v3">
+    <div class="style-header">
+      <div class="style-number">3</div>
+      <div class="style-info">
+        <h2>Lin Naturel - Timbre XL</h2>
+        <p>Tour Eiffel agrandie + PARIS en haut</p>
+      </div>
+      <div class="variation-tag">Lin + Taupe</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="verso-header">
+            <div class="title-section">
+              <h2>Au Marais</h2>
+              <p class="subtitle">Appartement de charme · Paris 4ème</p>
+            </div>
+            <div class="stamp">
+              <div class="stamp-content">
+                <img src="images/Tour_eiffel.jpg" alt="Tour Eiffel">
+                <div class="stamp-text">PARIS</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-zone">
+            <div class="thank-you">
+              Nous avons été ravis de vous accueillir !<br>
+              À très bientôt pour un nouveau séjour parisien.<br>
+              <span class="signature">— Anthony, Soraya & Lénaïg ♥</span>
+            </div>
+
+            <div class="promo-section">
+              <div class="promo-box">
+                <div class="code">
+                  <span>R</span><span>E</span><span>T</span><span>O</span><span>U</span><span>R</span><span>1</span><span>0</span>
+                </div>
+                <div class="discount">-10% sur votre prochain séjour / on your next stay</div>
+              </div>
+            </div>
+
+            <div class="paris-deco">
+              <span class="heart">♥</span> Le Marais, cœur de Paris <span class="heart">♥</span>
+            </div>
+          </div>
+
+          <div class="verso-footer">
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+              <div class="qr-label">Réserver / Book</div>
+            </div>
+            <div class="credit">Photo: Jawad @leflegme</div>
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+              <div class="qr-label">L'artiste / Artist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

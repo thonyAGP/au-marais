@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartes Postales Au Marais - V2 Bilingue + Icônes Paris</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&family=Bebas+Neue&family=Space+Mono&family=Satisfy&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #1a1a1a;
+      padding: 40px;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .updates {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid #D4AF37;
+      border-radius: 8px;
+      padding: 15px 20px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 13px;
+    }
+
+    .updates h3 {
+      color: #D4AF37;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .updates ul {
+      list-style: none;
+      color: #ccc;
+    }
+
+    .updates li::before {
+      content: "✓ ";
+      color: #4CAF50;
+    }
+
+    .style-section {
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #333;
+    }
+
+    .style-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .style-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #D4AF37, #B8960C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000;
+    }
+
+    .style-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 24px;
+    }
+
+    .style-info p {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .paris-icon-info {
+      background: rgba(255,255,255,0.05);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #D4AF37;
+      margin-left: auto;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card-wrapper {
+      text-align: center;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      width: 150mm;
+      height: 100mm;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* RECTO - Commun à tous */
+    .card-recto {
+      background: #0a0a0a;
+    }
+
+    .card-recto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.02);
+    }
+
+    /* ================================================
+       STYLE 1 - MINIMALISTE ZEN
+       Icône: Tour Eiffel minimaliste (trait fin)
+       ================================================ */
+    .style-1 .card-verso {
+      background: #FAFAFA;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .style-1 .paris-icon {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.08;
+      font-size: 120px;
+      line-height: 1;
+    }
+
+    .style-1 .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .style-1 h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 12px;
+      color: #2C2C2C;
+      margin-bottom: 25px;
+    }
+
+    .style-1 .tagline {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .style-1 .promo {
+      border: 1px solid #2C2C2C;
+      padding: 12px 30px;
+      margin-bottom: 20px;
+    }
+
+    .style-1 .promo .code {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 4px;
+      color: #2C2C2C;
+    }
+
+    .style-1 .promo .discount {
+      font-size: 10px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .style-1 .qr-left {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      text-align: center;
+    }
+
+    .style-1 .qr-right {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: center;
+    }
+
+    .style-1 .qr-left img,
+    .style-1 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 3px;
+      background: white;
+      border: 1px solid #eee;
+    }
+
+    .style-1 .qr-label {
+      font-size: 7px;
+      color: #999;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .style-1 .credit {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #bbb;
+    }
+
+    /* ================================================
+       STYLE 2 - RETRO VINTAGE 50s
+       Icône: Timbre postal avec Sacré-Cœur
+       ================================================ */
+    .style-2 .card-verso {
+      background: #F5E6D3;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,115,85,0.03) 2px, rgba(139,115,85,0.03) 4px);
+      padding: 20px;
+      position: relative;
+    }
+
+    .style-2 .stamp {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 70px;
+      height: 85px;
+      background: #C41E3A;
+      padding: 5px;
+      transform: rotate(3deg);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .style-2 .stamp::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        #F5E6D3 3px,
+        #F5E6D3 6px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 3px,
+        #F5E6D3 3px,
+        #F5E6D3 6px
+      );
+      z-index: -1;
+    }
+
+    .style-2 .stamp-content {
+      background: white;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: #333;
+      text-align: center;
+    }
+
+    .style-2 .stamp-icon {
+      font-size: 28px;
+      margin-bottom: 3px;
+    }
+
+    .style-2 .stamp-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .style-2 .postmark {
+      position: absolute;
+      top: 20px;
+      right: 70px;
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(139,115,85,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: rgba(139,115,85,0.6);
+      text-align: center;
+      transform: rotate(-15deg);
+      line-height: 1.2;
+    }
+
+    .style-2 .main-content {
+      max-width: 65%;
+    }
+
+    .style-2 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: #5C4033;
+      margin-bottom: 5px;
+    }
+
+    .style-2 .subtitle {
+      font-size: 9px;
+      color: #8B7355;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .style-2 .message {
+      font-size: 11px;
+      color: #5C4033;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 15px;
+      padding-left: 15px;
+      border-left: 2px solid #C41E3A;
+    }
+
+    .style-2 .promo-vintage {
+      display: inline-block;
+      background: #5C4033;
+      color: #F5E6D3;
+      padding: 8px 20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      transform: rotate(-2deg);
+    }
+
+    .style-2 .promo-sub {
+      font-size: 10px;
+      color: #8B7355;
+      margin-top: 8px;
+    }
+
+    .style-2 .qr-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      text-align: center;
+    }
+
+    .style-2 .qr-right {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      text-align: center;
+    }
+
+    .style-2 .qr-left img,
+    .style-2 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 4px;
+      background: #FFF8F0;
+      border: 2px solid #8B7355;
+    }
+
+    .style-2 .qr-label {
+      font-size: 7px;
+      color: #8B7355;
+      margin-top: 4px;
+    }
+
+    .style-2 .credit {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #A99275;
+    }
+
+    /* ================================================
+       STYLE 3 - NEON FUTURISTE
+       Icône: Arc de Triomphe en néon
+       ================================================ */
+    .style-3 .card-verso {
+      background: #0D0D0D;
+      background-image:
+        linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .style-3 .neon-arc {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 100px;
+      opacity: 0.15;
+      filter: drop-shadow(0 0 10px #FF00FF);
+    }
+
+    .style-3 .scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.1) 2px,
+        rgba(0,0,0,0.1) 4px
+      );
+      pointer-events: none;
+    }
+
+    .style-3 .content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .style-3 h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 8px;
+      color: #00FFFF;
+      text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+      margin-bottom: 5px;
+    }
+
+    .style-3 .tagline {
+      font-size: 10px;
+      color: #FF00FF;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #FF00FF;
+      margin-bottom: 20px;
+    }
+
+    .style-3 .promo-box {
+      border: 2px solid #00FFFF;
+      padding: 15px 30px;
+      position: relative;
+      background: rgba(0,255,255,0.05);
+    }
+
+    .style-3 .promo-box::before {
+      content: 'YOUR CODE';
+      position: absolute;
+      top: -8px;
+      left: 20px;
+      background: #0D0D0D;
+      padding: 0 10px;
+      font-size: 8px;
+      color: #FF00FF;
+      letter-spacing: 2px;
+    }
+
+    .style-3 .promo-code {
+      font-family: 'Space Mono', monospace;
+      font-size: 24px;
+      color: #FFFFFF;
+      text-shadow: 0 0 5px #00FFFF;
+    }
+
+    .style-3 .promo-discount {
+      font-size: 12px;
+      color: #00FFFF;
+      margin-top: 5px;
+    }
+
+    .style-3 .qr-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      text-align: center;
+    }
+
+    .style-3 .qr-right {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      text-align: center;
+    }
+
+    .style-3 .qr-left img,
+    .style-3 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 3px;
+      background: #0D0D0D;
+      border: 1px solid #00FFFF;
+      box-shadow: 0 0 10px rgba(0,255,255,0.3);
+    }
+
+    .style-3 .qr-label {
+      font-size: 7px;
+      color: #00FFFF;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .style-3 .credit {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #666;
+    }
+
+    /* ================================================
+       STYLE 4 - MANUSCRIT ELEGANT
+       Icône: Réverbère parisien dessiné
+       ================================================ */
+    .style-4 .card-verso {
+      background: #FDF8F3;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 45, 50 50 T100 50' stroke='%23E8DDD4' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+      padding: 25px 30px;
+      position: relative;
+    }
+
+    .style-4 .lamp-icon {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 50px;
+      opacity: 0.15;
+    }
+
+    .style-4 h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: #4A3728;
+      margin-bottom: 3px;
+    }
+
+    .style-4 .subtitle {
+      font-family: 'Satisfy', cursive;
+      font-size: 14px;
+      color: #8B7355;
+      margin-bottom: 15px;
+    }
+
+    .style-4 .note {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: #5C4A3D;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.5);
+      border-left: 3px solid #C9A86C;
+    }
+
+    .style-4 .promo-handwritten {
+      font-family: 'Satisfy', cursive;
+      font-size: 14px;
+      color: #8B7355;
+      margin-bottom: 5px;
+    }
+
+    .style-4 .promo-code {
+      display: inline-block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #C41E3A;
+      border-bottom: 2px solid #C41E3A;
+      padding-bottom: 2px;
+    }
+
+    .style-4 .promo-note {
+      font-family: 'Satisfy', cursive;
+      font-size: 12px;
+      color: #A99275;
+      margin-top: 5px;
+    }
+
+    .style-4 .qr-left {
+      position: absolute;
+      bottom: 20px;
+      left: 25px;
+      text-align: center;
+    }
+
+    .style-4 .qr-right {
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      text-align: center;
+    }
+
+    .style-4 .qr-left img,
+    .style-4 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 5px;
+      background: white;
+      border: 1px solid #D4C4B5;
+      border-radius: 3px;
+    }
+
+    .style-4 .qr-label {
+      font-family: 'Satisfy', cursive;
+      font-size: 9px;
+      color: #8B7355;
+      margin-top: 4px;
+    }
+
+    .style-4 .credit {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Satisfy', cursive;
+      font-size: 9px;
+      color: #A99275;
+    }
+
+    /* ================================================
+       STYLE 5 - BRUTALISTE BOLD
+       Icône: Métro M stylisé
+       ================================================ */
+    .style-5 .card-verso {
+      background: #FFEB3B;
+      padding: 15px;
+      position: relative;
+    }
+
+    .style-5 .metro-m {
+      position: absolute;
+      bottom: 10px;
+      right: 80px;
+      width: 50px;
+      height: 50px;
+      background: #003366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      color: #FFEB3B;
+    }
+
+    .style-5 h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      line-height: 0.85;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .style-5 .tagline {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #000;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .style-5 .promo-brutal {
+      background: #000;
+      color: #FFEB3B;
+      padding: 12px 25px;
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+
+    .style-5 .promo-brutal .label {
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .style-5 .promo-brutal .code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 4px;
+    }
+
+    .style-5 .discount-tag {
+      background: #C41E3A;
+      color: white;
+      padding: 5px 15px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      display: inline-block;
+      margin-left: 10px;
+      transform: rotate(2deg);
+    }
+
+    .style-5 .qr-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      text-align: center;
+    }
+
+    .style-5 .qr-right {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      text-align: center;
+    }
+
+    .style-5 .qr-left img,
+    .style-5 .qr-right img {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #000;
+    }
+
+    .style-5 .qr-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      color: #000;
+      margin-top: 3px;
+      letter-spacing: 1px;
+    }
+
+    .style-5 .credit {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 8px;
+      color: #666;
+    }
+
+    /* ================================================
+       STYLE 6 - PASTEL SCANDINAVE
+       Icône: Café parisien stylisé
+       ================================================ */
+    .style-6 .card-verso {
+      background: linear-gradient(180deg, #FDF5F0 0%, #F5EDE8 100%);
+      padding: 25px;
+      position: relative;
+    }
+
+    .style-6 .cafe-icon {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 35px;
+      opacity: 0.6;
+    }
+
+    .style-6 .blob {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: #E8D5C4;
+      border-radius: 60% 40% 50% 50%;
+      opacity: 0.3;
+    }
+
+    .style-6 .blob-1 { top: -30px; right: 50px; }
+    .style-6 .blob-2 { bottom: -20px; left: 30px; transform: rotate(45deg); }
+
+    .style-6 .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .style-6 h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #5C4A3D;
+      margin-bottom: 3px;
+    }
+
+    .style-6 .subtitle {
+      font-size: 10px;
+      color: #A99275;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .style-6 .message {
+      font-size: 11px;
+      color: #7A6B5E;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      max-width: 70%;
+    }
+
+    .style-6 .promo-pastel {
+      background: white;
+      border-radius: 20px;
+      padding: 12px 25px;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .style-6 .promo-pastel .label {
+      font-size: 9px;
+      color: #A99275;
+      letter-spacing: 2px;
+    }
+
+    .style-6 .promo-pastel .code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: #5C4A3D;
+      letter-spacing: 3px;
+    }
+
+    .style-6 .promo-pastel .discount {
+      font-size: 10px;
+      color: #C9A86C;
+    }
+
+    .style-6 .qr-left {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      text-align: center;
+    }
+
+    .style-6 .qr-right {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: center;
+    }
+
+    .style-6 .qr-left img,
+    .style-6 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 5px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .style-6 .qr-label {
+      font-size: 8px;
+      color: #A99275;
+      margin-top: 5px;
+    }
+
+    .style-6 .credit {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #C9B8A8;
+    }
+
+    /* ================================================
+       STYLE 7 - ART DECO GATSBY
+       Icône: Motif géométrique Art Déco
+       ================================================ */
+    .style-7 .card-verso {
+      background: #0A0A0A;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .style-7 .deco-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.1;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          #D4AF37 0px,
+          #D4AF37 1px,
+          transparent 1px,
+          transparent 20px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          #D4AF37 0px,
+          #D4AF37 1px,
+          transparent 1px,
+          transparent 20px
+        );
+    }
+
+    .style-7 .deco-corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #D4AF37;
+    }
+
+    .style-7 .deco-corner.tl { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+    .style-7 .deco-corner.tr { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+    .style-7 .deco-corner.bl { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+    .style-7 .deco-corner.br { bottom: 15px; right: 15px; border-left: none; border-top: none; }
+
+    .style-7 .content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .style-7 .deco-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+      margin-bottom: 15px;
+    }
+
+    .style-7 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #D4AF37;
+      letter-spacing: 10px;
+      margin-bottom: 5px;
+    }
+
+    .style-7 .subtitle {
+      font-size: 9px;
+      color: #888;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .style-7 .promo-deco {
+      border: 1px solid #D4AF37;
+      padding: 15px 40px;
+      position: relative;
+    }
+
+    .style-7 .promo-deco::before,
+    .style-7 .promo-deco::after {
+      content: '◆';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #D4AF37;
+      font-size: 10px;
+    }
+
+    .style-7 .promo-deco::before { left: 10px; }
+    .style-7 .promo-deco::after { right: 10px; }
+
+    .style-7 .promo-label {
+      font-size: 8px;
+      color: #888;
+      letter-spacing: 3px;
+      margin-bottom: 5px;
+    }
+
+    .style-7 .promo-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #D4AF37;
+      letter-spacing: 5px;
+    }
+
+    .style-7 .promo-discount {
+      font-size: 10px;
+      color: #D4AF37;
+      margin-top: 5px;
+    }
+
+    .style-7 .qr-left {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      text-align: center;
+    }
+
+    .style-7 .qr-right {
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+      text-align: center;
+    }
+
+    .style-7 .qr-left img,
+    .style-7 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 3px;
+      background: #0A0A0A;
+      border: 1px solid #D4AF37;
+    }
+
+    .style-7 .qr-label {
+      font-size: 7px;
+      color: #D4AF37;
+      margin-top: 5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .style-7 .credit {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #555;
+    }
+
+    /* ================================================
+       STYLE 8 - STREET ART URBAIN
+       Icône: Tag "PARIS" graffiti
+       ================================================ */
+    .style-8 .card-verso {
+      background: #F5F5F5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .style-8 .brick-wall {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          #E0E0E0 0px,
+          #E0E0E0 1px,
+          transparent 1px,
+          transparent 20px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          #E0E0E0 0px,
+          #E0E0E0 1px,
+          transparent 1px,
+          transparent 40px
+        );
+      opacity: 0.5;
+    }
+
+    .style-8 .graffiti-paris {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: #FF1493;
+      transform: rotate(-5deg);
+      text-shadow: 3px 3px 0 #00CED1;
+      opacity: 0.3;
+    }
+
+    .style-8 .sticker {
+      position: absolute;
+      background: white;
+      padding: 5px 10px;
+      font-size: 8px;
+      font-weight: 700;
+      transform: rotate(-5deg);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .style-8 .sticker-1 {
+      top: 15px;
+      left: 15px;
+      background: #FF6B6B;
+      color: white;
+    }
+
+    .style-8 .sticker-2 {
+      top: 35px;
+      left: 25px;
+      background: #4ECDC4;
+      color: white;
+      transform: rotate(3deg);
+    }
+
+    .style-8 .content {
+      position: relative;
+      z-index: 1;
+      padding: 25px;
+      height: 100%;
+    }
+
+    .style-8 h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #333;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+
+    .style-8 .tagline {
+      font-size: 10px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .style-8 .promo-street {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 5px;
+      transform: rotate(-2deg);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    }
+
+    .style-8 .promo-street .label {
+      font-size: 9px;
+      opacity: 0.9;
+    }
+
+    .style-8 .promo-street .code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 3px;
+    }
+
+    .style-8 .discount-bubble {
+      position: absolute;
+      right: 120px;
+      top: 80px;
+      background: #4ECDC4;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      transform: rotate(10deg);
+    }
+
+    .style-8 .qr-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      text-align: center;
+      background: white;
+      padding: 8px;
+      border-radius: 5px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    }
+
+    .style-8 .qr-right {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      text-align: center;
+      background: white;
+      padding: 8px;
+      border-radius: 5px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    }
+
+    .style-8 .qr-left img,
+    .style-8 .qr-right img {
+      width: 45px;
+      height: 45px;
+    }
+
+    .style-8 .qr-label {
+      font-size: 7px;
+      font-weight: 700;
+      color: #333;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .style-8 .credit {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #999;
+    }
+
+    /* ================================================
+       STYLE 9 - MAGAZINE EDITORIAL
+       Icône: Silhouette Haussmann buildings
+       ================================================ */
+    .style-9 .card-verso {
+      background: #FFFFFF;
+      display: flex;
+      position: relative;
+    }
+
+    .style-9 .left-column {
+      width: 40%;
+      background: #1A1A1A;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .style-9 .haussmann {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40%;
+      height: 40px;
+      background: linear-gradient(to top, #333 0%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 5px;
+      font-size: 20px;
+      letter-spacing: 5px;
+      opacity: 0.3;
+    }
+
+    .style-9 .left-column h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    .style-9 .left-column .subtitle {
+      font-size: 9px;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .style-9 .right-column {
+      width: 60%;
+      padding: 20px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .style-9 .editorial-text {
+      font-size: 11px;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      border-left: 3px solid #C41E3A;
+      padding-left: 15px;
+    }
+
+    .style-9 .promo-editorial {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .style-9 .promo-editorial .label {
+      font-size: 9px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .style-9 .promo-editorial .code {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #1A1A1A;
+      border-bottom: 2px solid #C41E3A;
+    }
+
+    .style-9 .promo-editorial .discount {
+      background: #C41E3A;
+      color: white;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .style-9 .qr-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      text-align: center;
+    }
+
+    .style-9 .qr-right {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      text-align: center;
+    }
+
+    .style-9 .qr-left img {
+      width: 45px;
+      height: 45px;
+      border: 1px solid #333;
+      padding: 2px;
+    }
+
+    .style-9 .qr-right img {
+      width: 45px;
+      height: 45px;
+      border: 1px solid #ddd;
+      padding: 2px;
+    }
+
+    .style-9 .qr-label {
+      font-size: 6px;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .style-9 .qr-left .qr-label { color: #888; }
+    .style-9 .qr-right .qr-label { color: #999; }
+
+    .style-9 .credit {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 7px;
+      color: #bbb;
+    }
+
+    /* ================================================
+       STYLE 10 - POETIQUE PARISIEN
+       Icône: Bouquinistes / Livres
+       ================================================ */
+    .style-10 .card-verso {
+      background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 100%);
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .style-10 .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .style-10 .books-icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      opacity: 0.3;
+    }
+
+    .style-10 .content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .style-10 h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 300;
+      color: #E8D5B5;
+      letter-spacing: 8px;
+      margin-bottom: 5px;
+    }
+
+    .style-10 .subtitle {
+      font-size: 10px;
+      color: #A99275;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .style-10 .poem {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #D4C4A8;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(212,175,55,0.3);
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+    }
+
+    .style-10 .promo-poetic {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: 30px;
+    }
+
+    .style-10 .promo-poetic .intro {
+      font-size: 10px;
+      color: #A99275;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .style-10 .promo-poetic .code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: #D4AF37;
+      letter-spacing: 6px;
+    }
+
+    .style-10 .promo-poetic .discount {
+      font-size: 11px;
+      color: #C9A86C;
+      margin-top: 5px;
+    }
+
+    .style-10 .qr-left {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      text-align: center;
+    }
+
+    .style-10 .qr-right {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: center;
+    }
+
+    .style-10 .qr-left img,
+    .style-10 .qr-right img {
+      width: 50px;
+      height: 50px;
+      padding: 4px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 3px;
+    }
+
+    .style-10 .qr-label {
+      font-size: 7px;
+      color: #A99275;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    .style-10 .credit {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: #6B5B4A;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+      }
+
+      h1, .intro, .updates, .style-header, .card-label, .paris-icon-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Cartes Postales Au Marais - Version 2</h1>
+  <p class="intro">Format : 150 x 100 mm · Bilingue FR/EN · QR codes aux coins opposés</p>
+
+  <div class="updates">
+    <h3>Améliorations V2</h3>
+    <ul>
+      <li>Textes clés bilingues (Français / English)</li>
+      <li>QR codes repositionnés aux coins opposés</li>
+      <li>Icônes Paris différentes pour chaque style</li>
+    </ul>
+  </div>
+
+  <!-- STYLE 1 - MINIMALISTE ZEN -->
+  <div class="style-section style-1">
+    <div class="style-header">
+      <div class="style-number">1</div>
+      <div class="style-info">
+        <h2>Minimaliste Zen</h2>
+        <p>Épuré, espace blanc, typographie fine</p>
+      </div>
+      <div class="paris-icon-info">🗼 Tour Eiffel (filigrane)</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="paris-icon">🗼</div>
+          <div class="content">
+            <h2>AU MARAIS</h2>
+            <p class="tagline">Appartement de charme · Charming apartment</p>
+            <div class="promo">
+              <div class="code">RETOUR10</div>
+              <div class="discount">-10% · Your code / Votre code</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book / Réserver</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Artist / Artiste</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 2 - RETRO VINTAGE -->
+  <div class="style-section style-2">
+    <div class="style-header">
+      <div class="style-number">2</div>
+      <div class="style-info">
+        <h2>Rétro Vintage 50s</h2>
+        <p>Teintes sépia, timbre postal, nostalgie</p>
+      </div>
+      <div class="paris-icon-info">⛪ Sacré-Cœur (timbre)</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="stamp">
+            <div class="stamp-content">
+              <div class="stamp-icon">⛪</div>
+              <div class="stamp-text">PARIS</div>
+            </div>
+          </div>
+          <div class="postmark">LE<br>MARAIS<br>PARIS 4e</div>
+          <div class="main-content">
+            <h2>Au Marais</h2>
+            <p class="subtitle">Paris · Le Marais · 4ème arr.</p>
+            <p class="message">"Thank you for your stay!<br>Merci pour votre séjour !"</p>
+            <div class="promo-vintage">RETOUR10</div>
+            <p class="promo-sub">-10% on your next stay / sur votre prochain séjour</p>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book direct</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">The artist</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 3 - NEON FUTURISTE -->
+  <div class="style-section style-3">
+    <div class="style-header">
+      <div class="style-number">3</div>
+      <div class="style-info">
+        <h2>Néon Futuriste</h2>
+        <p>Cyberpunk, couleurs néon, grille</p>
+      </div>
+      <div class="paris-icon-info">🏛️ Arc de Triomphe (néon)</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="neon-arc">🏛️</div>
+          <div class="scanline"></div>
+          <div class="content">
+            <h2>AU MARAIS</h2>
+            <p class="tagline">PARIS · FRANCE</p>
+            <div class="promo-box">
+              <div class="promo-code">RETOUR10</div>
+              <div class="promo-discount">-10% OFF</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book now</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Artist</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 4 - MANUSCRIT ELEGANT -->
+  <div class="style-section style-4">
+    <div class="style-header">
+      <div class="style-number">4</div>
+      <div class="style-info">
+        <h2>Manuscrit Élégant</h2>
+        <p>Calligraphie, notes personnelles</p>
+      </div>
+      <div class="paris-icon-info">🏮 Réverbère parisien</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="lamp-icon">🏮</div>
+          <h2>Au Marais</h2>
+          <p class="subtitle">Paris, with love...</p>
+          <div class="note">
+            Thank you for staying with us!<br>
+            Hope to see you again soon...<br>
+            Merci & à bientôt !
+          </div>
+          <p class="promo-handwritten">Your special code / Votre code :</p>
+          <span class="promo-code">RETOUR10</span>
+          <p class="promo-note">(-10% on your next booking)</p>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book here</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Photo by</div>
+          </div>
+          <div class="credit">Photo: Jawad @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 5 - BRUTALISTE BOLD -->
+  <div class="style-section style-5">
+    <div class="style-header">
+      <div class="style-number">5</div>
+      <div class="style-info">
+        <h2>Brutaliste Bold</h2>
+        <p>Typographie massive, jaune vif</p>
+      </div>
+      <div class="paris-icon-info">Ⓜ️ Métro parisien</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="metro-m">M</div>
+          <h2>AU<br>MARAIS</h2>
+          <p class="tagline">Paris · Book Direct / Réservez en direct</p>
+          <div class="promo-brutal">
+            <div class="label">YOUR CODE / VOTRE CODE</div>
+            <div class="code">RETOUR10</div>
+          </div>
+          <span class="discount-tag">-10%</span>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">BOOK</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">PHOTO</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 6 - PASTEL SCANDINAVE -->
+  <div class="style-section style-6">
+    <div class="style-header">
+      <div class="style-number">6</div>
+      <div class="style-info">
+        <h2>Pastel Scandinave</h2>
+        <p>Tons doux, formes rondes, chaleureux</p>
+      </div>
+      <div class="paris-icon-info">☕ Café parisien</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <div class="cafe-icon">☕</div>
+          <div class="content">
+            <h2>Au Marais</h2>
+            <p class="subtitle">Your Parisian home · Votre chez-vous parisien</p>
+            <p class="message">Thank you for choosing us. We hope you enjoyed your Parisian adventure!<br>Merci de nous avoir choisis.</p>
+            <div class="promo-pastel">
+              <div class="label">YOUR CODE / VOTRE CODE</div>
+              <div class="code">RETOUR10</div>
+              <div class="discount">-10% next stay</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book / Réserver</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Artist / Artiste</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 7 - ART DECO GATSBY -->
+  <div class="style-section style-7">
+    <div class="style-header">
+      <div class="style-number">7</div>
+      <div class="style-info">
+        <h2>Art Déco Gatsby</h2>
+        <p>Or sur noir, lignes géométriques</p>
+      </div>
+      <div class="paris-icon-info">◆ Motifs géométriques Art Déco</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="deco-pattern"></div>
+          <div class="deco-corner tl"></div>
+          <div class="deco-corner tr"></div>
+          <div class="deco-corner bl"></div>
+          <div class="deco-corner br"></div>
+          <div class="content">
+            <div class="deco-line"></div>
+            <h2>AU MARAIS</h2>
+            <p class="subtitle">Paris · Le Marais · Est. XVII</p>
+            <div class="promo-deco">
+              <div class="promo-label">YOUR CODE / VOTRE CODE</div>
+              <div class="promo-code">RETOUR10</div>
+              <div class="promo-discount">-10%</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Artist</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 8 - STREET ART URBAIN -->
+  <div class="style-section style-8">
+    <div class="style-header">
+      <div class="style-number">8</div>
+      <div class="style-info">
+        <h2>Street Art Urbain</h2>
+        <p>Stickers, couleurs vives, graffiti</p>
+      </div>
+      <div class="paris-icon-info">🎨 Tag "PARIS" graffiti</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="brick-wall"></div>
+          <div class="graffiti-paris">PARIS</div>
+          <div class="sticker sticker-1">❤️ MERCI</div>
+          <div class="sticker sticker-2">THANKS!</div>
+          <div class="content">
+            <h2>AU MARAIS</h2>
+            <p class="tagline">Book direct · Réservez en direct</p>
+            <div class="promo-street">
+              <div class="label">YOUR CODE</div>
+              <div class="code">RETOUR10</div>
+            </div>
+            <div class="discount-bubble">-10%</div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">BOOK</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">ARTIST</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 9 - MAGAZINE EDITORIAL -->
+  <div class="style-section style-9">
+    <div class="style-header">
+      <div class="style-number">9</div>
+      <div class="style-info">
+        <h2>Magazine Éditorial</h2>
+        <p>Split layout, noir et blanc, chic</p>
+      </div>
+      <div class="paris-icon-info">🏛️ Silhouette Haussmann</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="left-column">
+            <h2>AU<br>MARAIS</h2>
+            <p class="subtitle">Paris · France</p>
+            <div class="haussmann">▮▮▮▮▮</div>
+          </div>
+          <div class="right-column">
+            <p class="editorial-text">
+              Thank you for your stay.<br>
+              Book direct for -10% off.<br><br>
+              Merci pour votre séjour.<br>
+              Réservez en direct : -10%
+            </p>
+            <div class="promo-editorial">
+              <div>
+                <div class="label">Code</div>
+                <div class="code">RETOUR10</div>
+              </div>
+              <div class="discount">-10%</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Photo</div>
+          </div>
+          <div class="credit">📷 @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 10 - POETIQUE PARISIEN -->
+  <div class="style-section style-10">
+    <div class="style-header">
+      <div class="style-number">10</div>
+      <div class="style-info">
+        <h2>Poétique Parisien</h2>
+        <p>Romantique, tons chauds, vignette</p>
+      </div>
+      <div class="paris-icon-info">📚 Bouquinistes</div>
+    </div>
+    <div class="cards-row">
+      <div class="card-wrapper">
+        <div class="card-label">Recto</div>
+        <div class="card card-recto">
+          <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+        </div>
+      </div>
+      <div class="card-wrapper">
+        <div class="card-label">Verso</div>
+        <div class="card card-verso">
+          <div class="vignette"></div>
+          <div class="books-icon">📚</div>
+          <div class="content">
+            <h2>AU MARAIS</h2>
+            <p class="subtitle">In the heart of Paris · Au cœur de Paris</p>
+            <p class="poem">
+              "Paris is always a good idea..."<br>
+              <em>— Audrey Hepburn</em>
+            </p>
+            <div class="promo-poetic">
+              <div class="intro">YOUR CODE / VOTRE CODE</div>
+              <div class="code">RETOUR10</div>
+              <div class="discount">-10% on your return</div>
+            </div>
+          </div>
+          <div class="qr-left">
+            <img src="images/qrcodes/qr-aumarais.png" alt="QR Au Marais">
+            <div class="qr-label">Book / Réserver</div>
+          </div>
+          <div class="qr-right">
+            <img src="images/qrcodes/qr-leflegme.png" alt="QR Leflegme">
+            <div class="qr-label">Artist / Artiste</div>
+          </div>
+          <div class="credit">📷 Jawad @leflegme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -218,7 +218,7 @@ export default function QuartierPage() {
       {/* Location + Map */}
       <section className="py-20 bg-cream">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 items-end">
             {/* Address */}
             <div>
               <AnimateOnScroll>
@@ -271,7 +271,7 @@ export default function QuartierPage() {
 
             {/* Map */}
             <AnimateOnScroll delay={300}>
-              <Map className="sticky top-24" />
+              <Map />
             </AnimateOnScroll>
           </div>
         </Container>

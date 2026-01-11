@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte Postale Au Marais - Maquette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .cards-container {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card-wrapper {
+      text-align: center;
+    }
+
+    .card-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #999;
+      margin-bottom: 15px;
+    }
+
+    .card {
+      width: 150mm;
+      height: 100mm;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* RECTO - Photo */
+    .card-recto {
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-recto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      /* Légère mise à l'échelle pour masquer les bords imparfaits */
+      transform: scale(1.02);
+    }
+
+    .photo-placeholder {
+      color: #666;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .photo-placeholder p {
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* VERSO - Informations */
+    .card-verso {
+      background: linear-gradient(135deg, #FAF8F5 0%, #F5F0E8 100%);
+      padding: 20px 25px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .verso-header {
+      text-align: center;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #D4AF37;
+    }
+
+    .verso-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 6px;
+      color: #2C2C2C;
+      margin-bottom: 4px;
+    }
+
+    .verso-header .subtitle {
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: #8B7355;
+    }
+
+    .verso-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .accroche {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .accroche p {
+      font-size: 10px;
+      color: #5C5C5C;
+      line-height: 1.5;
+    }
+
+    .promo-box {
+      background: white;
+      border: 2px solid #D4AF37;
+      padding: 10px 15px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .promo-box .code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #2C2C2C;
+      letter-spacing: 2px;
+    }
+
+    .promo-box .discount {
+      font-size: 10px;
+      color: #D4AF37;
+      margin-top: 2px;
+    }
+
+    .qr-section {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    .qr-item {
+      text-align: center;
+    }
+
+    .qr-item img {
+      width: 55px;
+      height: 55px;
+      border: 1px solid #E5E5E5;
+      padding: 3px;
+      background: white;
+    }
+
+    .qr-item .qr-label {
+      font-size: 8px;
+      color: #8B7355;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .phone {
+      text-align: center;
+      font-size: 10px;
+      color: #5C5C5C;
+      margin-bottom: 8px;
+    }
+
+    .verso-footer {
+      border-top: 1px solid #D4AF37;
+      padding-top: 8px;
+      text-align: center;
+    }
+
+    .credit {
+      font-size: 9px;
+      color: #8B7355;
+    }
+
+    .credit a {
+      color: #8B7355;
+      text-decoration: none;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+      }
+
+      h1, .info, .card-label {
+        display: none;
+      }
+
+      .cards-container {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Carte Postale Au Marais</h1>
+  <p class="info">Format : 150 x 100 mm (carte postale standard)</p>
+
+  <div class="cards-container">
+    <!-- RECTO -->
+    <div class="card-wrapper">
+      <div class="card-label">Recto (Photo)</div>
+      <div class="card card-recto">
+        <img src="images/photo-jawad.jpg" alt="Paris par Jawad Le Flegme">
+      </div>
+    </div>
+
+    <!-- VERSO -->
+    <div class="card-wrapper">
+      <div class="card-label">Verso (Informations)</div>
+      <div class="card card-verso">
+        <div class="verso-header">
+          <h2>AU MARAIS</h2>
+          <p class="subtitle">Appartement de charme au coeur de Paris</p>
+        </div>
+
+        <div class="verso-content">
+          <div class="accroche">
+            <p>Vous avez aimé votre séjour ?<br>Réservez en direct pour votre prochaine visite</p>
+          </div>
+
+          <div class="promo-box">
+            <div class="code">VOTRE CODE : RETOUR10</div>
+            <div class="discount">-10% sur votre séjour</div>
+          </div>
+
+          <div class="qr-section">
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-aumarais.png" alt="QR Code Au Marais">
+              <div class="qr-label">Réserver</div>
+            </div>
+            <div class="qr-item">
+              <img src="images/qrcodes/qr-leflegme.png" alt="QR Code Leflegme">
+              <div class="qr-label">L'artiste</div>
+            </div>
+          </div>
+
+          <div class="phone">+33 6 31 59 84 00</div>
+        </div>
+
+        <div class="verso-footer">
+          <p class="credit">📷 Jawad Le Flegme · <a href="https://instagram.com/leflegme" target="_blank">@leflegme</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="info" style="margin-top: 20px; font-size: 12px; color: #999;">
+    Pour imprimer : Ctrl+P ou Cmd+P · Pour exporter en PDF : imprimer vers PDF
+  </p>
+</body>
+</html>

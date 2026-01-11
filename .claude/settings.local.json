@@ -10,7 +10,25 @@
       "WebSearch",
       "Bash(cd:*)",
       "WebFetch(domain:unsplash.com)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "WebFetch(domain:www.homeexchange.fr)",
+      "WebFetch(domain:my.styqr.fr)",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm run build)",
+      "WebFetch(domain:www.picuki.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "Bash(start \"\" \"file:///D:/Projects/Site_Au-marais/public/carte-postale-10-styles.html\")",
+      "Bash(start \"\" \"file:///D:/Projects/Site_Au-marais/public/carte-postale-v2.html\")",
+      "Bash(start \"\" \"file:///D:/Projects/Site_Au-marais/public/carte-postale-v3-vintage.html\")",
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v4-eiffel.html\")",
+      "WebFetch(domain:uxwing.com)",
+      "WebFetch(domain:www.svgrepo.com)",
+      "WebFetch(domain:svgsilh.com)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v5-final.html\")",
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v6-centree.html\")",
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v7-paris.html\")",
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v8-final.html\")"
     ]
   }
 }
