@@ -218,20 +218,23 @@ export default function QuartierPage() {
       {/* Location + Map */}
       <section className="py-20 bg-cream">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-            {/* Address */}
-            <div>
-              <AnimateOnScroll>
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-gold" />
-                  </div>
-                  <h2 className="font-serif text-3xl text-text">
-                    Notre emplacement
-                  </h2>
-                </div>
+          {/* Section title - above both columns */}
+          <AnimateOnScroll className="mb-12">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 border border-gold/30 flex items-center justify-center">
+                <MapPin className="h-5 w-5 text-gold" />
+              </div>
+              <h2 className="font-serif text-3xl text-text">
+                Notre emplacement
+              </h2>
+            </div>
+          </AnimateOnScroll>
 
-                <div className="bg-white border border-stone-200 p-8 mb-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-end">
+            {/* Address + Metro - left column */}
+            <div className="space-y-8">
+              <AnimateOnScroll>
+                <div className="bg-white border border-stone-200 p-8">
                   <p className="mb-4">
                     <strong className="text-text text-xl font-serif">Rue François Miron</strong>
                     <br />
@@ -269,12 +272,10 @@ export default function QuartierPage() {
               </AnimateOnScroll>
             </div>
 
-            {/* Map - aligned to bottom */}
-            <div className="flex flex-col justify-end h-full">
-              <AnimateOnScroll delay={300}>
-                <Map />
-              </AnimateOnScroll>
-            </div>
+            {/* Map - right column, aligned to bottom */}
+            <AnimateOnScroll delay={300}>
+              <Map />
+            </AnimateOnScroll>
           </div>
         </Container>
       </section>
