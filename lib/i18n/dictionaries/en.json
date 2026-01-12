@@ -233,8 +233,11 @@
       "airbnb": "Book on Airbnb"
     },
     "form": {
-      "sectionTitle": "Form",
+      "sectionTitle": "Booking",
       "title": "Booking Request",
+      "subtitle": "Fill out this form to make a request. We'll respond within 24 hours.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
       "name": "Full name",
       "namePlaceholder": "Your name",
       "email": "Email",
@@ -251,10 +254,24 @@
         "3": "3 guests",
         "4": "4 guests"
       },
-      "message": "Message",
+      "message": "Message (optional)",
       "messagePlaceholder": "Any questions or special requests?",
-      "submit": "Send via WhatsApp",
-      "submitNote": "Clicking will open WhatsApp with your pre-filled message"
+      "submit": "Send My Request",
+      "submitting": "Sending...",
+      "submitNote": "We'll respond within 24 hours by email",
+      "success": "Request Sent!",
+      "successMessage": "We've received your booking request. You'll receive a confirmation email within 24 hours.",
+      "error": "Error sending request",
+      "priceBreakdown": "Price Estimate",
+      "nights": "nights",
+      "nightlyRate": "Rate / night",
+      "discount": "Discount",
+      "cleaningFee": "Cleaning fee",
+      "touristTax": "Tourist tax",
+      "total": "Estimated Total",
+      "depositInfo": "A deposit of {amount}€ (~30%) will be requested to confirm the booking.",
+      "termsAccept": "By submitting this form, you agree to be contacted by email regarding your request.",
+      "requiredField": "Required field"
     },
     "faq": {
       "sectionTitle": "FAQ",

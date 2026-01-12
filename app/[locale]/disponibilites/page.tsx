@@ -98,21 +98,21 @@ export default async function DisponibilitesPage({ params }: PageProps) {
                   {avail.contact.description}
                 </p>
                 <div className="space-y-3">
+                  <Link
+                    href={`/${locale}/contact`}
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-gold hover:bg-gold-dark text-white text-sm font-medium tracking-wide uppercase transition-colors w-full"
+                  >
+                    {avail.contact.contactForm || 'Réserver'}
+                  </Link>
                   <a
                     href="https://wa.me/33631598400"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white text-sm font-medium tracking-wide uppercase transition-colors w-full"
+                    className="flex items-center justify-center gap-2 px-6 py-3 border border-stone-300 hover:border-[#25D366]/50 text-text text-sm font-medium tracking-wide uppercase transition-colors w-full"
                   >
                     <MessageCircle className="h-4 w-4" />
                     {avail.contact.whatsapp}
                   </a>
-                  <Link
-                    href={`/${locale}/contact`}
-                    className="flex items-center justify-center gap-2 px-6 py-3 border border-stone-300 hover:border-gold/50 text-text text-sm font-medium tracking-wide uppercase transition-colors w-full"
-                  >
-                    {avail.contact.contactForm}
-                  </Link>
                 </div>
               </div>
             </AnimateOnScroll>

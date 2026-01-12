@@ -1,3 +1,5 @@
+export * from './reservation';
+
 export interface Apartment {
   name: string;
   capacity: number;

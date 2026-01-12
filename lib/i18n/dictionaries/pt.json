@@ -235,8 +235,11 @@
       "airbnb": "Reservar no Airbnb"
     },
     "form": {
-      "sectionTitle": "Formulário",
+      "sectionTitle": "Reserva",
       "title": "Solicitação de reserva",
+      "subtitle": "Preencha este formulário para fazer uma solicitação. Responderemos em até 24 horas.",
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
       "name": "Nome completo",
       "namePlaceholder": "Seu nome",
       "email": "Email",
@@ -253,10 +256,24 @@
         "3": "3 hóspedes",
         "4": "4 hóspedes"
       },
-      "message": "Mensagem",
+      "message": "Mensagem (opcional)",
       "messagePlaceholder": "Perguntas ou pedidos especiais?",
-      "submit": "Enviar via WhatsApp",
-      "submitNote": "Ao clicar, o WhatsApp será aberto com sua mensagem pré-preenchida"
+      "submit": "Enviar minha solicitação",
+      "submitting": "Enviando...",
+      "submitNote": "Responderemos em até 24 horas por email",
+      "success": "Solicitação enviada!",
+      "successMessage": "Recebemos sua solicitação de reserva. Você receberá uma confirmação por email em até 24 horas.",
+      "error": "Erro ao enviar a solicitação",
+      "priceBreakdown": "Estimativa de preço",
+      "nights": "noites",
+      "nightlyRate": "Tarifa / noite",
+      "discount": "Desconto",
+      "cleaningFee": "Taxa de limpeza",
+      "touristTax": "Taxa turística",
+      "total": "Total estimado",
+      "depositInfo": "Um depósito de {amount}€ (~30%) será solicitado para confirmar a reserva.",
+      "termsAccept": "Ao enviar este formulário, você concorda em ser contatado por email sobre sua solicitação.",
+      "requiredField": "Campo obrigatório"
     },
     "faq": {
       "sectionTitle": "FAQ",

@@ -1,11 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Container, Button, AnimateOnScroll } from '@/components/ui';
-import { Phone, Mail, MapPin, MessageCircle, Calendar, ChevronDown } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle, Calendar, ChevronDown, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '33631598400';
+
+interface PricingResult {
+  nightlyRate: number;
+  nights: number;
+  subtotal: number;
+  discount: number;
+  discountPercent: number;
+  cleaningFee: number;
+  touristTax: number;
+  total: number;
+  depositSuggested: number;
+}
 
 interface ContactDict {
   hero: {
@@ -27,6 +39,9 @@ interface ContactDict {
   form: {
     sectionTitle: string;
     title: string;
+    subtitle?: string;
+    firstName?: string;
+    lastName?: string;
     name: string;
     namePlaceholder: string;
     email: string;
@@ -46,7 +61,21 @@ interface ContactDict {
     message: string;
     messagePlaceholder: string;
     submit: string;
+    submitting?: string;
     submitNote: string;
+    success?: string;
+    successMessage?: string;
+    error?: string;
+    priceBreakdown?: string;
+    nights?: string;
+    nightlyRate?: string;
+    discount?: string;
+    cleaningFee?: string;
+    touristTax?: string;
+    total?: string;
+    depositInfo?: string;
+    termsAccept?: string;
+    requiredField?: string;
   };
   faq: {
     sectionTitle: string;
@@ -65,39 +94,156 @@ interface ContactFormProps {
 
 export const ContactForm = ({ dict, locale }: ContactFormProps) => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    arrival: '',
-    departure: '',
-    guests: '',
+    arrivalDate: '',
+    departureDate: '',
+    guests: '2',
     message: '',
   });
+  const [pricing, setPricing] = useState<PricingResult | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Calculate pricing when dates or guests change
+  const calculatePrice = useCallback(() => {
+    if (!formData.arrivalDate || !formData.departureDate) {
+      setPricing(null);
+      return;
+    }
+
+    const arrival = new Date(formData.arrivalDate);
+    const departure = new Date(formData.departureDate);
+
+    if (departure <= arrival) {
+      setPricing(null);
+      return;
+    }
+
+    const nights = Math.ceil((departure.getTime() - arrival.getTime()) / (1000 * 60 * 60 * 24));
+    const guests = parseInt(formData.guests);
+
+    const nightlyRate = 120;
+    const cleaningFee = 50;
+    const touristTaxPerNight = 2.88;
+
+    // Calculate discount
+    let discountPercent = 0;
+    if (nights >= 28) discountPercent = 20;
+    else if (nights >= 14) discountPercent = 15;
+    else if (nights >= 7) discountPercent = 10;
+
+    const subtotal = nightlyRate * nights;
+    const discount = Math.round(subtotal * (discountPercent / 100));
+    const touristTax = Math.round(touristTaxPerNight * nights * guests * 100) / 100;
+    const total = subtotal - discount + cleaningFee + touristTax;
+    const depositSuggested = Math.max(Math.round((total * 0.3) / 50) * 50, 100);
+
+    setPricing({
+      nightlyRate,
+      nights,
+      subtotal,
+      discount,
+      discountPercent,
+      cleaningFee,
+      touristTax,
+      total,
+      depositSuggested,
+    });
+  }, [formData.arrivalDate, formData.departureDate, formData.guests]);
+
+  useEffect(() => {
+    calculatePrice();
+  }, [calculatePrice]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
 
-    const lines = [
-      `🏠 *Booking Request - Au Marais*`,
-      ``,
-      `👤 *${dict.form.name}:* ${formData.name}`,
-      `📧 *${dict.form.email}:* ${formData.email}`,
-      formData.phone ? `📱 *${dict.form.phone}:* ${formData.phone}` : '',
-      ``,
-      `📅 *${dict.form.arrival}:* ${formData.arrival}`,
-      `📅 *${dict.form.departure}:* ${formData.departure}`,
-      `👥 *${dict.form.guests}:* ${formData.guests}`,
-      formData.message ? `\n💬 *${dict.form.message}:*\n${formData.message}` : '',
-    ].filter(Boolean).join('\n');
+    try {
+      const response = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          guests: parseInt(formData.guests),
+          locale,
+        }),
+      });
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines)}`;
-    window.open(whatsappUrl, '_blank');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit reservation');
+      }
+
+      setSubmitStatus('success');
+      // Admin sera notifié par email avec liens d'action
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  // Get tomorrow's date for min arrival date
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().split('T')[0];
+
+  // Get min departure date (day after arrival)
+  const minDeparture = formData.arrivalDate
+    ? new Date(new Date(formData.arrivalDate).getTime() + 86400000).toISOString().split('T')[0]
+    : minDate;
+
+  // Success state
+  if (submitStatus === 'success') {
+    return (
+      <>
+        {/* Hero */}
+        <section className="py-24 bg-cream-dark">
+          <Container>
+            <AnimateOnScroll className="text-center">
+              <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
+                {dict.hero.sectionTitle}
+              </p>
+              <h1 className="font-serif text-5xl md:text-6xl text-text mb-6">
+                {dict.hero.title}
+              </h1>
+            </AnimateOnScroll>
+          </Container>
+        </section>
+
+        <section className="py-20 bg-cream">
+          <Container size="sm">
+            <div className="bg-white border border-stone-200 p-8 md:p-12 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-serif text-text mb-2">{dict.form.success || 'Demande envoyée !'}</h3>
+              <p className="text-text-muted">{dict.form.successMessage || 'Nous vous répondrons sous 24h.'}</p>
+              <Link
+                href={`/${locale}`}
+                className="inline-block mt-6 text-gold hover:underline"
+              >
+                Retour à l&apos;accueil
+              </Link>
+            </div>
+          </Container>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>
@@ -214,30 +360,51 @@ export const ContactForm = ({ dict, locale }: ContactFormProps) => {
                 <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
                   {dict.form.sectionTitle}
                 </p>
-                <h2 className="font-serif text-2xl text-text mb-8">
+                <h2 className="font-serif text-2xl text-text mb-2">
                   {dict.form.title}
                 </h2>
+                {dict.form.subtitle && (
+                  <p className="text-text-muted text-sm mb-8">{dict.form.subtitle}</p>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name fields */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-text-light text-sm font-medium mb-2">
-                        {dict.form.name} *
+                      <label htmlFor="firstName" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.firstName || 'Prénom'} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        id="name"
-                        name="name"
+                        id="firstName"
+                        name="firstName"
                         required
-                        value={formData.name}
+                        value={formData.firstName}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-cream border border-stone-200 text-text placeholder-text-muted focus:outline-none focus:border-gold transition-colors"
-                        placeholder={dict.form.namePlaceholder}
                       />
                     </div>
                     <div>
+                      <label htmlFor="lastName" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.lastName || 'Nom'} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-cream border border-stone-200 text-text placeholder-text-muted focus:outline-none focus:border-gold transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email and phone */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
                       <label htmlFor="email" className="block text-text-light text-sm font-medium mb-2">
-                        {dict.form.email} *
+                        {dict.form.email} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="email"
@@ -250,74 +417,114 @@ export const ContactForm = ({ dict, locale }: ContactFormProps) => {
                         placeholder={dict.form.emailPlaceholder}
                       />
                     </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-text-light text-sm font-medium mb-2">
-                      {dict.form.phone}
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-cream border border-stone-200 text-text placeholder-text-muted focus:outline-none focus:border-gold transition-colors"
-                      placeholder={dict.form.phonePlaceholder}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="arrival" className="block text-text-light text-sm font-medium mb-2">
-                        {dict.form.arrival} *
+                      <label htmlFor="phone" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.phone} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-cream border border-stone-200 text-text placeholder-text-muted focus:outline-none focus:border-gold transition-colors"
+                        placeholder={dict.form.phonePlaceholder}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Dates and guests */}
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <div>
+                      <label htmlFor="arrivalDate" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.arrival} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="date"
-                        id="arrival"
-                        name="arrival"
+                        id="arrivalDate"
+                        name="arrivalDate"
                         required
-                        value={formData.arrival}
+                        min={minDate}
+                        value={formData.arrivalDate}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-cream border border-stone-200 text-text focus:outline-none focus:border-gold transition-colors"
                       />
                     </div>
                     <div>
-                      <label htmlFor="departure" className="block text-text-light text-sm font-medium mb-2">
-                        {dict.form.departure} *
+                      <label htmlFor="departureDate" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.departure} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="date"
-                        id="departure"
-                        name="departure"
+                        id="departureDate"
+                        name="departureDate"
                         required
-                        value={formData.departure}
+                        min={minDeparture}
+                        value={formData.departureDate}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-cream border border-stone-200 text-text focus:outline-none focus:border-gold transition-colors"
                       />
                     </div>
+                    <div>
+                      <label htmlFor="guests" className="block text-text-light text-sm font-medium mb-2">
+                        {dict.form.guests} <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="guests"
+                        name="guests"
+                        required
+                        value={formData.guests}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-cream border border-stone-200 text-text focus:outline-none focus:border-gold transition-colors"
+                      >
+                        <option value="1" className="bg-cream">{dict.form.guestsOptions['1']}</option>
+                        <option value="2" className="bg-cream">{dict.form.guestsOptions['2']}</option>
+                        <option value="3" className="bg-cream">{dict.form.guestsOptions['3']}</option>
+                        <option value="4" className="bg-cream">{dict.form.guestsOptions['4']}</option>
+                      </select>
+                    </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="guests" className="block text-text-light text-sm font-medium mb-2">
-                      {dict.form.guests} *
-                    </label>
-                    <select
-                      id="guests"
-                      name="guests"
-                      required
-                      value={formData.guests}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-cream border border-stone-200 text-text focus:outline-none focus:border-gold transition-colors"
-                    >
-                      <option value="" className="bg-cream">{dict.form.guestsPlaceholder}</option>
-                      <option value="1" className="bg-cream">{dict.form.guestsOptions['1']}</option>
-                      <option value="2" className="bg-cream">{dict.form.guestsOptions['2']}</option>
-                      <option value="3" className="bg-cream">{dict.form.guestsOptions['3']}</option>
-                      <option value="4" className="bg-cream">{dict.form.guestsOptions['4']}</option>
-                    </select>
-                  </div>
+                  {/* Pricing breakdown */}
+                  {pricing && (
+                    <div className="bg-cream p-4 border border-stone-200 space-y-2">
+                      <h3 className="font-medium text-text mb-3">{dict.form.priceBreakdown || 'Estimation du prix'}</h3>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-muted">
+                          {pricing.nights} {dict.form.nights || 'nuits'} × {pricing.nightlyRate}€
+                        </span>
+                        <span>{pricing.subtotal}€</span>
+                      </div>
+                      {pricing.discount > 0 && (
+                        <div className="flex justify-between text-sm text-green-600">
+                          <span>{dict.form.discount || 'Réduction'} ({pricing.discountPercent}%)</span>
+                          <span>-{pricing.discount}€</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-muted">{dict.form.cleaningFee || 'Frais de ménage'}</span>
+                        <span>{pricing.cleaningFee}€</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-muted">{dict.form.touristTax || 'Taxe de séjour'}</span>
+                        <span>{pricing.touristTax.toFixed(2)}€</span>
+                      </div>
+                      <div className="border-t border-stone-200 pt-2 mt-2">
+                        <div className="flex justify-between font-semibold text-lg">
+                          <span>{dict.form.total || 'Total estimé'}</span>
+                          <span className="text-gold">{pricing.total.toFixed(2)}€</span>
+                        </div>
+                      </div>
+                      {dict.form.depositInfo && (
+                        <p className="text-xs text-text-muted mt-2">
+                          {dict.form.depositInfo.replace('{amount}', pricing.depositSuggested.toString())}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
+                  {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-text-light text-sm font-medium mb-2">
                       {dict.form.message}
@@ -325,7 +532,7 @@ export const ContactForm = ({ dict, locale }: ContactFormProps) => {
                     <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-cream border border-stone-200 text-text placeholder-text-muted focus:outline-none focus:border-gold transition-colors resize-none"
@@ -333,17 +540,35 @@ export const ContactForm = ({ dict, locale }: ContactFormProps) => {
                     />
                   </div>
 
+                  {/* Error message */}
+                  {submitStatus === 'error' && (
+                    <div className="bg-red-50 border border-red-200 p-4 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-red-800">{dict.form.error || 'Erreur'}</p>
+                        <p className="text-sm text-red-600">{errorMessage}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-4 text-sm tracking-widest uppercase font-medium"
+                    disabled={isSubmitting || !pricing}
+                    className="w-full bg-gold hover:bg-gold-dark text-white py-4 text-sm tracking-widest uppercase font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {dict.form.submit}
-                    <MessageCircle className="ml-2 h-5 w-5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        {dict.form.submitting || 'Envoi en cours...'}
+                      </>
+                    ) : (
+                      dict.form.submit
+                    )}
                   </Button>
 
                   <p className="text-text-muted text-xs text-center">
-                    {dict.form.submitNote}
+                    {dict.form.termsAccept || dict.form.submitNote}
                   </p>
                 </form>
               </div>

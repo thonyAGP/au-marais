@@ -235,8 +235,11 @@
       "airbnb": "在Airbnb预订"
     },
     "form": {
-      "sectionTitle": "表单",
+      "sectionTitle": "预订",
       "title": "预订申请",
+      "subtitle": "填写此表格提交申请。我们将在24小时内回复。",
+      "firstName": "名",
+      "lastName": "姓",
       "name": "姓名",
       "namePlaceholder": "您的姓名",
       "email": "邮箱",
@@ -253,10 +256,24 @@
         "3": "3位客人",
         "4": "4位客人"
       },
-      "message": "留言",
+      "message": "留言（选填）",
       "messagePlaceholder": "有任何问题或特殊要求？",
-      "submit": "通过WhatsApp发送",
-      "submitNote": "点击后将打开WhatsApp，您的消息已预填写"
+      "submit": "提交申请",
+      "submitting": "提交中...",
+      "submitNote": "我们将在24小时内通过邮件回复",
+      "success": "申请已发送！",
+      "successMessage": "我们已收到您的预订申请。您将在24小时内收到确认邮件。",
+      "error": "发送申请时出错",
+      "priceBreakdown": "价格估算",
+      "nights": "晚",
+      "nightlyRate": "每晚价格",
+      "discount": "折扣",
+      "cleaningFee": "清洁费",
+      "touristTax": "旅游税",
+      "total": "预估总价",
+      "depositInfo": "确认预订需支付{amount}€（约30%）的订金。",
+      "termsAccept": "提交此表格即表示您同意我们通过邮件就您的申请与您联系。",
+      "requiredField": "必填项"
     },
     "faq": {
       "sectionTitle": "常见问题",

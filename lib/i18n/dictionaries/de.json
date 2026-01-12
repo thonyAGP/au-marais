@@ -235,8 +235,11 @@
       "airbnb": "Auf Airbnb buchen"
     },
     "form": {
-      "sectionTitle": "Formular",
+      "sectionTitle": "Buchung",
       "title": "Buchungsanfrage",
+      "subtitle": "Füllen Sie dieses Formular aus, um eine Anfrage zu stellen. Wir antworten innerhalb von 24 Stunden.",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
       "name": "Vollständiger Name",
       "namePlaceholder": "Ihr Name",
       "email": "E-Mail",
@@ -253,10 +256,24 @@
         "3": "3 Gäste",
         "4": "4 Gäste"
       },
-      "message": "Nachricht",
+      "message": "Nachricht (optional)",
       "messagePlaceholder": "Fragen oder besondere Wünsche?",
-      "submit": "Über WhatsApp senden",
-      "submitNote": "Beim Klicken öffnet sich WhatsApp mit Ihrer vorausgefüllten Nachricht"
+      "submit": "Anfrage senden",
+      "submitting": "Wird gesendet...",
+      "submitNote": "Wir antworten innerhalb von 24 Stunden per E-Mail",
+      "success": "Anfrage gesendet!",
+      "successMessage": "Wir haben Ihre Buchungsanfrage erhalten. Sie erhalten innerhalb von 24 Stunden eine Bestätigung per E-Mail.",
+      "error": "Fehler beim Senden der Anfrage",
+      "priceBreakdown": "Preisschätzung",
+      "nights": "Nächte",
+      "nightlyRate": "Preis / Nacht",
+      "discount": "Rabatt",
+      "cleaningFee": "Reinigungsgebühr",
+      "touristTax": "Kurtaxe",
+      "total": "Geschätzter Gesamtpreis",
+      "depositInfo": "Eine Anzahlung von {amount}€ (~30%) wird zur Bestätigung der Buchung angefordert.",
+      "termsAccept": "Mit dem Absenden dieses Formulars erklären Sie sich damit einverstanden, per E-Mail bezüglich Ihrer Anfrage kontaktiert zu werden.",
+      "requiredField": "Pflichtfeld"
     },
     "faq": {
       "sectionTitle": "FAQ",

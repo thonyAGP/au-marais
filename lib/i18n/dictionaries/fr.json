@@ -229,8 +229,11 @@
       "airbnb": "Réserver sur Airbnb"
     },
     "form": {
-      "sectionTitle": "Formulaire",
+      "sectionTitle": "Réservation",
       "title": "Demande de réservation",
+      "subtitle": "Remplissez ce formulaire pour faire une demande. Nous vous répondrons sous 24h.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
       "name": "Nom complet",
       "namePlaceholder": "Votre nom",
       "email": "Email",
@@ -247,10 +250,24 @@
         "3": "3 voyageurs",
         "4": "4 voyageurs"
       },
-      "message": "Message",
+      "message": "Message (optionnel)",
       "messagePlaceholder": "Des questions ou des demandes particulières ?",
-      "submit": "Envoyer via WhatsApp",
-      "submitNote": "En cliquant, WhatsApp s'ouvrira avec votre message pré-rempli"
+      "submit": "Envoyer ma demande",
+      "submitting": "Envoi en cours...",
+      "submitNote": "Nous vous répondrons sous 24h par email",
+      "success": "Demande envoyée !",
+      "successMessage": "Nous avons bien reçu votre demande de réservation. Vous recevrez une confirmation par email sous 24h.",
+      "error": "Erreur lors de l'envoi",
+      "priceBreakdown": "Estimation du prix",
+      "nights": "nuits",
+      "nightlyRate": "Tarif / nuit",
+      "discount": "Réduction",
+      "cleaningFee": "Frais de ménage",
+      "touristTax": "Taxe de séjour",
+      "total": "Total estimé",
+      "depositInfo": "Un acompte de {amount}€ (~30%) sera demandé pour confirmer la réservation.",
+      "termsAccept": "En envoyant ce formulaire, vous acceptez d'être contacté par email concernant votre demande.",
+      "requiredField": "Champ obligatoire"
     },
     "faq": {
       "sectionTitle": "FAQ",

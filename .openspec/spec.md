@@ -16,6 +16,10 @@ Site web Next.js 15 pour promouvoir l'appartement "Au Marais", une location cour
 | Tailwind CSS | 4.x | Styling |
 | Lucide React | latest | Icônes |
 | date-fns | 4.x | Manipulation dates |
+| Vercel KV | - | Base de données réservations |
+| Resend | - | Emails transactionnels |
+| Stripe | 2025-12-15 | Payment Links (dépôts) |
+| Smoobu API | - | Calendrier & blocage dates |
 
 ## Architecture
 
@@ -86,6 +90,14 @@ au-marais/
 - [x] **Sélecteur de langue** - Dans le header desktop et mobile
 - [x] **Sitemap multilingue** - URLs par langue avec alternates
 - [x] **Dictionnaires de traduction** - Fichiers JSON complets pour chaque langue
+- [x] **Système de réservation complet** - Demandes avec validation admin
+- [x] **API Reservations CRUD** - Endpoints pour créer, lister, modifier, supprimer
+- [x] **Formulaire de réservation** - Calcul prix temps réel, soumission API
+- [x] **Notifications WhatsApp admin** - Liens action rapide (approve/reject/edit)
+- [x] **Pages action rapide** - /r/[id]/approve, /r/[id]/reject, /r/[id]/edit
+- [x] **Stripe Payment Links** - Génération automatique pour dépôts
+- [x] **Emails transactionnels Resend** - Confirmation, approbation, rejet, paiement
+- [x] **Interface admin réservations** - /admin/reservations avec filtres et actions
 
 ### À faire
 - [x] ~~Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)~~ ✓
@@ -104,6 +116,7 @@ au-marais/
 | 2026-01-08 | Polices Cormorant Garamond + Montserrat | Typographie premium pour le thème luxe |
 | 2026-01-10 | i18n 6 langues | FR, EN, ES, DE, PT, ZH avec middleware |
 | 2026-01-10 | Schema.org LodgingBusiness | SEO structured data pour rich results |
+| 2026-01-12 | Système réservation Option B | Vercel KV + Resend + Stripe + WhatsApp admin |
 
 ## Changelog
 
@@ -134,3 +147,11 @@ au-marais/
 - 2026-01-10 : Lieux à visiter et commerces traduits avec descriptions
 - 2026-01-12 : **Fix traductions PT/ZH** - Structure localTips alignée sur FR (address, tag, price, distance)
 - 2026-01-12 : **ChatAssistant amélioré** - API utilise maintenant chatbot-knowledge.json (surface 39m², équipements, FAQ)
+- 2026-01-12 : **Système de réservation complet** - Option B avec validation admin via WhatsApp
+- 2026-01-12 : Types Reservation, API CRUD (/api/reservations), lib/db.ts (Vercel KV)
+- 2026-01-12 : lib/email.ts (Resend) - Templates confirmation, approbation, rejet, paiement
+- 2026-01-12 : Pages action rapide /r/[id]/approve, /r/[id]/reject, /r/[id]/edit
+- 2026-01-12 : Stripe Payment Links automatiques pour dépôts (API version 2025-12-15.clover)
+- 2026-01-12 : ContactForm refactorisé - Soumission API avec calcul prix temps réel
+- 2026-01-12 : Traductions formulaire réservation ajoutées aux 6 langues
+- 2026-01-12 : Interface admin réservations /admin/reservations avec filtres et actions
