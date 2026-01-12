@@ -120,55 +120,87 @@
     },
     "restaurants": [
       {
-        "name": "Chez Janou",
-        "type": "Provençal",
-        "description": "Famoso por seus 80 pastis e cozinha do sul em um ambiente aconchegante. Terraço encantador."
+        "name": "King of Falafel",
+        "address": "26 Rue des Rosiers",
+        "description": "Imperdível do bairro judeu. Sanduíche misto a 10€, porções generosas.",
+        "tag": "Street food",
+        "price": "€"
       },
       {
-        "name": "L'As du Fallafel",
-        "type": "Israelense",
-        "description": "O melhor falafel de Paris segundo muitos! Fila garantida, mas vale a pena."
+        "name": "Pamela Popo",
+        "address": "15 Rue François Miron",
+        "description": "Ambiente retrô-chique, menu criativo caseiro. Bar de coquetéis à noite.",
+        "tag": "Retrô-chique",
+        "price": "€€€"
       },
       {
-        "name": "Breizh Café",
-        "type": "Creperia",
-        "description": "Crepes bretões artesanais com ingredientes de qualidade. Sidra excelente."
+        "name": "Le Bourguignon du Marais",
+        "address": "52 Rue François Miron",
+        "description": "Especialidades da Borgonha, incluindo o imperdível boeuf bourguignon.",
+        "tag": "Tradicional",
+        "price": "€€"
+      },
+      {
+        "name": "Le Gribouille",
+        "address": "44 Rue de Rivoli",
+        "description": "Brasserie com terraço sombreado. Happy hour das 17h às 22h.",
+        "tag": "Terraço",
+        "price": "€€"
       }
     ],
     "shops": [
       {
-        "name": "Merci",
-        "type": "Concept store",
-        "description": "Loja conceito imperdível: moda, decoração, café. Os lucros vão para caridade."
+        "name": "Boulangerie (Melhor baguete 2014)",
+        "address": "Na esquina, 50m à direita",
+        "description": "Eleita melhor baguete de Paris em 2014. Imperdível.",
+        "tag": "Imperdível",
+        "price": "€"
       },
       {
-        "name": "Village Saint-Paul",
-        "type": "Antiguidades",
-        "description": "Pátios escondidos cheios de antiquários e brechós. Perfeito para caça aos tesouros."
+        "name": "Les Délices de Manon",
+        "address": "Place Saint-Paul",
+        "description": "Excelente padaria-confeitaria para variar os prazeres.",
+        "tag": "Padaria",
+        "price": "€"
       },
       {
-        "name": "Fleux",
-        "type": "Decoração",
-        "description": "Quatro lojas na mesma rua dedicadas ao design e objetos originais."
+        "name": "Vinosfera",
+        "address": "11 Rue François Miron",
+        "description": "Loja de vinhos administrada por Igor, um verdadeiro apaixonado.",
+        "tag": "Vinhos",
+        "price": "€€"
+      },
+      {
+        "name": "Açougue Place Saint-Paul",
+        "address": "113 Rue Saint-Antoine",
+        "description": "Carne de qualidade e rotisseria. Perfeito para um frango assado.",
+        "tag": "Açougue",
+        "price": "€€"
       }
     ],
     "mustSee": [
       {
         "name": "Place des Vosges",
-        "type": "Patrimônio",
-        "description": "A praça mais antiga de Paris. Piquenique sob as arcadas ou visite a casa de Victor Hugo."
+        "distance": "600m",
+        "description": "A praça mais antiga de Paris (1605)."
       },
       {
         "name": "Musée Carnavalet",
-        "type": "Museu",
-        "description": "História de Paris em uma mansão magnífica. Entrada gratuita!"
+        "distance": "400m",
+        "description": "História de Paris. Entrada gratuita!"
       },
       {
-        "name": "Rue des Rosiers",
-        "type": "Bairro histórico",
-        "description": "Coração do bairro judeu. Não perca os pastéis e falafels."
+        "name": "Margens do Sena",
+        "distance": "400m",
+        "description": "Passeio ajardinado, longe da agitação."
+      },
+      {
+        "name": "BHV Marais",
+        "distance": "500m",
+        "description": "A grande loja de departamentos lifestyle parisiense."
       }
-    ]
+    ],
+    "mustSeeTitle": "★"
   },
   "cta": {
     "sectionTitle": "Reserva",

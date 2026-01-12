@@ -120,55 +120,87 @@
     },
     "restaurants": [
       {
-        "name": "Chez Janou",
-        "type": "普罗旺斯菜",
-        "description": "以80种茴香酒和温馨环境中的南方美食闻名。迷人的露台。"
+        "name": "King of Falafel",
+        "address": "26 Rue des Rosiers",
+        "description": "犹太区必去。混合三明治10€，分量十足。",
+        "tag": "街头美食",
+        "price": "€"
       },
       {
-        "name": "L'As du Fallafel",
-        "type": "以色列菜",
-        "description": "公认巴黎最好的法拉费尔！排队是常事，但绝对值得。"
+        "name": "Pamela Popo",
+        "address": "15 Rue François Miron",
+        "description": "复古时尚氛围，创意自制菜单。晚间鸡尾酒吧。",
+        "tag": "复古时尚",
+        "price": "€€€"
       },
       {
-        "name": "Breizh Café",
-        "type": "可丽饼店",
-        "description": "优质食材制作的手工布列塔尼可丽饼。苹果酒很棒。"
+        "name": "Le Bourguignon du Marais",
+        "address": "52 Rue François Miron",
+        "description": "勃艮第特色菜，包括必尝的红酒炖牛肉。",
+        "tag": "传统菜",
+        "price": "€€"
+      },
+      {
+        "name": "Le Gribouille",
+        "address": "44 Rue de Rivoli",
+        "description": "带遮阳露台的法式小酒馆。下午5点到晚上10点欢乐时光。",
+        "tag": "露台",
+        "price": "€€"
       }
     ],
     "shops": [
       {
-        "name": "Merci",
-        "type": "概念店",
-        "description": "必去的概念店：时尚、家居装饰、咖啡馆。收益捐给慈善机构。"
+        "name": "面包店（2014年最佳法棍）",
+        "address": "街角，右转50米",
+        "description": "2014年巴黎最佳法棍。绝对必去。",
+        "tag": "必去",
+        "price": "€"
       },
       {
-        "name": "Village Saint-Paul",
-        "type": "古董",
-        "description": "隐藏的庭院里满是古董商和复古店。淘宝的完美去处。"
+        "name": "Les Délices de Manon",
+        "address": "Place Saint-Paul",
+        "description": "优质面包糕点店，多种选择。",
+        "tag": "面包店",
+        "price": "€"
       },
       {
-        "name": "Fleux",
-        "type": "家居装饰",
-        "description": "同一条街上四家店，专注设计和独特物品。"
+        "name": "Vinosfera",
+        "address": "11 Rue François Miron",
+        "description": "由热情的Igor经营的葡萄酒店。",
+        "tag": "酒窖",
+        "price": "€€"
+      },
+      {
+        "name": "Place Saint-Paul肉铺",
+        "address": "113 Rue Saint-Antoine",
+        "description": "优质肉类和烤鸡。完美的烤鸡选择。",
+        "tag": "肉铺",
+        "price": "€€"
       }
     ],
     "mustSee": [
       {
         "name": "孚日广场",
-        "type": "文化遗产",
-        "description": "巴黎最古老的广场。在拱廊下野餐或参观雨果故居。"
+        "distance": "600米",
+        "description": "巴黎最古老的广场（1605年）。"
       },
       {
         "name": "卡纳瓦雷博物馆",
-        "type": "博物馆",
-        "description": "在宏伟的私人府邸中了解巴黎历史。免费入场！"
+        "distance": "400米",
+        "description": "巴黎历史。免费入场！"
       },
       {
-        "name": "玫瑰街",
-        "type": "历史街区",
-        "description": "犹太区的中心。不要错过糕点和法拉费尔。"
+        "name": "塞纳河畔",
+        "distance": "400米",
+        "description": "远离喧嚣的河畔步道。"
+      },
+      {
+        "name": "BHV Marais百货",
+        "distance": "500米",
+        "description": "巴黎生活方式百货公司。"
       }
-    ]
+    ],
+    "mustSeeTitle": "★"
   },
   "cta": {
     "sectionTitle": "预订",
