@@ -68,7 +68,7 @@ export const BookingBar = ({ dict, stats, locale }: BookingBarProps) => {
               <span>{dict.checkAvailability}</span>
             </Link>
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}/disponibilites`}
               className="px-8 py-3 bg-gold text-white hover:bg-gold-dark transition-all font-medium text-sm tracking-wider hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(201,169,98,0.3)]"
             >
               {dict.bookNow}

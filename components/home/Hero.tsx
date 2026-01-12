@@ -88,7 +88,7 @@ export const Hero = ({ dict, nav, common, locale }: HeroProps) => {
               {dict.cta}
             </Button>
           </Link>
-          <Link href={`/${locale}/contact`}>
+          <Link href={`/${locale}/disponibilites`}>
             <Button
               variant="outline"
               size="lg"
