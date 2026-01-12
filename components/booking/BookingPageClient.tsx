@@ -41,6 +41,40 @@ const dateFnsLocales: Record<Locale, typeof fr> = {
   zh: zhCN,
 };
 
+// Phone country codes with flags
+const COUNTRY_CODES = [
+  { code: '+33', country: 'FR', flag: '🇫🇷', name: 'France' },
+  { code: '+44', country: 'GB', flag: '🇬🇧', name: 'United Kingdom' },
+  { code: '+1', country: 'US', flag: '🇺🇸', name: 'United States' },
+  { code: '+49', country: 'DE', flag: '🇩🇪', name: 'Germany' },
+  { code: '+34', country: 'ES', flag: '🇪🇸', name: 'Spain' },
+  { code: '+39', country: 'IT', flag: '🇮🇹', name: 'Italy' },
+  { code: '+351', country: 'PT', flag: '🇵🇹', name: 'Portugal' },
+  { code: '+32', country: 'BE', flag: '🇧🇪', name: 'Belgium' },
+  { code: '+41', country: 'CH', flag: '🇨🇭', name: 'Switzerland' },
+  { code: '+31', country: 'NL', flag: '🇳🇱', name: 'Netherlands' },
+  { code: '+86', country: 'CN', flag: '🇨🇳', name: 'China' },
+  { code: '+81', country: 'JP', flag: '🇯🇵', name: 'Japan' },
+  { code: '+82', country: 'KR', flag: '🇰🇷', name: 'South Korea' },
+  { code: '+61', country: 'AU', flag: '🇦🇺', name: 'Australia' },
+  { code: '+55', country: 'BR', flag: '🇧🇷', name: 'Brazil' },
+  { code: '+52', country: 'MX', flag: '🇲🇽', name: 'Mexico' },
+  { code: '+7', country: 'RU', flag: '🇷🇺', name: 'Russia' },
+  { code: '+91', country: 'IN', flag: '🇮🇳', name: 'India' },
+  { code: '+971', country: 'AE', flag: '🇦🇪', name: 'UAE' },
+  { code: '+966', country: 'SA', flag: '🇸🇦', name: 'Saudi Arabia' },
+] as const;
+
+// Default country code based on locale
+const DEFAULT_COUNTRY_CODE: Record<Locale, string> = {
+  fr: '+33',
+  en: '+44',
+  es: '+34',
+  de: '+49',
+  pt: '+351',
+  zh: '+86',
+};
+
 interface CalendarDict {
   weekdays: string[];
   selectDates: string;
@@ -212,6 +246,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
     guests: '2',
     message: '',
   });
+  const [phoneCountryCode, setPhoneCountryCode] = useState(DEFAULT_COUNTRY_CODE[locale] || '+33');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -392,12 +427,18 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
     setIsSubmitting(true);
     setErrorMessage('');
 
+    // Combine country code with phone number
+    const fullPhone = formData.phone.startsWith('+')
+      ? formData.phone
+      : `${phoneCountryCode}${formData.phone.replace(/^0/, '')}`;
+
     try {
       const response = await fetch('/api/reservations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          phone: fullPhone,
           arrivalDate: selection.checkIn,
           departureDate: selection.checkOut,
           guests: parseInt(formData.guests),
@@ -738,17 +779,32 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                         <label htmlFor="phone" className="block text-text-light text-xs font-medium mb-1">
                           {dict.form.phone} *
                         </label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          required
-                          value={formData.phone}
-                          onChange={handleChange}
-                          disabled={!pricing}
-                          placeholder={dict.form.phonePlaceholder}
-                          className="w-full px-3 py-2 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
-                        />
+                        <div className="flex">
+                          <select
+                            value={phoneCountryCode}
+                            onChange={(e) => setPhoneCountryCode(e.target.value)}
+                            disabled={!pricing}
+                            className="w-24 px-2 py-2 bg-cream border border-stone-200 border-r-0 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50 rounded-l-none"
+                            aria-label="Country code"
+                          >
+                            {COUNTRY_CODES.map((country) => (
+                              <option key={country.code} value={country.code}>
+                                {country.flag} {country.code}
+                              </option>
+                            ))}
+                          </select>
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            required
+                            value={formData.phone}
+                            onChange={handleChange}
+                            disabled={!pricing}
+                            placeholder="6 12 34 56 78"
+                            className="flex-1 px-3 py-2 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                          />
+                        </div>
                       </div>
                       <div>
                         <label htmlFor="guests" className="block text-text-light text-xs font-medium mb-1">
