@@ -1,7 +1,18 @@
 import { Resend } from 'resend';
 import type { Reservation } from '@/types/reservation';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend lazily to avoid build errors when API key is not set
+let resendInstance: Resend | null = null;
+
+const getResend = (): Resend => {
+  if (!resendInstance) {
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resendInstance = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendInstance;
+};
 
 const FROM_EMAIL = process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'au-marais@hotmail.com';
@@ -107,7 +118,7 @@ export const sendReservationReceivedEmail = async (reservation: Reservation) => 
     </html>
   `;
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM_EMAIL,
     to: reservation.email,
     subject,
@@ -212,7 +223,7 @@ export const sendReservationApprovedEmail = async (
     </html>
   `;
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM_EMAIL,
     to: reservation.email,
     subject,
@@ -279,7 +290,7 @@ export const sendReservationRejectedEmail = async (
     </html>
   `;
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM_EMAIL,
     to: reservation.email,
     subject,
@@ -343,7 +354,7 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
     </html>
   `;
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM_EMAIL,
     to: reservation.email,
     subject,
@@ -467,7 +478,7 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
     </html>
   `;
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM_EMAIL,
     to: ADMIN_EMAIL,
     subject,

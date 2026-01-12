@@ -559,6 +559,150 @@
     "checkAvailability": "Disponibilidade",
     "bookNow": "Reservar"
   },
+  "booking": {
+    "title": "Reservar",
+    "subtitle": "Selecione suas datas e complete sua solicitação de reserva",
+    "hero": {
+      "sectionTitle": "Reserva direta",
+      "description": "Reserve diretamente conosco para economizar até 20% em comparação com o Airbnb e aproveitar contato direto com seus anfitriões."
+    },
+    "calendar": {
+      "title": "Escolha suas datas",
+      "instruction": "Clique em uma data de chegada, depois em uma data de partida para ver a tarifa"
+    },
+    "form": {
+      "title": "Seus dados",
+      "subtitle": "Preencha este formulário para finalizar sua solicitação",
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
+      "email": "Email",
+      "emailPlaceholder": "seu@email.com",
+      "phone": "Telefone",
+      "phonePlaceholder": "+33 6 XX XX XX XX",
+      "guests": "Hóspedes",
+      "guestsOptions": {
+        "1": "1 hóspede",
+        "2": "2 hóspedes",
+        "3": "3 hóspedes",
+        "4": "4 hóspedes"
+      },
+      "message": "Mensagem (opcional)",
+      "messagePlaceholder": "Perguntas ou pedidos especiais?",
+      "submit": "Enviar minha solicitação",
+      "submitting": "Enviando...",
+      "submitNote": "Responderemos em até 24 horas por email",
+      "success": "Solicitação enviada!",
+      "successMessage": "Recebemos sua solicitação. Você receberá uma confirmação por email em até 24 horas.",
+      "error": "Erro ao enviar",
+      "selectDatesFirst": "Selecione suas datas de chegada e partida no calendário"
+    },
+    "pricing": {
+      "title": "Estimativa de preço",
+      "nights": "noites",
+      "nightlyRate": "Tarifa / noite",
+      "discount": "Desconto",
+      "cleaningFee": "Taxa de limpeza",
+      "touristTax": "Taxa turística",
+      "total": "Total estimado",
+      "depositInfo": "Um depósito de {amount}€ (~30%) será necessário para confirmar.",
+      "savingsVsAirbnb": "Economia vs Airbnb"
+    },
+    "benefits": {
+      "title": "Vantagens da reserva direta",
+      "items": [
+        "Até <strong>20% mais barato</strong> que o Airbnb",
+        "Contato <strong>direto</strong> com seus anfitriões",
+        "Resposta rápida via WhatsApp ou email",
+        "<strong>Flexibilidade</strong> nas condições"
+      ]
+    },
+    "apartment": {
+      "sectionTitle": "O apartamento",
+      "title": "Em resumo",
+      "items": [
+        { "label": "Hóspedes", "value": "4 máx" },
+        { "label": "Quartos", "value": "1" },
+        { "label": "Camas", "value": "2" },
+        { "label": "Banheiro", "value": "1" }
+      ],
+      "viewApartment": "Ver o apartamento"
+    },
+    "airbnb": {
+      "preferPlatform": "Prefere reservar através de uma plataforma?",
+      "viewOnAirbnb": "Ver no Airbnb",
+      "note": "Nota: as tarifas do Airbnb incluem taxas de serviço"
+    }
+  },
+  "contactGeneral": {
+    "hero": {
+      "sectionTitle": "Contato",
+      "title": "Tem alguma pergunta?",
+      "description": "Tem alguma pergunta sobre o apartamento, o bairro ou um pedido especial? Não hesite em nos contatar."
+    },
+    "info": {
+      "sectionTitle": "Dados de contato",
+      "whatsapp": "WhatsApp",
+      "phone": "Telefone",
+      "email": "Email",
+      "address": "Endereço"
+    },
+    "links": {
+      "booking": "Fazer uma reserva",
+      "airbnb": "Ver no Airbnb"
+    },
+    "form": {
+      "sectionTitle": "Mensagem",
+      "title": "Envie-nos uma mensagem",
+      "subtitle": "Para solicitações de reserva, use nossa página de reservas.",
+      "name": "Nome",
+      "namePlaceholder": "Seu nome completo",
+      "email": "Email",
+      "emailPlaceholder": "seu@email.com",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Selecione um assunto",
+      "subjectOptions": {
+        "apartment": "Pergunta sobre o apartamento",
+        "neighborhood": "Pergunta sobre o bairro",
+        "special": "Pedido especial (animais, equipamentos...)",
+        "other": "Outro"
+      },
+      "message": "Mensagem",
+      "messagePlaceholder": "Descreva sua pergunta ou solicitação...",
+      "submit": "Enviar",
+      "submitting": "Enviando...",
+      "submitNote": "Responderemos o mais rápido possível",
+      "success": "Mensagem enviada!",
+      "successMessage": "Recebemos sua mensagem e responderemos em breve.",
+      "error": "Erro ao enviar"
+    },
+    "faq": {
+      "sectionTitle": "FAQ",
+      "title": "Perguntas frequentes",
+      "items": [
+        {
+          "question": "Quais são os horários de check-in e check-out?",
+          "answer": "Check-in a partir das 15h, check-out antes das 11h. Ajustes podem ser feitos conforme disponibilidade."
+        },
+        {
+          "question": "Há elevador?",
+          "answer": "Não, o apartamento está localizado no 2º andar de um edifício histórico do século XVII, sem elevador."
+        },
+        {
+          "question": "O WiFi está incluído?",
+          "answer": "Sim, WiFi de alta velocidade está incluído e acessível em todo o apartamento."
+        },
+        {
+          "question": "Animais de estimação são permitidos?",
+          "answer": "Entre em contato conosco para discutir sua solicitação. Avaliamos os pedidos caso a caso."
+        }
+      ]
+    },
+    "bookingCta": {
+      "title": "Deseja reservar?",
+      "description": "Verifique a disponibilidade e faça uma solicitação de reserva",
+      "button": "Reservar agora"
+    }
+  },
   "common": {
     "loading": "Carregando...",
     "error": "Ocorreu um erro",

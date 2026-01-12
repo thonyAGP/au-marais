@@ -1,5 +1,5 @@
 import { getDictionary } from '@/lib/i18n/dictionaries';
-import { ContactForm } from '@/components/contact';
+import { GeneralInquiryForm } from '@/components/contact';
 import type { Locale } from '@/lib/i18n/config';
 
 export default async function ContactPage({
@@ -12,7 +12,7 @@ export default async function ContactPage({
 
   return (
     <div className="min-h-screen bg-cream">
-      <ContactForm dict={dict.contact} locale={locale} />
+      <GeneralInquiryForm dict={dict.contactGeneral} locale={locale} />
     </div>
   );
 }

@@ -557,6 +557,150 @@
     "checkAvailability": "Availability",
     "bookNow": "Book Now"
   },
+  "booking": {
+    "title": "Book",
+    "subtitle": "Select your dates and complete your booking request",
+    "hero": {
+      "sectionTitle": "Direct Booking",
+      "description": "Book directly with us to save up to 20% compared to Airbnb and enjoy direct contact with your hosts."
+    },
+    "calendar": {
+      "title": "Choose your dates",
+      "instruction": "Click on an arrival date, then on a departure date to see the rate"
+    },
+    "form": {
+      "title": "Your details",
+      "subtitle": "Fill out this form to finalize your request",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+33 6 XX XX XX XX",
+      "guests": "Guests",
+      "guestsOptions": {
+        "1": "1 guest",
+        "2": "2 guests",
+        "3": "3 guests",
+        "4": "4 guests"
+      },
+      "message": "Message (optional)",
+      "messagePlaceholder": "Any questions or special requests?",
+      "submit": "Send my request",
+      "submitting": "Sending...",
+      "submitNote": "We will respond within 24 hours by email",
+      "success": "Request sent!",
+      "successMessage": "We have received your request. You will receive a confirmation by email within 24 hours.",
+      "error": "Error sending",
+      "selectDatesFirst": "Select your arrival and departure dates in the calendar"
+    },
+    "pricing": {
+      "title": "Price estimate",
+      "nights": "nights",
+      "nightlyRate": "Rate / night",
+      "discount": "Discount",
+      "cleaningFee": "Cleaning fee",
+      "touristTax": "Tourist tax",
+      "total": "Estimated total",
+      "depositInfo": "A deposit of {amount}€ (~30%) will be required to confirm.",
+      "savingsVsAirbnb": "Savings vs Airbnb"
+    },
+    "benefits": {
+      "title": "Direct booking benefits",
+      "items": [
+        "Up to <strong>20% cheaper</strong> than Airbnb",
+        "<strong>Direct</strong> contact with your hosts",
+        "Quick response via WhatsApp or email",
+        "<strong>Flexibility</strong> on conditions"
+      ]
+    },
+    "apartment": {
+      "sectionTitle": "The apartment",
+      "title": "At a glance",
+      "items": [
+        { "label": "Guests", "value": "4 max" },
+        { "label": "Bedrooms", "value": "1" },
+        { "label": "Beds", "value": "2" },
+        { "label": "Bathroom", "value": "1" }
+      ],
+      "viewApartment": "View apartment"
+    },
+    "airbnb": {
+      "preferPlatform": "Prefer booking through a platform?",
+      "viewOnAirbnb": "View on Airbnb",
+      "note": "Note: Airbnb rates include service fees"
+    }
+  },
+  "contactGeneral": {
+    "hero": {
+      "sectionTitle": "Contact",
+      "title": "Have a question?",
+      "description": "Do you have a question about the apartment, the neighborhood, or a special request? Feel free to contact us."
+    },
+    "info": {
+      "sectionTitle": "Contact details",
+      "whatsapp": "WhatsApp",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address"
+    },
+    "links": {
+      "booking": "Make a reservation",
+      "airbnb": "View on Airbnb"
+    },
+    "form": {
+      "sectionTitle": "Message",
+      "title": "Send us a message",
+      "subtitle": "For booking requests, please use our booking page.",
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Select a subject",
+      "subjectOptions": {
+        "apartment": "Question about the apartment",
+        "neighborhood": "Question about the neighborhood",
+        "special": "Special request (pets, equipment...)",
+        "other": "Other"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Describe your question or request...",
+      "submit": "Send",
+      "submitting": "Sending...",
+      "submitNote": "We will respond as soon as possible",
+      "success": "Message sent!",
+      "successMessage": "We have received your message and will respond shortly.",
+      "error": "Error sending"
+    },
+    "faq": {
+      "sectionTitle": "FAQ",
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "question": "What are the check-in and check-out times?",
+          "answer": "Check-in from 3pm, check-out before 11am. Arrangements can be made depending on availability."
+        },
+        {
+          "question": "Is there an elevator?",
+          "answer": "No, the apartment is located on the 2nd floor of a historic 17th century building, without an elevator."
+        },
+        {
+          "question": "Is WiFi included?",
+          "answer": "Yes, high-speed WiFi is included and accessible throughout the apartment."
+        },
+        {
+          "question": "Are pets allowed?",
+          "answer": "Contact us to discuss your request. We review requests on a case-by-case basis."
+        }
+      ]
+    },
+    "bookingCta": {
+      "title": "Want to book?",
+      "description": "Check availability and make a booking request",
+      "button": "Book now"
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",

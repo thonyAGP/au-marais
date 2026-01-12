@@ -559,6 +559,150 @@
     "checkAvailability": "Verfügbarkeit",
     "bookNow": "Buchen"
   },
+  "booking": {
+    "title": "Buchen",
+    "subtitle": "Wählen Sie Ihre Daten und vervollständigen Sie Ihre Buchungsanfrage",
+    "hero": {
+      "sectionTitle": "Direktbuchung",
+      "description": "Buchen Sie direkt bei uns und sparen Sie bis zu 20% im Vergleich zu Airbnb, mit direktem Kontakt zu Ihren Gastgebern."
+    },
+    "calendar": {
+      "title": "Wählen Sie Ihre Daten",
+      "instruction": "Klicken Sie auf ein Anreisedatum, dann auf ein Abreisedatum, um den Preis zu sehen"
+    },
+    "form": {
+      "title": "Ihre Angaben",
+      "subtitle": "Füllen Sie dieses Formular aus, um Ihre Anfrage abzuschließen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "emailPlaceholder": "ihre@email.de",
+      "phone": "Telefon",
+      "phonePlaceholder": "+33 6 XX XX XX XX",
+      "guests": "Gäste",
+      "guestsOptions": {
+        "1": "1 Gast",
+        "2": "2 Gäste",
+        "3": "3 Gäste",
+        "4": "4 Gäste"
+      },
+      "message": "Nachricht (optional)",
+      "messagePlaceholder": "Fragen oder besondere Wünsche?",
+      "submit": "Anfrage senden",
+      "submitting": "Wird gesendet...",
+      "submitNote": "Wir antworten innerhalb von 24 Stunden per E-Mail",
+      "success": "Anfrage gesendet!",
+      "successMessage": "Wir haben Ihre Anfrage erhalten. Sie erhalten innerhalb von 24 Stunden eine Bestätigung per E-Mail.",
+      "error": "Fehler beim Senden",
+      "selectDatesFirst": "Wählen Sie Ihre An- und Abreisedaten im Kalender"
+    },
+    "pricing": {
+      "title": "Preisschätzung",
+      "nights": "Nächte",
+      "nightlyRate": "Preis / Nacht",
+      "discount": "Rabatt",
+      "cleaningFee": "Reinigungsgebühr",
+      "touristTax": "Kurtaxe",
+      "total": "Geschätzter Gesamtpreis",
+      "depositInfo": "Eine Anzahlung von {amount}€ (~30%) wird zur Bestätigung benötigt.",
+      "savingsVsAirbnb": "Ersparnis vs Airbnb"
+    },
+    "benefits": {
+      "title": "Vorteile der Direktbuchung",
+      "items": [
+        "Bis zu <strong>20% günstiger</strong> als Airbnb",
+        "<strong>Direkter</strong> Kontakt mit Ihren Gastgebern",
+        "Schnelle Antwort per WhatsApp oder E-Mail",
+        "<strong>Flexibilität</strong> bei den Bedingungen"
+      ]
+    },
+    "apartment": {
+      "sectionTitle": "Die Wohnung",
+      "title": "Auf einen Blick",
+      "items": [
+        { "label": "Gäste", "value": "Max. 4" },
+        { "label": "Schlafzimmer", "value": "1" },
+        { "label": "Betten", "value": "2" },
+        { "label": "Bad", "value": "1" }
+      ],
+      "viewApartment": "Wohnung ansehen"
+    },
+    "airbnb": {
+      "preferPlatform": "Lieber über eine Plattform buchen?",
+      "viewOnAirbnb": "Auf Airbnb ansehen",
+      "note": "Hinweis: Airbnb-Preise beinhalten Servicegebühren"
+    }
+  },
+  "contactGeneral": {
+    "hero": {
+      "sectionTitle": "Kontakt",
+      "title": "Haben Sie eine Frage?",
+      "description": "Haben Sie eine Frage zur Wohnung, zum Viertel oder einen besonderen Wunsch? Zögern Sie nicht, uns zu kontaktieren."
+    },
+    "info": {
+      "sectionTitle": "Kontaktdaten",
+      "whatsapp": "WhatsApp",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "address": "Adresse"
+    },
+    "links": {
+      "booking": "Reservierung vornehmen",
+      "airbnb": "Auf Airbnb ansehen"
+    },
+    "form": {
+      "sectionTitle": "Nachricht",
+      "title": "Senden Sie uns eine Nachricht",
+      "subtitle": "Für Buchungsanfragen nutzen Sie bitte unsere Buchungsseite.",
+      "name": "Name",
+      "namePlaceholder": "Ihr vollständiger Name",
+      "email": "E-Mail",
+      "emailPlaceholder": "ihre@email.de",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Wählen Sie ein Thema",
+      "subjectOptions": {
+        "apartment": "Frage zur Wohnung",
+        "neighborhood": "Frage zum Viertel",
+        "special": "Besonderer Wunsch (Haustiere, Ausstattung...)",
+        "other": "Sonstiges"
+      },
+      "message": "Nachricht",
+      "messagePlaceholder": "Beschreiben Sie Ihre Frage oder Anfrage...",
+      "submit": "Senden",
+      "submitting": "Wird gesendet...",
+      "submitNote": "Wir antworten so schnell wie möglich",
+      "success": "Nachricht gesendet!",
+      "successMessage": "Wir haben Ihre Nachricht erhalten und werden Ihnen in Kürze antworten.",
+      "error": "Fehler beim Senden"
+    },
+    "faq": {
+      "sectionTitle": "FAQ",
+      "title": "Häufig gestellte Fragen",
+      "items": [
+        {
+          "question": "Was sind die Check-in und Check-out Zeiten?",
+          "answer": "Check-in ab 15 Uhr, Check-out vor 11 Uhr. Anpassungen sind je nach Verfügbarkeit möglich."
+        },
+        {
+          "question": "Gibt es einen Aufzug?",
+          "answer": "Nein, die Wohnung befindet sich im 2. Stock eines historischen Gebäudes aus dem 17. Jahrhundert, ohne Aufzug."
+        },
+        {
+          "question": "Ist WLAN inklusive?",
+          "answer": "Ja, schnelles WLAN ist inklusive und in der gesamten Wohnung verfügbar."
+        },
+        {
+          "question": "Sind Haustiere erlaubt?",
+          "answer": "Kontaktieren Sie uns, um Ihre Anfrage zu besprechen. Wir prüfen Anfragen einzeln."
+        }
+      ]
+    },
+    "bookingCta": {
+      "title": "Möchten Sie buchen?",
+      "description": "Prüfen Sie die Verfügbarkeit und stellen Sie eine Buchungsanfrage",
+      "button": "Jetzt buchen"
+    }
+  },
   "common": {
     "loading": "Laden...",
     "error": "Ein Fehler ist aufgetreten",

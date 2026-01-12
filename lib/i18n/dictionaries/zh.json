@@ -559,6 +559,150 @@
     "checkAvailability": "查看空房",
     "bookNow": "立即预订"
   },
+  "booking": {
+    "title": "预订",
+    "subtitle": "选择您的日期并完成预订申请",
+    "hero": {
+      "sectionTitle": "直接预订",
+      "description": "直接向我们预订，比Airbnb节省高达20%，并享受与房东的直接联系。"
+    },
+    "calendar": {
+      "title": "选择日期",
+      "instruction": "点击入住日期，然后点击退房日期以查看价格"
+    },
+    "form": {
+      "title": "您的信息",
+      "subtitle": "填写此表格以完成您的申请",
+      "firstName": "名",
+      "lastName": "姓",
+      "email": "电子邮件",
+      "emailPlaceholder": "your@email.com",
+      "phone": "电话",
+      "phonePlaceholder": "+33 6 XX XX XX XX",
+      "guests": "客人",
+      "guestsOptions": {
+        "1": "1位客人",
+        "2": "2位客人",
+        "3": "3位客人",
+        "4": "4位客人"
+      },
+      "message": "留言（可选）",
+      "messagePlaceholder": "有问题或特殊要求？",
+      "submit": "发送申请",
+      "submitting": "发送中...",
+      "submitNote": "我们将在24小时内通过电子邮件回复",
+      "success": "申请已发送！",
+      "successMessage": "我们已收到您的申请。您将在24小时内收到电子邮件确认。",
+      "error": "发送失败",
+      "selectDatesFirst": "请在日历中选择入住和退房日期"
+    },
+    "pricing": {
+      "title": "价格估算",
+      "nights": "晚",
+      "nightlyRate": "每晚价格",
+      "discount": "折扣",
+      "cleaningFee": "清洁费",
+      "touristTax": "旅游税",
+      "total": "预计总价",
+      "depositInfo": "需支付{amount}€的押金（约30%）以确认预订。",
+      "savingsVsAirbnb": "比Airbnb节省"
+    },
+    "benefits": {
+      "title": "直接预订优势",
+      "items": [
+        "比Airbnb<strong>便宜20%</strong>",
+        "与房东<strong>直接</strong>联系",
+        "通过WhatsApp或电子邮件快速回复",
+        "条件<strong>灵活</strong>"
+      ]
+    },
+    "apartment": {
+      "sectionTitle": "公寓",
+      "title": "概览",
+      "items": [
+        { "label": "客人", "value": "最多4人" },
+        { "label": "卧室", "value": "1间" },
+        { "label": "床位", "value": "2张" },
+        { "label": "浴室", "value": "1间" }
+      ],
+      "viewApartment": "查看公寓"
+    },
+    "airbnb": {
+      "preferPlatform": "更喜欢通过平台预订？",
+      "viewOnAirbnb": "在Airbnb上查看",
+      "note": "注：Airbnb价格包含服务费"
+    }
+  },
+  "contactGeneral": {
+    "hero": {
+      "sectionTitle": "联系我们",
+      "title": "有问题吗？",
+      "description": "关于公寓、社区或有特殊要求的问题？请随时与我们联系。"
+    },
+    "info": {
+      "sectionTitle": "联系方式",
+      "whatsapp": "WhatsApp",
+      "phone": "电话",
+      "email": "电子邮件",
+      "address": "地址"
+    },
+    "links": {
+      "booking": "进行预订",
+      "airbnb": "在Airbnb上查看"
+    },
+    "form": {
+      "sectionTitle": "留言",
+      "title": "给我们留言",
+      "subtitle": "如需预订，请使用我们的预订页面。",
+      "name": "姓名",
+      "namePlaceholder": "您的全名",
+      "email": "电子邮件",
+      "emailPlaceholder": "your@email.com",
+      "subject": "主题",
+      "subjectPlaceholder": "选择主题",
+      "subjectOptions": {
+        "apartment": "关于公寓的问题",
+        "neighborhood": "关于社区的问题",
+        "special": "特殊要求（宠物、设备...）",
+        "other": "其他"
+      },
+      "message": "留言",
+      "messagePlaceholder": "描述您的问题或要求...",
+      "submit": "发送",
+      "submitting": "发送中...",
+      "submitNote": "我们将尽快回复",
+      "success": "消息已发送！",
+      "successMessage": "我们已收到您的消息，将尽快回复。",
+      "error": "发送失败"
+    },
+    "faq": {
+      "sectionTitle": "常见问题",
+      "title": "常见问题解答",
+      "items": [
+        {
+          "question": "入住和退房时间是什么？",
+          "answer": "入住时间为下午3点起，退房时间为上午11点前。可根据情况灵活安排。"
+        },
+        {
+          "question": "有电梯吗？",
+          "answer": "没有，公寓位于17世纪历史建筑的2楼，没有电梯。"
+        },
+        {
+          "question": "包含WiFi吗？",
+          "answer": "是的，高速WiFi已包含在内，整个公寓都可使用。"
+        },
+        {
+          "question": "允许携带宠物吗？",
+          "answer": "请联系我们讨论您的要求。我们会根据具体情况进行评估。"
+        }
+      ]
+    },
+    "bookingCta": {
+      "title": "想要预订？",
+      "description": "查看空房情况并提交预订申请",
+      "button": "立即预订"
+    }
+  },
   "common": {
     "loading": "加载中...",
     "error": "发生错误",

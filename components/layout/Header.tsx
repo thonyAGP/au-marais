@@ -10,7 +10,7 @@ import { Container, LanguageSwitcher } from '@/components/ui';
 interface NavDict {
   apartment: string;
   neighborhood: string;
-  availability: string;
+  book: string;
   contact: string;
 }
 
@@ -28,7 +28,7 @@ export const Header = ({ nav }: HeaderProps) => {
   const navigation = [
     { name: nav.apartment, href: '/appartement' },
     { name: nav.neighborhood, href: '/quartier' },
-    { name: nav.availability, href: '/disponibilites' },
+    { name: nav.book, href: '/reserver' },
     { name: nav.contact, href: '/contact' },
   ];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

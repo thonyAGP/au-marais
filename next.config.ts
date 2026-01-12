@@ -18,6 +18,21 @@ const nextConfig: NextConfig = {
     ],
     qualities: [75, 80, 85, 90],
   },
+  async redirects() {
+    return [
+      // Redirect old /disponibilites to new /reserver for all locales
+      {
+        source: '/:locale(fr|en|es|de|pt|zh)/disponibilites',
+        destination: '/:locale/reserver',
+        permanent: true,
+      },
+      {
+        source: '/disponibilites',
+        destination: '/fr/reserver',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

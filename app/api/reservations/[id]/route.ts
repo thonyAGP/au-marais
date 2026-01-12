@@ -14,9 +14,20 @@ import { createSmoobuReservation, cancelSmoobuReservation } from '@/lib/smoobu';
 import type { UpdateReservationInput } from '@/types/reservation';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-12-15.clover',
-});
+// Initialize Stripe lazily to avoid build errors when API key is not set
+let stripeInstance: Stripe | null = null;
+
+const getStripe = (): Stripe => {
+  if (!stripeInstance) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY environment variable is not set');
+    }
+    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-12-15.clover',
+    });
+  }
+  return stripeInstance;
+};
 
 // GET /api/reservations/[id] - Get a single reservation
 export async function GET(
@@ -109,6 +120,7 @@ export async function PUT(
       let paymentLink: Stripe.PaymentLink | null = null;
       try {
         if (process.env.STRIPE_SECRET_KEY) {
+          const stripe = getStripe();
           // First create a product
           const product = await stripe.products.create({
             name: `Caution - Séjour Au Marais`,
