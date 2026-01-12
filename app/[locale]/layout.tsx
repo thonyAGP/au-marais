@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Header, Footer } from '@/components/layout';
 import { BookingBar } from '@/components/home';
 import { ChatAssistant } from '@/components/ui';
@@ -137,6 +139,8 @@ export default async function LocaleLayout({
         <Footer dict={dict.footer} nav={dict.nav} locale={locale} />
         <BookingBar dict={dict.bookingBar} stats={dict.stats} locale={locale} />
         <ChatAssistant />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -61,12 +61,11 @@ export const BookingBar = ({ dict, stats, locale }: BookingBarProps) => {
           {/* Right: CTA */}
           <div className="flex items-center gap-4 flex-1 sm:flex-none justify-end">
             <Link
-              href={`/${locale}/appartement#disponibilites`}
-              className="flex items-center gap-2 px-5 py-3 border border-stone-300 text-text hover:border-gold hover:text-gold transition-all text-sm font-medium tracking-wider"
+              href={`/${locale}/disponibilites`}
+              className="flex items-center gap-2 px-5 py-3 bg-cream border border-gold/30 text-gold hover:bg-gold hover:text-white transition-all text-sm font-medium tracking-wider group"
             >
-              <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">{dict.checkAvailability}</span>
-              <span className="sm:hidden">{dict.checkAvailability}</span>
+              <Calendar className="h-4 w-4 group-hover:animate-pulse" />
+              <span>{dict.checkAvailability}</span>
             </Link>
             <Link
               href={`/${locale}/contact`}
