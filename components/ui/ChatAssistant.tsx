@@ -37,6 +37,13 @@ export const ChatAssistant = () => {
     }
   }, [isOpen]);
 
+  // Refocus input after loading completes
+  useEffect(() => {
+    if (!isLoading && isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isLoading, isOpen]);
+
   const sendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
