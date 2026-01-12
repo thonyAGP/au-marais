@@ -132,3 +132,5 @@ au-marais/
 - 2026-01-10 : Composant ContactForm extrait en client component pour état formulaire
 - 2026-01-10 : Histoire du quartier (François Miron, la rue, Le Marais) traduite
 - 2026-01-10 : Lieux à visiter et commerces traduits avec descriptions
+- 2026-01-12 : **Fix traductions PT/ZH** - Structure localTips alignée sur FR (address, tag, price, distance)
+- 2026-01-12 : **ChatAssistant amélioré** - API utilise maintenant chatbot-knowledge.json (surface 39m², équipements, FAQ)

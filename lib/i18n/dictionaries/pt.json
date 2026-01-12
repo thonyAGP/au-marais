@@ -42,9 +42,9 @@
         "title": "Metrô Saint-Paul",
         "description": "A 200m, linha 1 direta"
       },
-      "wifi": {
-        "title": "WiFi de alta velocidade",
-        "description": "Conexão de fibra óptica"
+      "aircon": {
+        "title": "Ar condicionado",
+        "description": "Conforto garantido o ano todo"
       }
     }
   },
@@ -314,7 +314,7 @@
       },
       "comfort": {
         "title": "Conforto",
-        "items": ["WiFi de alta velocidade", "Aquecimento", "Roupa de cama", "Toalhas", "Ferro de passar", "Secador de cabelo"]
+        "items": ["Ar condicionado reversível", "WiFi de alta velocidade", "Aquecimento", "Roupa de cama", "Toalhas", "Ferro de passar", "Secador de cabelo"]
       },
       "multimedia": {
         "title": "Multimídia",

@@ -42,9 +42,9 @@
         "title": "Métro Saint-Paul",
         "description": "À 200m, ligne 1 directe"
       },
-      "wifi": {
-        "title": "WiFi haut débit",
-        "description": "Connexion fibre optique"
+      "aircon": {
+        "title": "Climatisation",
+        "description": "Été comme hiver, confort garanti"
       }
     }
   },
@@ -308,7 +308,7 @@
       },
       "comfort": {
         "title": "Confort",
-        "items": ["WiFi haut débit", "Chauffage", "Linge de lit", "Serviettes", "Fer à repasser", "Sèche-cheveux"]
+        "items": ["Climatisation réversible", "WiFi haut débit", "Chauffage", "Linge de lit", "Serviettes", "Fer à repasser", "Sèche-cheveux"]
       },
       "multimedia": {
         "title": "Multimédia",

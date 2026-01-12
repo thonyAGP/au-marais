@@ -42,9 +42,9 @@
         "title": "Saint-Paul地铁站",
         "description": "距离200米，1号线直达"
       },
-      "wifi": {
-        "title": "高速WiFi",
-        "description": "光纤连接"
+      "aircon": {
+        "title": "空调",
+        "description": "全年舒适保障"
       }
     }
   },
@@ -314,7 +314,7 @@
       },
       "comfort": {
         "title": "舒适设施",
-        "items": ["高速WiFi", "暖气", "床上用品", "毛巾", "熨斗", "吹风机"]
+        "items": ["冷暖空调", "高速WiFi", "暖气", "床上用品", "毛巾", "熨斗", "吹风机"]
       },
       "multimedia": {
         "title": "多媒体",

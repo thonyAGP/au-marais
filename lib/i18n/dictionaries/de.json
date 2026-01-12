@@ -42,9 +42,9 @@
         "title": "Metro Saint-Paul",
         "description": "200m entfernt, direkte Linie 1"
       },
-      "wifi": {
-        "title": "Highspeed-WLAN",
-        "description": "Glasfaserverbindung"
+      "aircon": {
+        "title": "Klimaanlage",
+        "description": "Ganzjähriger Komfort garantiert"
       }
     }
   },
@@ -314,7 +314,7 @@
       },
       "comfort": {
         "title": "Komfort",
-        "items": ["Highspeed-WLAN", "Heizung", "Bettwäsche", "Handtücher", "Bügeleisen", "Haartrockner"]
+        "items": ["Reversible Klimaanlage", "Highspeed-WLAN", "Heizung", "Bettwäsche", "Handtücher", "Bügeleisen", "Haartrockner"]
       },
       "multimedia": {
         "title": "Multimedia",

@@ -1,4 +1,4 @@
-import { Sparkles, Train, MapPin, Wifi } from 'lucide-react';
+import { Sparkles, Train, MapPin, AirVent } from 'lucide-react';
 import { Container, AnimateOnScroll } from '@/components/ui';
 
 interface FeatureItem {
@@ -14,7 +14,7 @@ interface FeaturesDict {
     beams: FeatureItem;
     stone: FeatureItem;
     metro: FeatureItem;
-    wifi: FeatureItem;
+    aircon: FeatureItem;
   };
 }
 
@@ -40,9 +40,9 @@ export const Features = ({ dict }: FeaturesProps) => {
       description: dict.items.stone.description,
     },
     {
-      icon: Wifi,
-      title: dict.items.wifi.title,
-      description: dict.items.wifi.description,
+      icon: AirVent,
+      title: dict.items.aircon.title,
+      description: dict.items.aircon.description,
     },
   ];
 

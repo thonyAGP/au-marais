@@ -42,9 +42,9 @@
         "title": "Saint-Paul Metro",
         "description": "200m away, direct line 1"
       },
-      "wifi": {
-        "title": "High-speed WiFi",
-        "description": "Fiber optic connection"
+      "aircon": {
+        "title": "Air Conditioning",
+        "description": "Year-round comfort guaranteed"
       }
     }
   },
@@ -312,7 +312,7 @@
       },
       "comfort": {
         "title": "Comfort",
-        "items": ["High-speed WiFi", "Heating", "Bed linens", "Towels", "Iron", "Hair dryer"]
+        "items": ["Reversible air conditioning", "High-speed WiFi", "Heating", "Bed linens", "Towels", "Iron", "Hair dryer"]
       },
       "multimedia": {
         "title": "Multimedia",
