@@ -137,8 +137,8 @@ export const Header = ({ nav }: HeaderProps) => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-2 border-t border-stone-200">
-              <LanguageSwitcher />
+            <div className="pt-4 border-t border-stone-200">
+              <LanguageSwitcher variant="inline" />
             </div>
           </div>
         </div>

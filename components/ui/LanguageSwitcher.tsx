@@ -2,12 +2,17 @@
 
 import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { locales, localeNames, getFlagUrl, type Locale } from '@/lib/i18n/config';
 
-export const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  variant?: 'dropdown' | 'inline';
+}
+
+export const LanguageSwitcher = ({ variant = 'dropdown' }: LanguageSwitcherProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const params = useParams();
   const pathname = usePathname();
   const currentLocale = (params?.locale as Locale) || 'fr';
@@ -18,12 +23,55 @@ export const LanguageSwitcher = () => {
     return `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Inline variant: show all flags in a row (for mobile menu)
+  if (variant === 'inline') {
+    return (
+      <div className="flex flex-wrap gap-2">
+        {locales.map((locale) => (
+          <Link
+            key={locale}
+            href={getLocalizedPath(locale)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${
+              locale === currentLocale
+                ? 'bg-gold/10 border border-gold text-gold'
+                : 'bg-stone-100 text-text hover:bg-stone-200'
+            }`}
+          >
+            <img src={getFlagUrl(locale, 20)} alt="" className="w-5 h-[15px] object-cover rounded-sm" />
+            <span className="text-xs font-medium">{locale.toUpperCase()}</span>
+          </Link>
+        ))}
+      </div>
+    );
+  }
+
+  // Dropdown variant (for desktop)
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1.5 px-2 py-2 text-text-light hover:text-gold transition-colors"
         aria-label="Change language"
+        aria-expanded={isOpen}
       >
         <img src={getFlagUrl(currentLocale, 24)} alt="" className="w-6 h-[18px] object-cover rounded-sm" />
         <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -37,7 +85,7 @@ export const LanguageSwitcher = () => {
             onClick={() => setIsOpen(false)}
           />
           {/* Dropdown */}
-          <div className="absolute right-0 top-full mt-2 bg-white border border-stone-200 shadow-lg z-50 min-w-[160px]">
+          <div className="absolute right-0 top-full mt-2 bg-white border border-stone-200 shadow-lg z-50 min-w-[160px] rounded-md overflow-hidden">
             {locales.map((locale) => (
               <Link
                 key={locale}
