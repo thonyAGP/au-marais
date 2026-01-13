@@ -59,10 +59,13 @@ test.describe('Pre-Production Checks', () => {
       await menuButton.click();
       await page.waitForTimeout(400);
 
-      // Check all 6 language codes are visible
+      // Check all 6 language codes are visible in the language grid
       const languageCodes = ['FR', 'EN', 'ES', 'DE', 'PT', 'ZH'];
+      const langGrid = page.locator('.grid.grid-cols-3');
+      await expect(langGrid).toBeVisible();
+
       for (const code of languageCodes) {
-        const langButton = page.locator(`text=${code}`).first();
+        const langButton = langGrid.locator(`text=${code}`);
         await expect(langButton).toBeVisible();
       }
 
