@@ -6,6 +6,7 @@ import { Container, AnimateOnScroll } from '@/components/ui';
 import {
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   Calendar,
   Star,
   Home,
@@ -41,28 +42,68 @@ const dateFnsLocales: Record<Locale, typeof fr> = {
   zh: zhCN,
 };
 
-// Phone country codes with flags
+// Get flag image URL (same as language switcher)
+const getCountryFlagUrl = (countryCode: string, size: number = 20) =>
+  `https://flagcdn.com/${size}x${Math.round(size * 0.75)}/${countryCode.toLowerCase()}.png`;
+
+// Phone country codes - comprehensive list for Paris tourists
 const COUNTRY_CODES = [
-  { code: '+33', country: 'FR', flag: '🇫🇷', name: 'France' },
-  { code: '+44', country: 'GB', flag: '🇬🇧', name: 'United Kingdom' },
-  { code: '+1', country: 'US', flag: '🇺🇸', name: 'United States' },
-  { code: '+49', country: 'DE', flag: '🇩🇪', name: 'Germany' },
-  { code: '+34', country: 'ES', flag: '🇪🇸', name: 'Spain' },
-  { code: '+39', country: 'IT', flag: '🇮🇹', name: 'Italy' },
-  { code: '+351', country: 'PT', flag: '🇵🇹', name: 'Portugal' },
-  { code: '+32', country: 'BE', flag: '🇧🇪', name: 'Belgium' },
-  { code: '+41', country: 'CH', flag: '🇨🇭', name: 'Switzerland' },
-  { code: '+31', country: 'NL', flag: '🇳🇱', name: 'Netherlands' },
-  { code: '+86', country: 'CN', flag: '🇨🇳', name: 'China' },
-  { code: '+81', country: 'JP', flag: '🇯🇵', name: 'Japan' },
-  { code: '+82', country: 'KR', flag: '🇰🇷', name: 'South Korea' },
-  { code: '+61', country: 'AU', flag: '🇦🇺', name: 'Australia' },
-  { code: '+55', country: 'BR', flag: '🇧🇷', name: 'Brazil' },
-  { code: '+52', country: 'MX', flag: '🇲🇽', name: 'Mexico' },
-  { code: '+7', country: 'RU', flag: '🇷🇺', name: 'Russia' },
-  { code: '+91', country: 'IN', flag: '🇮🇳', name: 'India' },
-  { code: '+971', country: 'AE', flag: '🇦🇪', name: 'UAE' },
-  { code: '+966', country: 'SA', flag: '🇸🇦', name: 'Saudi Arabia' },
+  // Europe - Main markets
+  { code: '+33', country: 'fr', name: 'France' },
+  { code: '+44', country: 'gb', name: 'United Kingdom' },
+  { code: '+49', country: 'de', name: 'Germany' },
+  { code: '+34', country: 'es', name: 'Spain' },
+  { code: '+39', country: 'it', name: 'Italy' },
+  { code: '+351', country: 'pt', name: 'Portugal' },
+  { code: '+32', country: 'be', name: 'Belgium' },
+  { code: '+41', country: 'ch', name: 'Switzerland' },
+  { code: '+31', country: 'nl', name: 'Netherlands' },
+  { code: '+43', country: 'at', name: 'Austria' },
+  { code: '+48', country: 'pl', name: 'Poland' },
+  { code: '+420', country: 'cz', name: 'Czech Republic' },
+  { code: '+45', country: 'dk', name: 'Denmark' },
+  { code: '+46', country: 'se', name: 'Sweden' },
+  { code: '+47', country: 'no', name: 'Norway' },
+  { code: '+358', country: 'fi', name: 'Finland' },
+  { code: '+353', country: 'ie', name: 'Ireland' },
+  { code: '+30', country: 'gr', name: 'Greece' },
+  { code: '+36', country: 'hu', name: 'Hungary' },
+  { code: '+40', country: 'ro', name: 'Romania' },
+  { code: '+352', country: 'lu', name: 'Luxembourg' },
+  // Americas
+  { code: '+1', country: 'us', name: 'United States' },
+  { code: '+1', country: 'ca', name: 'Canada' },
+  { code: '+55', country: 'br', name: 'Brazil' },
+  { code: '+52', country: 'mx', name: 'Mexico' },
+  { code: '+54', country: 'ar', name: 'Argentina' },
+  { code: '+56', country: 'cl', name: 'Chile' },
+  { code: '+57', country: 'co', name: 'Colombia' },
+  // Asia & Pacific
+  { code: '+86', country: 'cn', name: 'China' },
+  { code: '+81', country: 'jp', name: 'Japan' },
+  { code: '+82', country: 'kr', name: 'South Korea' },
+  { code: '+852', country: 'hk', name: 'Hong Kong' },
+  { code: '+886', country: 'tw', name: 'Taiwan' },
+  { code: '+65', country: 'sg', name: 'Singapore' },
+  { code: '+61', country: 'au', name: 'Australia' },
+  { code: '+64', country: 'nz', name: 'New Zealand' },
+  { code: '+91', country: 'in', name: 'India' },
+  { code: '+66', country: 'th', name: 'Thailand' },
+  { code: '+84', country: 'vn', name: 'Vietnam' },
+  { code: '+60', country: 'my', name: 'Malaysia' },
+  { code: '+62', country: 'id', name: 'Indonesia' },
+  { code: '+63', country: 'ph', name: 'Philippines' },
+  // Middle East & Africa
+  { code: '+971', country: 'ae', name: 'UAE' },
+  { code: '+966', country: 'sa', name: 'Saudi Arabia' },
+  { code: '+972', country: 'il', name: 'Israel' },
+  { code: '+90', country: 'tr', name: 'Turkey' },
+  { code: '+212', country: 'ma', name: 'Morocco' },
+  { code: '+27', country: 'za', name: 'South Africa' },
+  { code: '+20', country: 'eg', name: 'Egypt' },
+  // Eastern Europe & Russia
+  { code: '+7', country: 'ru', name: 'Russia' },
+  { code: '+380', country: 'ua', name: 'Ukraine' },
 ] as const;
 
 // Default country code based on locale
@@ -247,6 +288,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
     message: '',
   });
   const [phoneCountryCode, setPhoneCountryCode] = useState(DEFAULT_COUNTRY_CODE[locale] || '+33');
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -780,19 +822,56 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                           {dict.form.phone} *
                         </label>
                         <div className="flex">
-                          <select
-                            value={phoneCountryCode}
-                            onChange={(e) => setPhoneCountryCode(e.target.value)}
-                            disabled={!pricing}
-                            className="w-24 px-2 py-2 bg-cream border border-stone-200 border-r-0 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50 rounded-l-none"
-                            aria-label="Country code"
-                          >
-                            {COUNTRY_CODES.map((country) => (
-                              <option key={country.code} value={country.code}>
-                                {country.flag} {country.code}
-                              </option>
-                            ))}
-                          </select>
+                          {/* Custom country code dropdown with flag images */}
+                          <div className="relative">
+                            <button
+                              type="button"
+                              onClick={() => !pricing ? null : setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                              disabled={!pricing}
+                              className="flex items-center gap-1.5 w-[100px] px-2 py-2 bg-cream border border-stone-200 border-r-0 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                              aria-label="Country code"
+                              aria-expanded={isCountryDropdownOpen}
+                            >
+                              <img
+                                src={getCountryFlagUrl(COUNTRY_CODES.find(c => c.code === phoneCountryCode)?.country || 'fr', 20)}
+                                alt=""
+                                className="w-5 h-[15px] object-cover rounded-sm flex-shrink-0"
+                              />
+                              <span className="text-xs">{phoneCountryCode}</span>
+                              <ChevronDown className={`h-3 w-3 ml-auto transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                            </button>
+                            {isCountryDropdownOpen && (
+                              <>
+                                <div
+                                  className="fixed inset-0 z-40"
+                                  onClick={() => setIsCountryDropdownOpen(false)}
+                                />
+                                <div className="absolute left-0 top-full mt-1 bg-white border border-stone-200 shadow-lg z-50 w-[200px] max-h-[300px] overflow-y-auto rounded-md">
+                                  {COUNTRY_CODES.map((country, index) => (
+                                    <button
+                                      key={`${country.code}-${country.country}-${index}`}
+                                      type="button"
+                                      onClick={() => {
+                                        setPhoneCountryCode(country.code);
+                                        setIsCountryDropdownOpen(false);
+                                      }}
+                                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-cream transition-colors text-left ${
+                                        phoneCountryCode === country.code ? 'bg-cream text-gold' : 'text-text'
+                                      }`}
+                                    >
+                                      <img
+                                        src={getCountryFlagUrl(country.country, 20)}
+                                        alt=""
+                                        className="w-5 h-[15px] object-cover rounded-sm flex-shrink-0"
+                                      />
+                                      <span className="flex-1 truncate">{country.name}</span>
+                                      <span className="text-text-light text-xs">{country.code}</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+                          </div>
                           <input
                             type="tel"
                             id="phone"
