@@ -57,7 +57,7 @@ export const Hero = ({ dict, nav, common, locale }: HeroProps) => {
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl px-6">
         {/* Animated title letter by letter */}
-        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-normal tracking-wider mb-6 overflow-hidden">
+        <h1 className="font-serif text-[2.75rem] sm:text-6xl md:text-8xl lg:text-9xl font-normal tracking-wider mb-6 overflow-hidden whitespace-nowrap">
           {letters.map((letter, index) => (
             <span
               key={index}

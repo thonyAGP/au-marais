@@ -40,11 +40,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-cream text-text antialiased;
     font-family: var(--font-family-sans);
+    overflow-x: hidden;
   }
 
   ::selection {
