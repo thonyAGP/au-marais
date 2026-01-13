@@ -42,21 +42,25 @@ export const LanguageSwitcher = ({ variant = 'dropdown' }: LanguageSwitcherProps
     };
   }, [isOpen]);
 
-  // Inline variant: show all flags in a row (for mobile menu)
+  // Inline variant: show all flags in a grid (for mobile menu)
   if (variant === 'inline') {
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {locales.map((locale) => (
           <Link
             key={locale}
             href={getLocalizedPath(locale)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${
+            className={`flex items-center justify-center gap-2 px-2 py-2.5 rounded-md text-sm transition-colors ${
               locale === currentLocale
                 ? 'bg-gold/10 border border-gold text-gold'
                 : 'bg-stone-100 text-text hover:bg-stone-200'
             }`}
           >
-            <img src={getFlagUrl(locale, 20)} alt="" className="w-5 h-[15px] object-cover rounded-sm" />
+            <img
+              src={getFlagUrl(locale, 24)}
+              alt={localeNames[locale]}
+              className="w-6 h-[18px] object-cover rounded-sm flex-shrink-0"
+            />
             <span className="text-xs font-medium">{locale.toUpperCase()}</span>
           </Link>
         ))}

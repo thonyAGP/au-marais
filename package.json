@@ -12,6 +12,8 @@
     "test:e2e:mobile": "playwright test --project=\"iPhone 14\" --project=\"Pixel 7\" --project=\"iPhone SE\" --project=\"Samsung Galaxy S8\"",
     "test:e2e:ios": "playwright test --project=\"iPhone SE\" --project=\"iPhone 12\" --project=\"iPhone 14\" --project=\"iPhone 14 Pro Max\" --project=\"iPad Mini\"",
     "test:e2e:android": "playwright test --project=\"Pixel 5\" --project=\"Pixel 7\" --project=\"Samsung Galaxy S8\" --project=\"Samsung Galaxy S9+\"",
+    "test:e2e:desktop": "playwright test --project=\"Desktop Chrome\" --project=\"Desktop Safari\"",
+    "test:e2e:preprod": "playwright test pre-production.spec.ts",
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {

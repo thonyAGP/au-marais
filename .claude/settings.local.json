@@ -28,7 +28,13 @@
       "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v5-final.html\")",
       "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v6-centree.html\")",
       "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v7-paris.html\")",
-      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v8-final.html\")"
+      "Bash(start \"\" \"D:\\\\Projects\\\\Site_Au-marais\\\\public\\\\carte-postale-v8-final.html\")",
+      "Bash(pnpm test:e2e:mobile:*)",
+      "Bash(pnpm test:e2e:report:*)",
+      "Bash(pnpm test:e2e:preprod:*)",
+      "Bash(node -e:*)",
+      "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -Last 40)"
     ]
   }
 }

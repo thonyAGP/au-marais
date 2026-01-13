@@ -115,7 +115,7 @@ export const Header = ({ nav }: HeaderProps) => {
         <div
           className={cn(
             'md:hidden overflow-hidden transition-all duration-300',
-            mobileMenuOpen ? 'max-h-64 pb-6' : 'max-h-0'
+            mobileMenuOpen ? 'max-h-[400px] pb-6' : 'max-h-0'
           )}
         >
           <div className={cn(
