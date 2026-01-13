@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Pre-push hook: tests selon la branche
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+echo "🚀 Running pre-push checks for branch: $BRANCH"
+
+case "$BRANCH" in
+  main|master)
+    echo "📦 Production branch detected - Running FULL test suite..."
+    echo "⏳ This may take ~2 minutes..."
+
+    # Full E2E tests for production
+    pnpm test:preprod
+
+    if [ $? -ne 0 ]; then
+      echo "❌ Pre-production tests failed! Push aborted."
+      echo "💡 Fix the issues and try again, or use --no-verify to skip (not recommended)"
+      exit 1
+    fi
+
+    echo "✅ All production checks passed!"
+    ;;
+
+  develop|dev|staging)
+    echo "🧪 Test branch detected - Running quick tests..."
+
+    # Quick tests for develop/staging
+    pnpm test:quick
+
+    if [ $? -ne 0 ]; then
+      echo "❌ Quick tests failed! Push aborted."
+      exit 1
+    fi
+
+    echo "✅ Quick tests passed!"
+    ;;
+
+  *)
+    echo "🌿 Feature branch detected - Running minimal checks..."
+
+    # Just build check for feature branches
+    pnpm build
+
+    if [ $? -ne 0 ]; then
+      echo "❌ Build failed! Push aborted."
+      exit 1
+    fi
+
+    echo "✅ Build check passed!"
+    ;;
+esac

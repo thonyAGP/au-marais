@@ -21,6 +21,43 @@ Site web Next.js 15 pour promouvoir l'appartement "Au Marais", une location cour
 | Stripe | 2025-12-15 | Payment Links (dépôts) |
 | Smoobu API | - | Calendrier & blocage dates |
 
+## Git Workflow & Tests
+
+### Hooks Git (Husky)
+
+| Hook | Action | Quand |
+|------|--------|-------|
+| **pre-commit** | lint-staged + typecheck | Chaque commit |
+| **commit-msg** | Conventional Commits (commitlint) | Chaque commit |
+| **pre-push** | Tests selon branche | Chaque push |
+
+### Tests selon la branche
+
+| Branche | Tests exécutés | Commande |
+|---------|----------------|----------|
+| `main` / `master` | Suite complète pre-prod (Desktop + Mobile) | `pnpm test:preprod` |
+| `develop` / `staging` | Tests rapides (critiques + langues) | `pnpm test:quick` |
+| Feature branches | Build uniquement | `pnpm build` |
+
+### Scripts de test
+
+```bash
+pnpm test:quick      # Tests critiques Desktop Chrome
+pnpm test:preprod    # Tests pre-prod Desktop + iPhone 14
+pnpm test:e2e        # Suite E2E complète
+pnpm typecheck       # Vérification TypeScript
+```
+
+### Conventional Commits
+
+Types autorisés : `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `revert`, `build`
+
+```bash
+feat: Add new booking feature
+fix: Correct mobile menu overflow
+docs: Update README
+```
+
 ## Architecture
 
 ```
@@ -98,6 +135,8 @@ au-marais/
 - [x] **Stripe Payment Links** - Génération automatique pour dépôts
 - [x] **Emails transactionnels Resend** - Confirmation, approbation, rejet, paiement
 - [x] **Interface admin réservations** - /admin/reservations avec filtres et actions
+- [x] **Git Hooks (Husky)** - Pre-commit (lint + typecheck), pre-push (tests), commit-msg (conventional commits)
+- [x] **Tests E2E pre-production** - Suite Playwright avec tests critiques et multilingues
 
 ### À faire
 - [x] ~~Configurer Smoobu (accountId + apartmentId depuis dashboard Smoobu)~~ ✓
@@ -117,6 +156,7 @@ au-marais/
 | 2026-01-10 | i18n 6 langues | FR, EN, ES, DE, PT, ZH avec middleware |
 | 2026-01-10 | Schema.org LodgingBusiness | SEO structured data pour rich results |
 | 2026-01-12 | Système réservation Option B | Vercel KV + Resend + Stripe + WhatsApp admin |
+| 2026-01-13 | Git Hooks avec Husky | Pre-commit, pre-push par branche, conventional commits |
 
 ## Changelog
 
@@ -155,3 +195,6 @@ au-marais/
 - 2026-01-12 : ContactForm refactorisé - Soumission API avec calcul prix temps réel
 - 2026-01-12 : Traductions formulaire réservation ajoutées aux 6 langues
 - 2026-01-12 : Interface admin réservations /admin/reservations avec filtres et actions
+- 2026-01-13 : **Git Hooks Husky** - Pre-commit (lint-staged + typecheck), pre-push (tests selon branche), commit-msg (commitlint)
+- 2026-01-13 : **Tests E2E pre-production** - Suite Playwright (critiques, langues, SEO, accessibilité)
+- 2026-01-13 : Fix responsive mobile (titre Hero, overflow horizontal, sélecteur de langues)

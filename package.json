@@ -14,7 +14,11 @@
     "test:e2e:android": "playwright test --project=\"Pixel 5\" --project=\"Pixel 7\" --project=\"Samsung Galaxy S8\" --project=\"Samsung Galaxy S9+\"",
     "test:e2e:desktop": "playwright test --project=\"Desktop Chrome\" --project=\"Desktop Safari\"",
     "test:e2e:preprod": "playwright test pre-production.spec.ts",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "test:quick": "playwright test pre-production.spec.ts --project=\"Desktop Chrome\" --grep=\"Critical|Language\"",
+    "test:preprod": "playwright test pre-production.spec.ts --project=\"Desktop Chrome\" --project=\"iPhone 14\"",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
@@ -36,6 +40,8 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
     "@eslint/eslintrc": "^3.3.3",
     "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4.1.18",
@@ -46,6 +52,8 @@
     "autoprefixer": "^10.4.23",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"

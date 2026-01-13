@@ -1,0 +1,14 @@
+{
+  "app/**/*.{ts,tsx}": [
+    "eslint --fix --max-warnings=0"
+  ],
+  "components/**/*.{ts,tsx}": [
+    "eslint --fix --max-warnings=0"
+  ],
+  "lib/**/*.{ts,tsx}": [
+    "eslint --fix --max-warnings=0"
+  ],
+  "tests/**/*.{ts,tsx}": [
+    "eslint --fix --max-warnings=0"
+  ]
+}
