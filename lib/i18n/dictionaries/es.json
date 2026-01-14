@@ -65,8 +65,25 @@
   "testimonials": {
     "sectionTitle": "Testimonios",
     "title": "Lo que dicen nuestros huéspedes",
+    "subtitle": "Reseñas auténticas de nuestros huéspedes en varias plataformas",
     "viewAll": "Ver todas las reseñas en Airbnb",
     "translatedBy": "Traducido por Airbnb",
+    "sources": {
+      "airbnb": {
+        "name": "Airbnb",
+        "rating": 4.97,
+        "count": 89,
+        "url": "https://www.airbnb.fr/rooms/618442543008929958",
+        "color": "#FF5A5F"
+      },
+      "homeexchange": {
+        "name": "HomeExchange",
+        "rating": 5.0,
+        "count": 12,
+        "url": "https://www.homeexchange.fr/",
+        "color": "#00B4A2"
+      }
+    },
     "items": [
       {
         "name": "Valentine",
@@ -76,7 +93,8 @@
         "originalText": "L'appartement est parfaitement situé et très facile d'accès. De plus, il est situé dans un quartier génial. Nous avons passé un séjour parfait et des nuits très paisibles et calmes. Nous recommandons vivement ce logement plein de charmes où l'on s'y sent extrêmement bien! La boulangerie à 3 minutes à pieds est un grand plus également! Anthony est aussi très disponible et très réactif. Un grand merci!",
         "originalLang": "fr",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Lisa",
@@ -86,7 +104,8 @@
         "originalText": "Fantastic location and a comfortable, well-appointed space. A great place to use as a base for daily explorations. Bakery and several restaurants within a block or two. Two metro lines within a 10 minute walk. Host was great, friendly, responsive, and helpful. I would return.",
         "originalLang": "en",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Sophie",
@@ -96,7 +115,8 @@
         "originalText": "Séjour parfait pour notre anniversaire de mariage. L'appartement est décoré avec goût, très propre, et les recommandations de restaurants étaient excellentes. Merci !",
         "originalLang": "fr",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Thomas",
@@ -106,7 +126,8 @@
         "originalText": "Très bon accueil, appartement conforme à la description. Le quartier est vivant et authentique. Petit bémol : les escaliers à monter mais ça fait partie du charme parisien !",
         "originalLang": "fr",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       }
     ]
   },

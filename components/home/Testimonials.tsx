@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { Container, AnimateOnScroll } from '@/components/ui';
-import { Star, Quote, Globe } from 'lucide-react';
+import { Star, Quote, Globe, ExternalLink } from 'lucide-react';
+
+type SourceType = 'airbnb' | 'homeexchange';
 
 interface TestimonialItem {
   name: string;
@@ -13,13 +15,27 @@ interface TestimonialItem {
   originalLang?: string;
   rating: number;
   translated: boolean;
+  source?: string;
+}
+
+interface ReviewSource {
+  name: string;
+  rating: number;
+  count: number;
+  url: string;
+  color: string;
 }
 
 interface TestimonialsDict {
   sectionTitle: string;
   title: string;
+  subtitle?: string;
   viewAll?: string;
   translatedBy?: string;
+  sources: {
+    airbnb: ReviewSource;
+    homeexchange: ReviewSource;
+  };
   items: TestimonialItem[];
 }
 
@@ -32,6 +48,18 @@ interface TestimonialsProps {
   stats: StatsDict;
 }
 
+const sourceLabels = {
+  airbnb: 'Airbnb',
+  homeexchange: 'HomeExchange',
+};
+
+const sourceColors = {
+  airbnb: 'text-[#FF5A5F]',
+  homeexchange: 'text-[#00B4A2]',
+};
+
+const isValidSource = (s: string): s is SourceType => s === 'airbnb' || s === 'homeexchange';
+
 const TestimonialCard = ({
   testimonial,
   translatedBy,
@@ -42,6 +70,8 @@ const TestimonialCard = ({
   index: number;
 }) => {
   const [showOriginal, setShowOriginal] = useState(false);
+  const rawSource = testimonial.source || 'airbnb';
+  const source: SourceType = isValidSource(rawSource) ? rawSource : 'airbnb';
 
   const displayText = showOriginal && testimonial.originalText
     ? testimonial.originalText
@@ -80,8 +110,8 @@ const TestimonialCard = ({
             <p className="text-text-muted text-sm">{testimonial.location}</p>
             <p className="text-text-muted text-xs mt-1">{testimonial.date}</p>
           </div>
-          <div className="text-gold/70 text-xs tracking-wider uppercase">
-            via Airbnb
+          <div className={`text-xs tracking-wider uppercase ${sourceColors[source]}`}>
+            via {sourceLabels[source]}
           </div>
         </div>
       </div>
@@ -89,8 +119,40 @@ const TestimonialCard = ({
   );
 };
 
+const PlatformBadge = ({ source, reviewsLabel }: { source: ReviewSource; reviewsLabel: string }) => (
+  <a
+    href={source.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-4 bg-white border border-stone-200 rounded-lg px-5 py-4 hover:border-gold/50 hover:shadow-md transition-all group"
+  >
+    <div className="flex flex-col items-center">
+      <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            className={`h-4 w-4 ${i < Math.floor(source.rating) ? 'text-gold fill-gold' : 'text-stone-200'}`}
+          />
+        ))}
+      </div>
+      <span className="text-2xl font-serif text-text mt-1">{source.rating}</span>
+    </div>
+    <div className="border-l border-stone-200 pl-4">
+      <p className="font-medium text-text group-hover:text-gold transition-colors">
+        {source.name}
+      </p>
+      <p className="text-text-muted text-sm">
+        {source.count} {reviewsLabel}
+      </p>
+    </div>
+    <ExternalLink className="h-4 w-4 text-text-muted group-hover:text-gold transition-colors ml-auto" />
+  </a>
+);
+
 export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
   const testimonials = dict.items || [];
+  const sources = dict.sources;
+  const totalReviews = (sources?.airbnb?.count || 0) + (sources?.homeexchange?.count || 0);
 
   return (
     <section className="py-24 bg-cream-dark relative overflow-hidden">
@@ -100,22 +162,36 @@ export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
 
       <Container className="relative z-10">
         {/* Header */}
-        <AnimateOnScroll className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-5 w-5 text-gold fill-gold" />
-              ))}
-            </div>
-            <span className="text-3xl font-serif text-gold">4.97</span>
-          </div>
+        <AnimateOnScroll className="text-center mb-12">
+          <p className="text-xs font-medium tracking-[0.4em] uppercase text-gold mb-4">
+            {dict.sectionTitle}
+          </p>
           <h2 className="font-serif text-4xl md:text-5xl text-text mb-4">
             {dict.title}
           </h2>
-          <p className="text-text-muted text-sm tracking-wider">
-            89 {stats.reviews} · Airbnb
-          </p>
+          {dict.subtitle && (
+            <p className="text-text-muted max-w-2xl mx-auto">
+              {dict.subtitle}
+            </p>
+          )}
         </AnimateOnScroll>
+
+        {/* Platform Badges */}
+        {sources && (
+          <AnimateOnScroll delay={100} className="mb-12">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
+              {sources.airbnb && (
+                <PlatformBadge source={sources.airbnb} reviewsLabel={stats.reviews} />
+              )}
+              {sources.homeexchange && (
+                <PlatformBadge source={sources.homeexchange} reviewsLabel={stats.reviews} />
+              )}
+            </div>
+            <p className="text-center text-text-muted text-sm mt-4">
+              {totalReviews}+ {stats.reviews} {dict.subtitle ? '' : 'sur 2 plateformes'}
+            </p>
+          </AnimateOnScroll>
+        )}
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 gap-6">
@@ -127,21 +203,6 @@ export const Testimonials = ({ dict, stats }: TestimonialsProps) => {
               index={index}
             />
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="https://www.airbnb.fr/rooms/618442543008929958"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors text-sm tracking-wider"
-          >
-            {dict.viewAll || 'Airbnb'}
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
         </div>
       </Container>
     </section>

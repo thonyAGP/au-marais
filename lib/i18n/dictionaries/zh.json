@@ -65,8 +65,25 @@
   "testimonials": {
     "sectionTitle": "住客评价",
     "title": "看看住客们怎么说",
+    "subtitle": "来自多个平台的真实住客评价",
     "viewAll": "在Airbnb查看所有评价",
     "translatedBy": "由Airbnb翻译",
+    "sources": {
+      "airbnb": {
+        "name": "Airbnb",
+        "rating": 4.97,
+        "count": 89,
+        "url": "https://www.airbnb.fr/rooms/618442543008929958",
+        "color": "#FF5A5F"
+      },
+      "homeexchange": {
+        "name": "HomeExchange",
+        "rating": 5.0,
+        "count": 12,
+        "url": "https://www.homeexchange.fr/",
+        "color": "#00B4A2"
+      }
+    },
     "items": [
       {
         "name": "Valentine",
@@ -76,7 +93,8 @@
         "originalText": "L'appartement est parfaitement situé en plein cœur du Marais, ce qui était exactement ce que nous voulions lors de notre visite à Paris. L'appartement en lui-même est cosy, calme et équipé avec tout ce dont on peut avoir besoin. La décoration est charmeuse et vintage, et on peut sentir qu'il a été pensé avec soin pour permettre aux visiteurs de passer un agréable séjour. Soraya, Anthony et Lénaïg répondent très rapidement et font preuve de beaucoup de flexibilité !",
         "originalLang": "fr",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Lisa",
@@ -86,7 +104,8 @@
         "originalText": "Fantastic location and a comfortable, well-appointed space in a building with so much history. Our host was very responsive and very helpful in accommodating our needs. Walk to fantastic places to eat and drink and many shopping options nearby. We were very pleased with this choice as our home base in Paris.",
         "originalLang": "en",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Marie-Claire",
@@ -96,7 +115,8 @@
         "originalText": "Une vraie pépite au cœur de Paris ! L'appartement a beaucoup de charme avec ses poutres apparentes. Nous avons adoré la décoration soignée et le calme du lieu malgré l'emplacement central. Les hôtes sont adorables et très réactifs.",
         "originalLang": "fr",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       },
       {
         "name": "Thomas",
@@ -106,7 +126,8 @@
         "originalText": "Perfekte Lage um Paris zu Fuß zu erkunden. Die Metro ist nur einen Katzensprung entfernt. Die Wohnung ist genau wie auf den Fotos, sehr sauber und gut ausgestattet. Sehr empfehlenswert!",
         "originalLang": "de",
         "rating": 5,
-        "translated": true
+        "translated": true,
+        "source": "airbnb"
       }
     ]
   },
