@@ -34,7 +34,17 @@
       "Bash(pnpm test:e2e:preprod:*)",
       "Bash(node -e:*)",
       "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
-      "Bash(Select-Object -Last 40)"
+      "Bash(Select-Object -Last 40)",
+      "Bash(pnpm exec husky:*)",
+      "Bash(pnpm playwright test:*)",
+      "Bash(pnpm dev)",
+      "Bash(pnpm exec tsc:*)",
+      "Skill(playwright-skill:playwright-skill)",
+      "WebFetch(domain:zeevou.com)",
+      "WebFetch(domain:www.revyoos.com)",
+      "WebFetch(domain:www.proxi.co)",
+      "Bash(done)",
+      "Bash(grep:*)"
     ]
   }
 }

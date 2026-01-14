@@ -60,6 +60,9 @@
     "superhost": "超级房东",
     "rating": "平均评分",
     "reviews": "条评价",
+    "verifiedReviews": "条Airbnb认证评价",
+    "verified": "已认证",
+    "premium": "精选",
     "responseTime": "1小时内回复"
   },
   "testimonials": {

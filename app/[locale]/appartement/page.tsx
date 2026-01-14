@@ -31,7 +31,7 @@ export default async function AppartementPage({
             </p>
             {/* Compact Superhost inline */}
             <div className="mt-6 flex items-center justify-center gap-4">
-              <SuperhostBadge variant="minimal" />
+              <SuperhostBadge variant="minimal" labels={dict.hosts} />
               <span className="text-text-muted">•</span>
               <span className="text-sm text-text-muted">4.97★ · 89 {dict.hosts.reviews}</span>
             </div>

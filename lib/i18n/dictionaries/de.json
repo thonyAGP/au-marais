@@ -60,6 +60,9 @@
     "superhost": "Superhosts",
     "rating": "Durchschnittsbewertung",
     "reviews": "Bewertungen",
+    "verifiedReviews": "verifizierte Bewertungen auf Airbnb",
+    "verified": "Verifiziert",
+    "premium": "Premium",
     "responseTime": "Antwort innerhalb 1 Stunde"
   },
   "testimonials": {

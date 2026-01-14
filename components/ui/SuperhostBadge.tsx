@@ -4,10 +4,18 @@ import { Award, Star, Clock, ShieldCheck, Sparkles } from 'lucide-react';
 
 type BadgeVariant = 'full' | 'compact' | 'minimal';
 
+interface SuperhostLabels {
+  reviews?: string;
+  verifiedReviews?: string;
+  verified?: string;
+  premium?: string;
+}
+
 interface SuperhostBadgeProps {
   variant?: BadgeVariant;
   showExtras?: boolean;
   className?: string;
+  labels?: SuperhostLabels;
 }
 
 const stats = {
@@ -16,11 +24,21 @@ const stats = {
   responseTime: '< 1h',
 };
 
+const defaultLabels: SuperhostLabels = {
+  reviews: 'avis',
+  verifiedReviews: 'avis vérifiés sur Airbnb',
+  verified: 'Vérifié',
+  premium: 'Premium',
+};
+
 export const SuperhostBadge = ({
   variant = 'full',
   showExtras = false,
   className = '',
+  labels: propsLabels,
 }: SuperhostBadgeProps) => {
+  const labels = { ...defaultLabels, ...propsLabels };
+
   if (variant === 'minimal') {
     return (
       <div className={`inline-flex items-center gap-2 ${className}`}>
@@ -51,7 +69,7 @@ export const SuperhostBadge = ({
             ))}
           </div>
           <span className="text-sm text-text font-medium">{stats.rating}</span>
-          <span className="text-text-muted text-sm">· {stats.reviews} avis</span>
+          <span className="text-text-muted text-sm">· {stats.reviews} {labels.reviews}</span>
         </div>
       </div>
     );
@@ -95,14 +113,14 @@ export const SuperhostBadge = ({
         <span className="font-serif text-2xl text-text">{stats.rating}</span>
         <span className="text-text-muted">/ 5</span>
       </div>
-      <p className="text-sm text-text-muted mb-6">{stats.reviews} avis vérifiés sur Airbnb</p>
+      <p className="text-sm text-text-muted mb-6">{stats.reviews} {labels.verifiedReviews}</p>
 
       {/* Extras - 3 icônes style C */}
       {showExtras && (
         <div className="flex gap-6 pt-4 border-t border-gold/20">
           <div className="flex flex-col items-center gap-1">
             <ShieldCheck className="h-5 w-5 text-gold" />
-            <span className="text-[10px] text-text-muted uppercase tracking-wider">Vérifié</span>
+            <span className="text-[10px] text-text-muted uppercase tracking-wider">{labels.verified}</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <Clock className="h-5 w-5 text-gold" />
@@ -110,7 +128,7 @@ export const SuperhostBadge = ({
           </div>
           <div className="flex flex-col items-center gap-1">
             <Sparkles className="h-5 w-5 text-gold" />
-            <span className="text-[10px] text-text-muted uppercase tracking-wider">Premium</span>
+            <span className="text-[10px] text-text-muted uppercase tracking-wider">{labels.premium}</span>
           </div>
         </div>
       )}

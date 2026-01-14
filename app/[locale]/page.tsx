@@ -21,7 +21,7 @@ export default async function HomePage({
           <div className="grid grid-cols-2 md:grid-cols-4">
             {/* Superhost Badge */}
             <div className="py-6 flex items-center justify-center border-r border-stone-200 col-span-2 md:col-span-1">
-              <SuperhostBadge variant="compact" />
+              <SuperhostBadge variant="compact" labels={dict.hosts} />
             </div>
             {/* Other stats */}
             {[
