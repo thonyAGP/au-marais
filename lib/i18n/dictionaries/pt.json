@@ -324,6 +324,16 @@
     "title": "O apartamento",
     "subtitle": "Um refúgio aconchegante no coração do Marais, combinando charme histórico e conforto moderno.",
     "clickToEnlarge": "Clique em uma foto para ampliar",
+    "gallery": [
+      "Sala luminosa, vigas do século XVII e vista para a rua",
+      "Espaço aberto com área de trabalho",
+      "Cozinha moderna, mesa para 4 e parquet em espinha",
+      "Banheiro moderno e funcional",
+      "Entrada com armazenamento e parquet maciço",
+      "Quarto tranquilo com cama de casal confortável",
+      "Quarto com divisória de vidro estilo industrial",
+      "Divisória de vidro industrial e luz natural"
+    ],
     "description": {
       "sectionTitle": "Descrição",
       "title": "Bem-vindo ao seu lar",

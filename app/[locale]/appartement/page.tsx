@@ -42,7 +42,7 @@ export default async function AppartementPage({
       {/* Gallery */}
       <section className="py-12 bg-cream">
         <Container>
-          <ApartmentGallery clickToEnlarge={apt.clickToEnlarge} />
+          <ApartmentGallery clickToEnlarge={apt.clickToEnlarge} captions={apt.gallery || []} />
         </Container>
       </section>
 

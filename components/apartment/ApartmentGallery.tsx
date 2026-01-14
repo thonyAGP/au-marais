@@ -4,24 +4,30 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Lightbox, AnimateOnScroll } from '@/components/ui';
 
-const galleryImages = [
-  { src: '/images/apartment/01-salon.jpg', alt: 'Salon lumineux, poutres XVIIe et vue sur rue' },
-  { src: '/images/apartment/02-chambre.jpg', alt: 'Espace de vie ouvert avec coin bureau' },
-  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine moderne, table 4 places et parquet chevron' },
-  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Cuisine moderne ouverte' },
-  { src: '/images/apartment/05-detail-1.jpg', alt: 'Entrée avec rangements et parquet massif' },
-  { src: '/images/apartment/06-detail-2.jpg', alt: 'Chambre au calme' },
-  { src: '/images/apartment/07-detail-3.jpg', alt: 'Chambre avec verrière style atelier' },
-  { src: '/images/apartment/08-detail-4.jpg', alt: 'Verrière industrielle et lumière naturelle' },
+const galleryImageSources = [
+  '/images/apartment/01-salon.jpg',
+  '/images/apartment/02-chambre.jpg',
+  '/images/apartment/03-cuisine.jpg',
+  '/images/apartment/04-salle-de-bain.jpg',
+  '/images/apartment/05-detail-1.jpg',
+  '/images/apartment/06-detail-2.jpg',
+  '/images/apartment/07-detail-3.jpg',
+  '/images/apartment/08-detail-4.jpg',
 ];
 
 interface ApartmentGalleryProps {
   clickToEnlarge: string;
+  captions: string[];
 }
 
-export const ApartmentGallery = ({ clickToEnlarge }: ApartmentGalleryProps) => {
+export const ApartmentGallery = ({ clickToEnlarge, captions }: ApartmentGalleryProps) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const galleryImages = galleryImageSources.map((src, i) => ({
+    src,
+    alt: captions[i] || `Photo ${i + 1}`,
+  }));
 
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);

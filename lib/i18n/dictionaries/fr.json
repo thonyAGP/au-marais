@@ -318,6 +318,16 @@
     "title": "L'appartement",
     "subtitle": "Un cocon chaleureux au coeur du Marais, mêlant charme historique et confort moderne.",
     "clickToEnlarge": "Cliquez sur une photo pour l'agrandir",
+    "gallery": [
+      "Salon lumineux, poutres XVIIe et vue sur rue",
+      "Espace de vie ouvert avec coin bureau",
+      "Cuisine moderne, table 4 places et parquet chevron",
+      "Salle de bain moderne et fonctionnelle",
+      "Entrée avec rangements et parquet massif",
+      "Chambre au calme avec lit double confortable",
+      "Chambre avec verrière style atelier",
+      "Verrière industrielle et lumière naturelle"
+    ],
     "description": {
       "sectionTitle": "Description",
       "title": "Bienvenue chez vous",
