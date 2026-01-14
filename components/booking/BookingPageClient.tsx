@@ -14,6 +14,7 @@ import {
   CheckCircle,
   AlertCircle,
   MessageCircle,
+  Search,
 } from 'lucide-react';
 import {
   format,
@@ -289,6 +290,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
   });
   const [phoneCountryCode, setPhoneCountryCode] = useState(DEFAULT_COUNTRY_CODE[locale] || '+33');
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -844,30 +846,68 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                               <>
                                 <div
                                   className="fixed inset-0 z-40"
-                                  onClick={() => setIsCountryDropdownOpen(false)}
+                                  onClick={() => {
+                                    setIsCountryDropdownOpen(false);
+                                    setCountrySearch('');
+                                  }}
                                 />
-                                <div className="absolute left-0 top-full mt-1 bg-white border border-stone-200 shadow-lg z-50 w-[200px] max-h-[300px] overflow-y-auto rounded-md">
-                                  {COUNTRY_CODES.map((country, index) => (
-                                    <button
-                                      key={`${country.code}-${country.country}-${index}`}
-                                      type="button"
-                                      onClick={() => {
-                                        setPhoneCountryCode(country.code);
-                                        setIsCountryDropdownOpen(false);
-                                      }}
-                                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-cream transition-colors text-left ${
-                                        phoneCountryCode === country.code ? 'bg-cream text-gold' : 'text-text'
-                                      }`}
-                                    >
-                                      <img
-                                        src={getCountryFlagUrl(country.country, 20)}
-                                        alt=""
-                                        className="w-5 h-[15px] object-cover rounded-sm flex-shrink-0"
+                                <div className="absolute left-0 top-full mt-1 bg-white border border-stone-200 shadow-lg z-50 w-[240px] rounded-md overflow-hidden">
+                                  {/* Search input */}
+                                  <div className="p-2 border-b border-stone-200">
+                                    <div className="relative">
+                                      <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-text-light" />
+                                      <input
+                                        type="text"
+                                        value={countrySearch}
+                                        onChange={(e) => setCountrySearch(e.target.value)}
+                                        placeholder="Rechercher..."
+                                        className="w-full pl-8 pr-3 py-1.5 text-sm bg-cream border border-stone-200 rounded focus:outline-none focus:border-gold"
+                                        autoFocus
                                       />
-                                      <span className="flex-1 truncate">{country.name}</span>
-                                      <span className="text-text-light text-xs">{country.code}</span>
-                                    </button>
-                                  ))}
+                                    </div>
+                                  </div>
+                                  {/* Country list */}
+                                  <div className="max-h-[250px] overflow-y-auto">
+                                    {COUNTRY_CODES
+                                      .filter(country =>
+                                        countrySearch === '' ||
+                                        country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                        country.code.includes(countrySearch) ||
+                                        country.country.toLowerCase().includes(countrySearch.toLowerCase())
+                                      )
+                                      .map((country, index) => (
+                                        <button
+                                          key={`${country.code}-${country.country}-${index}`}
+                                          type="button"
+                                          onClick={() => {
+                                            setPhoneCountryCode(country.code);
+                                            setIsCountryDropdownOpen(false);
+                                            setCountrySearch('');
+                                          }}
+                                          className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-cream transition-colors text-left ${
+                                            phoneCountryCode === country.code ? 'bg-cream text-gold' : 'text-text'
+                                          }`}
+                                        >
+                                          <img
+                                            src={getCountryFlagUrl(country.country, 20)}
+                                            alt=""
+                                            className="w-5 h-[15px] object-cover rounded-sm flex-shrink-0"
+                                          />
+                                          <span className="flex-1 truncate">{country.name}</span>
+                                          <span className="text-text-light text-xs">{country.code}</span>
+                                        </button>
+                                      ))}
+                                    {COUNTRY_CODES.filter(country =>
+                                      countrySearch === '' ||
+                                      country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                      country.code.includes(countrySearch) ||
+                                      country.country.toLowerCase().includes(countrySearch.toLowerCase())
+                                    ).length === 0 && (
+                                      <div className="px-3 py-4 text-sm text-text-light text-center">
+                                        Aucun pays trouvé
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
                               </>
                             )}
