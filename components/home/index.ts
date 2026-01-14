@@ -5,4 +5,3 @@ export { Hosts } from './Hosts';
 export { Testimonials } from './Testimonials';
 export { LocalTips } from './LocalTips';
 export { BookingBar } from './BookingBar';
-export { VisitorMap } from './VisitorMap';
