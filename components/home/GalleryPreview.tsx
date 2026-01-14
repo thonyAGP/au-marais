@@ -4,10 +4,10 @@ import { ArrowRight } from 'lucide-react';
 import { Container, Button, AnimateOnScroll } from '@/components/ui';
 
 const previewImages = [
-  { src: '/images/apartment/01-salon.jpg', alt: 'Salon avec poutres apparentes' },
-  { src: '/images/apartment/02-chambre.jpg', alt: 'Chambre cosy' },
-  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine équipée' },
-  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Salle de bain' },
+  { src: '/images/apartment/01-salon.jpg', alt: 'Salon lumineux, poutres XVIIe et vue sur rue' },
+  { src: '/images/apartment/02-chambre.jpg', alt: 'Espace de vie ouvert avec coin bureau' },
+  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine moderne, table 4 places et parquet chevron' },
+  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Cuisine moderne ouverte' },
 ];
 
 interface GalleryDict {

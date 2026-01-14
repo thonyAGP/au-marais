@@ -5,14 +5,14 @@ import Image from 'next/image';
 import { Lightbox, AnimateOnScroll } from '@/components/ui';
 
 const galleryImages = [
-  { src: '/images/apartment/01-salon.jpg', alt: 'Salon avec poutres apparentes' },
-  { src: '/images/apartment/02-chambre.jpg', alt: 'Chambre cosy' },
-  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine équipée' },
-  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Salle de bain' },
-  { src: '/images/apartment/05-detail-1.jpg', alt: "Détail de l'appartement" },
-  { src: '/images/apartment/06-detail-2.jpg', alt: "Vue de l'appartement" },
-  { src: '/images/apartment/07-detail-3.jpg', alt: "Ambiance de l'appartement" },
-  { src: '/images/apartment/08-detail-4.jpg', alt: 'Charme parisien' },
+  { src: '/images/apartment/01-salon.jpg', alt: 'Salon lumineux, poutres XVIIe et vue sur rue' },
+  { src: '/images/apartment/02-chambre.jpg', alt: 'Espace de vie ouvert avec coin bureau' },
+  { src: '/images/apartment/03-cuisine.jpg', alt: 'Cuisine moderne, table 4 places et parquet chevron' },
+  { src: '/images/apartment/04-salle-de-bain.jpg', alt: 'Cuisine moderne ouverte' },
+  { src: '/images/apartment/05-detail-1.jpg', alt: 'Entrée avec rangements et parquet massif' },
+  { src: '/images/apartment/06-detail-2.jpg', alt: 'Chambre au calme' },
+  { src: '/images/apartment/07-detail-3.jpg', alt: 'Chambre avec verrière style atelier' },
+  { src: '/images/apartment/08-detail-4.jpg', alt: 'Verrière industrielle et lumière naturelle' },
 ];
 
 interface ApartmentGalleryProps {
