@@ -91,13 +91,16 @@ test.describe('Pre-Production Checks', () => {
     });
 
     test('Language switching should work correctly', async ({ page }) => {
-      await page.goto('/fr');
+      // This test navigates to 6 pages, needs more time
+      test.slow();
 
-      // Verify we're on French page
+      await page.goto('/fr');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/fr/);
 
       // Switch to English
       await page.goto('/en');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/en/);
 
       // Check content is in English
@@ -106,18 +109,22 @@ test.describe('Pre-Production Checks', () => {
 
       // Switch to Spanish
       await page.goto('/es');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/es/);
 
       // Switch to German
       await page.goto('/de');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/de/);
 
       // Switch to Portuguese
       await page.goto('/pt');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/pt/);
 
       // Switch to Chinese
       await page.goto('/zh');
+      await page.waitForLoadState('domcontentloaded');
       await expect(page).toHaveURL(/\/zh/);
     });
   });

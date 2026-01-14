@@ -818,7 +818,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="phone" className="block text-text-light text-xs font-medium mb-1">
                           {dict.form.phone} *
@@ -1058,7 +1058,15 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
             <div className="bg-white border border-stone-200 p-8">
               <p className="text-text-muted text-sm mb-4">{dict.airbnb.preferPlatform}</p>
               <a
-                href="https://www.airbnb.fr/rooms/618442543008929958"
+                href={(() => {
+                  const baseUrl = 'https://www.airbnb.fr/rooms/618442543008929958';
+                  const params = new URLSearchParams();
+                  if (selection.checkIn) params.set('check_in', selection.checkIn);
+                  if (selection.checkOut) params.set('check_out', selection.checkOut);
+                  if (formData.guests) params.set('adults', formData.guests);
+                  const queryString = params.toString();
+                  return queryString ? `${baseUrl}?${queryString}` : baseUrl;
+                })()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-text hover:text-[#FF5A5F] transition-colors"

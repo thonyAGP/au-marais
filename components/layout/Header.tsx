@@ -119,19 +119,16 @@ export const Header = ({ nav }: HeaderProps) => {
           )}
         >
           <div className={cn(
-            'flex flex-col gap-4 pt-2 border-t',
+            'flex flex-col gap-4 pt-4 mt-2 px-4 -mx-4 border-t',
+            // Solid opaque background for mobile menu (fixes Android transparency issue)
+            mobileMenuOpen ? 'bg-cream' : '',
             isScrolled ? 'border-stone-200' : 'border-white/20'
           )}>
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={getLocalizedHref(item.href, locale)}
-                className={cn(
-                  'transition-colors duration-300 text-sm font-medium tracking-wider uppercase py-2',
-                  isScrolled
-                    ? 'text-text-light hover:text-gold'
-                    : 'text-white/80 hover:text-gold'
-                )}
+                className="transition-colors duration-300 text-sm font-medium tracking-wider uppercase py-2 text-text-light hover:text-gold"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
