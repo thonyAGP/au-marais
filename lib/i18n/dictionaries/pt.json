@@ -744,5 +744,27 @@
     "previous": "Anterior",
     "next": "Próximo",
     "explore": "Explorar"
+  },
+  "testimonialForm": {
+    "pageTitle": "Deixar um depoimento",
+    "pageDescription": "Compartilhe sua experiência no Au Marais",
+    "title": "Sua opinião importa",
+    "subtitle": "Seu depoimento será publicado após aprovação.",
+    "name": "Seu nome",
+    "namePlaceholder": "Maria Silva",
+    "location": "Cidade, País",
+    "locationPlaceholder": "Lisboa, Portugal",
+    "rating": "Sua nota",
+    "ratingHint": "Clique nas estrelas para avaliar",
+    "text": "Seu depoimento",
+    "textPlaceholder": "Descreva sua estadia, o que você gostou...",
+    "textHint": "Mínimo 10 caracteres",
+    "submit": "Enviar meu depoimento",
+    "submitting": "Enviando...",
+    "success": "Obrigado!",
+    "successMessage": "Seu depoimento foi enviado e será publicado após aprovação.",
+    "error": "Erro",
+    "errorGeneric": "Ocorreu um erro. Por favor, tente novamente.",
+    "required": "Campo obrigatório"
   }
 }

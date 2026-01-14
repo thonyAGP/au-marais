@@ -742,5 +742,27 @@
     "previous": "Previous",
     "next": "Next",
     "explore": "Explore"
+  },
+  "testimonialForm": {
+    "pageTitle": "Leave a Review",
+    "pageDescription": "Share your experience at Au Marais",
+    "title": "Your Opinion Matters",
+    "subtitle": "Your review will be published after approval.",
+    "name": "Your Name",
+    "namePlaceholder": "John Smith",
+    "location": "City, Country",
+    "locationPlaceholder": "London, UK",
+    "rating": "Your Rating",
+    "ratingHint": "Click on the stars to rate",
+    "text": "Your Review",
+    "textPlaceholder": "Describe your stay, what you liked...",
+    "textHint": "Minimum 10 characters",
+    "submit": "Submit My Review",
+    "submitting": "Submitting...",
+    "success": "Thank You!",
+    "successMessage": "Your review has been submitted and will be published after approval.",
+    "error": "Error",
+    "errorGeneric": "An error occurred. Please try again.",
+    "required": "Required field"
   }
 }

@@ -744,5 +744,27 @@
     "previous": "Anterior",
     "next": "Siguiente",
     "explore": "Explorar"
+  },
+  "testimonialForm": {
+    "pageTitle": "Dejar una reseña",
+    "pageDescription": "Comparte tu experiencia en Au Marais",
+    "title": "Tu opinión importa",
+    "subtitle": "Tu reseña será publicada después de su aprobación.",
+    "name": "Tu nombre",
+    "namePlaceholder": "María García",
+    "location": "Ciudad, País",
+    "locationPlaceholder": "Madrid, España",
+    "rating": "Tu puntuación",
+    "ratingHint": "Haz clic en las estrellas para puntuar",
+    "text": "Tu reseña",
+    "textPlaceholder": "Describe tu estancia, lo que te gustó...",
+    "textHint": "Mínimo 10 caracteres",
+    "submit": "Enviar mi reseña",
+    "submitting": "Enviando...",
+    "success": "¡Gracias!",
+    "successMessage": "Tu reseña ha sido enviada y será publicada tras su aprobación.",
+    "error": "Error",
+    "errorGeneric": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+    "required": "Campo obligatorio"
   }
 }

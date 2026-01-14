@@ -744,5 +744,27 @@
     "previous": "上一个",
     "next": "下一个",
     "explore": "探索"
+  },
+  "testimonialForm": {
+    "pageTitle": "留下评价",
+    "pageDescription": "分享您在玛黑公寓的体验",
+    "title": "您的意见很重要",
+    "subtitle": "您的评价将在审核后发布。",
+    "name": "您的姓名",
+    "namePlaceholder": "张三",
+    "location": "城市，国家",
+    "locationPlaceholder": "上海，中国",
+    "rating": "您的评分",
+    "ratingHint": "点击星星进行评分",
+    "text": "您的评价",
+    "textPlaceholder": "描述您的住宿体验，您喜欢什么...",
+    "textHint": "至少10个字符",
+    "submit": "提交我的评价",
+    "submitting": "正在提交...",
+    "success": "谢谢您！",
+    "successMessage": "您的评价已提交，将在审核后发布。",
+    "error": "错误",
+    "errorGeneric": "发生错误，请重试。",
+    "required": "必填字段"
   }
 }

@@ -6,9 +6,19 @@ import type {
   UpdateReservationInput,
   ReservationPricing,
 } from '@/types/reservation';
+import type {
+  Testimonial,
+  TestimonialInput,
+  TestimonialUpdateInput,
+  TestimonialStatus,
+  TestimonialPublic,
+} from '@/types/testimonial';
 
 const RESERVATION_PREFIX = 'reservation:';
 const RESERVATIONS_LIST_KEY = 'reservations:list';
+
+const TESTIMONIAL_PREFIX = 'testimonial:';
+const TESTIMONIALS_LIST_KEY = 'testimonials:list';
 
 // Generate a secure token for action links
 const generateToken = () => uuidv4().replace(/-/g, '');
@@ -216,4 +226,136 @@ export const getReservationsForDateRange = async (
 
     return rStart < qEnd && rEnd > qStart;
   });
+};
+
+// ==================== TESTIMONIALS ====================
+
+// Create a new testimonial
+export const createTestimonial = async (
+  input: TestimonialInput
+): Promise<Testimonial> => {
+  const id = uuidv4();
+  const token = generateToken();
+  const now = new Date().toISOString();
+
+  const testimonial: Testimonial = {
+    id,
+    token,
+    status: 'pending',
+    text: input.text,
+    rating: input.rating,
+    author: {
+      name: input.authorName,
+      location: input.authorLocation,
+    },
+    reservationId: input.reservationId,
+    language: input.language,
+    source: 'native',
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await kv.set(`${TESTIMONIAL_PREFIX}${id}`, testimonial);
+  await kv.zadd(TESTIMONIALS_LIST_KEY, {
+    score: Date.now(),
+    member: id,
+  });
+
+  return testimonial;
+};
+
+// Get a testimonial by ID
+export const getTestimonial = async (id: string): Promise<Testimonial | null> => {
+  return kv.get<Testimonial>(`${TESTIMONIAL_PREFIX}${id}`);
+};
+
+// Get a testimonial by ID and token (for secure access)
+export const getTestimonialByToken = async (
+  id: string,
+  token: string
+): Promise<Testimonial | null> => {
+  const testimonial = await getTestimonial(id);
+  if (testimonial && testimonial.token === token) {
+    return testimonial;
+  }
+  return null;
+};
+
+// Update a testimonial
+export const updateTestimonial = async (
+  id: string,
+  updates: TestimonialUpdateInput
+): Promise<Testimonial | null> => {
+  const testimonial = await getTestimonial(id);
+  if (!testimonial) return null;
+
+  const now = new Date().toISOString();
+  const updated: Testimonial = {
+    ...testimonial,
+    ...updates,
+    updatedAt: now,
+    // Set publishedAt when approved
+    publishedAt:
+      updates.status === 'approved' && !testimonial.publishedAt
+        ? now
+        : testimonial.publishedAt,
+  };
+
+  await kv.set(`${TESTIMONIAL_PREFIX}${id}`, updated);
+  return updated;
+};
+
+// List testimonials
+export const listTestimonials = async (
+  options: {
+    status?: TestimonialStatus;
+    limit?: number;
+    offset?: number;
+  } = {}
+): Promise<{ testimonials: Testimonial[]; total: number }> => {
+  const { status, limit = 50, offset = 0 } = options;
+
+  const ids = await kv.zrange<string[]>(TESTIMONIALS_LIST_KEY, 0, -1, { rev: true });
+
+  if (!ids || ids.length === 0) {
+    return { testimonials: [], total: 0 };
+  }
+
+  const all = await Promise.all(ids.map((id) => getTestimonial(id)));
+
+  let filtered = all.filter(
+    (t): t is Testimonial => t !== null && (!status || t.status === status)
+  );
+
+  const total = filtered.length;
+  filtered = filtered.slice(offset, offset + limit);
+
+  return { testimonials: filtered, total };
+};
+
+// Get published testimonials for public display
+export const getPublishedTestimonials = async (
+  limit: number = 10
+): Promise<TestimonialPublic[]> => {
+  const { testimonials } = await listTestimonials({ status: 'approved', limit });
+
+  return testimonials.map((t) => ({
+    id: t.id,
+    text: t.text,
+    rating: t.rating,
+    author: t.author,
+    publishedAt: t.publishedAt || t.createdAt,
+    source: 'native' as const,
+  }));
+};
+
+// Delete a testimonial
+export const deleteTestimonial = async (id: string): Promise<boolean> => {
+  const testimonial = await getTestimonial(id);
+  if (!testimonial) return false;
+
+  await kv.del(`${TESTIMONIAL_PREFIX}${id}`);
+  await kv.zrem(TESTIMONIALS_LIST_KEY, id);
+
+  return true;
 };

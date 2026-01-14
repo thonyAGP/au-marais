@@ -179,6 +179,13 @@ au-marais/
 - [ ] Sollicitation active des guests pour vidéos
 - [ ] Lazy loading pour performance
 
+### V5 - Jeu concours témoignages (Priorité: Fin d'année)
+- [ ] Tirage au sort parmi les témoignages de l'année
+- [ ] Prix: 2 nuits offertes
+- [ ] Règlement du jeu concours
+- [ ] Communication email aux participants
+- [ ] Annonce du gagnant fin d'année
+
 ## Décisions
 
 | Date | Décision | Contexte |

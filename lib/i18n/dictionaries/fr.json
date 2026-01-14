@@ -738,5 +738,27 @@
     "previous": "Précédent",
     "next": "Suivant",
     "explore": "Explorer"
+  },
+  "testimonialForm": {
+    "pageTitle": "Laisser un témoignage",
+    "pageDescription": "Partagez votre expérience au Marais",
+    "title": "Votre avis compte",
+    "subtitle": "Votre témoignage sera publié après validation.",
+    "name": "Votre nom",
+    "namePlaceholder": "Marie Dupont",
+    "location": "Ville, Pays",
+    "locationPlaceholder": "Lyon, France",
+    "rating": "Votre note",
+    "ratingHint": "Cliquez sur les étoiles pour noter",
+    "text": "Votre témoignage",
+    "textPlaceholder": "Décrivez votre séjour, ce que vous avez aimé...",
+    "textHint": "Minimum 10 caractères",
+    "submit": "Envoyer mon témoignage",
+    "submitting": "Envoi en cours...",
+    "success": "Merci pour votre avis !",
+    "successMessage": "Votre témoignage a été soumis et sera publié après validation.",
+    "error": "Erreur",
+    "errorGeneric": "Une erreur est survenue. Veuillez réessayer.",
+    "required": "Champ obligatoire"
   }
 }

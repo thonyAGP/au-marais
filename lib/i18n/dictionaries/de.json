@@ -744,5 +744,27 @@
     "previous": "Zurück",
     "next": "Weiter",
     "explore": "Entdecken"
+  },
+  "testimonialForm": {
+    "pageTitle": "Bewertung abgeben",
+    "pageDescription": "Teilen Sie Ihre Erfahrung im Au Marais",
+    "title": "Ihre Meinung zählt",
+    "subtitle": "Ihre Bewertung wird nach Prüfung veröffentlicht.",
+    "name": "Ihr Name",
+    "namePlaceholder": "Hans Müller",
+    "location": "Stadt, Land",
+    "locationPlaceholder": "Berlin, Deutschland",
+    "rating": "Ihre Bewertung",
+    "ratingHint": "Klicken Sie auf die Sterne zum Bewerten",
+    "text": "Ihre Bewertung",
+    "textPlaceholder": "Beschreiben Sie Ihren Aufenthalt, was Ihnen gefallen hat...",
+    "textHint": "Mindestens 10 Zeichen",
+    "submit": "Bewertung absenden",
+    "submitting": "Wird gesendet...",
+    "success": "Vielen Dank!",
+    "successMessage": "Ihre Bewertung wurde eingereicht und wird nach Prüfung veröffentlicht.",
+    "error": "Fehler",
+    "errorGeneric": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "required": "Pflichtfeld"
   }
 }
