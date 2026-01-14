@@ -145,10 +145,45 @@ au-marais/
 - [x] ~~Page Disponibilités avec calendrier direct~~ ✓
 - [x] ~~Déploiement Vercel~~ ✓ (www.au-marais.fr)
 
+## Roadmap Livre d'or / Avis
+
+> **Stratégie** : Approche hybride plutôt que agrégation multi-plateformes classique
+> - Légalement sûr (pas de scraping ToS Airbnb)
+> - SEO optimal avec témoignages natifs + schema.org
+> - Coût zéro (pas d'abonnement Revyoos/GuestTouch)
+> - Contrôle total sur le contenu affiché
+
+### V1 ✓ (Déployé 2026-01-14)
+- [x] Badge Airbnb 4.97★ (note + nombre d'avis, pas de texte copié)
+- [x] Badge HomeExchange 5.0★
+- [x] 4 témoignages existants sur homepage
+- [x] Traductions 6 langues
+- [x] Source par avis (Airbnb/HomeExchange)
+
+### V2 - Formulaire collecte témoignages natifs (Priorité: Moyenne)
+- [ ] Formulaire post-séjour pour recueillir témoignages
+- [ ] Modération admin avant publication
+- [ ] Email automatique après checkout (via Smoobu webhook?)
+- [ ] Stockage Vercel KV
+- [ ] Affichage témoignages natifs avec schema.org Review
+
+### V3 - Carte interactive "Nos visiteurs" (Priorité: Basse)
+- [ ] Carte du monde avec provenance des guests
+- [ ] Opt-in lors du témoignage (ville/pays)
+- [ ] Animation des points sur la carte
+- [ ] Statistiques (X visiteurs de Y pays)
+
+### V4 - Section vidéo témoignages (Priorité: Optionnel)
+- [ ] Intégration vidéos YouTube/Vimeo
+- [ ] Galerie "Notre séjour en vidéo"
+- [ ] Sollicitation active des guests pour vidéos
+- [ ] Lazy loading pour performance
+
 ## Décisions
 
 | Date | Décision | Contexte |
 |------|----------|----------|
+| 2026-01-14 | Livre d'or V1 | Badges + témoignages homepage, pas de scraping (ToS Airbnb) |
 | 2026-01-05 | Tailwind CSS v4 | Nouvelle syntaxe avec @theme |
 | 2026-01-05 | Next.js 16 (latest) | App Router + Turbopack |
 | 2026-01-08 | Design Dark Luxury | Hero cinématique (Option A) + thème sombre avec or (Option C) |
