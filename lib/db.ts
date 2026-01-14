@@ -31,7 +31,7 @@ export const calculatePricing = (
   const departure = new Date(departureDate);
   const nights = Math.ceil((departure.getTime() - arrival.getTime()) / (1000 * 60 * 60 * 24));
 
-  const nightlyRate = settings?.baseRate || 120;
+  const nightlyRate = settings?.baseRate || 250;
   const cleaningFee = settings?.cleaningFee || 50;
   const touristTaxPerNight = settings?.touristTaxPerNight || 2.88;
 

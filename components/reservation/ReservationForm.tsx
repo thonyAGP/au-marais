@@ -82,7 +82,7 @@ export const ReservationForm = ({ dict, locale }: ReservationFormProps) => {
     const nights = Math.ceil((departure.getTime() - arrival.getTime()) / (1000 * 60 * 60 * 24));
     const guests = parseInt(formData.guests);
 
-    const nightlyRate = 120;
+    const nightlyRate = 250;
     const cleaningFee = 50;
     const touristTaxPerNight = 2.88;
 

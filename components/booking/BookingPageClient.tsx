@@ -431,7 +431,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
     const nights = differenceInDays(departure, arrival);
     const guests = parseInt(formData.guests);
 
-    const nightlyRate = 120;
+    const nightlyRate = 250;
     const cleaningFee = 50;
     const touristTaxPerNight = 2.88;
 
