@@ -125,13 +125,17 @@ export const VisitorMap = () => {
     return illuminatedCountries.has(geoName);
   }, [illuminatedCountries]);
 
-  // Animation effect
+  // Animation effect (loops continuously)
   useEffect(() => {
     if (!isPlaying) return;
 
     if (currentIndex >= chronologicalCountries.length) {
-      setIsPlaying(false);
-      return;
+      // Animation complete - pause briefly then restart
+      const restartTimer = setTimeout(() => {
+        setIlluminatedCountries(new Set());
+        setCurrentIndex(0);
+      }, 2000); // 2 second pause before restarting
+      return () => clearTimeout(restartTimer);
     }
 
     const timer = setTimeout(() => {
