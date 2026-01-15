@@ -56,21 +56,26 @@ export const VisitorMap = () => {
 
   const paris = { lat: 48.8566, lng: 2.3522 };
 
-  // Fetch data from API and auto-start animation
+  // Fetch data from API
   useEffect(() => {
     fetch('/api/visitors')
       .then(res => res.json())
       .then((apiData: ApiResponse) => {
         setData(apiData);
         setLoading(false);
-        // Auto-start animation after a short delay
-        setTimeout(() => {
-          setIsPlaying(true);
-          setShowAllConnections(false);
-        }, 800);
       })
       .catch(() => setLoading(false));
   }, []);
+
+  // Auto-start animation when data is loaded
+  useEffect(() => {
+    if (data && !loading && currentIndex === 0 && !isPlaying && illuminatedCountries.size === 0) {
+      const timer = setTimeout(() => {
+        setIsPlaying(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [data, loading, currentIndex, isPlaying, illuminatedCountries.size]);
 
   // Get unique countries in chronological order (for animation)
   const chronologicalCountries = data?.guests
