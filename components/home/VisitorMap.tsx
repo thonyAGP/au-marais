@@ -53,8 +53,8 @@ export const VisitorMap = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAllConnections, setShowAllConnections] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
-  const mapRef = useRef<HTMLDivElement>(null);
+  const [hasAnimationStarted, setHasAnimationStarted] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const paris = { lat: 48.8566, lng: 2.3522 };
 
@@ -69,30 +69,36 @@ export const VisitorMap = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // Auto-start animation when map becomes visible (IntersectionObserver)
+  // Auto-start animation when map becomes visible in viewport
   useEffect(() => {
-    if (!data || loading || hasStarted) return;
+    if (!data || loading || hasAnimationStarted) return;
+
+    const mapElement = mapContainerRef.current;
+    if (!mapElement) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStarted) {
-            setHasStarted(true);
-            setTimeout(() => {
-              setIsPlaying(true);
-            }, 500);
-          }
-        });
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          // Map is now visible - start animation
+          setHasAnimationStarted(true);
+          observer.disconnect();
+          // Small delay before starting animation
+          setTimeout(() => {
+            setIsPlaying(true);
+          }, 300);
+        }
       },
-      { threshold: 0.3 } // Trigger when 30% of the map is visible
+      {
+        threshold: 0.2, // Trigger when 20% visible
+        rootMargin: '0px'
+      }
     );
 
-    if (mapRef.current) {
-      observer.observe(mapRef.current);
-    }
+    observer.observe(mapElement);
 
     return () => observer.disconnect();
-  }, [data, loading, hasStarted]);
+  }, [data, loading, hasAnimationStarted]);
 
   // Get unique countries in chronological order (for animation)
   const chronologicalCountries = data?.guests
@@ -211,7 +217,7 @@ export const VisitorMap = () => {
         </div>
 
         {/* Map Container */}
-        <div ref={mapRef} className="relative rounded-xl overflow-hidden border border-neutral-700/50 mb-6 shadow-2xl bg-[#0c1929]">
+        <div ref={mapContainerRef} className="relative rounded-xl overflow-hidden border border-neutral-700/50 mb-6 shadow-2xl bg-[#0c1929]">
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{
