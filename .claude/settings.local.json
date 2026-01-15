@@ -44,7 +44,23 @@
       "WebFetch(domain:www.revyoos.com)",
       "WebFetch(domain:www.proxi.co)",
       "Bash(done)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(pnpm typecheck:*)",
+      "WebFetch(domain:docs.smoobu.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(timeout /t 5 /nobreak)",
+      "Bash(taskkill /F /PID 38244)",
+      "Bash(node run.js:*)",
+      "Bash(dir:*)",
+      "Bash(ls:*)",
+      "Bash(node imap-extract-guests.js:*)",
+      "Bash(timeout:*)",
+      "Bash(ping:*)",
+      "Bash(cat:*)",
+      "Bash(node scripts/extract-emails-imap.js:*)",
+      "Bash(node scripts/extract-playwright.js:*)",
+      "Bash(node scripts/fetch-smoobu-guests.js:*)",
+      "Bash(git config:*)"
     ]
   }
 }

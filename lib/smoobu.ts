@@ -134,3 +134,100 @@ export const getSmoobuChannels = async () => {
 
   return response.json();
 };
+
+// Guest data structure from Smoobu
+export interface SmoobuGuestAddress {
+  street: string | null;
+  postalCode: string | null;
+  city: string | null;
+  country: string | null;
+}
+
+export interface SmoobuGuest {
+  id: number;
+  firstName: string;
+  lastName: string;
+  companyName: string | null;
+  emails: string[];
+  telephoneNumbers: string[];
+  address: SmoobuGuestAddress;
+  notes: string | null;
+  bookings: Array<{
+    id: number;
+    arrival: string;
+    departure: string;
+  }>;
+}
+
+export interface SmoobuGuestsResponse {
+  guests: SmoobuGuest[];
+  pageCount: number;
+  pageSize: number;
+  totalItems: number;
+  page: number;
+}
+
+// Get all guests with their location data (for V3 map feature)
+export const getSmoobuGuests = async (page = 1): Promise<SmoobuGuestsResponse> => {
+  const response = await fetch(`${SMOOBU_BASE_URL}/guests?page=${page}`, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Smoobu guests');
+  }
+
+  return response.json();
+};
+
+// Get a single guest by ID
+export const getSmoobuGuest = async (guestId: number): Promise<SmoobuGuest> => {
+  const response = await fetch(`${SMOOBU_BASE_URL}/guests/${guestId}`, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Smoobu guest');
+  }
+
+  return response.json();
+};
+
+// Get guests with country data (filters out guests without country)
+export const getGuestsWithLocation = async (): Promise<Array<{
+  name: string;
+  country: string;
+  city: string | null;
+  stayDate: string;
+}>> => {
+  const guestsWithLocation: Array<{
+    name: string;
+    country: string;
+    city: string | null;
+    stayDate: string;
+  }> = [];
+
+  let page = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    const response = await getSmoobuGuests(page);
+
+    for (const guest of response.guests) {
+      if (guest.address.country) {
+        const latestBooking = guest.bookings[0]; // Most recent booking
+        guestsWithLocation.push({
+          name: `${guest.firstName} ${guest.lastName.charAt(0)}.`,
+          country: guest.address.country,
+          city: guest.address.city,
+          stayDate: latestBooking?.arrival || '',
+        });
+      }
+    }
+
+    hasMore = page < response.pageCount;
+    page++;
+  }
+
+  return guestsWithLocation;
+};
