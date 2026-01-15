@@ -1,7 +1,7 @@
 'use client';
 
 import { ComposableMap, Geographies, Geography, Marker, Line } from 'react-simple-maps';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
@@ -53,6 +53,8 @@ export const VisitorMap = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAllConnections, setShowAllConnections] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   const paris = { lat: 48.8566, lng: 2.3522 };
 
@@ -67,15 +69,30 @@ export const VisitorMap = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // Auto-start animation when data is loaded
+  // Auto-start animation when map becomes visible (IntersectionObserver)
   useEffect(() => {
-    if (data && !loading && currentIndex === 0 && !isPlaying && illuminatedCountries.size === 0) {
-      const timer = setTimeout(() => {
-        setIsPlaying(true);
-      }, 1000);
-      return () => clearTimeout(timer);
+    if (!data || loading || hasStarted) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasStarted) {
+            setHasStarted(true);
+            setTimeout(() => {
+              setIsPlaying(true);
+            }, 500);
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger when 30% of the map is visible
+    );
+
+    if (mapRef.current) {
+      observer.observe(mapRef.current);
     }
-  }, [data, loading, currentIndex, isPlaying, illuminatedCountries.size]);
+
+    return () => observer.disconnect();
+  }, [data, loading, hasStarted]);
 
   // Get unique countries in chronological order (for animation)
   const chronologicalCountries = data?.guests
@@ -194,7 +211,7 @@ export const VisitorMap = () => {
         </div>
 
         {/* Map Container */}
-        <div className="relative rounded-xl overflow-hidden border border-neutral-700/50 mb-6 shadow-2xl bg-[#0c1929]">
+        <div ref={mapRef} className="relative rounded-xl overflow-hidden border border-neutral-700/50 mb-6 shadow-2xl bg-[#0c1929]">
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{
