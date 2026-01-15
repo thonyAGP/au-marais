@@ -52,20 +52,22 @@ export const VisitorMap = () => {
   const [illuminatedCountries, setIlluminatedCountries] = useState<Set<string>>(new Set());
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAllConnections, setShowAllConnections] = useState(true);
+  const [showAllConnections, setShowAllConnections] = useState(false);
 
   const paris = { lat: 48.8566, lng: 2.3522 };
 
-  // Fetch data from API
+  // Fetch data from API and auto-start animation
   useEffect(() => {
     fetch('/api/visitors')
       .then(res => res.json())
       .then((apiData: ApiResponse) => {
         setData(apiData);
         setLoading(false);
-        // Show all countries by default
-        const allCountries = new Set(Object.keys(apiData.countrySummary));
-        setIlluminatedCountries(allCountries);
+        // Auto-start animation after a short delay
+        setTimeout(() => {
+          setIsPlaying(true);
+          setShowAllConnections(false);
+        }, 800);
       })
       .catch(() => setLoading(false));
   }, []);
