@@ -766,5 +766,12 @@
     "error": "Fehler",
     "errorGeneric": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
     "required": "Pflichtfeld"
+  },
+  "nativeTestimonials": {
+    "sectionTitle": "Gästebewertungen",
+    "title": "Was sie über uns sagen",
+    "subtitle": "Entdecken Sie authentische Bewertungen unserer Gäste",
+    "noTestimonials": "Noch keine Bewertungen",
+    "leaveReview": "Bewertung abgeben"
   }
 }

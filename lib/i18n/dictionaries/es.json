@@ -766,5 +766,12 @@
     "error": "Error",
     "errorGeneric": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
     "required": "Campo obligatorio"
+  },
+  "nativeTestimonials": {
+    "sectionTitle": "Opiniones de nuestros huéspedes",
+    "title": "Lo que dicen de nosotros",
+    "subtitle": "Descubre las opiniones auténticas de nuestros visitantes",
+    "noTestimonials": "Aún no hay opiniones",
+    "leaveReview": "Dejar una opinión"
   }
 }

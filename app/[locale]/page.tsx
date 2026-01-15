@@ -1,5 +1,6 @@
 import { Hero, Features, GalleryPreview, Hosts, Testimonials, LocalTips, VisitorMap } from '@/components/home';
 import { Container, AnimateOnScroll, SuperhostBadge } from '@/components/ui';
+import { NativeTestimonials } from '@/components/testimonials';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/i18n/config';
 
@@ -45,6 +46,7 @@ export default async function HomePage({
       <GalleryPreview dict={dict.gallery} locale={locale} />
       <Hosts dict={dict.hosts} />
       <Testimonials dict={dict.testimonials} stats={dict.stats} />
+      <NativeTestimonials dict={dict.nativeTestimonials} locale={locale} />
       <LocalTips dict={dict.localTips} />
       <VisitorMap />
 

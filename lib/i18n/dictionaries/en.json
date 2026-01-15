@@ -764,5 +764,12 @@
     "error": "Error",
     "errorGeneric": "An error occurred. Please try again.",
     "required": "Required field"
+  },
+  "nativeTestimonials": {
+    "sectionTitle": "Guest Reviews",
+    "title": "What They Say About Us",
+    "subtitle": "Discover authentic reviews from our visitors",
+    "noTestimonials": "No reviews yet",
+    "leaveReview": "Leave a Review"
   }
 }

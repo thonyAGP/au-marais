@@ -766,5 +766,12 @@
     "error": "Erro",
     "errorGeneric": "Ocorreu um erro. Por favor, tente novamente.",
     "required": "Campo obrigatório"
+  },
+  "nativeTestimonials": {
+    "sectionTitle": "Depoimentos dos hóspedes",
+    "title": "O que dizem sobre nós",
+    "subtitle": "Descubra os depoimentos autênticos dos nossos visitantes",
+    "noTestimonials": "Nenhum depoimento ainda",
+    "leaveReview": "Deixar um depoimento"
   }
 }

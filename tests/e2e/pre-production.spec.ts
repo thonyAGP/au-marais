@@ -165,11 +165,14 @@ test.describe('Pre-Production Checks', () => {
         // Wait for page to be fully loaded
         await page.waitForLoadState('networkidle');
 
-        // Check no critical JS errors (ignore third-party errors)
+        // Check no critical JS errors (ignore third-party errors and local API errors)
+        const isLocalDev = !process.env.CI && !process.env.VERCEL;
         const criticalErrors = errors.filter(e =>
           !e.includes('flagcdn') &&
           !e.includes('analytics') &&
-          !e.includes('third-party')
+          !e.includes('third-party') &&
+          // Ignore API 500 errors in local dev (Vercel KV unavailable for testimonials)
+          !(isLocalDev && e.includes('500'))
         );
 
         expect(criticalErrors).toHaveLength(0);
