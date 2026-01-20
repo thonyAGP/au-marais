@@ -262,3 +262,4 @@ au-marais/
 - 2026-01-20 : **Webhook Stripe** - Validation automatique des paiements (checkout.session.completed)
 - 2026-01-20 : **Page confirmation paiement** - /reservation/confirmed avec détails séjour
 - 2026-01-20 : **Checklist tests réservation** - docs/tests-reservation.md pour tests manuels
+- 2026-01-20 : **Fallback Vercel KV** - Wrapper safeKv pour dev local sans KV configuré
