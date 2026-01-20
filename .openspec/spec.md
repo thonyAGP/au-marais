@@ -259,3 +259,6 @@ au-marais/
 - 2026-01-13 : **Git Hooks Husky** - Pre-commit (lint-staged + typecheck), pre-push (tests selon branche), commit-msg (commitlint)
 - 2026-01-13 : **Tests E2E pre-production** - Suite Playwright (critiques, langues, SEO, accessibilité)
 - 2026-01-13 : Fix responsive mobile (titre Hero, overflow horizontal, sélecteur de langues)
+- 2026-01-20 : **Webhook Stripe** - Validation automatique des paiements (checkout.session.completed)
+- 2026-01-20 : **Page confirmation paiement** - /reservation/confirmed avec détails séjour
+- 2026-01-20 : **Checklist tests réservation** - docs/tests-reservation.md pour tests manuels
