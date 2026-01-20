@@ -20,6 +20,75 @@ const RESERVATIONS_LIST_KEY = 'reservations:list';
 const TESTIMONIAL_PREFIX = 'testimonial:';
 const TESTIMONIALS_LIST_KEY = 'testimonials:list';
 
+// Check if Vercel KV is configured
+const isKvConfigured = () => {
+  return !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+};
+
+// Log warning only once
+let kvWarningLogged = false;
+const logKvWarning = () => {
+  if (!kvWarningLogged && !isKvConfigured()) {
+    console.warn(
+      '[db] Vercel KV not configured (missing KV_REST_API_URL/KV_REST_API_TOKEN). ' +
+      'Database operations will return empty results. ' +
+      'This is expected in local development without KV setup.'
+    );
+    kvWarningLogged = true;
+  }
+};
+
+// Safe KV wrapper that returns fallback values when KV is not configured
+const safeKv = {
+  async get<T>(key: string): Promise<T | null> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return null;
+    }
+    return kv.get<T>(key);
+  },
+
+  async set<T>(key: string, value: T): Promise<void> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return;
+    }
+    await kv.set(key, value);
+  },
+
+  async del(key: string): Promise<void> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return;
+    }
+    await kv.del(key);
+  },
+
+  async zadd(key: string, options: { score: number; member: string }): Promise<void> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return;
+    }
+    await kv.zadd(key, options);
+  },
+
+  async zrange<T extends unknown[]>(key: string, start: number, end: number, options?: { rev?: boolean }): Promise<T | null> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return null;
+    }
+    return kv.zrange<T>(key, start, end, options);
+  },
+
+  async zrem(key: string, member: string): Promise<void> {
+    if (!isKvConfigured()) {
+      logKvWarning();
+      return;
+    }
+    await kv.zrem(key, member);
+  },
+};
+
 // Generate a secure token for action links
 const generateToken = () => uuidv4().replace(/-/g, '');
 
@@ -98,10 +167,10 @@ export const createReservation = async (
   };
 
   // Store the reservation
-  await kv.set(`${RESERVATION_PREFIX}${id}`, reservation);
+  await safeKv.set(`${RESERVATION_PREFIX}${id}`, reservation);
 
   // Add to the list of reservations (sorted by creation date)
-  await kv.zadd(RESERVATIONS_LIST_KEY, {
+  await safeKv.zadd(RESERVATIONS_LIST_KEY, {
     score: Date.now(),
     member: id,
   });
@@ -111,7 +180,7 @@ export const createReservation = async (
 
 // Get a reservation by ID
 export const getReservation = async (id: string): Promise<Reservation | null> => {
-  return kv.get<Reservation>(`${RESERVATION_PREFIX}${id}`);
+  return safeKv.get<Reservation>(`${RESERVATION_PREFIX}${id}`);
 };
 
 // Get a reservation by ID and token (for secure action links)
@@ -157,7 +226,7 @@ export const updateReservation = async (
     updatedAt: new Date().toISOString(),
   };
 
-  await kv.set(`${RESERVATION_PREFIX}${id}`, updated);
+  await safeKv.set(`${RESERVATION_PREFIX}${id}`, updated);
   return updated;
 };
 
@@ -172,7 +241,7 @@ export const listReservations = async (
   const { status, limit = 50, offset = 0 } = options;
 
   // Get all reservation IDs (newest first)
-  const ids = await kv.zrange<string[]>(RESERVATIONS_LIST_KEY, 0, -1, { rev: true });
+  const ids = await safeKv.zrange<string[]>(RESERVATIONS_LIST_KEY, 0, -1, { rev: true });
 
   if (!ids || ids.length === 0) {
     return { reservations: [], total: 0 };
@@ -201,8 +270,8 @@ export const deleteReservation = async (id: string): Promise<boolean> => {
   const reservation = await getReservation(id);
   if (!reservation) return false;
 
-  await kv.del(`${RESERVATION_PREFIX}${id}`);
-  await kv.zrem(RESERVATIONS_LIST_KEY, id);
+  await safeKv.del(`${RESERVATION_PREFIX}${id}`);
+  await safeKv.zrem(RESERVATIONS_LIST_KEY, id);
 
   return true;
 };
@@ -255,8 +324,8 @@ export const createTestimonial = async (
     updatedAt: now,
   };
 
-  await kv.set(`${TESTIMONIAL_PREFIX}${id}`, testimonial);
-  await kv.zadd(TESTIMONIALS_LIST_KEY, {
+  await safeKv.set(`${TESTIMONIAL_PREFIX}${id}`, testimonial);
+  await safeKv.zadd(TESTIMONIALS_LIST_KEY, {
     score: Date.now(),
     member: id,
   });
@@ -266,7 +335,7 @@ export const createTestimonial = async (
 
 // Get a testimonial by ID
 export const getTestimonial = async (id: string): Promise<Testimonial | null> => {
-  return kv.get<Testimonial>(`${TESTIMONIAL_PREFIX}${id}`);
+  return safeKv.get<Testimonial>(`${TESTIMONIAL_PREFIX}${id}`);
 };
 
 // Get a testimonial by ID and token (for secure access)
@@ -301,7 +370,7 @@ export const updateTestimonial = async (
         : testimonial.publishedAt,
   };
 
-  await kv.set(`${TESTIMONIAL_PREFIX}${id}`, updated);
+  await safeKv.set(`${TESTIMONIAL_PREFIX}${id}`, updated);
   return updated;
 };
 
@@ -315,7 +384,7 @@ export const listTestimonials = async (
 ): Promise<{ testimonials: Testimonial[]; total: number }> => {
   const { status, limit = 50, offset = 0 } = options;
 
-  const ids = await kv.zrange<string[]>(TESTIMONIALS_LIST_KEY, 0, -1, { rev: true });
+  const ids = await safeKv.zrange<string[]>(TESTIMONIALS_LIST_KEY, 0, -1, { rev: true });
 
   if (!ids || ids.length === 0) {
     return { testimonials: [], total: 0 };
@@ -354,8 +423,8 @@ export const deleteTestimonial = async (id: string): Promise<boolean> => {
   const testimonial = await getTestimonial(id);
   if (!testimonial) return false;
 
-  await kv.del(`${TESTIMONIAL_PREFIX}${id}`);
-  await kv.zrem(TESTIMONIALS_LIST_KEY, id);
+  await safeKv.del(`${TESTIMONIAL_PREFIX}${id}`);
+  await safeKv.zrem(TESTIMONIALS_LIST_KEY, id);
 
   return true;
 };
