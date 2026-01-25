@@ -15,20 +15,32 @@ const getResend = (): Resend => {
 };
 
 // Email configuration - evaluated at RUNTIME (not build time)
-// In preview/dev: use Resend test domain (can only send to account owner email)
-// In production: use verified domain
+// ADMIN_EMAIL_TEST is only set in Preview/Dev environments (not Production)
+// So we use its presence to determine the environment
 const getEmailConfig = () => {
+  const hasTestConfig = !!process.env.ADMIN_EMAIL_TEST;
   const isProduction = process.env.VERCEL_ENV === 'production';
 
-  const fromEmail = isProduction
-    ? (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>')
-    : 'Au Marais Test <onboarding@resend.dev>';
+  // Use test domain if ADMIN_EMAIL_TEST is configured
+  const fromEmail = hasTestConfig
+    ? 'Au Marais Test <onboarding@resend.dev>'
+    : (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>');
 
-  const adminEmail = isProduction
-    ? (process.env.ADMIN_EMAIL || 'au-marais@hotmail.com')
-    : (process.env.ADMIN_EMAIL_TEST || 'au-marais@hotmail.com');
+  // ADMIN_EMAIL_TEST takes priority when set (preview/dev only)
+  const adminEmail = process.env.ADMIN_EMAIL_TEST
+    || process.env.ADMIN_EMAIL
+    || 'au-marais@hotmail.com';
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr';
+
+  // Debug log (will appear in Vercel function logs)
+  console.log('[Email Config]', {
+    hasTestConfig,
+    isProduction,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    adminEmail,
+    fromEmail: fromEmail.substring(0, 30) + '...'
+  });
 
   return { isProduction, fromEmail, adminEmail, siteUrl };
 };
