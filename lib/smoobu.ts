@@ -32,8 +32,9 @@ export const checkAvailability = async (arrival: string, departure: string) => {
     throw new Error(`Smoobu config missing: apartmentId=${!!apartmentId}, apiKey=${!!apiKey}`);
   }
 
+  // Use the rates endpoint to check availability
   const response = await fetch(
-    `${SMOOBU_BASE_URL}/availability?arrivalDate=${arrival}&departureDate=${departure}&apartments[]=${apartmentId}`,
+    `${SMOOBU_BASE_URL}/rates?apartments[]=${apartmentId}&start_date=${arrival}&end_date=${departure}`,
     { headers: getHeaders() }
   );
 
@@ -43,7 +44,26 @@ export const checkAvailability = async (arrival: string, departure: string) => {
   }
 
   const data = await response.json();
-  return data.availableApartments?.includes(Number(apartmentId)) ?? false;
+  const rates = data.data?.[apartmentId];
+
+  if (!rates) {
+    return false;
+  }
+
+  // Check if all dates (except departure) are available
+  // Departure date doesn't need to be available (checkout day)
+  const arrivalDate = new Date(arrival);
+  const departureDate = new Date(departure);
+
+  for (let d = new Date(arrivalDate); d < departureDate; d.setDate(d.getDate() + 1)) {
+    const dateStr = d.toISOString().split('T')[0];
+    const dayData = rates[dateStr];
+    if (!dayData || dayData.available === 0) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 // Create a reservation in Smoobu (blocks the dates)
