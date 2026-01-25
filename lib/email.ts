@@ -512,6 +512,10 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
             <a href="${actionBaseUrl}/reject?token=${reservation.token}" class="btn btn-reject">❌ Refuser</a>
             <a href="${siteUrl}/admin/reservations/${reservation.id}?token=${reservation.token}" class="btn btn-edit">📋 Voir détails</a>
           </div>
+
+          <div style="text-align: center; margin-top: 15px;">
+            <a href="${getWhatsAppUrl(reservation.phone, `Bonjour ${reservation.firstName}, merci pour votre demande de réservation Au Marais du ${formatDate(reservation.arrivalDate, 'fr')} au ${formatDate(reservation.departureDate, 'fr')}. `)}" class="btn" style="background: #25D366; color: white;">💬 Contacter sur WhatsApp</a>
+          </div>
         </div>
       </div>
     </body>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Container } from '@/components/ui';
+import { Container, DevModeBanner } from '@/components/ui';
 import {
   Lock,
   LogOut,
@@ -18,6 +18,7 @@ import {
   ChevronDown,
   RefreshCw,
   Settings,
+  Eye,
 } from 'lucide-react';
 import Link from 'next/link';
 import type { Reservation } from '@/types/reservation';
@@ -173,44 +174,47 @@ export default function AdminReservationsPage() {
   // Login screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-stone-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gold/10 rounded-full mb-4">
-              <Lock className="h-8 w-8 text-gold" />
+      <div className="min-h-screen bg-cream">
+        <DevModeBanner />
+        <div className="flex items-center justify-center min-h-screen p-4">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border border-stone-200">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold/10 rounded-full mb-4">
+                <Lock className="h-8 w-8 text-gold" />
+              </div>
+              <h1 className="font-serif text-2xl text-text">Réservations</h1>
+              <p className="text-text-muted text-sm mt-2">Au Marais - Administration</p>
             </div>
-            <h1 className="font-serif text-2xl text-stone-900">Réservations</h1>
-            <p className="text-stone-500 text-sm mt-2">Au Marais - Administration</p>
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-text mb-1">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
+                  placeholder="Entrez le mot de passe"
+                  required
+                />
+              </div>
+
+              {loginError && (
+                <p className="text-red-500 text-sm text-center">{loginError}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full px-4 py-3 bg-gold text-white font-medium rounded-lg hover:bg-gold-dark transition-colors disabled:opacity-50"
+              >
+                {loading ? 'Connexion...' : 'Se connecter'}
+              </button>
+            </form>
           </div>
-
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
-                placeholder="Entrez le mot de passe"
-                required
-              />
-            </div>
-
-            {loginError && (
-              <p className="text-red-500 text-sm text-center">{loginError}</p>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-4 py-3 bg-gold text-white font-medium rounded-lg hover:bg-gold-dark transition-colors disabled:opacity-50"
-            >
-              {loading ? 'Connexion...' : 'Se connecter'}
-            </button>
-          </form>
         </div>
       </div>
     );
@@ -218,49 +222,65 @@ export default function AdminReservationsPage() {
 
   // Main content
   return (
-    <div className="min-h-screen bg-stone-100 py-8">
+    <div className="min-h-screen bg-cream">
+      <DevModeBanner />
+
+      {/* Header */}
+      <header className="bg-white border-b border-stone-200 sticky top-0 z-40">
+        <Container size="lg">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center gap-3">
+              <span className="font-serif text-xl text-text">Au <span className="text-gold">Marais</span></span>
+              <span className="text-text-muted">•</span>
+              <span className="text-text-muted text-sm">Administration</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
+              >
+                <Settings className="h-4 w-4" />
+                Paramètres
+              </Link>
+              <button
+                onClick={() => loadReservations()}
+                disabled={isRefreshing}
+                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors disabled:opacity-50 text-sm"
+              >
+                <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                Actualiser
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
+              >
+                <LogOut className="h-4 w-4" />
+                Déconnexion
+              </button>
+            </div>
+          </div>
+        </Container>
+      </header>
+
+      <div className="py-8">
       <Container size="lg">
-        {/* Header */}
+        {/* Page Title */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <Calendar className="h-8 w-8 text-gold" />
             <div>
-              <h1 className="font-serif text-2xl text-stone-900">Réservations</h1>
-              <p className="text-stone-500 text-sm">
+              <h1 className="font-serif text-2xl text-text">Réservations</h1>
+              <p className="text-text-muted text-sm">
                 {reservations.length} demande{reservations.length > 1 ? 's' : ''}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="flex items-center gap-2 px-4 py-2 text-stone-600 hover:text-stone-900 hover:bg-stone-200 rounded-lg transition-colors"
-            >
-              <Settings className="h-4 w-4" />
-              Paramètres
-            </Link>
-            <button
-              onClick={() => loadReservations()}
-              disabled={isRefreshing}
-              className="flex items-center gap-2 px-4 py-2 text-stone-600 hover:text-stone-900 hover:bg-stone-200 rounded-lg transition-colors disabled:opacity-50"
-            >
-              <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-              Actualiser
-            </button>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 text-stone-600 hover:text-stone-900 hover:bg-stone-200 rounded-lg transition-colors"
-            >
-              <LogOut className="h-4 w-4" />
-              Déconnexion
-            </button>
-          </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6 border border-stone-200">
           <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-sm text-stone-500">Filtrer par statut :</span>
+            <span className="text-sm text-text-muted">Filtrer par statut :</span>
             <div className="flex gap-2 flex-wrap">
               {(['all', 'pending', 'approved', 'paid', 'rejected', 'cancelled'] as const).map((status) => (
                 <button
@@ -269,7 +289,7 @@ export default function AdminReservationsPage() {
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                     statusFilter === status
                       ? 'bg-gold text-white'
-                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                      : 'bg-cream text-text-muted hover:bg-stone-200'
                   }`}
                 >
                   {status === 'all' ? 'Toutes' : statusConfig[status].label}
@@ -286,9 +306,9 @@ export default function AdminReservationsPage() {
 
         {/* Reservations List */}
         {sortedReservations.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+          <div className="bg-white rounded-lg shadow-sm p-12 text-center border border-stone-200">
             <Calendar className="h-12 w-12 text-stone-300 mx-auto mb-4" />
-            <p className="text-stone-500">Aucune réservation trouvée</p>
+            <p className="text-text-muted">Aucune réservation trouvée</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -304,6 +324,7 @@ export default function AdminReservationsPage() {
           </div>
         )}
       </Container>
+      </div>
     </div>
   );
 }
@@ -334,10 +355,10 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-stone-200">
       {/* Header - Always visible */}
       <div
-        className="p-4 cursor-pointer hover:bg-stone-50 transition-colors"
+        className="p-4 cursor-pointer hover:bg-cream/50 transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center justify-between">
@@ -347,10 +368,10 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
               {status.label}
             </div>
             <div>
-              <p className="font-medium text-stone-900">
+              <p className="font-medium text-text">
                 {reservation.firstName} {reservation.lastName}
               </p>
-              <p className="text-sm text-stone-500">
+              <p className="text-sm text-text-muted">
                 {formatDate(reservation.arrivalDate)} → {formatDate(reservation.departureDate)}
                 <span className="mx-2">•</span>
                 {reservation.nights} nuit{reservation.nights > 1 ? 's' : ''}
@@ -359,13 +380,21 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <p className="font-semibold text-stone-900">{reservation.total}€</p>
-              <p className="text-xs text-stone-500">
+              <p className="font-semibold text-text">{reservation.total}€</p>
+              <p className="text-xs text-text-muted">
                 Reçue {formatDateTime(reservation.createdAt)}
               </p>
             </div>
+            <Link
+              href={`/admin/reservations/${reservation.id}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gold hover:text-gold-dark hover:bg-gold/10 rounded-lg transition-colors"
+            >
+              <Eye className="h-4 w-4" />
+              Détails
+            </Link>
             <ChevronDown
-              className={`h-5 w-5 text-stone-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+              className={`h-5 w-5 text-text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`}
             />
           </div>
         </div>
@@ -373,34 +402,34 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="border-t border-stone-100 p-4 bg-stone-50">
+        <div className="border-t border-stone-200 p-4 bg-cream/30">
           <div className="grid md:grid-cols-2 gap-6">
             {/* Contact Info */}
             <div className="space-y-3">
-              <h4 className="font-medium text-stone-700 text-sm uppercase tracking-wide">Contact</h4>
+              <h4 className="font-medium text-text text-sm uppercase tracking-wide">Contact</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-4 w-4 text-stone-400" />
-                  <a href={`mailto:${reservation.email}`} className="text-gold hover:underline">
+                  <Mail className="h-4 w-4 text-text-muted" />
+                  <a href={`mailto:${reservation.email}`} className="text-gold hover:text-gold-dark hover:underline">
                     {reservation.email}
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-4 w-4 text-stone-400" />
-                  <a href={`tel:${reservation.phone}`} className="text-gold hover:underline">
+                  <Phone className="h-4 w-4 text-text-muted" />
+                  <a href={`tel:${reservation.phone}`} className="text-gold hover:text-gold-dark hover:underline">
                     {reservation.phone}
                   </a>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Users className="h-4 w-4 text-stone-400" />
+                <div className="flex items-center gap-2 text-sm text-text">
+                  <Users className="h-4 w-4 text-text-muted" />
                   <span>{reservation.guests} voyageur{reservation.guests > 1 ? 's' : ''}</span>
                 </div>
               </div>
               {reservation.message && (
                 <div className="mt-3 p-3 bg-white rounded-lg border border-stone-200">
                   <div className="flex items-start gap-2">
-                    <MessageSquare className="h-4 w-4 text-stone-400 mt-0.5" />
-                    <p className="text-sm text-stone-600">{reservation.message}</p>
+                    <MessageSquare className="h-4 w-4 text-text-muted mt-0.5" />
+                    <p className="text-sm text-text-muted">{reservation.message}</p>
                   </div>
                 </div>
               )}
@@ -408,11 +437,11 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
 
             {/* Pricing Details */}
             <div className="space-y-3">
-              <h4 className="font-medium text-stone-700 text-sm uppercase tracking-wide">Tarification</h4>
+              <h4 className="font-medium text-text text-sm uppercase tracking-wide">Tarification</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-stone-500">{reservation.nightlyRate}€ x {reservation.nights} nuits</span>
-                  <span>{reservation.subtotal}€</span>
+                  <span className="text-text-muted">{reservation.nightlyRate}€ x {reservation.nights} nuits</span>
+                  <span className="text-text">{reservation.subtotal}€</span>
                 </div>
                 {reservation.discount && reservation.discount > 0 && (
                   <div className="flex justify-between text-green-600">
@@ -421,16 +450,16 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span className="text-stone-500">Frais de ménage</span>
-                  <span>{reservation.cleaningFee}€</span>
+                  <span className="text-text-muted">Frais de ménage</span>
+                  <span className="text-text">{reservation.cleaningFee}€</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-500">Taxe de séjour</span>
-                  <span>{reservation.touristTax}€</span>
+                  <span className="text-text-muted">Taxe de séjour</span>
+                  <span className="text-text">{reservation.touristTax}€</span>
                 </div>
                 <div className="flex justify-between font-semibold pt-2 border-t border-stone-200">
-                  <span>Total</span>
-                  <span>{reservation.total}€</span>
+                  <span className="text-text">Total</span>
+                  <span className="text-gold">{reservation.total}€</span>
                 </div>
               </div>
             </div>
@@ -442,8 +471,8 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-4">
                   <div className="flex-1 min-w-[200px]">
-                    <label className="block text-xs font-medium text-stone-500 mb-1">
-                      Montant caution (€)
+                    <label className="block text-xs font-medium text-text-muted mb-1">
+                      Montant acompte (€)
                     </label>
                     <input
                       type="number"
@@ -453,7 +482,7 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
                     />
                   </div>
                   <div className="flex-1 min-w-[200px]">
-                    <label className="block text-xs font-medium text-stone-500 mb-1">
+                    <label className="block text-xs font-medium text-text-muted mb-1">
                       Motif de refus (optionnel)
                     </label>
                     <input
