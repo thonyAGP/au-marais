@@ -30,10 +30,13 @@ const getPreferredLocale = (request: NextRequest): Locale => {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip static files, api routes, and _next
+  // Skip static files, api routes, admin routes, action routes, and _next
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/r/') ||
+    pathname.startsWith('/reservation') ||
     pathname.startsWith('/images') ||
     pathname.includes('.') // static files with extensions
   ) {
