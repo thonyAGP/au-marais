@@ -26,13 +26,20 @@ export const getAvailability = async (startDate: string, endDate: string) => {
 
 export const checkAvailability = async (arrival: string, departure: string) => {
   const apartmentId = process.env.SMOOBU_APARTMENT_ID;
+  const apiKey = process.env.SMOOBU_API_KEY;
+
+  if (!apartmentId || !apiKey) {
+    throw new Error(`Smoobu config missing: apartmentId=${!!apartmentId}, apiKey=${!!apiKey}`);
+  }
+
   const response = await fetch(
     `${SMOOBU_BASE_URL}/availability?arrivalDate=${arrival}&departureDate=${departure}&apartments[]=${apartmentId}`,
     { headers: getHeaders() }
   );
 
   if (!response.ok) {
-    throw new Error('Failed to check availability');
+    const text = await response.text();
+    throw new Error(`Smoobu API error ${response.status}: ${text.slice(0, 200)}`);
   }
 
   const data = await response.json();
