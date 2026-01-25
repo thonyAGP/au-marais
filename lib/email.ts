@@ -42,7 +42,7 @@ const getEmailConfig = () => {
     fromEmail: fromEmail.substring(0, 30) + '...'
   });
 
-  return { isProduction, fromEmail, adminEmail, siteUrl };
+  return { isProduction, fromEmail, adminEmail, siteUrl, isTest: hasTestConfig };
 };
 
 // Format date for display
@@ -395,10 +395,11 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
 
 // Email template: New reservation notification (to admin)
 export const sendAdminNotificationEmail = async (reservation: Reservation) => {
-  const { fromEmail, adminEmail, siteUrl } = getEmailConfig();
+  const { fromEmail, adminEmail, siteUrl, isTest } = getEmailConfig();
   const actionBaseUrl = `${siteUrl}/r/${reservation.id}`;
 
-  const subject = `🏠 Nouvelle demande - ${reservation.firstName} ${reservation.lastName} (${reservation.nights} nuits)`;
+  const testPrefix = isTest ? '[TEST] ' : '';
+  const subject = `${testPrefix}🏠 Nouvelle demande - ${reservation.firstName} ${reservation.lastName} (${reservation.nights} nuits)`;
 
   const html = `
     <!DOCTYPE html>
@@ -422,6 +423,7 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
     </head>
     <body>
       <div class="container">
+        ${isTest ? '<div style="background: #ff9800; color: white; padding: 10px; text-align: center; font-weight: bold;">⚠️ ENVIRONNEMENT DE TEST - Ceci n\'est pas une vraie réservation</div>' : ''}
         <div class="header">
           <h2 style="margin: 0;">🏠 Nouvelle demande de réservation</h2>
         </div>
