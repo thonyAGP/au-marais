@@ -510,7 +510,7 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
           <div class="actions" style="text-align: center;">
             <a href="${actionBaseUrl}/approve?token=${reservation.token}" class="btn btn-approve">✅ Valider</a>
             <a href="${actionBaseUrl}/reject?token=${reservation.token}" class="btn btn-reject">❌ Refuser</a>
-            <a href="${siteUrl}/admin/reservations" class="btn btn-edit">📋 Voir dans Admin</a>
+            <a href="${siteUrl}/admin/reservations/${reservation.id}?token=${reservation.token}" class="btn btn-edit">📋 Voir détails</a>
           </div>
         </div>
       </div>
@@ -545,7 +545,7 @@ export const generateWhatsAppAdminMessage = (reservation: Reservation): string =
 
 ✅ VALIDER: ${actionBaseUrl}/approve?token=${reservation.token}
 ❌ REFUSER: ${actionBaseUrl}/reject?token=${reservation.token}
-✏️ MODIFIER: ${actionBaseUrl}/edit?token=${reservation.token}`;
+📋 DÉTAILS: ${siteUrl}/admin/reservations/${reservation.id}?token=${reservation.token}`;
 };
 
 // Generate WhatsApp URL to send message
@@ -633,7 +633,7 @@ export const sendPaymentFailedAdminEmail = async (
 
           <div style="text-align: center; margin-top: 20px;">
             <p>Vous pouvez contacter le client pour lui proposer un nouveau lien de paiement :</p>
-            <a href="${siteUrl}/admin/reservations" class="btn btn-primary">📋 Voir dans Admin</a>
+            <a href="${siteUrl}/admin/reservations/${reservation.id}?token=${reservation.token}" class="btn btn-primary">📋 Voir la réservation</a>
           </div>
         </div>
       </div>
