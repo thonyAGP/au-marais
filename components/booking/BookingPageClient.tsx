@@ -830,7 +830,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                               type="button"
                               onClick={() => !pricing ? null : setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                               disabled={!pricing}
-                              className="flex items-center gap-1.5 w-[100px] px-2 py-2 bg-cream border border-stone-200 border-r-0 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                              className="flex items-center gap-1.5 w-[100px] h-[42px] px-2 bg-cream border border-stone-200 border-r-0 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
                               aria-label="Country code"
                               aria-expanded={isCountryDropdownOpen}
                             >
@@ -921,7 +921,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                             onChange={handleChange}
                             disabled={!pricing}
                             placeholder="6 12 34 56 78"
-                            className="flex-1 px-3 py-2 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                            className="flex-1 h-[42px] px-3 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
                           />
                         </div>
                       </div>
@@ -936,7 +936,7 @@ export const BookingPageClient = ({ dict, calendarDict, locale }: BookingPageCli
                           value={formData.guests}
                           onChange={handleChange}
                           disabled={!pricing}
-                          className="w-full px-3 py-2 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                          className="w-full h-[42px] px-3 bg-cream border border-stone-200 text-text text-sm focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
                         >
                           <option value="1">{dict.form.guestsOptions['1']}</option>
                           <option value="2">{dict.form.guestsOptions['2']}</option>
