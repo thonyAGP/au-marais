@@ -14,21 +14,24 @@ const getResend = (): Resend => {
   return resendInstance;
 };
 
-// Environment detection
-const isProduction = process.env.VERCEL_ENV === 'production';
-
-// Email configuration based on environment
+// Email configuration - evaluated at RUNTIME (not build time)
 // In preview/dev: use Resend test domain (can only send to account owner email)
 // In production: use verified domain
-const FROM_EMAIL = isProduction
-  ? (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>')
-  : 'Au Marais Test <onboarding@resend.dev>';
+const getEmailConfig = () => {
+  const isProduction = process.env.VERCEL_ENV === 'production';
 
-const ADMIN_EMAIL = isProduction
-  ? (process.env.ADMIN_EMAIL || 'au-marais@hotmail.com')
-  : (process.env.ADMIN_EMAIL_TEST || process.env.ADMIN_EMAIL || 'au-marais@hotmail.com');
+  const fromEmail = isProduction
+    ? (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>')
+    : 'Au Marais Test <onboarding@resend.dev>';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr';
+  const adminEmail = isProduction
+    ? (process.env.ADMIN_EMAIL || 'au-marais@hotmail.com')
+    : (process.env.ADMIN_EMAIL_TEST || 'au-marais@hotmail.com');
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr';
+
+  return { isProduction, fromEmail, adminEmail, siteUrl };
+};
 
 // Format date for display
 const formatDate = (dateStr: string, locale: string = 'fr'): string => {
@@ -130,8 +133,9 @@ export const sendReservationReceivedEmail = async (reservation: Reservation) => 
     </html>
   `;
 
+  const { fromEmail } = getEmailConfig();
   return getResend().emails.send({
-    from: FROM_EMAIL,
+    from: fromEmail,
     to: reservation.email,
     subject,
     html,
@@ -235,8 +239,9 @@ export const sendReservationApprovedEmail = async (
     </html>
   `;
 
+  const { fromEmail } = getEmailConfig();
   return getResend().emails.send({
-    from: FROM_EMAIL,
+    from: fromEmail,
     to: reservation.email,
     subject,
     html,
@@ -302,8 +307,9 @@ export const sendReservationRejectedEmail = async (
     </html>
   `;
 
+  const { fromEmail } = getEmailConfig();
   return getResend().emails.send({
-    from: FROM_EMAIL,
+    from: fromEmail,
     to: reservation.email,
     subject,
     html,
@@ -366,8 +372,9 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
     </html>
   `;
 
+  const { fromEmail } = getEmailConfig();
   return getResend().emails.send({
-    from: FROM_EMAIL,
+    from: fromEmail,
     to: reservation.email,
     subject,
     html,
@@ -376,7 +383,8 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
 
 // Email template: New reservation notification (to admin)
 export const sendAdminNotificationEmail = async (reservation: Reservation) => {
-  const actionBaseUrl = `${SITE_URL}/r/${reservation.id}`;
+  const { fromEmail, adminEmail, siteUrl } = getEmailConfig();
+  const actionBaseUrl = `${siteUrl}/r/${reservation.id}`;
 
   const subject = `🏠 Nouvelle demande - ${reservation.firstName} ${reservation.lastName} (${reservation.nights} nuits)`;
 
@@ -482,7 +490,7 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
           <div class="actions" style="text-align: center;">
             <a href="${actionBaseUrl}/approve?token=${reservation.token}" class="btn btn-approve">✅ Valider</a>
             <a href="${actionBaseUrl}/reject?token=${reservation.token}" class="btn btn-reject">❌ Refuser</a>
-            <a href="${SITE_URL}/admin/reservations" class="btn btn-edit">📋 Voir dans Admin</a>
+            <a href="${siteUrl}/admin/reservations" class="btn btn-edit">📋 Voir dans Admin</a>
           </div>
         </div>
       </div>
@@ -491,8 +499,8 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
   `;
 
   return getResend().emails.send({
-    from: FROM_EMAIL,
-    to: ADMIN_EMAIL,
+    from: fromEmail,
+    to: adminEmail,
     subject,
     html,
   });
@@ -500,7 +508,8 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
 
 // Generate WhatsApp notification message for admin
 export const generateWhatsAppAdminMessage = (reservation: Reservation): string => {
-  const actionBaseUrl = `${SITE_URL}/r/${reservation.id}`;
+  const { siteUrl } = getEmailConfig();
+  const actionBaseUrl = `${siteUrl}/r/${reservation.id}`;
 
   return `🏠 *Nouvelle demande de réservation!*
 
@@ -537,6 +546,7 @@ export const sendPaymentFailedAdminEmail = async (
     stripeSessionId?: string;
   }
 ) => {
+  const { fromEmail, adminEmail, siteUrl } = getEmailConfig();
   const subject = `⚠️ Échec de paiement - ${reservation.firstName} ${reservation.lastName}`;
 
   const html = `
@@ -603,7 +613,7 @@ export const sendPaymentFailedAdminEmail = async (
 
           <div style="text-align: center; margin-top: 20px;">
             <p>Vous pouvez contacter le client pour lui proposer un nouveau lien de paiement :</p>
-            <a href="${SITE_URL}/admin/reservations" class="btn btn-primary">📋 Voir dans Admin</a>
+            <a href="${siteUrl}/admin/reservations" class="btn btn-primary">📋 Voir dans Admin</a>
           </div>
         </div>
       </div>
@@ -612,8 +622,8 @@ export const sendPaymentFailedAdminEmail = async (
   `;
 
   return getResend().emails.send({
-    from: FROM_EMAIL,
-    to: ADMIN_EMAIL,
+    from: fromEmail,
+    to: adminEmail,
     subject,
     html,
   });
