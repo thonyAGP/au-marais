@@ -25,6 +25,9 @@ case "$BRANCH" in
   develop|dev|staging)
     echo "🧪 Test branch detected - Running quick tests..."
 
+    # Build first (required for pnpm start in tests)
+    pnpm build
+
     # Quick tests for develop/staging
     pnpm test:quick
 

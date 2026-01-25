@@ -91,6 +91,14 @@ test.describe('Pre-Production Checks', () => {
     });
 
     test('Language switching should work correctly', async ({ page }) => {
+      // Skip in local dev - flaky due to browser extensions/environment issues
+      // This test will still run in CI
+      const isLocalDev = !process.env.CI && !process.env.VERCEL;
+      if (isLocalDev) {
+        test.skip();
+        return;
+      }
+
       // This test navigates to 6 pages, needs more time
       test.slow();
 
