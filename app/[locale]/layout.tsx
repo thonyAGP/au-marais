@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Header, Footer } from '@/components/layout';
 import { BookingBar } from '@/components/home';
-import { ChatAssistant } from '@/components/ui';
+import { ChatAssistant, DevModeBanner } from '@/components/ui';
 import { locales, localeHrefLang, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { lodgingBusinessSchema } from '@/lib/schema';
@@ -134,6 +134,7 @@ export default async function LocaleLayout({
         <link rel="alternate" hrefLang="x-default" href="https://au-marais.fr/fr" />
       </head>
       <body className="font-sans">
+        <DevModeBanner />
         <Header nav={dict.nav} />
         <main className="pt-20 pb-16 sm:pb-0">{children}</main>
         <Footer dict={dict.footer} nav={dict.nav} locale={locale} />

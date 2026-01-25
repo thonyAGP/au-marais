@@ -12,3 +12,4 @@ export { SuperhostBadge } from "./SuperhostBadge";
 export { ChatAssistant } from "./ChatAssistant";
 export { LocaleLink } from "./LocaleLink";
 export { LanguageSwitcher } from "./LanguageSwitcher";
+export { DevModeBanner } from "./DevModeBanner";

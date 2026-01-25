@@ -65,7 +65,8 @@ develop (travail) → PR → Vercel Preview URL → Validation utilisateur → M
 
 **URLs:**
 - Production: https://www.au-marais.fr (branche `master`)
-- Preview: https://au-marais-xxx.vercel.app (PRs et branches)
+- Preview develop: https://au-marais-git-develop-thonyagps-projects.vercel.app (branche `develop`)
+- Preview PRs: https://au-marais-xxx.vercel.app (générées automatiquement)
 
 ### Conventional Commits
 

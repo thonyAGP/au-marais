@@ -1,0 +1,72 @@
+Nom,Source,Canal,CheckIn,CheckOut,Nuits,Voyageurs,Prix,Pays,Ville,Téléphone,Email,Code,Avis
+"Aliza Schlabach",airbnb,"",2026-07-03,2026-07-08,5,,,"United States","Narberth","","","HMTDHTZ5RK",12
+"Hege Fage",airbnb,"",2026-04-16,2026-04-19,3,,1005.30,"Norway","Tvedestrand","","","HM5W8ZMESB",1
+"Michael Erhard",airbnb,"",2026-04-09,,,,,"Germany","","","","HMQ8WF4DJA",4
+"Félix",homeexchange,"",2026-03-28,2026-04-03,6,4,,"","","","","HE-Félix-mkeeyjxz",
+"Alba",homeexchange,"",2026-02-20,2026-02-24,4,4,,"","","","","HE-Alba-mkeeyq8o",
+"Bruno Sonnet",airbnb,"",2026-02-20,,3,,978.15,"France","Cesson-Sévigné","","","HMFHXK9F95",2
+"Shannon",homeexchange,"",2026-02-10,2026-02-15,5,2,,"","","","","HE-Shannon-mkeeyi7x",
+"Debra",homeexchange,"",2026-01-16,2026-01-24,8,2,,"","","","","HE-Debra-mkeeysup",
+"Marieke Berkhout",airbnb,"",2025-12-27,2026-12-30,3,,1013.52,"Netherlands","Bussum","","","HMFBHWN2MK",3
+"Gareth Wallis",airbnb,"",2025-12-20,2026-12-24,4,,1280.20,"New Zealand","Tauranga","","","HM849FXC3Z",12
+"Lee",homeexchange,"",2025-12-05,2025-12-11,6,3,,"","","","","HE-Lee-mkeeycvj",
+"Melissa Goldman",airbnb,"",2025-11-20,2026-11-24,4,,1252.20,"Israel","Tel Aviv-Yafo","","","HMRXSTQ5KN",14
+"Nadia Home Exchange",abritel,"Abritel / HomeAway",2025-11-14,2025-11-17,3,1,630.00,"","","","","SMB-101269968",
+"Nadia",homeexchange,"",2025-11-14,2025-11-17,3,2,,"","","","","HE-Nadia-mkeeyb56",
+"Marcela et Sara",abritel,"Abritel / HomeAway",2025-11-01,2025-11-04,3,,630.00,"","","","","SMB-104551843",
+"Sara",homeexchange,"",2025-11-01,2025-11-04,3,3,,"","","","","HE-Sara-mkeeyemf",
+"Père de Solene",direct,"Direct booking",2025-10-26,2025-10-30,4,1,600.00,"","","","","SMB-106594501",
+"Valentine Mauron",airbnb,"Airbnb",2025-10-18,2025-10-22,4,4,1188.00,"","","+41793051607","","SMB-100308853",
+"Anis et Kris Home Exchange",abritel,"Abritel / HomeAway",2025-10-10,2025-10-14,4,,,"","","","","SMB-95640438",
+"Julie Xun Xu",airbnb,"Airbnb",2025-10-06,2025-10-09,3,3,898.00,"Australia","Wareemba","+61426246521","","SMB-101836533",3
+"Lisa Haneberg",airbnb,"Airbnb",2025-10-01,2025-10-06,5,2,1478.00,"United States","Lexington","+15136380828","","SMB-101737228",4
+"Philippe Rodrigue",airbnb,"Airbnb",2025-09-23,2025-09-30,7,2,1855.00,"","","+14388811430","","SMB-97167003",
+"Barbara And David Dow",airbnb,"Airbnb",2025-09-14,2025-09-21,7,2,1855.00,"","","+17138163259","","SMB-98520513",
+"Andrea Roldan",airbnb,"Airbnb",2025-09-11,2025-09-15,4,4,1188.00,"","","+541155065899","","SMB-95947498",
+"Andrey Urusov",airbnb,"Airbnb",2025-09-09,2025-09-12,3,3,898.00,"","","+79626013633","","SMB-97448178",
+"Sophie Laroumanie",airbnb,"Airbnb",2025-08-29,2025-09-02,4,3,1188.00,"France","Paris","+33628900243","","SMB-106594421",3
+"Delaney Lacey",airbnb,"Airbnb",2025-08-19,2025-08-26,7,3,1855.00,"","","+14126139632","","SMB-99681328",
+"Jeffery Sherner",airbnb,"Airbnb",2025-08-13,2025-08-16,3,4,898.00,"","","+15855075883","","SMB-93289251",
+"Kyungseon Kim",airbnb,"",2025-08-04,,6,,1896.30,"South Korea","Seoul","","","HMXEF2JSBQ",4
+"Miguel Zuniga",direct,"Direct booking",2025-07-30,2025-08-08,9,1,1800.00,"","","(+52)8182875676","","SMB-89958828",
+"Marcela Guerrero",airbnb,"Airbnb",2025-07-23,2025-07-29,6,4,1768.00,"","","+5491153897032","","SMB-98399043",
+"Villa Vino Stays Sengai Podhuvan",airbnb,"Airbnb",2025-07-17,2025-07-22,5,4,1478.00,"","","+16508149434","","SMB-93285095",
+"Tiyashi Shi",airbnb,"Airbnb",2025-07-17,2025-07-22,5,4,1478.00,"","","++1 650-814-9434","","SMB-93355051",
+"Charmaine Soh",airbnb,"",2025-07-15,2026-07-18,3,,972.15,"Australia","","","","HMXDTJ53PQ",4
+"Kelli Ingels",airbnb,"Airbnb",2025-07-14,2025-07-17,3,3,898.00,"","","+14058189504","","SMB-95166283",
+"Mridul Ghosh",airbnb,"Airbnb",2025-07-10,2025-07-14,4,4,1216.00,"","","(+1)9802280234","","SMB-86713688",
+"Frances Chin",airbnb,"Airbnb",2025-07-04,2025-07-09,5,3,1513.00,"","","+14167974134","","SMB-87595398",
+"Colin User",airbnb,"Airbnb",2025-07-01,2025-07-04,3,3,925.00,"","","+17144656195","","SMB-91073103",
+"Nathaniel Federman",airbnb,"Airbnb",2025-06-27,2025-07-01,4,4,1216.00,"","","+13104028259","","SMB-87003883",
+"Tim Hammacher",airbnb,"",2025-06-26,,4,,1280.20,"Australia","Sydney","","","HMNY3SJX3M",11
+"Bridgette Kozuch",airbnb,"Airbnb",2025-06-20,2025-06-27,7,4,1899.00,"","","+16108234390","","SMB-85971078",
+"Gemma Williams",airbnb,"Airbnb",2025-06-11,2025-06-19,8,4,2166.40,"","","+61401664047","","SMB-85971073",
+"Sarah Kozak",airbnb,"",2025-06-08,2026-06-11,3,,1557.18,"United States","Monroe Township","","","HM34ZXPNFD",4
+"혜경 고",airbnb,"Airbnb",2025-06-06,2025-06-10,4,4,1272.00,"","","+821042110475","","SMB-85971068",
+"Cindy Hardy",airbnb,"Airbnb",2025-06-02,2025-06-06,4,2,1188.00,"","","+17047715165","","SMB-96680403",
+"Liesl Picard",airbnb,"",2025-06-01,,10,,2776.25,"United States","","","","HMD4CW5KBB",
+"Celine Gil",airbnb,"Airbnb",2025-05-28,2025-06-01,4,4,1216.00,"","","+33624595911","","SMB-86712398",
+"Dee Wall",airbnb,"Airbnb",2025-05-24,2025-05-27,3,3,919.00,"","","+14042753365","","SMB-88262823",
+"Stéphanie Home Exchange",abritel,"Abritel / HomeAway",2025-05-23,2025-05-27,4,,,"","","","","SMB-90180783",
+"Robert Klein",airbnb,"Airbnb",2025-05-23,2025-05-27,4,2,1188.00,"","","+17788966732","","SMB-93792814",
+"Shauntae Byas",airbnb,"Airbnb",2025-05-14,2025-05-22,8,3,2166.40,"","","+16084401561","","SMB-85971063",
+"Sandy Howard",airbnb,"",2025-05-12,,3,,972.15,"Canada","Calgary","","","HMADNDB8K9",7
+"Stephanie Barrington",airbnb,"Airbnb",2025-05-09,2025-05-14,5,3,1478.00,"","","+16474008588","","SMB-94287369",
+"Ashley Saliba",direct,"Direct booking",2025-05-06,2025-05-08,2,1,500.00,"","","(+1)4803298907","","SMB-86874858",
+"Natália Guedes",airbnb,"",2025-05-01,2026-05-08,7,,2035.03,"Brazil","DF","","","HMJAXTHNME",4
+"Eduardo Fraga",airbnb,"Airbnb",2025-04-26,2025-05-03,7,4,1911.70,"","","+5521999914889","","SMB-91425263",
+"Thomas HÄSelhoff",airbnb,"Airbnb",2025-04-23,2025-04-26,3,4,961.00,"","","+4916097806035","","SMB-85971058",
+"Nesterenko Paulina",direct,"Direct booking",2025-04-19,2025-04-23,4,1,828.00,"","","","Nesterenko.p@gmail.com","SMB-90749698",
+"Chris McKay",airbnb,"Airbnb",2025-04-15,2025-04-19,4,3,1216.00,"","","+61407460679","","SMB-85971053",
+"Jake Wandasan",airbnb,"Airbnb",2025-04-08,2025-04-13,5,4,1513.00,"","","+18083833637","","SMB-88399773",
+"Kimberly Bailliard",airbnb,"",2025-04-05,,3,,972.15,"United States","Durham","","","HMYS4FNZ25",19
+"Cristy McConahey",airbnb,"",2025-03-31,,4,,1302.30,"United States","","","","HMTZKBSR5Z",4
+"Anais Home Exchange",abritel,"Abritel / HomeAway",2025-03-28,2025-04-02,5,,,"","","","","SMB-90882963",
+"Annie Home Exchange",abritel,"Abritel / HomeAway",2025-03-22,2025-03-27,5,,,"","","","","SMB-90883128",
+"Michael Bielski",airbnb,"",2025-03-21,2026-03-28,3,,972.15,"United States","Lake Bluff","","","HMQ8WF4DJA",5
+"Olga Demianuk",direct,"Direct booking",2025-03-07,2025-03-09,2,,428.00,"","","","","SMB-86158933",
+"Patricia Maragliano",airbnb,"",2025-03-06,2026-03-14,8,,2319.00,"United States","Coral Gables","","","HM52BFWF5K",25
+"Carole et Jean Michel HOME EXCHANGE",abritel,"Abritel / HomeAway",2025-02-28,2025-03-03,3,,,"","","","","SMB-87610453",
+"test",direct,"Direct booking",2025-02-25,2025-02-28,3,,,"","","","","SMB-85970328",
+"Inma Home Exchange",direct,"Direct booking",2025-01-31,2025-02-03,3,,,"","","","","SMB-85970078",
+"Julien",homeexchange,"",2024-11-19,2024-11-23,4,2,,"","","","","HE-Julien-mkeey99v",

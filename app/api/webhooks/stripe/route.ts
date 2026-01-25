@@ -3,6 +3,8 @@ import Stripe from 'stripe';
 import { getReservation, updateReservation } from '@/lib/db';
 import { sendPaymentConfirmedEmail, sendPaymentFailedAdminEmail } from '@/lib/email';
 
+export const dynamic = 'force-dynamic';
+
 // Initialize Stripe
 const getStripe = (): Stripe => {
   if (!process.env.STRIPE_SECRET_KEY) {

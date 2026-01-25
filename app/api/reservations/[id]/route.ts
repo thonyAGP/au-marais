@@ -13,6 +13,8 @@ import {
 import { createSmoobuReservation, cancelSmoobuReservation } from '@/lib/smoobu';
 import { generateConfirmationToken } from '@/lib/crypto';
 import type { UpdateReservationInput } from '@/types/reservation';
+
+export const dynamic = 'force-dynamic';
 import Stripe from 'stripe';
 
 // Initialize Stripe lazily to avoid build errors when API key is not set

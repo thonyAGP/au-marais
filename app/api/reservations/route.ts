@@ -11,6 +11,9 @@ import {
 import { checkAvailability } from '@/lib/smoobu';
 import type { CreateReservationInput } from '@/types/reservation';
 
+// Force runtime evaluation (not build-time) to read env vars correctly
+export const dynamic = 'force-dynamic';
+
 // Read settings from file (same as existing admin)
 const getSettings = async () => {
   try {
