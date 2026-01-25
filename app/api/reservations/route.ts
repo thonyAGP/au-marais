@@ -115,8 +115,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error creating reservation:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to create reservation' },
+      { error: 'Failed to create reservation', details: errorMessage },
       { status: 500 }
     );
   }
