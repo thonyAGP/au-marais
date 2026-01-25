@@ -82,9 +82,9 @@ export default defineConfig({
     },
   ],
 
-  /* Start local dev server before running tests */
+  /* Start production server before running tests (more stable than dev) */
   webServer: {
-    command: 'pnpm dev --port 3001',
+    command: 'pnpm start --port 3001',
     url: 'http://localhost:3001',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,

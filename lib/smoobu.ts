@@ -26,17 +26,44 @@ export const getAvailability = async (startDate: string, endDate: string) => {
 
 export const checkAvailability = async (arrival: string, departure: string) => {
   const apartmentId = process.env.SMOOBU_APARTMENT_ID;
+  const apiKey = process.env.SMOOBU_API_KEY;
+
+  if (!apartmentId || !apiKey) {
+    throw new Error(`Smoobu config missing: apartmentId=${!!apartmentId}, apiKey=${!!apiKey}`);
+  }
+
+  // Use the rates endpoint to check availability
   const response = await fetch(
-    `${SMOOBU_BASE_URL}/availability?arrivalDate=${arrival}&departureDate=${departure}&apartments[]=${apartmentId}`,
+    `${SMOOBU_BASE_URL}/rates?apartments[]=${apartmentId}&start_date=${arrival}&end_date=${departure}`,
     { headers: getHeaders() }
   );
 
   if (!response.ok) {
-    throw new Error('Failed to check availability');
+    const text = await response.text();
+    throw new Error(`Smoobu API error ${response.status}: ${text.slice(0, 200)}`);
   }
 
   const data = await response.json();
-  return data.availableApartments?.includes(Number(apartmentId)) ?? false;
+  const rates = data.data?.[apartmentId];
+
+  if (!rates) {
+    return false;
+  }
+
+  // Check if all dates (except departure) are available
+  // Departure date doesn't need to be available (checkout day)
+  const arrivalDate = new Date(arrival);
+  const departureDate = new Date(departure);
+
+  for (let d = new Date(arrivalDate); d < departureDate; d.setDate(d.getDate() + 1)) {
+    const dateStr = d.toISOString().split('T')[0];
+    const dayData = rates[dateStr];
+    if (!dayData || dayData.available === 0) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 // Create a reservation in Smoobu (blocks the dates)
@@ -133,4 +160,101 @@ export const getSmoobuChannels = async () => {
   }
 
   return response.json();
+};
+
+// Guest data structure from Smoobu
+export interface SmoobuGuestAddress {
+  street: string | null;
+  postalCode: string | null;
+  city: string | null;
+  country: string | null;
+}
+
+export interface SmoobuGuest {
+  id: number;
+  firstName: string;
+  lastName: string;
+  companyName: string | null;
+  emails: string[];
+  telephoneNumbers: string[];
+  address: SmoobuGuestAddress;
+  notes: string | null;
+  bookings: Array<{
+    id: number;
+    arrival: string;
+    departure: string;
+  }>;
+}
+
+export interface SmoobuGuestsResponse {
+  guests: SmoobuGuest[];
+  pageCount: number;
+  pageSize: number;
+  totalItems: number;
+  page: number;
+}
+
+// Get all guests with their location data (for V3 map feature)
+export const getSmoobuGuests = async (page = 1): Promise<SmoobuGuestsResponse> => {
+  const response = await fetch(`${SMOOBU_BASE_URL}/guests?page=${page}`, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Smoobu guests');
+  }
+
+  return response.json();
+};
+
+// Get a single guest by ID
+export const getSmoobuGuest = async (guestId: number): Promise<SmoobuGuest> => {
+  const response = await fetch(`${SMOOBU_BASE_URL}/guests/${guestId}`, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Smoobu guest');
+  }
+
+  return response.json();
+};
+
+// Get guests with country data (filters out guests without country)
+export const getGuestsWithLocation = async (): Promise<Array<{
+  name: string;
+  country: string;
+  city: string | null;
+  stayDate: string;
+}>> => {
+  const guestsWithLocation: Array<{
+    name: string;
+    country: string;
+    city: string | null;
+    stayDate: string;
+  }> = [];
+
+  let page = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    const response = await getSmoobuGuests(page);
+
+    for (const guest of response.guests) {
+      if (guest.address.country) {
+        const latestBooking = guest.bookings[0]; // Most recent booking
+        guestsWithLocation.push({
+          name: `${guest.firstName} ${guest.lastName.charAt(0)}.`,
+          country: guest.address.country,
+          city: guest.address.city,
+          stayDate: latestBooking?.arrival || '',
+        });
+      }
+    }
+
+    hasMore = page < response.pageCount;
+    page++;
+  }
+
+  return guestsWithLocation;
 };

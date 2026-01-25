@@ -48,6 +48,25 @@ pnpm test:e2e        # Suite E2E complète
 pnpm typecheck       # Vérification TypeScript
 ```
 
+### Deployment Workflow (OBLIGATOIRE)
+
+```
+develop (travail) → PR → Vercel Preview URL → Validation utilisateur → Merge master → Production
+```
+
+| Étape | Action | Règle |
+|-------|--------|-------|
+| 1. Développement | Travailler sur `develop` | JAMAIS coder directement sur master |
+| 2. Commit | Push sur `develop` | Tests quick exécutés |
+| 3. Pull Request | Créer PR vers `master` | Vercel génère Preview URL automatiquement |
+| 4. Validation | Tester sur Preview URL | Utilisateur valide AVANT merge |
+| 5. Merge | Merge PR dans `master` | Tests pre-prod complets |
+| 6. Production | Déploiement auto Vercel | Site live mis à jour |
+
+**URLs:**
+- Production: https://www.au-marais.fr (branche `master`)
+- Preview: https://au-marais-xxx.vercel.app (PRs et branches)
+
 ### Conventional Commits
 
 Types autorisés : `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `revert`, `build`
@@ -240,3 +259,7 @@ au-marais/
 - 2026-01-13 : **Git Hooks Husky** - Pre-commit (lint-staged + typecheck), pre-push (tests selon branche), commit-msg (commitlint)
 - 2026-01-13 : **Tests E2E pre-production** - Suite Playwright (critiques, langues, SEO, accessibilité)
 - 2026-01-13 : Fix responsive mobile (titre Hero, overflow horizontal, sélecteur de langues)
+- 2026-01-20 : **Webhook Stripe** - Validation automatique des paiements (checkout.session.completed)
+- 2026-01-20 : **Page confirmation paiement** - /reservation/confirmed avec détails séjour
+- 2026-01-20 : **Checklist tests réservation** - docs/tests-reservation.md pour tests manuels
+- 2026-01-20 : **Fallback Vercel KV** - Wrapper safeKv pour dev local sans KV configuré

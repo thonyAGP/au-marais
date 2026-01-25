@@ -11,6 +11,7 @@ import {
   sendPaymentConfirmedEmail,
 } from '@/lib/email';
 import { createSmoobuReservation, cancelSmoobuReservation } from '@/lib/smoobu';
+import { generateConfirmationToken } from '@/lib/crypto';
 import type { UpdateReservationInput } from '@/types/reservation';
 import Stripe from 'stripe';
 
@@ -116,6 +117,9 @@ export async function PUT(
         // Continue anyway - we can create it manually later
       }
 
+      // Generate confirmation token for secure access to confirmation page
+      const confirmationToken = generateConfirmationToken(reservation.id);
+
       // Create Stripe Payment Link for deposit
       let paymentLink: Stripe.PaymentLink | null = null;
       try {
@@ -134,7 +138,7 @@ export async function PUT(
             currency: 'eur',
           });
 
-          // Create Payment Link
+          // Create Payment Link with confirmation token in redirect URL
           paymentLink = await stripe.paymentLinks.create({
             line_items: [{ price: price.id, quantity: 1 }],
             metadata: {
@@ -144,7 +148,7 @@ export async function PUT(
             after_completion: {
               type: 'redirect',
               redirect: {
-                url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr'}/reservation/confirmed?id=${reservation.id}`,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr'}/reservation/confirmed?token=${confirmationToken}`,
               },
             },
           });
@@ -159,6 +163,7 @@ export async function PUT(
       const updated = await updateReservation(id, {
         status: 'approved',
         depositAmount,
+        confirmationToken,
         smoobuReservationId: smoobuId,
         stripePaymentLinkId: paymentLink?.id,
         stripePaymentLinkUrl: paymentLink?.url,
@@ -224,6 +229,45 @@ export async function PUT(
 
       return NextResponse.json({
         success: true,
+        reservation: updated,
+      });
+    }
+
+    if (body.action === 'resend_payment') {
+      // Verify reservation is in approved status
+      if (reservation.status !== 'approved') {
+        return NextResponse.json(
+          { error: 'Reservation must be in approved status to resend payment link' },
+          { status: 400 }
+        );
+      }
+
+      // Verify payment link exists
+      if (!reservation.stripePaymentLinkUrl) {
+        return NextResponse.json(
+          { error: 'No payment link found for this reservation' },
+          { status: 400 }
+        );
+      }
+
+      // Resend approval email with existing payment link
+      try {
+        await sendReservationApprovedEmail(reservation, reservation.stripePaymentLinkUrl);
+        console.log(`Payment link resent for reservation ${id}`);
+      } catch (emailError) {
+        console.error('Failed to resend payment email:', emailError);
+        return NextResponse.json(
+          { error: 'Failed to send email' },
+          { status: 500 }
+        );
+      }
+
+      // Update timestamp to log the action
+      const updated = await updateReservation(id, {});
+
+      return NextResponse.json({
+        success: true,
+        message: 'Payment link resent successfully',
         reservation: updated,
       });
     }

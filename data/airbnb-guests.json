@@ -1,0 +1,167 @@
+[
+  {
+    "name": "Bruno",
+    "location": "Cesson-Sévigné, France",
+    "checkin": "20 févr.",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "978,15",
+    "confirmationCode": "HMFHXK9F95",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Hege",
+    "location": "Tvedestrand, Norway",
+    "checkin": "16 avr.",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "1005,30",
+    "confirmationCode": "HM5W8ZMESB",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Cristy",
+    "location": "United States",
+    "checkin": "31 mars",
+    "checkout": null,
+    "guests": null,
+    "nights": 4,
+    "price": "1302,30",
+    "confirmationCode": "HMTZKBSR5Z",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Michael",
+    "location": "Germany",
+    "checkin": "9 avr.",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "972,15",
+    "confirmationCode": "HMQ8WF4DJA",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Kimberly",
+    "location": "Durham, NC",
+    "checkin": "5 avr.",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "972,15",
+    "confirmationCode": "HMYS4FNZ25",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Natália",
+    "location": "DF, Brazil",
+    "checkin": "1 mai",
+    "checkout": null,
+    "guests": null,
+    "nights": null,
+    "price": "2035,03",
+    "confirmationCode": "HMJAXTHNME",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Liesl",
+    "location": null,
+    "checkin": "1 juin",
+    "checkout": null,
+    "guests": null,
+    "nights": 4,
+    "price": "1302,30",
+    "confirmationCode": "HMJJD43KEW",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Patricia",
+    "location": "Coral Gables, FL",
+    "checkin": "6 mars",
+    "checkout": null,
+    "guests": null,
+    "nights": 8,
+    "price": "2319,00",
+    "confirmationCode": "HM52BFWF5K",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Kyungseon",
+    "location": "Seoul, South Korea",
+    "checkin": "4 août",
+    "checkout": null,
+    "guests": null,
+    "nights": 6,
+    "price": "1896,30",
+    "confirmationCode": "HMXEF2JSBQ",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Gareth",
+    "location": "Tauranga, New Zealand",
+    "checkin": "20 déc.",
+    "checkout": null,
+    "guests": null,
+    "nights": 4,
+    "price": "1280,20",
+    "confirmationCode": "HM849FXC3Z",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Melissa",
+    "location": "Tel Aviv-Yafo, Israel",
+    "checkin": "20 nov.",
+    "checkout": null,
+    "guests": null,
+    "nights": 4,
+    "price": "1252,20",
+    "confirmationCode": "HMRXSTQ5KN",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Tim",
+    "location": "Sydney, Australia",
+    "checkin": "26 juin",
+    "checkout": null,
+    "guests": null,
+    "nights": 4,
+    "price": "1280,20",
+    "confirmationCode": "HMNY3SJX3M",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Liesl",
+    "location": null,
+    "checkin": "22 mai",
+    "checkout": null,
+    "guests": null,
+    "nights": 10,
+    "price": "2776,25",
+    "confirmationCode": "HMD4CW5KBB",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Charmaine",
+    "location": "Australia",
+    "checkin": "15 juil.",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "972,15",
+    "confirmationCode": "HMXDTJ53PQ",
+    "bookingDate": "18:20"
+  },
+  {
+    "name": "Sandy",
+    "location": "Calgary, Canada",
+    "checkin": "12 mai",
+    "checkout": null,
+    "guests": null,
+    "nights": 3,
+    "price": "972,15",
+    "confirmationCode": "HMADNDB8K9",
+    "bookingDate": "18:20"
+  }
+]

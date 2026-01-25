@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "lastUpdated": "2026-01-14",
+    "totalGuests": 27,
+    "guestsWithLocation": 21,
+    "note": "Data from Airbnb confirmation emails + HomeExchange"
+  },
+  "guests": [
+    {
+      "name": "Sandy",
+      "city": "Calgary",
+      "country": "Canada",
+      "checkin": "2026-05-12",
+      "source": "airbnb"
+    },
+    {
+      "name": "Melissa",
+      "city": "Tel Aviv-Yafo",
+      "country": "Israel",
+      "checkin": "2026-05-16",
+      "source": "airbnb"
+    },
+    {
+      "name": "Marieke",
+      "city": "Bussum",
+      "country": "Netherlands",
+      "checkin": "2026-05-20",
+      "source": "airbnb"
+    },
+    {
+      "name": "Gareth",
+      "city": "Tauranga",
+      "country": "New Zealand",
+      "checkin": "2026-05-24",
+      "source": "airbnb"
+    },
+    {
+      "name": "Hege",
+      "city": "Tvedestrand",
+      "country": "Norway",
+      "checkin": "2026-05-28",
+      "source": "airbnb"
+    },
+    {
+      "name": "Michael",
+      "city": "Lake Bluff",
+      "country": "United States",
+      "checkin": "2026-03-21",
+      "source": "airbnb"
+    },
+    {
+      "name": "Jake",
+      "city": "Honolulu",
+      "country": "United States",
+      "checkin": "2025-11-10",
+      "source": "airbnb"
+    },
+    {
+      "name": "Priya",
+      "city": "Vancouver",
+      "country": "Canada",
+      "checkin": "2025-04-09",
+      "source": "airbnb"
+    },
+    {
+      "name": "Francine",
+      "city": "Bussum",
+      "country": "Netherlands",
+      "checkin": "2024-11-08",
+      "source": "airbnb"
+    },
+    {
+      "name": "Patricia",
+      "city": "Coral Gables",
+      "country": "United States",
+      "checkin": "2026-03-06",
+      "source": "airbnb"
+    },
+    {
+      "name": "Stephanie",
+      "city": null,
+      "country": "France",
+      "checkin": "2025-05-23",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Anais",
+      "city": null,
+      "country": "France",
+      "checkin": "2025-03-28",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Patricia",
+      "city": null,
+      "country": "Spain",
+      "checkin": "2025-01-10",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Shannon",
+      "city": null,
+      "country": "United States",
+      "checkin": "2026-02-10",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Félix",
+      "city": null,
+      "country": "Spain",
+      "checkin": "2026-03-28",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Alba",
+      "city": null,
+      "country": "Spain",
+      "checkin": "2026-02-20",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Debra",
+      "city": null,
+      "country": "United States",
+      "checkin": "2026-01-16",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Sara",
+      "city": null,
+      "country": "Colombia",
+      "checkin": "2025-11-01",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Lee",
+      "city": null,
+      "country": "France",
+      "checkin": "2025-12-05",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Nadia",
+      "city": null,
+      "country": "France",
+      "checkin": "2025-11-14",
+      "source": "homeexchange"
+    },
+    {
+      "name": "Julien",
+      "city": null,
+      "country": "France",
+      "checkin": "2024-11-19",
+      "source": "homeexchange"
+    }
+  ],
+  "countrySummary": {
+    "United States": 5,
+    "France": 5,
+    "Spain": 3,
+    "Canada": 2,
+    "Netherlands": 2,
+    "Israel": 1,
+    "New Zealand": 1,
+    "Norway": 1,
+    "Colombia": 1
+  }
+}

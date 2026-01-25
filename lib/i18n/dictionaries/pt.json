@@ -83,7 +83,7 @@
         "name": "HomeExchange",
         "rating": 5.0,
         "count": 12,
-        "url": "https://www.homeexchange.fr/",
+        "url": "https://www.homeexchange.fr/homes/view/2095673",
         "color": "#00B4A2"
       }
     },
@@ -766,5 +766,12 @@
     "error": "Erro",
     "errorGeneric": "Ocorreu um erro. Por favor, tente novamente.",
     "required": "Campo obrigatório"
+  },
+  "nativeTestimonials": {
+    "sectionTitle": "Depoimentos dos hóspedes",
+    "title": "O que dizem sobre nós",
+    "subtitle": "Descubra os depoimentos autênticos dos nossos visitantes",
+    "noTestimonials": "Nenhum depoimento ainda",
+    "leaveReview": "Deixar um depoimento"
   }
 }
