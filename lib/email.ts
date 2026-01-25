@@ -31,14 +31,20 @@ const getEmailConfig = () => {
     || process.env.ADMIN_EMAIL
     || 'au-marais@hotmail.com';
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr';
+  // In test mode, use Vercel preview URL; otherwise use configured site URL
+  // VERCEL_URL is automatically set by Vercel for all deployments
+  const siteUrl = hasTestConfig && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : (process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr');
 
   // Debug log (will appear in Vercel function logs)
   console.log('[Email Config]', {
     hasTestConfig,
     isProduction,
     VERCEL_ENV: process.env.VERCEL_ENV,
+    VERCEL_URL: process.env.VERCEL_URL,
     adminEmail,
+    siteUrl,
     fromEmail: fromEmail.substring(0, 30) + '...'
   });
 
