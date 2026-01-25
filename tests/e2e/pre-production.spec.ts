@@ -171,6 +171,10 @@ test.describe('Pre-Production Checks', () => {
           !e.includes('flagcdn') &&
           !e.includes('analytics') &&
           !e.includes('third-party') &&
+          !e.includes('speed-insights') &&
+          !e.includes('vercel') &&
+          // Ignore generic 404 errors for external resources in local dev
+          !(isLocalDev && e.includes('404')) &&
           // Ignore API 500 errors in local dev (Vercel KV unavailable for testimonials)
           !(isLocalDev && e.includes('500'))
         );
