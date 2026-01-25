@@ -14,8 +14,20 @@ const getResend = (): Resend => {
   return resendInstance;
 };
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>';
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'au-marais@hotmail.com';
+// Environment detection
+const isProduction = process.env.VERCEL_ENV === 'production';
+
+// Email configuration based on environment
+// In preview/dev: use Resend test domain (can only send to account owner email)
+// In production: use verified domain
+const FROM_EMAIL = isProduction
+  ? (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>')
+  : 'Au Marais Test <onboarding@resend.dev>';
+
+const ADMIN_EMAIL = isProduction
+  ? (process.env.ADMIN_EMAIL || 'au-marais@hotmail.com')
+  : (process.env.ADMIN_EMAIL_TEST || process.env.ADMIN_EMAIL || 'au-marais@hotmail.com');
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://au-marais.fr';
 
 // Format date for display
