@@ -33,6 +33,7 @@ export interface Reservation {
   stripePaymentLinkId?: string;
   stripePaymentLinkUrl?: string;
   stripePaymentIntentId?: string;
+  confirmationToken?: string; // Token for secure confirmation page access
 
   // Smoobu
   smoobuReservationId?: number;
@@ -72,6 +73,7 @@ export interface UpdateReservationInput {
   stripePaymentLinkId?: string;
   stripePaymentLinkUrl?: string;
   stripePaymentIntentId?: string;
+  confirmationToken?: string;
   smoobuReservationId?: number;
   adminNotes?: string;
   rejectionReason?: string;

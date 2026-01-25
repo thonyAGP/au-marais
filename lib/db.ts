@@ -195,6 +195,22 @@ export const getReservationByToken = async (
   return null;
 };
 
+// Get a reservation by confirmation token (for secure confirmation page)
+export const getReservationByConfirmationToken = async (
+  confirmationToken: string
+): Promise<Reservation | null> => {
+  const ids = await safeKv.zrange<string[]>(RESERVATIONS_LIST_KEY, 0, -1);
+  if (!ids || ids.length === 0) return null;
+
+  for (const id of ids) {
+    const reservation = await getReservation(id);
+    if (reservation && reservation.confirmationToken === confirmationToken) {
+      return reservation;
+    }
+  }
+  return null;
+};
+
 // Update a reservation
 export const updateReservation = async (
   id: string,

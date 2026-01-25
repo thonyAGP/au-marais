@@ -2,40 +2,71 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Check, Loader2, AlertCircle, Home, Calendar, Mail } from 'lucide-react';
+import { Check, Loader2, AlertCircle, Home, Calendar, Mail, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
-import type { Reservation } from '@/types/reservation';
+
+interface ReservationData {
+  id: string;
+  firstName: string;
+  arrivalDate: string;
+  departureDate: string;
+  nights: number;
+  guests: number;
+  total: number;
+  depositAmount: number;
+  depositPaid: boolean;
+  status: string;
+}
 
 function PaymentConfirmedContent() {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const token = searchParams.get('token');
+  const legacyId = searchParams.get('id'); // Support old links temporarily
 
-  const [reservation, setReservation] = useState<Reservation | null>(null);
+  const [reservation, setReservation] = useState<ReservationData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchReservation = async () => {
-      if (!id) {
+      // No token and no legacy ID = invalid access
+      if (!token && !legacyId) {
+        setError('invalid');
         setLoading(false);
         return;
       }
 
       try {
-        // Try to fetch reservation details (may fail if not authenticated)
-        const res = await fetch(`/api/reservations/${id}`);
-        if (res.ok) {
+        let res;
+        if (token) {
+          // Secure access via confirmation token
+          res = await fetch(`/api/reservations/by-confirmation-token?token=${encodeURIComponent(token)}`);
+        } else if (legacyId) {
+          // Legacy access (will fail with 401 but show generic success)
+          res = await fetch(`/api/reservations/${legacyId}`);
+        }
+
+        if (res && res.ok) {
           const data = await res.json();
           setReservation(data);
+        } else if (res && res.status === 404) {
+          setError('not_found');
+        } else if (res && res.status === 401 && legacyId) {
+          // Legacy link without proper auth - show generic success
+          setReservation(null);
+        } else {
+          setError('invalid');
         }
       } catch {
-        // Silently fail - we'll show a generic success message
+        // Network error - show generic success
+        setReservation(null);
       } finally {
         setLoading(false);
       }
     };
 
     fetchReservation();
-  }, [id]);
+  }, [token, legacyId]);
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString('fr-FR', {
@@ -50,6 +81,51 @@ function PaymentConfirmedContent() {
     return (
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-[#D4AF37]" />
+      </div>
+    );
+  }
+
+  // Invalid or expired token
+  if (error === 'invalid' || error === 'not_found') {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] py-12 px-4">
+        <div className="max-w-lg mx-auto">
+          <div className="bg-[#1A1A1A] rounded-2xl shadow-2xl overflow-hidden border border-red-500/20">
+            <div className="pt-12 pb-6 text-center">
+              <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6 ring-4 ring-red-500/30">
+                <ShieldAlert className="h-10 w-10 text-red-500" />
+              </div>
+              <h1 className="text-3xl font-serif text-white mb-2">
+                Lien invalide
+              </h1>
+              <p className="text-gray-400">
+                Ce lien de confirmation n&apos;est pas valide ou a expiré.
+              </p>
+            </div>
+
+            <div className="px-8 pb-8 space-y-6">
+              <div className="bg-red-500/10 text-red-400 p-4 rounded-xl text-sm">
+                <p>
+                  Si vous avez effectué un paiement et que vous voyez ce message,
+                  ne vous inquiétez pas. Votre paiement a été enregistré.
+                  Vous recevrez un email de confirmation.
+                </p>
+              </div>
+
+              <div className="bg-[#0A0A0A] rounded-xl p-4 text-center text-gray-400 text-sm">
+                <p>Besoin d&apos;aide ? Contactez-nous via WhatsApp.</p>
+              </div>
+
+              <Link
+                href="/fr"
+                className="flex items-center justify-center gap-2 w-full bg-[#D4AF37] text-[#0A0A0A] py-4 rounded-xl font-medium hover:bg-[#C9A962] transition-colors"
+              >
+                <Home className="h-5 w-5" />
+                Retour à l&apos;accueil
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -118,8 +194,8 @@ function PaymentConfirmedContent() {
               </ul>
             </div>
 
-            {/* Error if no ID */}
-            {!id && (
+            {/* Warning if no details available */}
+            {!reservation && !error && (
               <div className="bg-yellow-500/10 text-yellow-400 p-4 rounded-xl text-sm flex items-start gap-3">
                 <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
                 <p>

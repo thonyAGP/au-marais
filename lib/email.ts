@@ -514,3 +514,95 @@ export const getWhatsAppUrl = (phoneNumber: string, message: string): string => 
   const cleanPhone = phoneNumber.replace(/\D/g, '');
   return `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
 };
+
+// Email template: Payment failed notification (to admin)
+export const sendPaymentFailedAdminEmail = async (
+  reservation: Reservation,
+  errorDetails: {
+    errorMessage?: string;
+    errorType?: string;
+    declineCode?: string;
+    stripeSessionId?: string;
+  }
+) => {
+  const subject = `⚠️ Échec de paiement - ${reservation.firstName} ${reservation.lastName}`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #f44336; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .details { background: white; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .row:last-child { border-bottom: none; }
+        .error-box { background: #ffebee; border: 1px solid #f44336; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .btn { display: inline-block; padding: 12px 24px; margin: 5px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+        .btn-primary { background: #C9A962; color: white; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2 style="margin: 0;">⚠️ Échec de paiement</h2>
+        </div>
+        <div class="content">
+          <p>Un paiement a échoué pour la réservation suivante :</p>
+
+          <div class="details">
+            <h3 style="margin-top: 0;">👤 Client</h3>
+            <div class="row">
+              <span>Nom</span>
+              <strong>${reservation.firstName} ${reservation.lastName}</strong>
+            </div>
+            <div class="row">
+              <span>Email</span>
+              <strong><a href="mailto:${reservation.email}">${reservation.email}</a></strong>
+            </div>
+            <div class="row">
+              <span>Téléphone</span>
+              <strong><a href="tel:${reservation.phone}">${reservation.phone}</a></strong>
+            </div>
+          </div>
+
+          <div class="details">
+            <h3 style="margin-top: 0;">📅 Séjour</h3>
+            <div class="row">
+              <span>Dates</span>
+              <strong>${formatDate(reservation.arrivalDate, 'fr')} → ${formatDate(reservation.departureDate, 'fr')}</strong>
+            </div>
+            <div class="row">
+              <span>Caution demandée</span>
+              <strong>${formatCurrency(reservation.depositAmount)}</strong>
+            </div>
+          </div>
+
+          <div class="error-box">
+            <h3 style="margin-top: 0; color: #f44336;">🚫 Détails de l'erreur</h3>
+            ${errorDetails.errorMessage ? `<p><strong>Message :</strong> ${errorDetails.errorMessage}</p>` : ''}
+            ${errorDetails.errorType ? `<p><strong>Type :</strong> ${errorDetails.errorType}</p>` : ''}
+            ${errorDetails.declineCode ? `<p><strong>Code de refus :</strong> ${errorDetails.declineCode}</p>` : ''}
+            ${errorDetails.stripeSessionId ? `<p><strong>Session Stripe :</strong> ${errorDetails.stripeSessionId}</p>` : ''}
+          </div>
+
+          <div style="text-align: center; margin-top: 20px;">
+            <p>Vous pouvez contacter le client pour lui proposer un nouveau lien de paiement :</p>
+            <a href="${SITE_URL}/admin/reservations" class="btn btn-primary">📋 Voir dans Admin</a>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return getResend().emails.send({
+    from: FROM_EMAIL,
+    to: ADMIN_EMAIL,
+    subject,
+    html,
+  });
+};

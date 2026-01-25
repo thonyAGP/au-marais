@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getReservation, updateReservation } from '@/lib/db';
-import { sendPaymentConfirmedEmail } from '@/lib/email';
+import { sendPaymentConfirmedEmail, sendPaymentFailedAdminEmail } from '@/lib/email';
 
 // Initialize Stripe
 const getStripe = (): Stripe => {
@@ -50,6 +50,18 @@ export async function POST(request: NextRequest) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session;
       await handleCheckoutCompleted(session);
+      break;
+    }
+
+    case 'checkout.session.expired': {
+      const session = event.data.object as Stripe.Checkout.Session;
+      await handleCheckoutExpired(session);
+      break;
+    }
+
+    case 'payment_intent.payment_failed': {
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      await handlePaymentFailed(paymentIntent);
       break;
     }
 
@@ -117,5 +129,93 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   } catch (error) {
     console.error(`Error processing payment for reservation ${reservationId}:`, error);
     throw error; // Re-throw to return 500 and trigger Stripe retry
+  }
+}
+
+async function handleCheckoutExpired(session: Stripe.Checkout.Session) {
+  const reservationId = session.metadata?.reservationId;
+
+  if (!reservationId) {
+    console.log('Stripe webhook: checkout.session.expired without reservationId');
+    return;
+  }
+
+  console.log(`Checkout session expired for reservation ${reservationId}`);
+
+  try {
+    const reservation = await getReservation(reservationId);
+
+    if (!reservation) {
+      console.error(`Stripe webhook: Reservation not found for expired session: ${reservationId}`);
+      return;
+    }
+
+    // Only notify if reservation is still in approved status (waiting for payment)
+    if (reservation.status !== 'approved') {
+      console.log(`Reservation ${reservationId} not in approved status, skipping expired notification`);
+      return;
+    }
+
+    // Send notification to admin
+    try {
+      await sendPaymentFailedAdminEmail(reservation, {
+        errorMessage: 'La session de paiement a expiré sans paiement',
+        errorType: 'checkout_expired',
+        stripeSessionId: session.id,
+      });
+      console.log(`Expired session notification sent for reservation ${reservationId}`);
+    } catch (emailError) {
+      console.error(`Failed to send expired session notification for ${reservationId}:`, emailError);
+    }
+  } catch (error) {
+    console.error(`Error handling expired session for reservation ${reservationId}:`, error);
+    // Don't throw - this is not critical
+  }
+}
+
+async function handlePaymentFailed(paymentIntent: Stripe.PaymentIntent) {
+  const reservationId = paymentIntent.metadata?.reservationId;
+
+  if (!reservationId) {
+    console.log('Stripe webhook: payment_intent.payment_failed without reservationId');
+    return;
+  }
+
+  console.log(`Payment failed for reservation ${reservationId}`);
+
+  // Extract error details
+  const lastError = paymentIntent.last_payment_error;
+  const errorDetails = {
+    errorMessage: lastError?.message || 'Paiement refusé',
+    errorType: lastError?.type || 'unknown',
+    declineCode: lastError?.decline_code || undefined,
+  };
+
+  console.log(`Payment failure details for ${reservationId}:`, errorDetails);
+
+  try {
+    const reservation = await getReservation(reservationId);
+
+    if (!reservation) {
+      console.error(`Stripe webhook: Reservation not found for failed payment: ${reservationId}`);
+      return;
+    }
+
+    // Only notify if reservation is still in approved status
+    if (reservation.status !== 'approved') {
+      console.log(`Reservation ${reservationId} not in approved status, skipping failure notification`);
+      return;
+    }
+
+    // Send notification to admin
+    try {
+      await sendPaymentFailedAdminEmail(reservation, errorDetails);
+      console.log(`Payment failure notification sent for reservation ${reservationId}`);
+    } catch (emailError) {
+      console.error(`Failed to send payment failure notification for ${reservationId}:`, emailError);
+    }
+  } catch (error) {
+    console.error(`Error handling payment failure for reservation ${reservationId}:`, error);
+    // Don't throw - notification failure is not critical
   }
 }
