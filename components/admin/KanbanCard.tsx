@@ -102,47 +102,49 @@ export const KanbanCard = ({ reservation, onAction, isLoading }: KanbanCardProps
       )}
 
       {/* Actions */}
-      <div className="flex items-center gap-1 pt-2 border-t border-stone-100">
-        {reservation.status === 'pending' && (
-          <>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onAction?.(reservation.id, 'approve');
-              }}
-              className="flex-1 text-xs py-1 px-2 bg-green-50 text-green-700 rounded hover:bg-green-100 transition-colors"
-            >
-              Approuver
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onAction?.(reservation.id, 'reject');
-              }}
-              className="flex-1 text-xs py-1 px-2 bg-red-50 text-red-700 rounded hover:bg-red-100 transition-colors"
-            >
-              Refuser
-            </button>
-          </>
-        )}
-        {reservation.status === 'approved' && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onAction?.(reservation.id, 'mark_paid');
-            }}
-            className="flex-1 text-xs py-1 px-2 bg-green-50 text-green-700 rounded hover:bg-green-100 transition-colors"
-          >
-            Marquer payé
-          </button>
-        )}
+      <div className="flex items-center justify-between gap-1 pt-2 border-t border-stone-100">
         <Link
           href={`/admin/reservations/${reservation.id}`}
           onClick={(e) => e.stopPropagation()}
-          className="text-xs py-1 px-2 text-gold hover:text-gold-dark transition-colors"
+          className="text-xs py-1 px-2 text-gold hover:text-gold-dark transition-colors font-medium"
         >
           Détails
         </Link>
+        <div className="flex items-center gap-1">
+          {reservation.status === 'pending' && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAction?.(reservation.id, 'approve');
+                }}
+                className="text-xs py-1 px-2 bg-green-50 text-green-700 rounded hover:bg-green-100 transition-colors"
+              >
+                Approuver
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAction?.(reservation.id, 'reject');
+                }}
+                className="text-xs py-1 px-2 bg-red-50 text-red-700 rounded hover:bg-red-100 transition-colors"
+              >
+                Refuser
+              </button>
+            </>
+          )}
+          {reservation.status === 'approved' && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onAction?.(reservation.id, 'mark_paid');
+              }}
+              className="text-xs py-1 px-2 bg-green-50 text-green-700 rounded hover:bg-green-100 transition-colors"
+            >
+              Marquer payé
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

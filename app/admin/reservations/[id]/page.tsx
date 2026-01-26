@@ -102,8 +102,8 @@ export default function ReservationDetailPage() {
         }
       }
 
-      // Then try session-based auth
-      const adminToken = sessionStorage.getItem('adminToken');
+      // Then try localStorage-based auth
+      const adminToken = localStorage.getItem('adminToken');
       if (adminToken) {
         try {
           const authRes = await fetch('/api/auth', {
@@ -151,7 +151,8 @@ export default function ReservationDetailPage() {
       const data = await response.json();
 
       if (response.ok && data.token) {
-        sessionStorage.setItem('adminToken', data.token);
+        localStorage.setItem('adminToken', data.token);
+        localStorage.setItem('adminLastActivity', String(Date.now()));
         document.cookie = `adminToken=${data.token}; path=/; max-age=86400`;
 
         const res = await fetch(`/api/reservations/${id}`, {
@@ -188,7 +189,7 @@ export default function ReservationDetailPage() {
       if (accessMode === 'token' && token) {
         url += `?token=${token}`;
       } else {
-        const adminToken = sessionStorage.getItem('adminToken');
+        const adminToken = localStorage.getItem('adminToken');
         if (adminToken) {
           headers['Authorization'] = `Bearer ${adminToken}`;
         }
@@ -243,7 +244,7 @@ export default function ReservationDetailPage() {
       if (accessMode === 'token' && token) {
         url += `?token=${token}`;
       } else {
-        const adminToken = sessionStorage.getItem('adminToken');
+        const adminToken = localStorage.getItem('adminToken');
         if (adminToken) {
           headers['Authorization'] = `Bearer ${adminToken}`;
         }
