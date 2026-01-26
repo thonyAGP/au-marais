@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Container, DevModeBanner } from '@/components/ui';
-import { Settings, Percent, Phone, ExternalLink, Save } from 'lucide-react';
+import { Settings, Percent, Phone, ExternalLink, Save, Mail, Plus, X } from 'lucide-react';
 import { useAdminAuth } from '../AdminAuthContext';
 import { AdminLogin } from '../AdminLogin';
 import { AdminHeader } from '../AdminHeader';
@@ -66,6 +66,42 @@ export default function AdminSettingsPage() {
       [category]: {
         ...settings[category],
         [key]: value,
+      },
+    });
+  };
+
+  const addAdminEmail = () => {
+    if (!settings) return;
+    setSettings({
+      ...settings,
+      emails: {
+        ...settings.emails,
+        adminEmails: [...settings.emails.adminEmails, ''],
+      },
+    });
+  };
+
+  const updateAdminEmail = (index: number, value: string) => {
+    if (!settings) return;
+    const newEmails = [...settings.emails.adminEmails];
+    newEmails[index] = value;
+    setSettings({
+      ...settings,
+      emails: {
+        ...settings.emails,
+        adminEmails: newEmails,
+      },
+    });
+  };
+
+  const removeAdminEmail = (index: number) => {
+    if (!settings || settings.emails.adminEmails.length <= 1) return;
+    const newEmails = settings.emails.adminEmails.filter((_, i) => i !== index);
+    setSettings({
+      ...settings,
+      emails: {
+        ...settings.emails,
+        adminEmails: newEmails,
       },
     });
   };
@@ -270,6 +306,99 @@ export default function AdminSettingsPage() {
                   <p className="text-stone-400 text-xs mt-1">
                     Format international sans le + (ex: 33612345678)
                   </p>
+                </div>
+              </div>
+
+              {/* Configuration Email */}
+              <div className="bg-white rounded-lg shadow-sm p-6 border border-stone-200">
+                <div className="flex items-center gap-2 mb-4">
+                  <Mail className="h-5 w-5 text-gold" />
+                  <h2 className="font-serif text-xl text-text">Configuration Email</h2>
+                </div>
+                <p className="text-text-muted text-sm mb-6">
+                  Paramètres pour les notifications email (réservations, paiements).
+                </p>
+
+                <div className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text mb-1">
+                        Nom de l&apos;expéditeur
+                      </label>
+                      <input
+                        type="text"
+                        value={settings.emails.fromName}
+                        onChange={(e) => updateSetting('emails', 'fromName', e.target.value)}
+                        className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                        placeholder="Au Marais"
+                      />
+                      <p className="text-stone-400 text-xs mt-1">
+                        Nom affiché dans les emails envoyés
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-text mb-1">
+                        Email expéditeur
+                      </label>
+                      <input
+                        type="email"
+                        value={settings.emails.fromEmail}
+                        onChange={(e) => updateSetting('emails', 'fromEmail', e.target.value)}
+                        className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                        placeholder="reservation@au-marais.fr"
+                      />
+                      <p className="text-stone-400 text-xs mt-1">
+                        Doit être vérifié dans Resend
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text mb-1">
+                      Emails administrateur
+                    </label>
+                    <p className="text-stone-400 text-xs mb-3">
+                      Ces adresses reçoivent les notifications de nouvelles réservations et paiements.
+                    </p>
+                    <div className="space-y-2">
+                      {settings.emails.adminEmails.map((email, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => updateAdminEmail(index, e.target.value)}
+                            className="flex-1 px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                            placeholder="email@example.com"
+                          />
+                          {settings.emails.adminEmails.length > 1 && (
+                            <button
+                              onClick={() => removeAdminEmail(index)}
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              title="Supprimer"
+                            >
+                              <X className="h-5 w-5" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      onClick={addAdminEmail}
+                      className="mt-3 flex items-center gap-2 text-gold hover:text-gold-dark transition-colors text-sm font-medium"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Ajouter un email
+                    </button>
+                  </div>
+
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                    <p className="text-amber-800 text-sm">
+                      <strong>Note :</strong> En mode test (environnement de développement),
+                      les emails sont envoyés à l&apos;adresse configurée dans <code className="bg-amber-100 px-1 rounded">ADMIN_EMAIL_TEST</code>
+                      pour éviter d&apos;envoyer des emails de test aux vraies adresses.
+                    </p>
+                  </div>
                 </div>
               </div>
 

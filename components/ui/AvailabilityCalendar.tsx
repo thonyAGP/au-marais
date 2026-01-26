@@ -90,6 +90,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   discounts: { weekly: 10, biweekly: 15, monthly: 20 },
   airbnb: { nightlyMarkup: 19, cleaningFee: 48, touristTax: 2.88, listingId: '618442543008929958' },
   contact: { whatsapp: '33631598400' },
+  emails: { fromEmail: 'reservation@au-marais.fr', fromName: 'Au Marais', adminEmails: ['au-marais@hotmail.com'] },
 };
 
 const getStayDiscounts = (settings: SiteSettings, discountLabels: CalendarDict['discounts']) => {

@@ -1,5 +1,8 @@
 import { Resend } from 'resend';
+import { promises as fs } from 'fs';
+import path from 'path';
 import type { Reservation } from '@/types/reservation';
+import type { SiteSettings } from '@/types/settings';
 
 // Initialize Resend lazily to avoid build errors when API key is not set
 let resendInstance: Resend | null = null;
@@ -14,22 +17,48 @@ const getResend = (): Resend => {
   return resendInstance;
 };
 
+// Default email settings (fallback)
+const DEFAULT_EMAIL_SETTINGS: SiteSettings['emails'] = {
+  fromEmail: 'reservation@au-marais.fr',
+  fromName: 'Au Marais',
+  adminEmails: ['au-marais@hotmail.com'],
+};
+
+// Load email settings from settings file
+const getEmailSettings = async (): Promise<SiteSettings['emails']> => {
+  try {
+    const settingsPath = path.join(process.cwd(), 'data', 'settings.json');
+    const data = await fs.readFile(settingsPath, 'utf-8');
+    const settings = JSON.parse(data) as Partial<SiteSettings>;
+    return {
+      ...DEFAULT_EMAIL_SETTINGS,
+      ...settings.emails,
+    };
+  } catch {
+    return DEFAULT_EMAIL_SETTINGS;
+  }
+};
+
 // Email configuration - evaluated at RUNTIME (not build time)
 // ADMIN_EMAIL_TEST is only set in Preview/Dev environments (not Production)
 // So we use its presence to determine the environment
-const getEmailConfig = () => {
+const getEmailConfig = async () => {
   const hasTestConfig = !!process.env.ADMIN_EMAIL_TEST;
   const isProduction = process.env.VERCEL_ENV === 'production';
+
+  // Get settings from file
+  const emailSettings = await getEmailSettings();
 
   // Use test domain if ADMIN_EMAIL_TEST is configured
   const fromEmail = hasTestConfig
     ? 'Au Marais Test <onboarding@resend.dev>'
-    : (process.env.EMAIL_FROM || 'Au Marais <reservation@au-marais.fr>');
+    : `${emailSettings.fromName} <${emailSettings.fromEmail}>`;
 
   // ADMIN_EMAIL_TEST takes priority when set (preview/dev only)
-  const adminEmail = process.env.ADMIN_EMAIL_TEST
-    || process.env.ADMIN_EMAIL
-    || 'au-marais@hotmail.com';
+  // Otherwise use all admin emails from settings
+  const adminEmails = process.env.ADMIN_EMAIL_TEST
+    ? [process.env.ADMIN_EMAIL_TEST]
+    : emailSettings.adminEmails;
 
   // In test mode, use Vercel preview URL; otherwise use configured site URL
   // VERCEL_URL is automatically set by Vercel for all deployments
@@ -43,12 +72,12 @@ const getEmailConfig = () => {
     isProduction,
     VERCEL_ENV: process.env.VERCEL_ENV,
     VERCEL_URL: process.env.VERCEL_URL,
-    adminEmail,
+    adminEmails,
     siteUrl,
     fromEmail: fromEmail.substring(0, 30) + '...'
   });
 
-  return { isProduction, fromEmail, adminEmail, siteUrl, isTest: hasTestConfig };
+  return { isProduction, fromEmail, adminEmails, siteUrl, isTest: hasTestConfig };
 };
 
 // Format date for display
@@ -151,7 +180,7 @@ export const sendReservationReceivedEmail = async (reservation: Reservation) => 
     </html>
   `;
 
-  const { fromEmail } = getEmailConfig();
+  const { fromEmail } = await getEmailConfig();
   return getResend().emails.send({
     from: fromEmail,
     to: reservation.email,
@@ -257,7 +286,7 @@ export const sendReservationApprovedEmail = async (
     </html>
   `;
 
-  const { fromEmail } = getEmailConfig();
+  const { fromEmail } = await getEmailConfig();
   return getResend().emails.send({
     from: fromEmail,
     to: reservation.email,
@@ -325,7 +354,7 @@ export const sendReservationRejectedEmail = async (
     </html>
   `;
 
-  const { fromEmail } = getEmailConfig();
+  const { fromEmail } = await getEmailConfig();
   return getResend().emails.send({
     from: fromEmail,
     to: reservation.email,
@@ -390,7 +419,7 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
     </html>
   `;
 
-  const { fromEmail } = getEmailConfig();
+  const { fromEmail } = await getEmailConfig();
   return getResend().emails.send({
     from: fromEmail,
     to: reservation.email,
@@ -401,7 +430,7 @@ export const sendPaymentConfirmedEmail = async (reservation: Reservation) => {
 
 // Email template: New reservation notification (to admin)
 export const sendAdminNotificationEmail = async (reservation: Reservation) => {
-  const { fromEmail, adminEmail, siteUrl, isTest } = getEmailConfig();
+  const { fromEmail, adminEmails, siteUrl, isTest } = await getEmailConfig();
   const actionBaseUrl = `${siteUrl}/r/${reservation.id}`;
 
   const testPrefix = isTest ? '[TEST] ' : '';
@@ -524,15 +553,15 @@ export const sendAdminNotificationEmail = async (reservation: Reservation) => {
 
   return getResend().emails.send({
     from: fromEmail,
-    to: adminEmail,
+    to: adminEmails,
     subject,
     html,
   });
 };
 
 // Generate WhatsApp notification message for admin
-export const generateWhatsAppAdminMessage = (reservation: Reservation): string => {
-  const { siteUrl } = getEmailConfig();
+export const generateWhatsAppAdminMessage = async (reservation: Reservation): Promise<string> => {
+  const { siteUrl } = await getEmailConfig();
   const actionBaseUrl = `${siteUrl}/r/${reservation.id}`;
 
   return `🏠 *Nouvelle demande de réservation!*
@@ -570,7 +599,7 @@ export const sendPaymentFailedAdminEmail = async (
     stripeSessionId?: string;
   }
 ) => {
-  const { fromEmail, adminEmail, siteUrl } = getEmailConfig();
+  const { fromEmail, adminEmails, siteUrl } = await getEmailConfig();
   const subject = `⚠️ Échec de paiement - ${reservation.firstName} ${reservation.lastName}`;
 
   const html = `
@@ -647,7 +676,7 @@ export const sendPaymentFailedAdminEmail = async (
 
   return getResend().emails.send({
     from: fromEmail,
-    to: adminEmail,
+    to: adminEmails,
     subject,
     html,
   });

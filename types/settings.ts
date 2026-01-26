@@ -13,4 +13,9 @@ export interface SiteSettings {
   contact: {
     whatsapp: string;
   };
+  emails: {
+    fromEmail: string; // Email expéditeur (doit être vérifié dans Resend)
+    fromName: string; // Nom affiché (ex: "Au Marais")
+    adminEmails: string[]; // Liste des emails admin pour notifications
+  };
 }

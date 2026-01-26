@@ -5,17 +5,32 @@ import type { SiteSettings } from '@/types/settings';
 
 const SETTINGS_PATH = path.join(process.cwd(), 'data', 'settings.json');
 
+const DEFAULT_SETTINGS: SiteSettings = {
+  discounts: { weekly: 10, biweekly: 15, monthly: 20 },
+  airbnb: { nightlyMarkup: 19, cleaningFee: 48, touristTax: 2.88, listingId: '618442543008929958' },
+  contact: { whatsapp: '33631598400' },
+  emails: {
+    fromEmail: 'reservation@au-marais.fr',
+    fromName: 'Au Marais',
+    adminEmails: ['au-marais@hotmail.com'],
+  },
+};
+
 const getSettings = async (): Promise<SiteSettings> => {
   try {
     const data = await fs.readFile(SETTINGS_PATH, 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    // Retourner les valeurs par défaut si le fichier n'existe pas
+    const settings = JSON.parse(data);
+    // Merge with defaults to ensure all fields exist (backward compatibility)
     return {
-      discounts: { weekly: 10, biweekly: 15, monthly: 20 },
-      airbnb: { nightlyMarkup: 19, cleaningFee: 48, touristTax: 2.88, listingId: '618442543008929958' },
-      contact: { whatsapp: '33631598400' },
+      ...DEFAULT_SETTINGS,
+      ...settings,
+      emails: {
+        ...DEFAULT_SETTINGS.emails,
+        ...settings.emails,
+      },
     };
+  } catch {
+    return DEFAULT_SETTINGS;
   }
 };
 
@@ -51,7 +66,11 @@ export async function POST(request: NextRequest) {
       typeof newSettings.airbnb?.cleaningFee !== 'number' ||
       typeof newSettings.airbnb?.touristTax !== 'number' ||
       typeof newSettings.airbnb?.listingId !== 'string' ||
-      typeof newSettings.contact?.whatsapp !== 'string'
+      typeof newSettings.contact?.whatsapp !== 'string' ||
+      typeof newSettings.emails?.fromEmail !== 'string' ||
+      typeof newSettings.emails?.fromName !== 'string' ||
+      !Array.isArray(newSettings.emails?.adminEmails) ||
+      newSettings.emails.adminEmails.length === 0
     ) {
       return NextResponse.json({ error: 'Données invalides' }, { status: 400 });
     }
