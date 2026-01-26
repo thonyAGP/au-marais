@@ -3,8 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Container, DevModeBanner } from '@/components/ui';
 import {
-  Lock,
-  LogOut,
   Calendar,
   Clock,
   CheckCircle,
@@ -17,10 +15,12 @@ import {
   ExternalLink,
   ChevronDown,
   RefreshCw,
-  Settings,
   Eye,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useAdminAuth } from '../AdminAuthContext';
+import { AdminLogin } from '../AdminLogin';
+import { AdminHeader } from '../AdminHeader';
 import type { Reservation } from '@/types/reservation';
 
 type StatusFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'paid' | 'cancelled';
@@ -34,73 +34,18 @@ const statusConfig = {
 };
 
 export default function AdminReservationsPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { isAuthenticated, isLoading, token } = useAdminAuth();
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  useEffect(() => {
-    const token = sessionStorage.getItem('adminToken');
-    if (token) {
-      verifyToken(token);
-    }
-  }, []);
-
-  const verifyToken = async (token: string) => {
-    try {
-      const response = await fetch('/api/auth', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (response.ok) {
-        setIsAuthenticated(true);
-        loadReservations(token);
-      } else {
-        sessionStorage.removeItem('adminToken');
-      }
-    } catch {
-      sessionStorage.removeItem('adminToken');
-    }
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setLoginError('');
-
-    try {
-      const response = await fetch('/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.token) {
-        sessionStorage.setItem('adminToken', data.token);
-        document.cookie = `adminToken=${data.token}; path=/; max-age=86400`;
-        setIsAuthenticated(true);
-        loadReservations(data.token);
-      } else {
-        setLoginError(data.error || 'Mot de passe incorrect');
-      }
-    } catch {
-      setLoginError('Erreur de connexion');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadReservations = useCallback(async (token?: string) => {
+  const loadReservations = useCallback(async () => {
+    if (!token) return;
     setIsRefreshing(true);
     try {
-      const authToken = token || sessionStorage.getItem('adminToken');
       const response = await fetch('/api/reservations', {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
         credentials: 'include',
       });
@@ -113,18 +58,15 @@ export default function AdminReservationsPage() {
     } finally {
       setIsRefreshing(false);
     }
-  }, []);
+  }, [token]);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('adminToken');
-    document.cookie = 'adminToken=; path=/; max-age=0';
-    setIsAuthenticated(false);
-    setReservations([]);
-    setPassword('');
-  };
+  useEffect(() => {
+    if (isAuthenticated && token) {
+      loadReservations();
+    }
+  }, [isAuthenticated, token, loadReservations]);
 
   const handleAction = async (id: string, action: 'approve' | 'reject' | 'mark_paid', extraData?: Record<string, unknown>) => {
-    const token = sessionStorage.getItem('adminToken');
     if (!token) return;
 
     try {
@@ -139,7 +81,7 @@ export default function AdminReservationsPage() {
       });
 
       if (response.ok) {
-        loadReservations(token);
+        loadReservations();
       }
     } catch (error) {
       console.error('Erreur:', error);
@@ -171,159 +113,95 @@ export default function AdminReservationsPage() {
     });
   };
 
-  // Login screen
-  if (!isAuthenticated) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-cream">
         <DevModeBanner />
-        <div className="flex items-center justify-center min-h-screen p-4">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border border-stone-200">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gold/10 rounded-full mb-4">
-                <Lock className="h-8 w-8 text-gold" />
-              </div>
-              <h1 className="font-serif text-2xl text-text">Réservations</h1>
-              <p className="text-text-muted text-sm mt-2">Au Marais - Administration</p>
-            </div>
-
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-text mb-1">
-                  Mot de passe
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all"
-                  placeholder="Entrez le mot de passe"
-                  required
-                />
-              </div>
-
-              {loginError && (
-                <p className="text-red-500 text-sm text-center">{loginError}</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full px-4 py-3 bg-gold text-white font-medium rounded-lg hover:bg-gold-dark transition-colors disabled:opacity-50"
-              >
-                {loading ? 'Connexion...' : 'Se connecter'}
-              </button>
-            </form>
-          </div>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-pulse text-text-muted">Chargement...</div>
         </div>
       </div>
     );
   }
 
-  // Main content
+  if (!isAuthenticated) {
+    return <AdminLogin title="Réservations" subtitle="Au Marais - Administration" />;
+  }
+
   return (
     <div className="min-h-screen bg-cream">
       <DevModeBanner />
-
-      {/* Header */}
-      <header className="bg-white border-b border-stone-200 sticky top-0 z-40">
-        <Container size="lg">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-3">
-              <span className="font-serif text-xl text-text">Au <span className="text-gold">Marais</span></span>
-              <span className="text-text-muted">•</span>
-              <span className="text-text-muted text-sm">Administration</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/admin"
-                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
-              >
-                <Settings className="h-4 w-4" />
-                Paramètres
-              </Link>
-              <button
-                onClick={() => loadReservations()}
-                disabled={isRefreshing}
-                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors disabled:opacity-50 text-sm"
-              >
-                <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-                Actualiser
-              </button>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
-              >
-                <LogOut className="h-4 w-4" />
-                Déconnexion
-              </button>
-            </div>
-          </div>
-        </Container>
-      </header>
+      <AdminHeader />
 
       <div className="py-8">
-      <Container size="lg">
-        {/* Page Title */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <Calendar className="h-8 w-8 text-gold" />
-            <div>
-              <h1 className="font-serif text-2xl text-text">Réservations</h1>
-              <p className="text-text-muted text-sm">
-                {reservations.length} demande{reservations.length > 1 ? 's' : ''}
-              </p>
+        <Container size="lg">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <Calendar className="h-8 w-8 text-gold" />
+              <div>
+                <h1 className="font-serif text-2xl text-text">Réservations</h1>
+                <p className="text-text-muted text-sm">
+                  {reservations.length} demande{reservations.length > 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => loadReservations()}
+              disabled={isRefreshing}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-stone-200 rounded-lg text-text-muted hover:text-text hover:bg-cream transition-colors disabled:opacity-50"
+            >
+              <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+              Actualiser
+            </button>
+          </div>
+
+          {/* Filters */}
+          <div className="bg-white rounded-lg shadow-sm p-4 mb-6 border border-stone-200">
+            <div className="flex items-center gap-4 flex-wrap">
+              <span className="text-sm text-text-muted">Filtrer par statut :</span>
+              <div className="flex gap-2 flex-wrap">
+                {(['all', 'pending', 'approved', 'paid', 'rejected', 'cancelled'] as const).map((status) => (
+                  <button
+                    key={status}
+                    onClick={() => setStatusFilter(status)}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                      statusFilter === status
+                        ? 'bg-gold text-white'
+                        : 'bg-cream text-text-muted hover:bg-stone-200'
+                    }`}
+                  >
+                    {status === 'all' ? 'Toutes' : statusConfig[status].label}
+                    {status !== 'all' && (
+                      <span className="ml-1.5 opacity-70">
+                        ({reservations.filter((r) => r.status === status).length})
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6 border border-stone-200">
-          <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-sm text-text-muted">Filtrer par statut :</span>
-            <div className="flex gap-2 flex-wrap">
-              {(['all', 'pending', 'approved', 'paid', 'rejected', 'cancelled'] as const).map((status) => (
-                <button
-                  key={status}
-                  onClick={() => setStatusFilter(status)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                    statusFilter === status
-                      ? 'bg-gold text-white'
-                      : 'bg-cream text-text-muted hover:bg-stone-200'
-                  }`}
-                >
-                  {status === 'all' ? 'Toutes' : statusConfig[status].label}
-                  {status !== 'all' && (
-                    <span className="ml-1.5 opacity-70">
-                      ({reservations.filter((r) => r.status === status).length})
-                    </span>
-                  )}
-                </button>
+          {/* Reservations List */}
+          {sortedReservations.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-sm p-12 text-center border border-stone-200">
+              <Calendar className="h-12 w-12 text-stone-300 mx-auto mb-4" />
+              <p className="text-text-muted">Aucune réservation trouvée</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {sortedReservations.map((reservation) => (
+                <ReservationCard
+                  key={reservation.id}
+                  reservation={reservation}
+                  onAction={handleAction}
+                  formatDate={formatDate}
+                  formatDateTime={formatDateTime}
+                />
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Reservations List */}
-        {sortedReservations.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center border border-stone-200">
-            <Calendar className="h-12 w-12 text-stone-300 mx-auto mb-4" />
-            <p className="text-text-muted">Aucune réservation trouvée</p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {sortedReservations.map((reservation) => (
-              <ReservationCard
-                key={reservation.id}
-                reservation={reservation}
-                onAction={handleAction}
-                formatDate={formatDate}
-                formatDateTime={formatDateTime}
-              />
-            ))}
-          </div>
-        )}
-      </Container>
+          )}
+        </Container>
       </div>
     </div>
   );
@@ -520,7 +398,7 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                   <div>
                     <p className="text-sm font-medium text-blue-800">En attente du paiement</p>
-                    <p className="text-xs text-blue-600">Caution: {reservation.depositAmount}€</p>
+                    <p className="text-xs text-blue-600">Acompte: {reservation.depositAmount}€</p>
                   </div>
                   {reservation.stripePaymentLinkUrl && (
                     <a
@@ -552,7 +430,7 @@ function ReservationCard({ reservation, onAction, formatDate, formatDateTime }: 
                   <div>
                     <p className="font-medium">Réservation confirmée</p>
                     <p className="text-xs text-green-600">
-                      Caution de {reservation.depositAmount}€ reçue
+                      Acompte de {reservation.depositAmount}€ reçu
                       {reservation.smoobuReservationId && ' • Dates bloquées sur Smoobu'}
                     </p>
                   </div>

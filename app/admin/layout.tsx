@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Montserrat } from 'next/font/google';
+import { AdminAuthProvider } from './AdminAuthContext';
 import '../globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -33,7 +34,9 @@ export default function AdminLayout({
   return (
     <html lang="fr" className={`${cormorant.variable} ${montserrat.variable}`}>
       <body className="font-sans bg-cream text-text antialiased">
-        {children}
+        <AdminAuthProvider>
+          {children}
+        </AdminAuthProvider>
       </body>
     </html>
   );
