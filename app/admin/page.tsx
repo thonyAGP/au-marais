@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Container, DevModeBanner } from '@/components/ui';
-import { Lock, Save, LogOut, Settings, Percent, Phone, ExternalLink } from 'lucide-react';
+import { Lock, Save, LogOut, Settings, Percent, Phone, ExternalLink, Calendar } from 'lucide-react';
+import Link from 'next/link';
 import type { SiteSettings } from '@/types/settings';
 
 export default function AdminPage() {
@@ -193,13 +194,22 @@ export default function AdminPage() {
               <span className="text-text-muted">•</span>
               <span className="text-text-muted text-sm">Administration</span>
             </div>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
-            >
-              <LogOut className="h-4 w-4" />
-              Déconnexion
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/admin/reservations"
+                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
+              >
+                <Calendar className="h-4 w-4" />
+                Réservations
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-3 py-2 text-text-muted hover:text-text hover:bg-cream rounded-lg transition-colors text-sm"
+              >
+                <LogOut className="h-4 w-4" />
+                Déconnexion
+              </button>
+            </div>
           </div>
         </Container>
       </header>
