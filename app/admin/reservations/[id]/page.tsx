@@ -26,6 +26,7 @@ import {
 import Link from 'next/link';
 import type { Reservation } from '@/types/reservation';
 import { DevModeBanner } from '@/components/ui';
+import { useAdminAuth } from '../../AdminAuthContext';
 
 const statusConfig = {
   pending: { label: 'En attente', color: 'bg-amber-100 text-amber-800', icon: Clock },
@@ -41,7 +42,10 @@ export default function ReservationDetailPage() {
   const params = useParams();
   const searchParams = useSearchParams();
   const id = params.id as string;
-  const token = searchParams.get('token');
+  const urlToken = searchParams.get('token');
+
+  // Use shared auth context
+  const { isAuthenticated, isLoading: authLoading, token: authToken, login: contextLogin } = useAdminAuth();
 
   const [accessMode, setAccessMode] = useState<AccessMode>('loading');
   const [reservation, setReservation] = useState<Reservation | null>(null);
@@ -86,11 +90,14 @@ export default function ReservationDetailPage() {
 
   // Check access mode and load reservation
   useEffect(() => {
+    // Wait for auth context to finish loading
+    if (authLoading) return;
+
     const checkAccess = async () => {
-      // First try token-based access
-      if (token) {
+      // First try URL token-based access (for quick action links)
+      if (urlToken) {
         try {
-          const res = await fetch(`/api/reservations/${id}?token=${token}`);
+          const res = await fetch(`/api/reservations/${id}?token=${urlToken}`);
           if (res.ok) {
             const data = await res.json();
             setReservation(data);
@@ -102,24 +109,17 @@ export default function ReservationDetailPage() {
         }
       }
 
-      // Then try localStorage-based auth
-      const adminToken = localStorage.getItem('adminToken');
-      if (adminToken) {
+      // Then try context-based auth (shared session)
+      if (isAuthenticated && authToken) {
         try {
-          const authRes = await fetch('/api/auth', {
-            headers: { Authorization: `Bearer ${adminToken}` },
+          const res = await fetch(`/api/reservations/${id}`, {
+            headers: { Authorization: `Bearer ${authToken}` },
           });
-          if (authRes.ok) {
-            const res = await fetch(`/api/reservations/${id}`, {
-              headers: { Authorization: `Bearer ${adminToken}` },
-              credentials: 'include',
-            });
-            if (res.ok) {
-              const data = await res.json();
-              setReservation(data);
-              setAccessMode('authenticated');
-              return;
-            }
+          if (res.ok) {
+            const data = await res.json();
+            setReservation(data);
+            setAccessMode('authenticated');
+            return;
           }
         } catch {
           // Auth failed
@@ -127,14 +127,14 @@ export default function ReservationDetailPage() {
       }
 
       // No valid access method
-      if (token) {
+      if (urlToken) {
         setError('Lien invalide ou expiré');
       }
       setAccessMode('login_required');
     };
 
     checkAccess();
-  }, [id, token]);
+  }, [id, urlToken, authLoading, isAuthenticated, authToken]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,33 +142,13 @@ export default function ReservationDetailPage() {
     setLoginError('');
 
     try {
-      const response = await fetch('/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
+      const result = await contextLogin(password);
 
-      const data = await response.json();
-
-      if (response.ok && data.token) {
-        localStorage.setItem('adminToken', data.token);
-        localStorage.setItem('adminLastActivity', String(Date.now()));
-        document.cookie = `adminToken=${data.token}; path=/; max-age=86400`;
-
-        const res = await fetch(`/api/reservations/${id}`, {
-          headers: { Authorization: `Bearer ${data.token}` },
-          credentials: 'include',
-        });
-
-        if (res.ok) {
-          const reservationData = await res.json();
-          setReservation(reservationData);
-          setAccessMode('authenticated');
-        } else {
-          setLoginError('Réservation non trouvée');
-        }
+      if (result.success) {
+        // Context will update isAuthenticated, which triggers the useEffect to load reservation
+        // No need to manually load here - the effect will handle it
       } else {
-        setLoginError(data.error || 'Mot de passe incorrect');
+        setLoginError(result.error || 'Mot de passe incorrect');
       }
     } catch {
       setLoginError('Erreur de connexion');
@@ -186,13 +166,10 @@ export default function ReservationDetailPage() {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       let url = `/api/reservations/${id}`;
 
-      if (accessMode === 'token' && token) {
-        url += `?token=${token}`;
-      } else {
-        const adminToken = localStorage.getItem('adminToken');
-        if (adminToken) {
-          headers['Authorization'] = `Bearer ${adminToken}`;
-        }
+      if (accessMode === 'token' && urlToken) {
+        url += `?token=${urlToken}`;
+      } else if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
       }
 
       const body: Record<string, unknown> = {
@@ -241,13 +218,10 @@ export default function ReservationDetailPage() {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       let url = `/api/reservations/${id}`;
 
-      if (accessMode === 'token' && token) {
-        url += `?token=${token}`;
-      } else {
-        const adminToken = localStorage.getItem('adminToken');
-        if (adminToken) {
-          headers['Authorization'] = `Bearer ${adminToken}`;
-        }
+      if (accessMode === 'token' && urlToken) {
+        url += `?token=${urlToken}`;
+      } else if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
       }
 
       const body: Record<string, unknown> = { action };
@@ -297,7 +271,7 @@ export default function ReservationDetailPage() {
     } finally {
       setActionLoading(null);
     }
-  }, [id, token, accessMode, depositAmount, adminNotes, rejectionReason, approvalMessage, editedNightlyRate, editedCleaningFee, editedTouristTax, editedDiscount, useCustomTotal, customTotal]);
+  }, [id, urlToken, authToken, accessMode, depositAmount, adminNotes, rejectionReason, approvalMessage, editedNightlyRate, editedCleaningFee, editedTouristTax, editedDiscount, useCustomTotal, customTotal]);
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString('fr-FR', {

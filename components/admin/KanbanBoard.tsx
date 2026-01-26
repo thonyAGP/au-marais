@@ -16,7 +16,7 @@ import { KanbanColumn, ColumnConfig } from './KanbanColumn';
 import { KanbanCard } from './KanbanCard';
 import type { Reservation } from '@/types/reservation';
 
-const COLUMNS: ColumnConfig[] = [
+const MAIN_COLUMNS: ColumnConfig[] = [
   {
     id: 'pending',
     title: 'Demandes',
@@ -44,6 +44,9 @@ const COLUMNS: ColumnConfig[] = [
     borderColor: 'border-green-200',
     statuses: ['paid'],
   },
+];
+
+const ARCHIVE_COLUMNS: ColumnConfig[] = [
   {
     id: 'rejected',
     title: 'Refusées',
@@ -63,6 +66,8 @@ const COLUMNS: ColumnConfig[] = [
     statuses: ['cancelled'],
   },
 ];
+
+const ALL_COLUMNS = [...MAIN_COLUMNS, ...ARCHIVE_COLUMNS];
 
 interface KanbanBoardProps {
   reservations: Reservation[];
@@ -90,7 +95,7 @@ export const KanbanBoard = ({
   const reservationsByColumn = useMemo(() => {
     const grouped: Record<string, Reservation[]> = {};
 
-    COLUMNS.forEach((col) => {
+    ALL_COLUMNS.forEach((col) => {
       grouped[col.id] = reservations
         .filter((r) => col.statuses.includes(r.status))
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -98,6 +103,10 @@ export const KanbanBoard = ({
 
     return grouped;
   }, [reservations]);
+
+  const archiveCount = useMemo(() => {
+    return ARCHIVE_COLUMNS.reduce((acc, col) => acc + (reservationsByColumn[col.id]?.length || 0), 0);
+  }, [reservationsByColumn]);
 
   const activeReservation = useMemo(() => {
     if (!activeId) return null;
@@ -118,7 +127,7 @@ export const KanbanBoard = ({
     if (!activeReservation) return;
 
     const targetColumnId = over.id as string;
-    const targetColumn = COLUMNS.find((col) => col.id === targetColumnId);
+    const targetColumn = ALL_COLUMNS.find((col) => col.id === targetColumnId);
 
     if (!targetColumn) return;
     if (targetColumn.statuses.includes(activeReservation.status)) return;
@@ -142,6 +151,8 @@ export const KanbanBoard = ({
     await onAction(id, action);
   };
 
+  const [showArchive, setShowArchive] = useState(false);
+
   return (
     <DndContext
       sensors={sensors}
@@ -149,8 +160,9 @@ export const KanbanBoard = ({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {COLUMNS.map((column) => (
+      {/* Main workflow columns */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        {MAIN_COLUMNS.map((column) => (
           <KanbanColumn
             key={column.id}
             config={column}
@@ -159,6 +171,33 @@ export const KanbanBoard = ({
             isLoading={isLoading}
           />
         ))}
+      </div>
+
+      {/* Archive section (collapsed by default) */}
+      <div className="border-t border-stone-200 pt-4">
+        <button
+          onClick={() => setShowArchive(!showArchive)}
+          className="flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors mb-3"
+        >
+          <Archive className="h-4 w-4" />
+          <span>Archives ({archiveCount})</span>
+          <span className={`transition-transform ${showArchive ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+
+        {showArchive && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {ARCHIVE_COLUMNS.map((column) => (
+              <KanbanColumn
+                key={column.id}
+                config={column}
+                reservations={reservationsByColumn[column.id] || []}
+                onAction={handleAction}
+                isLoading={isLoading}
+                compact
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <DragOverlay>

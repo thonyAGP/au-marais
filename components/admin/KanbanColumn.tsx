@@ -21,9 +21,10 @@ interface KanbanColumnProps {
   reservations: Reservation[];
   onAction?: (id: string, action: string) => void;
   isLoading?: boolean;
+  compact?: boolean;
 }
 
-export const KanbanColumn = ({ config, reservations, onAction, isLoading }: KanbanColumnProps) => {
+export const KanbanColumn = ({ config, reservations, onAction, isLoading, compact }: KanbanColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({
     id: config.id,
   });
@@ -34,7 +35,8 @@ export const KanbanColumn = ({ config, reservations, onAction, isLoading }: Kanb
     <div
       ref={setNodeRef}
       className={`
-        flex flex-col min-h-[400px] rounded-lg border-2 transition-colors
+        flex flex-col rounded-lg border-2 transition-colors
+        ${compact ? 'min-h-[150px]' : 'min-h-[400px]'}
         ${isOver ? 'border-gold bg-gold/5' : config.borderColor}
         ${config.bgColor}
       `}
@@ -49,13 +51,13 @@ export const KanbanColumn = ({ config, reservations, onAction, isLoading }: Kanb
       </div>
 
       {/* Column Content */}
-      <div className="flex-1 p-2 space-y-2 overflow-y-auto max-h-[500px]">
+      <div className={`flex-1 p-2 space-y-2 overflow-y-auto ${compact ? 'max-h-[200px]' : 'max-h-[500px]'}`}>
         <SortableContext
           items={reservations.map((r) => r.id)}
           strategy={verticalListSortingStrategy}
         >
           {reservations.length === 0 ? (
-            <div className="flex items-center justify-center h-24 text-text-muted text-sm">
+            <div className={`flex items-center justify-center text-text-muted text-sm ${compact ? 'h-12' : 'h-24'}`}>
               Aucune réservation
             </div>
           ) : (
