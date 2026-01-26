@@ -1,73 +1,118 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Container, DevModeBanner } from '@/components/ui';
-import { Settings, Percent, Phone, ExternalLink, Save } from 'lucide-react';
+import { LayoutDashboard, RefreshCw } from 'lucide-react';
 import { useAdminAuth } from './AdminAuthContext';
 import { AdminLogin } from './AdminLogin';
 import { AdminHeader } from './AdminHeader';
-import type { SiteSettings } from '@/types/settings';
+import { KanbanBoard, ActionAlerts, QuickStats, QuickLinks } from '@/components/admin';
+import type { Reservation } from '@/types/reservation';
 
-export default function AdminPage() {
+interface MonitoringData {
+  failedEmails: { id: string }[];
+  links: {
+    vercel: string;
+    vercelAnalytics: string;
+    resend: string;
+    stripe: string;
+    smoobu: string;
+  };
+}
+
+export default function AdminDashboardPage() {
   const { isAuthenticated, isLoading, token } = useAdminAuth();
-  const [settings, setSettings] = useState<SiteSettings | null>(null);
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [monitoringData, setMonitoringData] = useState<MonitoringData | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const loadData = useCallback(async () => {
+    if (!token) return;
+    setIsRefreshing(true);
+    setError(null);
+
+    try {
+      const [reservationsRes, monitoringRes] = await Promise.all([
+        fetch('/api/reservations', {
+          headers: { Authorization: `Bearer ${token}` },
+          credentials: 'include',
+        }),
+        fetch('/api/admin/monitoring', {
+          headers: { Authorization: `Bearer ${token}` },
+          credentials: 'include',
+        }),
+      ]);
+
+      if (reservationsRes.ok) {
+        const data = await reservationsRes.json();
+        setReservations(data.reservations || []);
+      }
+
+      if (monitoringRes.ok) {
+        const data = await monitoringRes.json();
+        setMonitoringData(data);
+      }
+    } catch {
+      setError('Erreur lors du chargement des données');
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [token]);
 
   useEffect(() => {
     if (isAuthenticated && token) {
-      loadSettings();
+      loadData();
     }
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated, token, loadData]);
 
-  const loadSettings = async () => {
-    try {
-      const response = await fetch('/api/settings');
-      const data = await response.json();
-      setSettings(data);
-    } catch {
-      console.error('Erreur lors du chargement des paramètres');
-    }
-  };
-
-  const handleSave = async () => {
-    if (!settings || !token) return;
-
-    setSaveStatus('saving');
+  const handleAction = async (id: string, action: string) => {
+    if (!token) return;
+    setActionLoading(id);
+    setError(null);
 
     try {
-      const response = await fetch('/api/settings', {
-        method: 'POST',
+      const response = await fetch(`/api/reservations/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(settings),
+        body: JSON.stringify({ action }),
       });
 
       if (response.ok) {
-        setSaveStatus('saved');
-        setTimeout(() => setSaveStatus('idle'), 2000);
+        const actionLabels: Record<string, string> = {
+          approve: 'Réservation approuvée',
+          reject: 'Réservation refusée',
+          mark_paid: 'Paiement confirmé',
+        };
+        setSuccessMessage(actionLabels[action] || 'Action effectuée');
+        setTimeout(() => setSuccessMessage(null), 3000);
+        await loadData();
       } else {
-        setSaveStatus('error');
+        const data = await response.json();
+        setError(data.error || 'Erreur lors de l\'action');
       }
     } catch {
-      setSaveStatus('error');
+      setError('Erreur de connexion');
+    } finally {
+      setActionLoading(null);
     }
   };
 
-  const updateSetting = <K extends keyof SiteSettings>(
-    category: K,
-    key: keyof SiteSettings[K],
-    value: string | number
-  ) => {
-    if (!settings) return;
-    setSettings({
-      ...settings,
-      [category]: {
-        ...settings[category],
-        [key]: value,
-      },
-    });
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    const actionMap: Record<string, string> = {
+      approved: 'approve',
+      rejected: 'reject',
+      paid: 'mark_paid',
+    };
+    const action = actionMap[newStatus];
+    if (action) {
+      await handleAction(id, action);
+    }
   };
 
   if (isLoading) {
@@ -82,221 +127,83 @@ export default function AdminPage() {
   }
 
   if (!isAuthenticated) {
-    return <AdminLogin title="Administration" subtitle="Au Marais - Paramétrage" />;
+    return <AdminLogin title="Dashboard" subtitle="Au Marais - Administration" />;
   }
+
+  // Calculate stats for ActionAlerts
+  const pendingCount = reservations.filter((r) => r.status === 'pending').length;
+  const awaitingPaymentCount = reservations.filter((r) => r.status === 'approved').length;
+  const failedEmailsCount = monitoringData?.failedEmails?.length || 0;
 
   return (
     <div className="min-h-screen bg-cream">
       <DevModeBanner />
       <AdminHeader />
 
-      <div className="py-8">
-        <Container size="md">
-          <div className="flex items-center gap-3 mb-8">
-            <Settings className="h-8 w-8 text-gold" />
-            <div>
-              <h1 className="font-serif text-2xl text-text">Paramétrage</h1>
-              <p className="text-text-muted text-sm">Configuration du site Au Marais</p>
+      <div className="py-6">
+        <Container size="xl">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <LayoutDashboard className="h-8 w-8 text-gold" />
+              <div>
+                <h1 className="font-serif text-2xl text-text">Tableau de bord</h1>
+                <p className="text-text-muted text-sm">Vue d'ensemble des réservations</p>
+              </div>
             </div>
+            <button
+              onClick={loadData}
+              disabled={isRefreshing}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-stone-200 rounded-lg text-text-muted hover:text-text hover:bg-cream transition-colors disabled:opacity-50"
+            >
+              <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+              Actualiser
+            </button>
           </div>
 
-          {settings && (
-            <div className="space-y-6">
-              {/* Réductions */}
-              <div className="bg-white rounded-lg shadow-sm p-6 border border-stone-200">
-                <div className="flex items-center gap-2 mb-4">
-                  <Percent className="h-5 w-5 text-gold" />
-                  <h2 className="font-serif text-xl text-text">Réductions par durée</h2>
-                </div>
-                <p className="text-text-muted text-sm mb-6">
-                  Ces réductions sont appliquées automatiquement selon la durée du séjour.
-                  Mettez 0 pour désactiver une réduction.
-                </p>
-
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      Semaine (7+ nuits)
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        max="100"
-                        value={settings.discounts.weekly}
-                        onChange={(e) => updateSetting('discounts', 'weekly', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">%</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      2 semaines (14+ nuits)
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        max="100"
-                        value={settings.discounts.biweekly}
-                        onChange={(e) => updateSetting('discounts', 'biweekly', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">%</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      Mensuel (28+ nuits)
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        max="100"
-                        value={settings.discounts.monthly}
-                        onChange={(e) => updateSetting('discounts', 'monthly', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Airbnb */}
-              <div className="bg-white rounded-lg shadow-sm p-6 border border-stone-200">
-                <div className="flex items-center gap-2 mb-4">
-                  <ExternalLink className="h-5 w-5 text-gold" />
-                  <h2 className="font-serif text-xl text-text">Configuration Airbnb</h2>
-                </div>
-                <p className="text-text-muted text-sm mb-6">
-                  Paramètres pour calculer le prix Airbnb équivalent (comparaison).
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      Majoration nuitée Airbnb
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        max="100"
-                        value={settings.airbnb.nightlyMarkup}
-                        onChange={(e) => updateSetting('airbnb', 'nightlyMarkup', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">%</span>
-                    </div>
-                    <p className="text-stone-400 text-xs mt-1">Différence de prix par nuit vs direct</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      Frais de ménage Airbnb
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        value={settings.airbnb.cleaningFee}
-                        onChange={(e) => updateSetting('airbnb', 'cleaningFee', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">€</span>
-                    </div>
-                    <p className="text-stone-400 text-xs mt-1">Frais fixes ajoutés sur Airbnb</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      Taxe de séjour / pers / nuit
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        value={settings.airbnb.touristTax}
-                        onChange={(e) => updateSetting('airbnb', 'touristTax', Number(e.target.value))}
-                        className="w-full px-4 py-2 pr-8 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                      />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">€</span>
-                    </div>
-                    <p className="text-stone-400 text-xs mt-1">Appliquée pour 2 voyageurs par défaut</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1">
-                      ID de l&apos;annonce Airbnb
-                    </label>
-                    <input
-                      type="text"
-                      value={settings.airbnb.listingId}
-                      onChange={(e) => updateSetting('airbnb', 'listingId', e.target.value)}
-                      className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                    />
-                    <p className="text-stone-400 text-xs mt-1">
-                      Trouvable dans l&apos;URL de votre annonce
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="bg-white rounded-lg shadow-sm p-6 border border-stone-200">
-                <div className="flex items-center gap-2 mb-4">
-                  <Phone className="h-5 w-5 text-gold" />
-                  <h2 className="font-serif text-xl text-text">Contact</h2>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-text mb-1">
-                    Numéro WhatsApp
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.contact.whatsapp}
-                    onChange={(e) => updateSetting('contact', 'whatsapp', e.target.value)}
-                    className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                    placeholder="33612345678"
-                  />
-                  <p className="text-stone-400 text-xs mt-1">
-                    Format international sans le + (ex: 33612345678)
-                  </p>
-                </div>
-              </div>
-
-              {/* Bouton Sauvegarder */}
-              <div className="flex justify-end">
-                <button
-                  onClick={handleSave}
-                  disabled={saveStatus === 'saving'}
-                  className={`
-                    flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all
-                    ${saveStatus === 'saved'
-                      ? 'bg-green-500 text-white'
-                      : saveStatus === 'error'
-                      ? 'bg-red-500 text-white'
-                      : 'bg-gold text-white hover:bg-gold-dark'}
-                    disabled:opacity-50
-                  `}
-                >
-                  <Save className="h-5 w-5" />
-                  {saveStatus === 'saving' && 'Enregistrement...'}
-                  {saveStatus === 'saved' && 'Enregistré !'}
-                  {saveStatus === 'error' && 'Erreur'}
-                  {saveStatus === 'idle' && 'Enregistrer les modifications'}
-                </button>
-              </div>
+          {/* Messages */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-red-700">
+              {error}
             </div>
           )}
+
+          {successMessage && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 text-green-700">
+              {successMessage}
+            </div>
+          )}
+
+          {/* Action Alerts */}
+          <div className="mb-6">
+            <ActionAlerts
+              pendingCount={pendingCount}
+              awaitingPaymentCount={awaitingPaymentCount}
+              failedEmailsCount={failedEmailsCount}
+            />
+          </div>
+
+          {/* Main Content */}
+          <div className="grid lg:grid-cols-4 gap-6">
+            {/* Kanban Board - Takes 3 columns */}
+            <div className="lg:col-span-3" id="kanban">
+              <div className="bg-white rounded-lg border border-stone-200 p-4">
+                <h2 className="font-medium text-text mb-4">Réservations</h2>
+                <KanbanBoard
+                  reservations={reservations}
+                  onStatusChange={handleStatusChange}
+                  onAction={handleAction}
+                  isLoading={actionLoading !== null}
+                />
+              </div>
+            </div>
+
+            {/* Sidebar - 1 column */}
+            <div className="space-y-6">
+              <QuickStats reservations={reservations} />
+              <QuickLinks links={monitoringData?.links} />
+            </div>
+          </div>
         </Container>
       </div>
     </div>
