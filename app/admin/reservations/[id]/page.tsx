@@ -84,8 +84,16 @@ export default function ReservationDetailPage() {
     }
   }, [reservation]);
 
+  // Calculate subtotal before discount (for auto-calculating discount from custom total)
+  const subtotalBeforeDiscount = (editedNightlyRate * (reservation?.nights || 0)) + editedCleaningFee + editedTouristTax;
+
+  // When using custom total, auto-calculate the discount as the difference
+  const effectiveDiscount = useCustomTotal
+    ? subtotalBeforeDiscount - customTotal
+    : editedDiscount;
+
   // Calculate total based on edited values
-  const calculatedTotal = (editedNightlyRate * (reservation?.nights || 0)) - editedDiscount + editedCleaningFee + editedTouristTax;
+  const calculatedTotal = subtotalBeforeDiscount - editedDiscount;
   const displayTotal = useCustomTotal ? customTotal : calculatedTotal;
 
   // Check access mode and load reservation
@@ -176,7 +184,7 @@ export default function ReservationDetailPage() {
         nightlyRate: editedNightlyRate,
         cleaningFee: editedCleaningFee,
         touristTax: editedTouristTax,
-        discount: editedDiscount,
+        discount: useCustomTotal ? effectiveDiscount : editedDiscount,
         depositAmount,
         adminNotes,
       };
@@ -577,15 +585,21 @@ export default function ReservationDetailPage() {
                       </div>
                       <div>
                         <label className="block text-xs font-medium text-text-muted mb-1">
-                          Réduction (€)
+                          Réduction (€) {useCustomTotal && <span className="text-amber-600">(auto)</span>}
                         </label>
-                        <input
-                          type="number"
-                          value={editedDiscount}
-                          onChange={(e) => setEditedDiscount(Number(e.target.value))}
-                          className="w-full px-3 py-2 border border-stone-300 rounded-lg text-sm focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
-                          min={0}
-                        />
+                        {useCustomTotal ? (
+                          <div className={`w-full px-3 py-2 border rounded-lg text-sm ${effectiveDiscount > 0 ? 'bg-green-50 border-green-300 text-green-700' : effectiveDiscount < 0 ? 'bg-amber-50 border-amber-300 text-amber-700' : 'bg-stone-100 border-stone-300'}`}>
+                            {effectiveDiscount > 0 ? `-${effectiveDiscount.toFixed(2)}€` : effectiveDiscount < 0 ? `+${Math.abs(effectiveDiscount).toFixed(2)}€ (surcoût)` : '0€'}
+                          </div>
+                        ) : (
+                          <input
+                            type="number"
+                            value={editedDiscount}
+                            onChange={(e) => setEditedDiscount(Number(e.target.value))}
+                            className="w-full px-3 py-2 border border-stone-300 rounded-lg text-sm focus:ring-2 focus:ring-gold focus:border-transparent outline-none"
+                            min={0}
+                          />
+                        )}
                       </div>
                       <div>
                         <label className="block text-xs font-medium text-text-muted mb-1">
