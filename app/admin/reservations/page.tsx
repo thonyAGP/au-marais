@@ -36,7 +36,7 @@ const statusConfig = {
 export default function AdminReservationsPage() {
   const { isAuthenticated, isLoading, token } = useAdminAuth();
   const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('pending');
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadReservations = useCallback(async () => {

@@ -18,8 +18,11 @@ interface ResendResponse {
   has_more: boolean;
 }
 
+// Failed email events
+const FAILED_EVENTS = ['bounced', 'complained', 'delivery_delayed'];
+
 // Fetch emails from Resend API
-const fetchResendEmails = async (limit: number = 20): Promise<ResendEmail[]> => {
+const fetchResendEmails = async (limit: number = 50): Promise<ResendEmail[]> => {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn('[Monitoring] RESEND_API_KEY not configured');
@@ -59,10 +62,14 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch data in parallel
-    const [emails, reservationsData] = await Promise.all([
-      fetchResendEmails(30),
+    const [allEmails, reservationsData] = await Promise.all([
+      fetchResendEmails(50),
       listReservations({ limit: 100 }),
     ]);
+
+    // Separate failed emails from successful ones
+    const failedEmails = allEmails.filter((e) => FAILED_EVENTS.includes(e.last_event));
+    const successEmails = allEmails.filter((e) => !FAILED_EVENTS.includes(e.last_event)).slice(0, 20);
 
     // Calculate reservation stats
     const reservations = reservationsData.reservations || [];
@@ -75,9 +82,43 @@ export async function GET(request: NextRequest) {
       cancelled: reservations.filter((r) => r.status === 'cancelled').length,
     };
 
-    // Recent reservations (last 5)
-    const recentReservations = reservations
+    // Awaiting payment (approved but not paid)
+    const awaitingPayment = reservations
+      .filter((r) => r.status === 'approved')
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 10)
+      .map((r) => ({
+        id: r.id,
+        name: `${r.firstName} ${r.lastName}`,
+        email: r.email,
+        status: r.status,
+        total: r.total,
+        depositAmount: r.depositAmount,
+        createdAt: r.createdAt,
+        arrivalDate: r.arrivalDate,
+        stripePaymentLinkUrl: r.stripePaymentLinkUrl,
+      }));
+
+    // Recent paid reservations
+    const recentPaid = reservations
+      .filter((r) => r.status === 'paid')
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      .slice(0, 5)
+      .map((r) => ({
+        id: r.id,
+        name: `${r.firstName} ${r.lastName}`,
+        status: r.status,
+        total: r.total,
+        depositAmount: r.depositAmount,
+        createdAt: r.createdAt,
+        updatedAt: r.updatedAt,
+        arrivalDate: r.arrivalDate,
+      }));
+
+    // Pending reservations (need action)
+    const pendingReservations = reservations
+      .filter((r) => r.status === 'pending')
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()) // oldest first
       .slice(0, 5)
       .map((r) => ({
         id: r.id,
@@ -89,9 +130,12 @@ export async function GET(request: NextRequest) {
       }));
 
     return NextResponse.json({
-      emails,
+      emails: successEmails,
+      failedEmails,
       stats,
-      recentReservations,
+      awaitingPayment,
+      recentPaid,
+      pendingReservations,
       links: {
         vercel: 'https://vercel.com/thonyagps-projects/au-marais',
         vercelAnalytics: 'https://vercel.com/thonyagps-projects/au-marais/analytics',
