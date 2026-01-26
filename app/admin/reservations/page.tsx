@@ -51,7 +51,7 @@ export default function AdminReservationsPage() {
       });
       if (response.ok) {
         const data = await response.json();
-        setReservations(data);
+        setReservations(data.reservations || []);
       }
     } catch (error) {
       console.error('Erreur lors du chargement des réservations:', error);
