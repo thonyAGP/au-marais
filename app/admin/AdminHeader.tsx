@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Settings, Calendar } from 'lucide-react';
+import { LogOut, Settings, Calendar, Activity } from 'lucide-react';
 import { Container } from '@/components/ui';
 import { useAdminAuth } from './AdminAuthContext';
 
@@ -12,6 +12,7 @@ export const AdminHeader = () => {
 
   const isSettings = pathname === '/admin';
   const isReservations = pathname?.startsWith('/admin/reservations');
+  const isMonitoring = pathname?.startsWith('/admin/monitoring');
 
   return (
     <header className="bg-white border-b border-stone-200 sticky top-0 z-40">
@@ -33,6 +34,17 @@ export const AdminHeader = () => {
             >
               <Calendar className="h-4 w-4" />
               Réservations
+            </Link>
+            <Link
+              href="/admin/monitoring"
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
+                isMonitoring
+                  ? 'bg-gold/10 text-gold'
+                  : 'text-text-muted hover:text-text hover:bg-cream'
+              }`}
+            >
+              <Activity className="h-4 w-4" />
+              Monitoring
             </Link>
             <Link
               href="/admin"
