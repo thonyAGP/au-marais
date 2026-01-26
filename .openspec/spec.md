@@ -264,3 +264,4 @@ au-marais/
 - 2026-01-20 : **Page confirmation paiement** - /reservation/confirmed avec détails séjour
 - 2026-01-20 : **Checklist tests réservation** - docs/tests-reservation.md pour tests manuels
 - 2026-01-20 : **Fallback Vercel KV** - Wrapper safeKv pour dev local sans KV configuré
+- 2026-01-26 : **Configuration Email Admin** - Interface pour gérer fromEmail, fromName et multiple adminEmails depuis /admin/settings
