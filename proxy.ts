@@ -27,7 +27,7 @@ const getPreferredLocale = (request: NextRequest): Locale => {
   return defaultLocale;
 };
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip static files, api routes, admin routes, action routes, and _next
