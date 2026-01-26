@@ -18,6 +18,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://au-marais.fr'),
   title: 'Administration - Au Marais',
   description: 'Interface d\'administration Au Marais',
   robots: {

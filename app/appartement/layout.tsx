@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://au-marais.fr'),
   title: 'L\'appartement',
   description:
     'Découvrez notre appartement de charme au coeur du Marais : 4 voyageurs, 1 chambre, poutres apparentes, cuisine équipée. Note Airbnb 4.97★ (89 avis).',

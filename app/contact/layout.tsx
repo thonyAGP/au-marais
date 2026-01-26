@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://au-marais.fr'),
   title: 'Contact',
   description:
     'Contactez-nous pour réserver votre séjour au Marais. Réponse rapide via WhatsApp. Questions fréquentes sur l\'appartement et les conditions.',

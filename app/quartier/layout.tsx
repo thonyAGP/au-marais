@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://au-marais.fr'),
   title: 'Le quartier du Marais',
   description:
     'Découvrez le Marais, l\'un des quartiers les plus emblématiques de Paris. Place des Vosges, Centre Pompidou, boutiques, restaurants. Métro Saint-Paul à 200m.',
