@@ -671,11 +671,18 @@ export default function ReservationDetailPage() {
                       <span className="text-text-muted">{reservation.nightlyRate}€ × {reservation.nights} nuits</span>
                       <span className="text-text">{reservation.subtotal}€</span>
                     </div>
-                    {reservation.discount && reservation.discount > 0 && (
-                      <div className="flex justify-between text-sm text-green-600">
-                        <span>Réduction</span>
-                        <span>-{reservation.discount}€</span>
-                      </div>
+                    {reservation.discount !== undefined && reservation.discount !== 0 && (
+                      reservation.discount > 0 ? (
+                        <div className="flex justify-between text-sm text-green-600">
+                          <span>Réduction</span>
+                          <span>-{reservation.discount}€</span>
+                        </div>
+                      ) : (
+                        <div className="flex justify-between text-sm text-amber-600">
+                          <span>Surcoût</span>
+                          <span>+{Math.abs(reservation.discount)}€</span>
+                        </div>
+                      )
                     )}
                     <div className="flex justify-between text-sm">
                       <span className="text-text-muted">Frais de ménage</span>
